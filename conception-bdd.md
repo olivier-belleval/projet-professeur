@@ -100,7 +100,7 @@ relation: N:N
 ## MCD - via MOCODO
 
 ```
-Article: title, author, slug, excertp, content
+Article: title, author, slug, excerpt, content
 ecrire, 0N User, 11 Article
 User: label, password, first_name, last_name
 posséder, 1N User, 0N Role
@@ -121,12 +121,12 @@ Tag: name, color
 
 ## MLD
 
-**Article** (<ins>title</ins>, author, slug, excertp, content, _label_)  
-**User** (<ins>label</ins>, password, first_name, last_name)  
-**posséder** (<ins>_label_</ins>, <ins>_label.1_</ins>)  
-**Role** (<ins>label</ins>, description)  
-**Kanban** (<ins>title</ins>, slug, description, author, background, _label_)  
-**List** (<ins>name</ins>, order, _title_)  
-**Card** (<ins>description</ins>, color, order, _name_)  
-**associer** (<ins>_description_</ins>, <ins>_name_</ins>)  
-**Tag** (<ins>name</ins>, color)
+**article** (<ins>id</ins>,title, author, slug, excerpt, content, _#user(id)_)  
+**user** (<ins>id</ins>,label, password, first_name, last_name)  
+**m2m_user_role** (<ins>id</ins>,_#user(id)_, _#role(id)_)  
+**role** (<ins>id</ins>,label, description)  
+**kanban** (<ins>id</ins>,title, slug, description, author, background, _#user(id)_)  
+**list** (<ins>id</ins>,name, order, _#kanban(id)_)  
+**card** (<ins>id</ins>,description, color, order, _#list(id)_)  
+**m2m_card_tag** (<ins>id</ins>,_#card(id)_, _#tag(id_)  
+**tag** (<ins>id</ins>,name, color)
