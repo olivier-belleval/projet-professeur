@@ -128,11 +128,13 @@ Tag: name, color
 
 ## MLD
 
-**article** (<ins>id</ins>,title, author, slug, excerpt, content, _#user(id)_)  
+**article** (<ins>id</ins>,title, slug, excerpt, content, _#user(id)_)  
 **user** (<ins>id</ins>,label, password, first_name, last_name)  
-**m2m_user_role** (<ins>id</ins>,_#user(id)_, _#role(id)_)  
+**m2m_user_role** (<ins>id</ins>,_#user(id)_, _#role(id)_) 
+**m2m_article_role** (<ins>id</ins>,_#article(id)_, _#role(id)_) 
 **role** (<ins>id</ins>,label, description)  
-**kanban** (<ins>id</ins>,title, slug, description, author, background, _#user(id)_)  
+**kanban** (<ins>id</ins>,title, slug, description, background, _#user(id)_)) 
+**m2m_kanban_role** (<ins>id</ins>,_#kanban(id)_, _#role(id)_) 
 **list** (<ins>id</ins>,name, order, _#kanban(id)_)  
 **card** (<ins>id</ins>,description, color, order, _#list(id)_)  
 **m2m_card_tag** (<ins>id</ins>,_#card(id)_, _#tag(id_)  
