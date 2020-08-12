@@ -11,31 +11,38 @@ Elles représentent une chose abstraite (comme un rôle, un tag ) ou concrètes 
   * password
   * first name (opt)
   * last name (opt)
+
 * Article
   * title
   * author
   * slug
   * excertp
   * content
+
 * Role
   * label
   * description
+
 * Kanban
   * title
   * slug
   * description
   * author
   * background
+
 * Card
   * description
   * color
   * order
+
 * List
   * name
   * order
+
 * Tag
   * name
   * color
+  
 
 ## Analyse des relations
 
