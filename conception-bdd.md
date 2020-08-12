@@ -100,19 +100,33 @@ relation: N:N
 ## MCD - via MOCODO
 
 ```
-Décrir, 0N Level, 11 Question
-Question: question, anecdote
-Répondre, 11 Card, 0N Question
-Answer: answer
+Article: title, author, slug, excertp, content
+ecrire, 0N User, 11 Article
+User: label, password, first_name, last_name
+posséder, 1N User, 0N Role
+Role: label, description
 
-Level: title, color
-Contenir, 11 Question, 0N Quizz
-Quizz: titre, description
-Ecrire, 0N User, 11 Quizz
+avoir, 0N User, 11 Kanban
 
-:
-Tag: title, color
-Définir, 0N Tag, 01 Quizz
-User: first_name, last_name, email, password
+Kanban: title, slug, description, author, background
 
+contenir, 0N Kanban, 11 List
+
+List: name, order
+inclure, 0N List, 11 Card
+Card: description, color, order
+associer, 0N List, 11 Tag
+Tag: name, color
 ```
+
+## MLD
+
+**Article** (<ins>title</ins>, author, slug, excertp, content, _label_)  
+**User** (<ins>label</ins>, password, first_name, last_name)  
+**posséder** (<ins>_label_</ins>, <ins>_label.1_</ins>)  
+**Role** (<ins>label</ins>, description)  
+**Kanban** (<ins>title</ins>, slug, description, author, background, _label_)  
+**List** (<ins>name</ins>, order, _title_)  
+**Card** (<ins>description</ins>, color, order, _name_)  
+**associer** (<ins>_description_</ins>, <ins>_name_</ins>)  
+**Tag** (<ins>name</ins>, color)
