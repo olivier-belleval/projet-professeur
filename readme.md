@@ -9,7 +9,8 @@ Le logiciel Pronote, d'ores et déjà utilisé par le corps enseignant pour comm
 Pour palier à ce problème, de nombreux professeurs requièrent les services de développeur web indépendants. D'autres encore souscrivent à de coûteux abonnements, auprès de différentes plateformes, pour réaliser leurs projets.
 
 C’est là qu’intervient **O'MyProf**, pensé pour une professeure de français. Un site où elle pourra créer un espace pour chaque niveau auquel elle enseigne et en donner l’accès à ses élèves. Articles, tableaux de suivi du cours, informations culturelles seront ainsi affichés aux élèves concernés et permettra de compléter le cours.
-Objectifs du projet
+
+## Objectifs du projet
 
 L'objectif principal de ce projet est de fournir au client un environnement de travail personnalisable, adapté à la matière qu’il enseigne. Celui-ci pourra ainsi créer des tableaux (avec un système de listes et d'étiquettes, à l'instar de Trello), publier des articles et partager avec ses élèves des ressources complémentaires aux cours *(vidéos, pistes audio, url, …)*. Les élèves pourront également y retrouver les ressources partagées lors des cours *(polycopiés, …)* et, par exemple, les réimprimer en cas de perte.
 
