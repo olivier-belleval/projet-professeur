@@ -3,10 +3,12 @@
 | #   | En tant que ... | Je veux...                                    | Afin de ....                                              |
 | --- | --------------- | --------------------------------------------- | ----------------------------------------------------------|
 | #   | visiteur        | une page de connexion                         | Afin de pouvoir acceder aux fonctionnalités du site       |
-| #   | visiteur        | une page de recupartion de mot de passe       | Afin de pouvoir retrouver mon mot de passe                |
 | #   | - - - - - -     | - - - - - - -                                 | - - - - - - -                                             |
 | #   | utilisateur     | Pouvoir me déconnecter                        | Afin d'empêcher d'autres d'utiliser mon compte            |
-| #   | utilisateur     | Pouvoir consulter le site                     | Afin de lire les articles et kanbans                      |
+| #   | utilisateur     | Pouvoir consulter la liste des articles       | Afin d'afficher un appercu des articles                   |
+| #   | utilisateur     | Pouvoir consulter la liste des kanbans        | Afin de voir les kanbans disponibles                      |
+| #   | utilisateur     | Pouvoir consulter un article                  | Afin de lire un articles                                  |
+| #   | utilisateur     | Pouvoir consulter kanban                      | Afin de lire un kanban                                    |
 | #   | - - - - - -     | - - - - - - -                                 | - - - - - - -                                             |
 | #   | adminitrateur   | créer une classe/niveau                       | Afin d'ajouter une classe et son niveau                   |
 | #   | adminitrateur   | modifier une classe/niveau                    | Afin de modifier une classe et son niveau                 |
