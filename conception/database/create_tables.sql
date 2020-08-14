@@ -1,7 +1,5 @@
 BEGIN;
 
---CREATE ROLE omyprof_admin WITH LOGIN ENCRYPTED PASSWORD 'admin';
-
 CREATE SCHEMA IF NOT EXISTS "omyprof";
 CREATE SCHEMA IF NOT EXISTS "article";
 CREATE SCHEMA IF NOT EXISTS "kanban";
@@ -72,15 +70,12 @@ CREATE TABLE "kanban"."kanban" (
     "user_id" INT REFERENCES "omyprof"."user"("id")
 );
 
--- prévoir colonne "classe" pour kanban.kanban afin de distribuer les droits
-
 CREATE TABLE "kanban"."list" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL,
     "order" INT NOT NULL,
     "kanban_id" INT REFERENCES "kanban"."kanban"("id")
 );
-
 
 CREATE TABLE "kanban"."card" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
