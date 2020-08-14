@@ -4,10 +4,8 @@
 
 ### Les entités 
 
-Elles représentent une chose abstraite (comme un rôle, un tag ) ou concrètes (un utilisateur, une voiture) qu'on veut pouvoir créer / éditer / supprimer
-
-* User
-  * label
+* Teacher
+  * username
   * password
   * first name (opt)
   * last name (opt)
@@ -19,9 +17,10 @@ Elles représentent une chose abstraite (comme un rôle, un tag ) ou concrètes 
   * excertp
   * content
 
-* Role
-  * label
+* Class
+  * username
   * description
+  * password
 
 * Kanban
   * title
@@ -46,35 +45,54 @@ Elles représentent une chose abstraite (comme un rôle, un tag ) ou concrètes 
 
 ## Analyse des relations
 
-### Article <--> User
+### Article <--> Teacher
 
-Un user est l'autheur d'un Article
+Un Teacher est l'autheur d'un Article
 
 * verbe: écrire
 * cardinalité:
-  * User > Article: Un utilisateur peut écrire au minimum 0 et au maximum N  Article
-  * Article > User: Un Article peut être écrit par au minimum 1 et au maximum 1 Users
+  * Teacher > Article: Un utilisateur peut écrire au minimum 0 et au maximum N Article
+  * Article > Teacher: Un Article peut être écrit par au minimum 1 et au maximum 1 Teachers
 * relation de type: 1:N
 
-### Role <--> User
+### Article <--> Class
 
-Un User posséde un ou plusieurs Role(s)
+Une Class peux voir un Article
 
-* verbe: posséder
+* verbe: voire
+* cardinalité:
+  * Class > Article: Une Classe peut voire au minimum 0 et au maximum N Article
+  * Article > Class: Un Article peut être vu par au minimum 0 et au maximum N Class
+* relation de type: N:N
+
+### Class <--> Teacher
+
+Un Teacher crée un ou plusieurs Class(s)
+
+* verbe: creer
 * cardinalité
-  * User > Role: Un User peut posséder au minimum 1 et au maximum N Roles
-  * Role > User: Un Role peut être posséder par au minimum 0 et au maximum N User
-* La relation: N: N (many to many)
+  * Teacher > Class: Un Teacher peut creer au minimum 0 et au maximum N Classs
+  * Class > Teacher: Une Class peut être creer par au minimum 1 et au maximum 1 Teacher
+* La relation: 1: N
 
-### User <--> Kanban
-Un User peux avoir un ou plusieurs kanban
+### Teacher <--> Kanban
+Un Teacher peux avoir un ou plusieurs kanban
 
 * verbe: avoir
 * cardinalité
-  * User > Kanban: Un User peut avoir au minimum 0 et au maximum N kanban
-  * Kanban > User: Un Kanban a au minimum 1 et au maximum 1 User
+  * Teacher > Kanban: Un Teacher peut avoir au minimum 0 et au maximum N kanban
+  * Kanban > Teacher: Un Kanban a au minimum 1 et au maximum 1 Teacher
 * la relation: 1:N
   
+### Class <--> Kanban
+Une Class peux consulter un ou plusieurs kanban
+
+* verbe: consulter
+* cardinalité
+  * Class > Kanban: Une Class peut consulter au minimum 0 et au maximum N kanban
+  * Kanban > Class: Un Kanban peux etre consulter au minimum 0 et au maximum N Class
+* la relation: N:N
+
 ### Kanban <--> List
 
 Un Kanban contient x List
@@ -107,34 +125,38 @@ relation: N:N
 ## MCD - via MOCODO
 
 ```
-Article: title, author, slug, excerpt, content
-ecrire, 0N User, 11 Article
-User: label, password, first_name, last_name
-posséder, 1N User, 0N Role
-Role: label, description
+voir, 0N Article, 0N Class
 
-avoir, 0N User, 11 Kanban
+Article: title, slug, excerpt, content
+ecrire, 0N Teacher, 11 Article
+Teacher: username, password, first_name, last_name
+creer, 0N Teacher, 11 Class
+Class: username, description, password
 
-Kanban: title, slug, description, author, background
+:
+avoir, 0N Teacher, 11 Kanban
+consulte, 0N Kanban, 0N Class
+
+Kanban: title, slug, description, background
 
 contenir, 0N Kanban, 11 List
 
 List: name, order
 inclure, 0N List, 11 Card
 Card: description, color, order
-associer, 0N List, 11 Tag
+associer, 0N Card, 1N Tag
 Tag: name, color
+
 ```
 
 ## MLD
 
 **article** (<ins>id</ins>,title, slug, excerpt, content, _#user(id)_)  
-**user** (<ins>id</ins>,label, password, first_name, last_name)  
-**m2m_user_role** (<ins>id</ins>,_#user(id)_, _#role(id)_) 
-**m2m_article_role** (<ins>id</ins>,_#article(id)_, _#role(id)_) 
-**role** (<ins>id</ins>,label, description)  
+**teacher** (<ins>id</ins>,username, password, first_name, last_name)  
+**m2m_article_class** (<ins>id</ins>,_#article(id)_, _#class(id)_) 
+**class** (<ins>id</ins>,username, description, _#teacher(id)_)  
 **kanban** (<ins>id</ins>,title, slug, description, background, _#user(id)_)) 
-**m2m_kanban_role** (<ins>id</ins>,_#kanban(id)_, _#role(id)_) 
+**m2m_kanban_class** (<ins>id</ins>,_#kanban(id)_, _#class(id)_) 
 **list** (<ins>id</ins>,name, order, _#kanban(id)_)  
 **card** (<ins>id</ins>,description, color, order, _#list(id)_)  
 **m2m_card_tag** (<ins>id</ins>,_#card(id)_, _#tag(id_)  

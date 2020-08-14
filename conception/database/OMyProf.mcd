@@ -1,10 +1,14 @@
-Article: title, author, slug, excerpt, content
-ecrire, 0N User, 11 Article
-User: label, password, first_name, last_name
-posséder, 1N User, 0N Role
-Role: label, description
+voir, 0N Article, 0N Class
 
-avoir, 0N User, 11 Kanban
+Article: title, slug, excerpt, content
+ecrire, 0N Teacher, 11 Article
+Teacher: username, password, first_name, last_name
+creer, 0N Teacher, 11 Class
+Class: username, description, password
+
+:
+avoir, 0N Teacher, 11 Kanban
+consulte, 0N Kanban, 0N Class
 
 Kanban: title, slug, description, background
 
@@ -13,5 +17,5 @@ contenir, 0N Kanban, 11 List
 List: name, order
 inclure, 0N List, 11 Card
 Card: description, color, order
-associer, 0N Card, 1N Tag
+associer, 0N Card, 0N Tag
 Tag: name, color
