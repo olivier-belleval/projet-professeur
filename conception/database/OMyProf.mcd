@@ -6,12 +6,12 @@ Role: label, description
 
 avoir, 0N User, 11 Kanban
 
-Kanban: title, slug, description, author, background
+Kanban: title, slug, description, background
 
 contenir, 0N Kanban, 11 List
 
 List: name, order
 inclure, 0N List, 11 Card
 Card: description, color, order
-associer, 0N List, 11 Tag
+associer, 0N Card, 1N Tag
 Tag: name, color
