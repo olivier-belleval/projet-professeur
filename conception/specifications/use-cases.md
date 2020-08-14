@@ -3,12 +3,12 @@
 | En tant que ... | Je veux...                                    | Afin de ....                                              |
 | --------------- | --------------------------------------------- | ----------------------------------------------------------|
 | visiteur        | une page de connexion                         | Afin de pouvoir acceder aux fonctionnalités du site       |
-| classe / teacher| Pouvoir me déconnecter                        | Afin d'empêcher d'autres d'utiliser mon compte            |
+| class / teacher| Pouvoir me déconnecter                         | Afin d'empêcher d'autres d'utiliser mon compte            |
 | - - - - - -     | - - - - - - -                                 | - - - - - - -                                             |
-| classe          | Pouvoir consulter la liste des articles       | Afin d'afficher un appercu des articles                   |
-| classe          | Pouvoir consulter la liste des kanbans        | Afin de voir les kanbans disponibles                      |
-| classe          | Pouvoir consulter un article                  | Afin de lire un articles                                  |
-| classe          | Pouvoir consulter kanban                      | Afin de lire un kanban                                    |
+| class           | Pouvoir consulter la liste des articles       | Afin d'afficher un appercu des articles                   |
+| class           | Pouvoir consulter la liste des kanbans        | Afin de voir les kanbans disponibles                      |
+| class           | Pouvoir consulter un article                  | Afin de lire un articles                                  |
+| class           | Pouvoir consulter kanban                      | Afin de lire un kanban                                    |
 | - - - - - -     | - - - - - - -                                 | - - - - - - -                                             |
 | teacher         | créer une classe                              | Afin d'ajouter une classe                                 |
 | teacher         | modifier une classe                           | Afin de modifier une classe                               |

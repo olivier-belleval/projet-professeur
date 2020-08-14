@@ -14,6 +14,16 @@ C’est là qu’intervient **O'MyProf**, pensé pour une professeure de frança
 
 L'objectif principal de ce projet est de fournir au client un environnement de travail personnalisable, adapté à la matière qu’il enseigne. Celui-ci pourra ainsi créer des tableaux (avec un système de listes et d'étiquettes, à l'instar de Trello), publier des articles et partager avec ses élèves des ressources complémentaires aux cours *(vidéos, pistes audio, url, …)*. Les élèves pourront également y retrouver les ressources partagées lors des cours *(polycopiés, …)* et, par exemple, les réimprimer en cas de perte.
 
+## Définition du Minimum Viable Product
+
+- Connexion / Déconnexion
+- 2 types d'utilisateurs : Professeur / Classe
+- Consultation des articles (les 2 utilisateurs)
+- Consultation des tableaux (les 2 utilisateurs)
+- Création d’un article (professeur)
+- Création d’un tableau (professeur)
+- Création d’un compte-classe (professeur)
+
 ## Le public visé (cible)
 
 Ce projet, en plus de répondre aux besoins exprimés par le client, vise à faciliter les échanges de ressources entre un professeur et ses élèves.
@@ -129,13 +139,5 @@ Effectue les choix techniques front-end et s'assure de la bonne avancée du proj
 
 ![arborescence](https://i.ibb.co/Dw90why/arborescence.png)
 
-## Définition du Minimum Viable Product
 
-- Connexion / Déconnexion
-- 2 rôles : Professeur / Classe
-- Consultation des articles (les 2 rôles)
-- Consultation des tableaux (les 2 rôles)
-- Création d’un article (admin)
-- Création d’un tableau (admin)
-- Création d’un compte-classe
 

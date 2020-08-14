@@ -47,60 +47,60 @@
 
 ### Article <--> Teacher
 
-Un Teacher est l'autheur d'un Article
+Un Teacher est l'auteur d'un Article
 
 * verbe: écrire
 * cardinalité:
-  * Teacher > Article: Un utilisateur peut écrire au minimum 0 et au maximum N Article
-  * Article > Teacher: Un Article peut être écrit par au minimum 1 et au maximum 1 Teachers
+  * Teacher > Article: Un utilisateur peut écrire au minimum 0 et au maximum N article
+  * Article > Teacher: Un article peut être écrit par au minimum 1 et au maximum 1 teacher
 * relation de type: 1:N
 
 ### Article <--> Class
 
 Une Class peux voir un Article
 
-* verbe: voire
+* verbe: voir
 * cardinalité:
-  * Class > Article: Une Classe peut voire au minimum 0 et au maximum N Article
-  * Article > Class: Un Article peut être vu par au minimum 0 et au maximum N Class
+  * Class > Article: Une classe peut voir au minimum 0 et au maximum N article
+  * Article > Class: Un article peut être vu par au minimum 0 et au maximum N class
 * relation de type: N:N
 
 ### Class <--> Teacher
 
-Un Teacher crée un ou plusieurs Class(s)
+Un Teacher crée un ou plusieurs Class
 
 * verbe: creer
 * cardinalité
-  * Teacher > Class: Un Teacher peut creer au minimum 0 et au maximum N Classs
-  * Class > Teacher: Une Class peut être creer par au minimum 1 et au maximum 1 Teacher
+  * Teacher > Class: Un teacher peut creer au minimum 0 et au maximum N classe
+  * Class > Teacher: Une classe peut être créé par au minimum 1 et au maximum 1 teacher
 * La relation: 1: N
 
 ### Teacher <--> Kanban
-Un Teacher peux avoir un ou plusieurs kanban
+Un Teacher peux avoir un ou plusieurs kanbans
 
 * verbe: avoir
 * cardinalité
-  * Teacher > Kanban: Un Teacher peut avoir au minimum 0 et au maximum N kanban
-  * Kanban > Teacher: Un Kanban a au minimum 1 et au maximum 1 Teacher
+  * Teacher > Kanban: Un teacher peut avoir au minimum 0 et au maximum N kanban
+  * Kanban > Teacher: Un kanban a au minimum 1 et au maximum 1 teacher
 * la relation: 1:N
   
 ### Class <--> Kanban
-Une Class peux consulter un ou plusieurs kanban
+Une Class peut consulter un ou plusieurs kanban
 
 * verbe: consulter
 * cardinalité
-  * Class > Kanban: Une Class peut consulter au minimum 0 et au maximum N kanban
-  * Kanban > Class: Un Kanban peux etre consulter au minimum 0 et au maximum N Class
+  * Class > Kanban: Une classe peut consulter au minimum 0 et au maximum N kanban
+  * Kanban > Class: Un Kanban peux etre consulté au minimum 0 et au maximum N classs
 * la relation: N:N
 
 ### Kanban <--> List
 
-Un Kanban contient x List
+Un Kanban contient N List
 
 * verbe: contenir
 * * cardinalité:
-  * Kanban > List Un Kanban contient au minimum 0 et au maximum N List
-  * List > Kanban Une List est contenue au minimum dans 1 et au maximum 1 Kanban
+  * Kanban > List Un kanban contient au minimum 0 et au maximum N liste
+  * List > Kanban Une liste est contenue au minimum dans 1 et au maximum 1 kanban
 * relation: 1:N
 
 ###  List <-->  Card
@@ -108,8 +108,8 @@ Une List inclue une Card
 
 * verbe: inclure
 * cardinalité
-  * List <--> Card: Une List inclue au minimum 0 et au maximum N Cards
-  * Card <-->List :Une Card peut être inclue au minimum 1 et au maximum 1 List
+  * List <--> Card: Une liste inclue au minimum 0 et au maximum N cards
+  * Card <-->List : Une card peut être inclue au minimum 1 et au maximum 1 liste
 relation: 1:N
 
 ###  Card <-->  Tag
@@ -117,8 +117,8 @@ Une Card est associée a un Tag
 
 * verbe: associer
 * cardinalité
-  * Card <--> Tag: Une Card est associée au minimum 0 et au maximum N Tags
-  * Tag <-->Card :Une Tag est associé au minimum 0 et au maximum N Card
+  * Card <--> Tag: Une card est associée au minimum 0 et au maximum N tags
+  * Tag <-->Card :Un tag est associé au minimum 0 et au maximum N card
 relation: N:N
 
 

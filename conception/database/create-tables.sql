@@ -4,11 +4,9 @@ CREATE SCHEMA IF NOT EXISTS "omyprof";
 CREATE SCHEMA IF NOT EXISTS "article";
 CREATE SCHEMA IF NOT EXISTS "kanban";
 
-
-DROP TABLE IF EXISTS "omyprof"."m2m_user_role";
 DROP TABLE IF EXISTS "kanban"."m2m_tag_card";
-DROP TABLE IF EXISTS "article"."m2m_article_role";
-DROP TABLE IF EXISTS "kanban"."m2m_kanban_role";
+DROP TABLE IF EXISTS "article"."m2m_article_class";
+DROP TABLE IF EXISTS "kanban"."m2m_kanban_class";
 
 DROP TABLE IF EXISTS "article"."article";
 
@@ -17,29 +15,25 @@ DROP TABLE IF EXISTS "kanban"."card";
 DROP TABLE IF EXISTS "kanban"."list";
 DROP TABLE IF EXISTS "kanban"."kanban";
 
-DROP TABLE IF EXISTS "omyprof"."user" ;
-DROP TABLE IF EXISTS "omyprof"."role";
+DROP TABLE IF EXISTS "omyprof"."class";
+DROP TABLE IF EXISTS "omyprof"."teacher" ;
+
 
 -- TABLES DU SCHEMA OMYPROF
 
-CREATE TABLE "omyprof"."user" (
+CREATE TABLE "omyprof"."teacher" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "label" TEXT NOT NULL UNIQUE,
+    "username" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
     "first_name" TEXT,
     "last_name" TEXT
 );
 
-CREATE TABLE "omyprof"."role" (
+CREATE TABLE "omyprof"."class" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "label" TEXT NOT NULL UNIQUE,
-    "description" TEXT 
-);
-
-CREATE TABLE "omyprof"."m2m_user_role" (
-    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "user_id" INT REFERENCES "omyprof"."user"("id"),
-    "role_id" INT REFERENCES "omyprof"."role"("id")
+    "username" TEXT NOT NULL UNIQUE,
+    "description" TEXT,
+    "teacher_id" INT REFERENCES "omyprof"."teacher"("id")
 );
 
 -- TABLES DU SCHEMA ARTICLE
@@ -50,13 +44,13 @@ CREATE TABLE "article"."article" (
     "slug" TEXT NOT NULL,
     "excerpt" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "user_id" INT REFERENCES "omyprof"."user"("id")
+    "teacher_id" INT REFERENCES "omyprof"."teacher"("id")
 );
 
-CREATE TABLE "article"."m2m_article_role" (
+CREATE TABLE "article"."m2m_article_class" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "article_id" INT REFERENCES "article"."article"("id"),
-    "role_id" INT REFERENCES "omyprof"."role"("id")
+    "class_id" INT REFERENCES "omyprof"."class"("id")
 );
 
 -- TABLES DU SCHEMA KANBAN
@@ -67,7 +61,7 @@ CREATE TABLE "kanban"."kanban" (
     "slug" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "background" TEXT DEFAULT '#FFFFFF',
-    "user_id" INT REFERENCES "omyprof"."user"("id")
+    "teacher_id" INT REFERENCES "omyprof"."teacher"("id")
 );
 
 CREATE TABLE "kanban"."list" (
@@ -97,10 +91,10 @@ CREATE TABLE "kanban"."m2m_tag_card" (
     "card_id" INT REFERENCES "kanban"."card"("id")
 );
 
-CREATE TABLE "kanban"."m2m_kanban_role" (
+CREATE TABLE "kanban"."m2m_kanban_class" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "kanban_id" INT REFERENCES "kanban"."kanban"("id"),
-    "role_id" INT REFERENCES "omyprof"."role"("id")
+    "class_id" INT REFERENCES "omyprof"."class"("id")
 );
 
 
