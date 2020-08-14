@@ -28,19 +28,19 @@ L'âge des élèves diffère d'une classe à une autre mais également d'un éta
 
 Cela sera l’unique fonctionnalité accessible depuis la page d’accueil pour assurer la confidentialité du contenu. Le professeur ou les élèves pourront se connecter pour accéder à leurs espaces dédiés.
 
-### Publication d'articles
+### Création/Modification/Suppression d'articles
 
 Le professeur aura la possibilité de publier des articles. Ceux-ci seront modifiables ou supprimables en cas de besoin. Chaque article, lors de sa création, se verra attribué une ou plusieurs classes, évitant ainsi aux élèves d'un autre niveau de lire celui-ci.
 
 > exemple: Un article concernant les épreuves du brevet blanc est publié par le professeur. Ce dernier précise lors de sa création que cet article concerne les élèves de 3ème.  Donc seuls les élèves de 3ème pourront le lire.
 
-### Création de tableaux/kanbans
+### Création/Modification/Suppression de tableaux/kanbans
 
 Le professeur pourra créer des tableaux incluant un système de listes et d'étiquettes. Ces derniers seront modifiables et supprimables, comme les articles, uniquement par le professeur. Ce dernier attribuera une ou plusieurs classes au kanban créé, afin de terminer quel niveau pourrait y avoir accès.
 
 > exemple: Un tableau listant les textes étudiés lors d'une séquence, les exercices associés, les polycopiés transmis et les ressources complémentaires proposées par le professeur.
 
-### Gestion de comptes
+### Création/Modification/Suppression de comptes
 
 Le professeur pourra créer des accès *(1 compte par classe)* qui seront partagés entre les élèves d'une même classe. Ceci évitera ainsi aux élèves d'avoir à s'inscrire individuellement et permettra également au professeur de répondre aux directives du rectorat. En effet, un professeur n'est pas autorisé à forcer/inciter l'inscription d'un élève sur un site non affilié à l'Education Nationale *(afin d'empêcher toute récolte de données le concernant)*.
 
@@ -132,9 +132,10 @@ Effectue les choix techniques front-end et s'assure de la bonne avancée du proj
 ## Définition du Minimum Viable Product
 
 - Connexion / Déconnexion
-- Consultation des articles
-- Consultation des tableaux
-- Création d’un article *(admin)*
-- Création d’un tableau *(admin)*
-- Création d’un compte-classe *(admin)*
+- 2 rôles : Professeur / Classe
+- Consultation des articles (les 2 rôles)
+- Consultation des tableaux (les 2 rôles)
+- Création d’un article (admin)
+- Création d’un tableau (admin)
+- Création d’un compte-classe
 
