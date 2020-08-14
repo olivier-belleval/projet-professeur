@@ -1,6 +1,6 @@
-Data Dictionary
+# Data Dictionary
 
-### User
+## User
 
 |Name|Description|Type|Constraint|Comment|
 |-|-|-|-|-|
@@ -9,14 +9,14 @@ Data Dictionary
 |first_name|first name of user|TEXT||-|
 |last_name|last name of user|TEXT||-|
 
-### Role
+## Role
 
 |Name|Description|Type|Constraint|Comment|
 |-|-|-|-|-|
 | label |name of role|TEXT|UNIQUE NOT NULL|-|
 |description|short description of role|TEXT||-|
 
-### Article
+## Article
 
 |Name|Description|Type|Constraint|Comment|
 |-|-|-|-|-|
@@ -26,7 +26,7 @@ Data Dictionary
 |content|content of the article|TEXT|NOT NULL|-|
 |user_id|references the id of the creator|INT| NOT NULL|-|
 
-### Kanban
+## Kanban
 
 |Name|Description|Type|Constraint|Comment|
 |-|-|-|-|-|
@@ -36,7 +36,7 @@ Data Dictionary
 |background|background color or image | TEXT|DEFAULT('#FFFFF')|-|
 |user_id|references the id of the creator|INT| NOT NULL|-|
 
-### List
+## List
 
 |Name|Description|Type|Constraint|Comment|
 |-|-|-|-|-|
@@ -45,7 +45,7 @@ Data Dictionary
 |kanban_id|references the kanban|INT|NOT NULL|-|
 
 
-### Card
+## Card
 
 |Name|Description|Type|Constraint|Comment|
 |-|-|-|-|-|
@@ -54,7 +54,7 @@ Data Dictionary
 |color| color of the card|TEXT|DEFAULT('#FFFFF')|-|
 |list_id|references the list|INT|NOT NULL|-|
 
-### Tag
+## Tag
 
 |Name|Description|Type|Constraint|Comment|
 |-|-|-|-|-|
