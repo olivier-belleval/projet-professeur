@@ -12,7 +12,7 @@ app.use(session({
 
     secret: process.env.SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
 
 }));
 

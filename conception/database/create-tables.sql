@@ -32,6 +32,7 @@ CREATE TABLE "omyprof"."teacher" (
 CREATE TABLE "omyprof"."class" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "username" TEXT NOT NULL UNIQUE,
+    "password" TEXT NOT NULL,
     "description" TEXT,
     "teacher_id" INT REFERENCES "omyprof"."teacher"("id")
 );
