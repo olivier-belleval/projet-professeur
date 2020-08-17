@@ -8,6 +8,7 @@ const kanbanController = require('../controllers/kanbanController');
 router.post('/api/login', userController.login);
 router.get('/api/logout', userController.logout);
 
-router.post('/api/kanban/create', kanbanController.createKanban)
+router.post('/api/kanban/create', kanbanController.createKanban);
+router.delete('/api/kanban/:id/delete', kanbanController.deleteKanban);
 
 module.exports = router;
