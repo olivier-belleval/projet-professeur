@@ -9,6 +9,11 @@ const Login = ({username, password, changeField, isLogged, handleLogin}) => {
     console.log (username);
     handleLogin();
   };
+  const handleInputChange = (evt) =>{
+    const { name, value } = evt.target;
+    changeField({ 
+      [name]: value})
+  };
   return (
     <div className="login">
       <form className="login-form" onSubmit={handleSubmit}>
@@ -16,14 +21,14 @@ const Login = ({username, password, changeField, isLogged, handleLogin}) => {
           <input
             name="username"
             value={username}
-            onChange={changeField}
+            onChange={handleInputChange}
             type="text"
             placeholder="nom d'utilisateur"
           />
           <input
             name="password"
             value={password}
-            onChange={changeField}
+            onChange={handleInputChange}
             type="password"
             placeholder="mot de passe"
           />
