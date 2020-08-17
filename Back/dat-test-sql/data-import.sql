@@ -19,10 +19,11 @@ INSERT INTO "omyprof"."teacher" ("username", "password", "first_name", "last_nam
 ('admin', 'admin', 'Jules', 'Ferry');
 
 -- class
-INSERT INTO "omyprof"."class" ("username", "description", "teacher_id") VALUES
-('6eme A', 'La classe de 6eme A', 1),
-('5eme B', 'La classe de 5eme B', 1),
-('Terminale ES 2', 'La classe de Terminale ES 2', 1);
+INSERT INTO "omyprof"."class" ("username", "description", "password", "teacher_id") VALUES
+('6eme A', 'La classe de 6eme A', 'pwd1', 1),
+('5eme B', 'La classe de 5eme B', 'pwd2', 1),
+('Terminale ES 2', 'La classe de Terminale ES 2', 'pwd3', 1),
+('test-bcrypt', 'test', '$2b$09$9uK0.7vddDcGlON75CdemefjibJDLKe.oE6HolH0qVXNTWOg1OrW6', 1);
 
 -- article
 INSERT INTO "article"."article" ("title", "slug", "excerpt", "content", "teacher_id") VALUES
