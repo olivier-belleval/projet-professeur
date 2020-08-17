@@ -1,6 +1,22 @@
+@use 'src/styles/vars.scss';
+
 .homepage{
+  height: 100vh;
+  text-align: center;
+  background-image: url('src/assets/images/opened_book.png');
+  background-position: bottom right;
+  background-size:85%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
 
   &-image{
-    width: 20%;
+    width: 40%;
+    position: absolute bottom;
+  }
+
+  &-title{
+    margin: 2rem;
+    font-size: 3rem;
   }
 }

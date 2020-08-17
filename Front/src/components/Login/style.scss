@@ -1,14 +1,23 @@
 @use 'src/styles/vars.scss';
 
 .login{
-  background-color: rgb(211, 207, 201);
+  align-self: center;
+  margin-top:3rem;
+  display: flex;
+  justify-content: center;
+
+  &-button{
+    align-self: center;
+    padding: 1.6rem;
+    margin-top: 5rem;
+  }
+
+  &-form{
+  background-color:vars.$color;
   width: 80%;
   border-radius: 5px;
-  padding: 10px;
-  text-align: center;
+  padding: 1rem;
 
-  &-form {
-    width: 100%;
     &-inputs{
       margin: 5px;
       
@@ -16,16 +25,7 @@
         margin: 10px;
         border:none;
         padding:10px;
+        }
       }
-    }
-    &>button {
-      border:none;
-      padding: 10px;
-      border-radius: 5px;
-      &:hover{
-        background-color: orange;
-        color:white;
-      }
-    }
   }
 }

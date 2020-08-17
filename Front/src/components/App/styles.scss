@@ -1,0 +1,25 @@
+@use 'src/styles/vars.scss';
+
+body{
+  background-color: vars.$light-color;
+  text-align: center;
+}
+.app {
+
+}
+
+button {
+  border:none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: vars.$dark-color;
+  color:vars.$lightest-color;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+
+  &:hover{
+    background-color: vars.$primary-color;
+    color:white;
+  }
+}

@@ -2,8 +2,8 @@
 import React from 'react';
 
 // == Import
-import './styles.css';
-import HomePage from '../HomePage';
+import './styles.scss';
+import HomePage from '../../containers/HomePage';
 
 // == Composant
 const App = () => (
