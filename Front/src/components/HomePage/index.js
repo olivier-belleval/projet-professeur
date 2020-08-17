@@ -10,7 +10,6 @@ return (
     <button type="button"> connexion</button>
     <Login />
     <img src ={image_book} className="homepage-image"/>
-
   </div>
 )};
 

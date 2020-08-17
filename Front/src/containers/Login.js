@@ -6,7 +6,7 @@ const mapStateToProps = (state) => ({
   username: state.username,
   password: state.password,
   isLogged: state.isLogged,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
   changeField: (changedData) => {

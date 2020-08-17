@@ -1,8 +1,8 @@
 import { LOGIN, CHANGE_FIELD } from '../action';
 
 const initialState = {
-  username: 'toto',
-  password: 'tata',
+  username: '',
+  password: '',
   isLogged: false,
 
 };

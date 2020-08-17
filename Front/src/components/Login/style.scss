@@ -1,5 +1,7 @@
+@use 'src/styles/vars.scss';
+
 .login{
-  background-color: red;
+  background-color: rgb(211, 207, 201);
   width: 80%;
   border-radius: 5px;
   padding: 10px;
@@ -7,5 +9,23 @@
 
   &-form {
     width: 100%;
+    &-inputs{
+      margin: 5px;
+      
+      &>input{
+        margin: 10px;
+        border:none;
+        padding:10px;
+      }
+    }
+    &>button {
+      border:none;
+      padding: 10px;
+      border-radius: 5px;
+      &:hover{
+        background-color: orange;
+        color:white;
+      }
+    }
   }
 }

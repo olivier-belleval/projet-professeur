@@ -2,11 +2,12 @@ import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
 
-const Login = ({username, password, changeField, isLogged, handleLogin}) => {
+const Login = ({ username, password, changeField, isLogged, handleLogin }) => {
+  // function to prevent from page reloading + function to change input's value asap user types
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log('test');
-    console.log (username);
+    console.log ("j'ai le username :", username);
+    console.log ("j'ai le password :", password);
     handleLogin();
   };
   const handleInputChange = (evt) =>{
@@ -45,7 +46,6 @@ Login.propTypes = {
   changeField: PropTypes.func,
   isLogged: PropTypes.bool,
   handleLogin: PropTypes.func,
-
 }
 
 export default Login;
