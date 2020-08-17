@@ -1,27 +1,31 @@
 import { connect } from 'react-redux';
 import Login from '../components/Login';
-import { login, changeField, toggleLoginForm } from '../store/action';
+import {
+  loginSubmit,
+  changeField,
+  toggleLoginForm,
+} from '../store/action';
 
 const mapStateToProps = (state) => ({
   username: state.username,
   password: state.password,
   isLogged: state.isLogged,
   opened: state.loginOpened,
+  loading: state.loading,
 });
 
-// to handle changes in login inputs
+
 const mapDispatchToProps = (dispatch) => ({
+  // to handle changes in login inputs
   changeField: (changedData) => {
     dispatch(changeField(changedData));
   },
-
+  // changing loading value to true
   handleLogin: () => {
-    dispatch(login());
-    console.log("logging");
+    dispatch(loginSubmit());
   },
-
+  // toggle to open login form
   onOpenClick: () => {
-    console.log("open or close login form");
     dispatch(toggleLoginForm());
   },
 });

@@ -8,6 +8,7 @@ const Login = ({
   password,
   isLogged,
   opened,
+  loading,
   // func which dispatch
   handleLogin,
   changeField,
@@ -25,10 +26,11 @@ const Login = ({
   };
   return (
     <div className="login">
+      {opened && loading && <span>Connexion en cours...</span>}
       {!isLogged && !opened && (
         <button type="button" className="login-button" onClick={onOpenClick}> Connexion</button>
       )}
-      {!isLogged  && opened && (
+      {!isLogged  && opened && !loading && (
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="login-form-inputs">
             <input

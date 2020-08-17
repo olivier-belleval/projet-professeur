@@ -20,3 +20,22 @@
     font-size: 3rem;
   }
 }
+
+@media screen and (min-width:600px){
+  .homepage{
+    background-size:65%;
+  }
+}
+
+@media screen and (min-width:800px){
+  .homepage{
+    background-size:50%;
+  }
+}
+
+@media screen and (min-width:1000px){
+  .homepage{
+    background-size:40%;
+  }
+}
+

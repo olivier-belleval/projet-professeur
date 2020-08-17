@@ -6,6 +6,10 @@
   display: flex;
   justify-content: center;
 
+  &-loader{
+    width: 20%;
+  }
+
   &-button{
     align-self: center;
     padding: 1.6rem;
@@ -29,3 +33,4 @@
       }
   }
 }
+
