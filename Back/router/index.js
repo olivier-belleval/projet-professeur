@@ -9,7 +9,10 @@ const articleController = require('../controllers/articleController');
 router.post('/api/login', userController.classLogin);
 router.post('/api/admin/login', userController.adminLogin);
 
+
 // routes liées aux articles
 router.get('/api/articles', articleController.getAllArticles);
+router.get('/api/article/:id(\\d+)', articleController.getOneArticle);
+router.post('/api/article/write', articleController.createOneArticle);
 
 module.exports = router;

@@ -30,7 +30,7 @@ module.exports = {
     getArticlesByClass: async (classId) => {
 
         const preparedQuery = {
-        text: `SELECT
+            text: `SELECT
 		a.id AS article_id,
 		a.title AS article_title,
 		a.content AS article_content,
@@ -42,9 +42,9 @@ module.exports = {
         JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
         WHERE c.id = $1
 	    GROUP BY a.id, a.title, a.content, article_author`,
-        values: [classId]
+            values: [classId]
         };
-        
+
         const result = await client.query(preparedQuery);
 
         // fin d'execution si aucun article n'est trouvé - undefined
@@ -54,6 +54,46 @@ module.exports = {
 
         // retourne tous les articles concernant la classe donnée
         return result.rows;
+    },
+
+    getOneArticle: async (articleId) => {
+
+        const preparedQuery = {
+            text: `SELECT
+		a.id AS article_id,
+		a.title AS article_title,
+		a.content AS article_content,
+		string_agg(distinct c.username, ', ' ORDER BY c.username) AS class_name,
+		t.first_name || ' ' || t.last_name AS article_author
+	    FROM "article"."article" a
+	    JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
+	    JOIN "omyprof"."class" c ON m2m.class_id = c.id
+        JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
+        WHERE a.id = $1
+	    GROUP BY a.id, a.title, a.content, article_author`,
+            values: [articleId]
+        };
+
+        const result = await client.query(preparedQuery);
+
+        // retourne tous les articles concernant la classe donnée
+        return result.rows[0];
+    },
+
+    createOneArticle: async (article) => {
+
+        const preparedQuery = {
+            text: `INSERT INTO "article"."article" ("title", "slug", "excerpt", "content", "teacher_id") VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            values: [article.title, article.slug, article.excerpt, article.content, article.teacherId]
+        };
+
+        const result = await client.query(preparedQuery);
+
+        // retourne l'article qui vient d'être créé
+        return result.rows[0];
+
     }
+
+
 
 };
