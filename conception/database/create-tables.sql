@@ -32,6 +32,7 @@ CREATE TABLE "omyprof"."teacher" (
 CREATE TABLE "omyprof"."class" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "username" TEXT NOT NULL UNIQUE,
+    "password" TEXT NOT NULL,
     "description" TEXT,
     "teacher_id" INT REFERENCES "omyprof"."teacher"("id")
 );
@@ -49,8 +50,8 @@ CREATE TABLE "article"."article" (
 
 CREATE TABLE "article"."m2m_article_class" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "article_id" INT REFERENCES "article"."article"("id"),
-    "class_id" INT REFERENCES "omyprof"."class"("id")
+    "article_id" INT REFERENCES "article"."article"("id") ON DELETE CASCADE,
+    "class_id" INT REFERENCES "omyprof"."class"("id") ON DELETE CASCADE
 );
 
 -- TABLES DU SCHEMA KANBAN
