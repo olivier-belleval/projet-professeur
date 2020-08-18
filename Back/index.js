@@ -6,8 +6,10 @@ require('dotenv').config();
 const router = require('./router');
 const session = require('express-session');
 
+// gestion du request.body
 app.use(express.urlencoded({extended: true}));
 
+// gestion session
 app.use(session({
 
     secret: process.env.SECRET,
@@ -15,6 +17,12 @@ app.use(session({
     saveUninitialized: true
 
 }));
+
+// gestion CORS
+app.use((_, response, next) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 app.use(router);
 
