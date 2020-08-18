@@ -92,6 +92,26 @@ module.exports = {
         // retourne l'article qui vient d'être créé
         return result.rows[0];
 
+    },
+
+    deleteArticle: async (articleId) => {
+
+
+        // requiert changements bdd (delete on cascade sur FK)
+        
+        const preparedQuery = {
+            text: `DELETE FROM "article"."article" WHERE id = $1 RETURNING *`,
+            values: [articleId]
+        };
+
+        const result = await client.query(preparedQuery);
+
+        if (!result) {
+            return;
+        }
+
+        return 'Article supprimé!';
+
     }
 
 

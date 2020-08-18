@@ -14,5 +14,6 @@ router.post('/api/admin/login', userController.adminLogin);
 router.get('/api/articles', articleController.getAllArticles);
 router.get('/api/article/:id(\\d+)', articleController.getOneArticle);
 router.post('/api/article/write', articleController.createOneArticle);
+router.get('/api/article/:id(\\d+)/delete', articleController.deleteArticle);
 
 module.exports = router;

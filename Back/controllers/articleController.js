@@ -6,7 +6,7 @@ module.exports = {
 
     getAllArticles: async (request, response, next) => {
 
-        request.session.user = { state: 'teacher'};
+        // request.session.user = { state: 'teacher'};
         // request.session.user = { id: 1, state: 'class'};
 
         // fin d'éxécution si utilisateur n'est pas identifié
@@ -34,7 +34,7 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        request.session.user = { state: 'teacher'};
+        // request.session.user = { state: 'teacher'};
 
         // fin d'éxécution si utilisateur n'est pas identifié
         if(!request.session.user) {
@@ -59,7 +59,7 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        request.session.user = { state: 'teacher', id: 1};
+        // request.session.user = { state: 'teacher', id: 1};
 
         // fin d'éxécution si utilisateur n'est pas identifié
         if(!request.session.user) {
@@ -111,6 +111,33 @@ module.exports = {
             console.log('vous n\'êtes pas autorisé à écrire un article');
         }
 
+    },
+
+    deleteArticle: async (request, response, next) => {
+
+        const articleId = request.params.id;
+
+        // request.session.user = { state: 'teacher'};
+
+        // fin d'éxécution si utilisateur n'est pas identifié
+        if(!request.session.user) {
+            // prévoir gestion status + json
+            console.log('utilisateur n\'est pas connecté');
+            return;
+        };
+
+        if(request.session.user.state !== 'teacher') {
+            console.log('Vous n\'avez pas les droits pour supprimer un article');
+            return;
+        }
+
+        const result = await articleDataMapper.deleteArticle(articleId);
+
+        if(!result) {
+            return response.json({error: 'Article inconnu - Le numéro indiqué ne fait référence à aucun article'});
+        }
+
+        return response.json({ deleted_article: result });
 
     },
 

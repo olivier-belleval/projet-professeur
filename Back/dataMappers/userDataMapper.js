@@ -70,7 +70,7 @@ module.exports = {
 
         const pwd = 'test';
 
-        const hashedpwd = await bcrypt.hash(clear, 9);
+        const hashedpwd = await bcrypt.hash(pwd, 9);
 
         console.log(pwd, ' : ', hashedpwd);
 
