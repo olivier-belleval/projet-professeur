@@ -72,9 +72,9 @@ module.exports = {
         try {
             // get the kanban id from params
             const kanbanId = request.params.id;
-            await kanbanDataMapper.deleteKanban(kanbanId);
+            const result = await kanbanDataMapper.deleteKanban(kanbanId);
             response.json({
-                status: "deleted"
+                status: result || "deleted"
             })
 
         } catch (error) {
@@ -82,6 +82,82 @@ module.exports = {
             response.status(500).json(error); 
         };
     },
+
+    createList:async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const newListObject = {};
+            newListObject['kanban_id'] = request.params.id;
+
+            for (const key in request.body) {
+                newListObject[key] = request.body[key];
+            };
+            console.log('newListObject : ', newListObject)            
+
+            const newList = await kanbanDataMapper.createList(newListObject);
+
+            response.json({
+                newList
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
+    deletelist: async (request, response) => {
+        try {
+            // get the kanban id from params
+            const kanbanId = request.params.kanbanId;
+            const listId = request.params.listId;
+            const result = await kanbanDataMapper.deleteList(listId, kanbanId);
+            response.json({
+                status: result || "deleted" 
+            })
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error); 
+        };
+    },
+
+    createCard:async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const newCardObject = {};
+            newCardObject['list_id'] = request.params.id;
+
+            for (const key in request.body) {
+                newCardObject[key] = request.body[key];
+            };         
+
+            const newCard = await kanbanDataMapper.createCard(newCardObject);
+
+            response.json({
+                newCard
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
+    deleteCard: async (request, response) => {
+        try {
+            // get the kanban id from params
+            const listId = request.params.listId;
+            const cardId = request.params.cardId;
+            const result = await kanbanDataMapper.deleteCard(cardId, listId);
+            response.json({
+                status: result || "deleted" 
+            })
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error); 
+        };
+    },
+
 
     todo: async () => (_, response) => {
         response.json({

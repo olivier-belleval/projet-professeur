@@ -125,4 +125,75 @@ module.exports = {
         return;
     },
 
+    createList: async (listObject) => {
+        
+        const query = {
+            text : `INSERT INTO "kanban"."list" 
+                    ("name", "order", "kanban_id") 
+                    VALUES ($1, $2, $3) returning *`,
+            values: [listObject.name, listObject.order, listObject.kanban_id]
+          };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return
+        }
+        console.log(result.rows[0]);
+        return result.rows[0];
+    },
+
+    deleteList: async (listId, kanbanId) => {
+        const query = {
+            text : `DELETE FROM "kanban"."list"
+                    WHERE id = $1`,
+            values: [listId]
+          };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return;
+        }
+        return result;
+    },
+
+    createCard: async (cardObject) => {
+        
+        const query = {
+            text : `INSERT INTO "kanban"."card" 
+                    ("description", "order", "color", "list_id") 
+                    VALUES ($1, $2, $3, $4) returning *`,
+            values: [cardObject.description, cardObject.order, cardObject.color, cardObject.list_id]
+          };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return
+        }
+        console.log(result.rows[0]);
+        return result.rows[0];
+    },
+
+    deleteCard: async (cardId, listId) => {
+        const query = {
+            text : `DELETE FROM "kanban"."card"
+                    WHERE id = $1`,
+            values: [cardId]
+          };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return;
+        }
+        return result;
+    },
+
+    
 }
