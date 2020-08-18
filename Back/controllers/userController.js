@@ -25,7 +25,6 @@ module.exports = {
 
     adminLogin: async (request, response, next) => {
 
-        try {
             // fin d'éxécution si username ou password ne sont pas renseignés
             if (!request.body.username || !request.body.password) {
                 // prévoir gestion 404 - next();
@@ -45,10 +44,6 @@ module.exports = {
             request.session.user = result;
             return response.json({ data: 'authentification réussie' });
 
-        } catch (error) {
-            // prévoir gestion status + json
-            console.log('echec promesse');
-        }
     },
 
 }
