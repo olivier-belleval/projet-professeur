@@ -73,11 +73,11 @@ CREATE TABLE "kanban"."list" (
 );
 
 CREATE TABLE "kanban"."card" (
-    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "description" TEXT DEFAULT 'à remplir',
-    "order" INT NOT NULL,
-    "color" TEXT DEFAULT '#FFFFFF',
-    "list_id" INT REFERENCES "kanban"."list"("id")
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY ON DELETE CASCADE,
+    "description" TEXT DEFAULT 'à remplir' ON DELETE CASCADE,
+    "order" INT NOT NULL ON DELETE CASCADE,
+    "color" TEXT DEFAULT '#FFFFFF' ON DELETE CASCADE,
+    "list_id" INT REFERENCES "kanban"."list"("id") ON DELETE CASCADE
 );
 
 CREATE TABLE "kanban"."tag" (
@@ -88,14 +88,14 @@ CREATE TABLE "kanban"."tag" (
 
 CREATE TABLE "kanban"."m2m_tag_card" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "tag_id" INT REFERENCES "kanban"."tag"("id"),
-    "card_id" INT REFERENCES "kanban"."card"("id")
+    "tag_id" INT REFERENCES "kanban"."tag"("id") ON DELETE CASCADE,
+    "card_id" INT REFERENCES "kanban"."card"("id") ON DELETE CASCADE
 );
 
 CREATE TABLE "kanban"."m2m_kanban_class" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "kanban_id" INT REFERENCES "kanban"."kanban"("id"),
-    "class_id" INT REFERENCES "omyprof"."class"("id")
+    "kanban_id" INT REFERENCES "kanban"."kanban"("id") ON DELETE CASCADE,
+    "class_id" INT REFERENCES "omyprof"."class"("id") ON DELETE CASCADE
 );
 
 

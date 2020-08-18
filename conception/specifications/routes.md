@@ -55,12 +55,12 @@
 | GET | /api/kanban/:id/lists | kanbanController | Pour afficher les listes d'un kanban |
 | POST | /api/kanban/:id/list/create | kanbanController | Pour créer une liste dans un kanban|
 | PUT | /api/kanban/:id/list/:id/edit | kanbanController | Pour modifier une liste d'un kanban|
-| DELETE | /api/kanban/:id/list/:id/delete | kanbanController | Pour supprimer une liste d'un kanban |
+| DELETE | /api/kanban/:kanbanId/list/:listId/delete | kanbanController | Pour supprimer une liste d'un kanban |
 | -| -| -| -|
 | GET | /api/lists/:id/cards | kanbanController | Pour afficher les cartes d'une liste |
 | POST | /api/list/:id/card/create | kanbanController | Pour créer une carte dans une liste|
 | PUT | /api/list/:id/card/:id/edit | kanbanController | Pour modifier une carte dans une liste|
-| DELETE | /api/list/:id/card/:id/delete  | kanbanController | Pour supprimer une carte d'une liste |
+| DELETE | /api/list/:listId/card/:cardId/delete  | kanbanController | Pour supprimer une carte d'une liste |
 | -| -| -| -|
 | GET | /api/card/:id/tags | kanbanController | Pour afficher les tags d'une carte |
 | POST | /api/tag/create | kanbanController | Pour créer un tag |
