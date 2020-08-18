@@ -4,12 +4,9 @@ module.exports = {
 
     classLogin: async (request, response, next) => {
 
-        try {
             // fin d'éxécution si username ou password ne sont pas renseignés
             if (!request.body.username || !request.body.password) {
-                // prévoir gestion 404 - next();
-                console.log('par ici!');
-                return;
+                return response.status(400).json({ data: 'mdp ou identifiant invalide' })
             }
 
             // appel datamapper pour vérification du username/password
@@ -22,12 +19,7 @@ module.exports = {
 
             // on stocke l'id de la classe, son username/nom et son state en cookie si l'authentification est réussie
             request.session.user = result;
-            console.log('authentification réussie! (session stockée)');
-
-        } catch (error) {
-            // prévoir gestion status + json
-            console.log('echec promesse');
-        }
+            return response.json({ data: 'authentification réussie' });
 
     },
 
@@ -51,7 +43,7 @@ module.exports = {
 
             // on stocke l'id du teacher, son username et son state en cookie si l'authentification est réussie
             request.session.user = result;
-            console.log('authentification réussie! (session stockée)');
+            return response.json({ data: 'authentification réussie' });
 
         } catch (error) {
             // prévoir gestion status + json
