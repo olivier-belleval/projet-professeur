@@ -5,10 +5,11 @@
   text-align: center;
   background-image: url('src/assets/images/opened_book.png');
   background-position: bottom right;
-  background-size:85%;
+  background-size:115%;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 
   &-image{
     width: 40%;
@@ -16,7 +17,7 @@
   }
 
   &-title{
-    margin: 2rem;
+    margin-top: 2rem;
     font-size: 3rem;
   }
 }

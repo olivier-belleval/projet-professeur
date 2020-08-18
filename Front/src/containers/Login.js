@@ -4,7 +4,9 @@ import {
   loginSubmit,
   changeField,
   toggleLoginForm,
+  loginChangeTeacher,
 } from '../store/action';
+
 
 const mapStateToProps = (state) => ({
   username: state.username,
@@ -12,6 +14,8 @@ const mapStateToProps = (state) => ({
   isLogged: state.isLogged,
   opened: state.loginOpened,
   loading: state.loading,
+  classes: state.classes,
+  teacher: state.teacher,
 });
 
 
@@ -29,6 +33,10 @@ const mapDispatchToProps = (dispatch) => ({
   onOpenClick: () => {
     dispatch(toggleLoginForm());
   },
+  //turn login window as teacher login windows
+  onTeacherClick: () => {
+    dispatch(loginChangeTeacher());
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

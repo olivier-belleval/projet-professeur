@@ -4,6 +4,7 @@ import {
   LOGIN_SUBMIT,
   LOGIN_SUBMIT_SUCCESS,
   LOGIN_SUBMIT_ERROR,
+  LOGIN_CHANGE_TEACHER,
 } from '../action';
 
 const initialState = {
@@ -13,6 +14,8 @@ const initialState = {
   loading: false,
   isLogged: false,
   loginOpened: false,
+  teacher:false,
+  classes: ['6ème A', '5eme D', '3eme B'],
 };
 
 export default (state = initialState, action = {}) => {
@@ -47,6 +50,11 @@ export default (state = initialState, action = {}) => {
         loading: false,
         username: action.payload,
         loginErrorMessage: action.payload,
+      };
+    case LOGIN_CHANGE_TEACHER:
+      return {
+        ...state,
+        teacher: !state.teacher,
       };
     default:
       return state;
