@@ -6,7 +6,7 @@ module.exports = {
 
     getAllArticles: async (request, response, next) => {
 
-        // request.session.user = { state: 'teacher'};
+        request.session.user = { state: 'teacher'};
         // request.session.user = { id: 1, state: 'class'};
 
         // fin d'éxécution si utilisateur n'est pas identifié
@@ -117,7 +117,7 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        // request.session.user = { state: 'teacher'};
+        request.session.user = { state: 'teacher'};
 
         // fin d'éxécution si utilisateur n'est pas identifié
         if(!request.session.user) {
