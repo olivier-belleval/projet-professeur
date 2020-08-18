@@ -1,5 +1,5 @@
-import axios from "axios";
-import { LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError } from "../action";
+import axios from 'axios';
+import { LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError } from '../action';
 
 const logMiddleware = (store) => (next) => (action) => {
   next(action);
@@ -7,11 +7,12 @@ const logMiddleware = (store) => (next) => (action) => {
     case LOGIN_SUBMIT:
       const user = {
         username: store.getState().username,
-        password: store.getState().password
-      }
+        password: store.getState().password,
+      };
+
       axios({
-        method: "post",
-        url: "http://localhost:3001/login",
+        method: 'post',
+        url: 'http://localhost:3000/api/login',
         data: user,
         withCredentials: true,
       })
@@ -20,12 +21,11 @@ const logMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           store.dispatch(
-            loginSubmitError("Mot de passe incorrect");
+            loginSubmitError('Mot de passe incorrect'),
           );
         });
-        
+
     default:
-      return;
   }
 };
 
