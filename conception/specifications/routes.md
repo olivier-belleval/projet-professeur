@@ -47,6 +47,7 @@
 | -| -| -| -|
 | GET | /api/kanbans | kanbanController | Pour afficher liste des kanbans en fonction de la classe|
 | GET | /api/kanban/:id | kanbanController | Pour afficher les détails d'un kanban |
+| GET | /api/kanban/class/:classname | kanbanController | Pour afficher les kanbans d'une classe |
 | POST | /api/kanban/create | kanbanController | Pour créer un kanban|
 | PUT | /api/kanban/:id/edit | kanbanController | Pour modifier un kanban |
 | DELETE | /api/kanban/:id/delete | kanbanController | Pour supprimer un kanban |
