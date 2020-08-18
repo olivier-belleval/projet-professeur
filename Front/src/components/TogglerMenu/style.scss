@@ -7,14 +7,26 @@
   left: 20px;
   padding: 10px;
   align-items: center;
+  &-icon {
+    position:fixed;
+    top: 10px;
+  left: 10px;
+  }
   &-menu {
-    background-color: vars.$light-color;
+    background-color: rgba(232, 232, 232, 0.5);
     width: 200px;
     height: 100vh;
+    position: fixed;
+    top: 30px;
+    left: 30px;
   }
   &-nav {
+    margin-top: 40px;
     margin-bottom: 50px;
     color: vars.$primary-color;
+    &:hover {
+      background-color: vars.$dark-color;
+    }
   }
   &-button {
     font-size: 1.5em;

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Logout = () => (
   <div className="article">
-    <h2>Deconnexion</h2>
+    <h2>Modale de deconnexion</h2>
   </div>
 );
 

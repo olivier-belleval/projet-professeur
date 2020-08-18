@@ -20,12 +20,6 @@ export default (state = initialState, action = {}) => {
         ...state,
         loginOpened: !state.loginOpened,
       };
-    // case INPUT_MESSAGE_CHANGE
-    // Renvoyer le state tel qu'il était
-    // MAIS en changeant la propriété
-    // messageInput, et lui donner en valeur
-    // ce qui a été tapé par l'user
-    // (action.value par exemple)
     default:
       return state;
   }
