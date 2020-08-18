@@ -4,25 +4,23 @@ const articleDataMapper = require('../dataMappers/articleDataMapper');
 
 module.exports = {
 
-    getAllArticles: async (request, response, next) => {
+    getAllArticlesWithClass: async (request, response, next) => {
 
-        request.session.user = { state: 'teacher'};
+        request.session.user = { id: 1, state: 'teacher' };
         // request.session.user = { id: 1, state: 'class'};
 
         // fin d'éxécution si utilisateur n'est pas identifié
-        if(!request.session.user) {
-            // prévoir gestion status + json
-            console.log('utilisateur n\'est pas connecté');
-            return;
+        if (!request.session.user) {
+            return response.json({ error: 'Vous devez d\'abord vous connecter' });
         };
 
         // si l'utilisateur est professeur (accès à tous les articles)
-        if(request.session.user.state === 'teacher') {
-            var result = await articleDataMapper.getAllArticles();
+        if (request.session.user.state === 'teacher') {
+            var result = await articleDataMapper.getAllArticlesWithClass();
         };
 
         // si l'utilisateur est un élève (accès aux articles concernant la classe)
-        if(request.session.user.state === 'class') {
+        if (request.session.user.state === 'class') {
             var result = await articleDataMapper.getArticlesByClass(request.session.user.id);
         };
 
@@ -34,21 +32,17 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        // request.session.user = { state: 'teacher'};
+        request.session.user = { id: 1, state: 'teacher' };
 
         // fin d'éxécution si utilisateur n'est pas identifié
-        if(!request.session.user) {
-            // prévoir gestion status + json
-            console.log('utilisateur n\'est pas connecté');
-            return;
+        if (!request.session.user) {
+            return response.json({ error: 'Vous devez d\'abord vous connecter' });
         };
 
         const result = await articleDataMapper.getOneArticle(articleId);
 
-        if(!result) {
-
-            // prévoir 404
-            console.log('aucun article!');
+        if (!result) {
+            return response.json({ error: 'Aucun article!' });
         }
 
         return response.json({ result });
@@ -59,21 +53,19 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        // request.session.user = { state: 'teacher', id: 1};
+        request.session.user = { state: 'teacher', id: 1 };
 
         // fin d'éxécution si utilisateur n'est pas identifié
-        if(!request.session.user) {
-            // prévoir gestion status + json
-            console.log('utilisateur n\'est pas connecté');
-            return;
+        if (!request.session.user) {
+            return response.json({ error: 'Vous devez d\'abord vous connecter' });
         };
 
-        if(request.session.user.state === 'teacher') {
+        if (request.session.user.state === 'teacher') {
 
-            const article = { 
+            const article = {
 
                 title: request.body.title,
-                slug: slugify(request.body.title, {remove: /[*+~.()'"!:@]/g, lower:true}),
+                slug: slugify(request.body.title, { remove: /[*+~.()'"!:@]/g, lower: true }),
                 excerpt: request.body.excerpt,
                 content: request.body.content,
                 teacherId: request.session.user.id,
@@ -82,23 +74,23 @@ module.exports = {
 
 
             // vérification des données reçues 
-            
+
             const mandatory = [];
 
-            if(!article.title) {
+            if (!article.title) {
                 mandatory.push('Le titre est obligatoire');
             }
 
-            if(!article.excerpt) {
+            if (!article.excerpt) {
                 mandatory.push('L\'extrait est obligatoire');
             }
 
-            if(!article.content) {
+            if (!article.content) {
                 mandatory.push('L\'article est vide!');
             }
 
-            if(mandatory.length > 0) {
-                return response.json({ error: mandatory});
+            if (mandatory.length > 0) {
+                return response.json({ error: mandatory });
             }
 
             const result = await articleDataMapper.createOneArticle(article);
@@ -106,9 +98,7 @@ module.exports = {
             return response.json({ result });
 
         } else {
-
-            // 404?
-            console.log('vous n\'êtes pas autorisé à écrire un article');
+            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour créer un article' });
         }
 
     },
@@ -117,29 +107,28 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        request.session.user = { state: 'teacher'};
+        request.session.user = { state: 'class' };
 
         // fin d'éxécution si utilisateur n'est pas identifié
-        if(!request.session.user) {
-            // prévoir gestion status + json
-            console.log('utilisateur n\'est pas connecté');
-            return;
+        if (!request.session.user) {
+            return response.json({ error: 'Vous devez d\'abord vous connecter' });
         };
 
-        if(request.session.user.state !== 'teacher') {
-            console.log('Vous n\'avez pas les droits pour supprimer un article');
-            return;
+        if (request.session.user.state !== 'teacher') {
+            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour supprimer un article!' });
         }
 
         const result = await articleDataMapper.deleteArticle(articleId);
 
-        if(!result) {
-            return response.json({error: 'Article inconnu - Le numéro indiqué ne fait référence à aucun article'});
+        if (!result) {
+            return response.json({ error: 'Article inconnu - Le numéro indiqué ne fait référence à aucun article' });
         }
 
         return response.json({ deleted_article: result });
 
     },
+
+
 
 
 };
