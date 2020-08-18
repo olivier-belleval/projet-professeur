@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const cors = require('cors')
+
 require('dotenv').config();
 
 const router = require('./router');
@@ -19,10 +21,7 @@ app.use(session({
 }));
 
 // gestion CORS
-app.use((_, response, next) => {
-    response.setHeader('Access-Control-Allow-Origin', '*');
-    next();
-});
+app.options('*',cors);
 
 app.use(router);
 
