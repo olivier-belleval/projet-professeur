@@ -6,7 +6,7 @@ module.exports = {
 
     getAllArticlesWithClass: async (request, response, next) => {
 
-        request.session.user = { id: 1, state: 'teacher' };
+        // request.session.user = { id: 1, state: 'teacher' };
         // request.session.user = { id: 1, state: 'class'};
 
         // fin d'éxécution si utilisateur n'est pas identifié
@@ -14,14 +14,16 @@ module.exports = {
             return response.json({ error: 'Vous devez d\'abord vous connecter' });
         };
 
+        let result;
+
         // si l'utilisateur est professeur (accès à tous les articles)
         if (request.session.user.state === 'teacher') {
-            var result = await articleDataMapper.getAllArticlesWithClass();
+            result = await articleDataMapper.getAllArticlesWithClass();
         };
 
         // si l'utilisateur est un élève (accès aux articles concernant la classe)
         if (request.session.user.state === 'class') {
-            var result = await articleDataMapper.getArticlesByClass(request.session.user.id);
+            result = await articleDataMapper.getArticlesByClass(request.session.user.id);
         };
 
         return response.json({ result });
@@ -32,7 +34,7 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        request.session.user = { id: 1, state: 'teacher' };
+        //request.session.user = { id: 1, state: 'teacher' };
 
         // fin d'éxécution si utilisateur n'est pas identifié
         if (!request.session.user) {
@@ -62,45 +64,45 @@ module.exports = {
 
         if (request.session.user.state !== 'teacher') {
             return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour créer un article' });
+        };
+
+
+        const article = {
+
+            title: request.body.title,
+            slug: slugify(request.body.title, { remove: /[*+~.()'"!:@]/g, lower: true }),
+            excerpt: request.body.excerpt,
+            content: request.body.content,
+            teacherId: request.session.user.id,
+
+        };
+
+
+        // vérification des données reçues 
+
+        const mandatory = [];
+
+        if (!article.title) {
+            mandatory.push('Le titre est obligatoire');
         }
-        
 
-            const article = {
+        if (!article.excerpt) {
+            mandatory.push('L\'extrait est obligatoire');
+        }
 
-                title: request.body.title,
-                slug: slugify(request.body.title, { remove: /[*+~.()'"!:@]/g, lower: true }),
-                excerpt: request.body.excerpt,
-                content: request.body.content,
-                teacherId: request.session.user.id,
+        if (!article.content) {
+            mandatory.push('L\'article est vide!');
+        }
 
-            };
+        if (mandatory.length > 0) {
+            return response.json({ error: mandatory });
+        }
+
+        const result = await articleDataMapper.createOneArticle(article);
+
+        return response.json({ result });
 
 
-            // vérification des données reçues 
-
-            const mandatory = [];
-
-            if (!article.title) {
-                mandatory.push('Le titre est obligatoire');
-            }
-
-            if (!article.excerpt) {
-                mandatory.push('L\'extrait est obligatoire');
-            }
-
-            if (!article.content) {
-                mandatory.push('L\'article est vide!');
-            }
-
-            if (mandatory.length > 0) {
-                return response.json({ error: mandatory });
-            }
-
-            const result = await articleDataMapper.createOneArticle(article);
-
-            return response.json({ result });
-
-        
 
     },
 
@@ -108,7 +110,7 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        request.session.user = { id: 1, state: 'teacher' };
+        //request.session.user = { id: 1, state: 'teacher' };
 
         // fin d'éxécution si utilisateur n'est pas identifié
         if (!request.session.user) {
@@ -134,6 +136,7 @@ module.exports = {
     associateClassToArticle: async (request, response, next) => {
 
         // request.session.user = { id: 1, state: 'teacher' };
+        
         if (!request.session.user) {
             return response.json({ error: 'Vous devez d\'abord vous connecter' });
         };
