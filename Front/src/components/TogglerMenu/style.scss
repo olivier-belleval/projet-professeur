@@ -1,0 +1,29 @@
+@use '../../styles/vars';
+
+.settings {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 20px;
+  padding: 10px;
+  align-items: center;
+  &-menu {
+    background-color: vars.$light-color;
+    width: 200px;
+    height: 100vh;
+  }
+  &-nav {
+    margin-bottom: 50px;
+    color: vars.$primary-color;
+  }
+  &-button {
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: vars.$dark-color;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  }
+
