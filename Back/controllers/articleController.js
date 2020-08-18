@@ -42,7 +42,7 @@ module.exports = {
         const result = await articleDataMapper.getOneArticle(articleId);
 
         if (!result) {
-            return response.json({ error: 'Aucun article!' });
+            return response.json({ error: 'Aucun article ne porte ce numéro!' });
         }
 
         return response.json({ result });
@@ -53,14 +53,17 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        request.session.user = { state: 'teacher', id: 1 };
+        // request.session.user = { state: 'teacher', id: 1 };
 
         // fin d'éxécution si utilisateur n'est pas identifié
         if (!request.session.user) {
             return response.json({ error: 'Vous devez d\'abord vous connecter' });
         };
 
-        if (request.session.user.state === 'teacher') {
+        if (request.session.user.state !== 'teacher') {
+            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour créer un article' });
+        }
+        
 
             const article = {
 
@@ -97,9 +100,7 @@ module.exports = {
 
             return response.json({ result });
 
-        } else {
-            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour créer un article' });
-        }
+        
 
     },
 
@@ -107,19 +108,21 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        request.session.user = { state: 'class' };
+        request.session.user = { id: 1, state: 'teacher' };
 
         // fin d'éxécution si utilisateur n'est pas identifié
         if (!request.session.user) {
             return response.json({ error: 'Vous devez d\'abord vous connecter' });
         };
 
+        // fin d'éxécution si l'utilisateur n'est pas un teacher
         if (request.session.user.state !== 'teacher') {
             return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour supprimer un article!' });
         }
 
         const result = await articleDataMapper.deleteArticle(articleId);
 
+        // si utilisateur renseigne un article inconnu
         if (!result) {
             return response.json({ error: 'Article inconnu - Le numéro indiqué ne fait référence à aucun article' });
         }
@@ -128,7 +131,27 @@ module.exports = {
 
     },
 
+    associateClassToArticle: async (request, response, next) => {
 
+        // request.session.user = { id: 1, state: 'teacher' };
+        if (!request.session.user) {
+            return response.json({ error: 'Vous devez d\'abord vous connecter' });
+        };
 
+        // fin d'éxécution si l'utilisateur n'est pas un teacher
+        if (request.session.user.state !== 'teacher') {
+            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour supprimer un article!' });
+        };
+
+        const result = await articleDataMapper.associateClassToArticle(request.body.articleId, request.body.classId);
+
+        // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un article inexistant
+        if (!result) {
+            return response.json({ error: 'Impossible d\'associer cette classe à cet article' });
+        }
+
+        return response.json({ result });
+
+    },
 
 };

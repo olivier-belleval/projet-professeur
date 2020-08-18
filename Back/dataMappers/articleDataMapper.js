@@ -106,12 +106,32 @@ module.exports = {
 
         const result = await client.query(preparedQuery);
 
-        if (!result) {
+        
+        if (!result.rows[0]) {
             return;
         }
 
         return 'Article supprimé!';
 
+    },
+
+    associateClassToArticle: async (articleId, classId) => {
+
+        try {
+        const preparedQuery = {
+            text: `INSERT INTO "article"."m2m_article_class" ("article_id", "class_id")
+            VALUES ($1, $2)`,
+            values: [articleId, classId]
+        };
+
+        const result = await client.query(preparedQuery);
+
+        return 'Classe ajoutée à l\'article!';
+    
+        } catch (error) {
+
+            return;
+        }
     }
 
 };

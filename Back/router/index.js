@@ -15,5 +15,6 @@ router.get('/api/articles', articleController.getAllArticlesWithClass);
 router.get('/api/article/:id(\\d+)', articleController.getOneArticle);
 router.post('/api/article/write', articleController.createOneArticle);
 router.get('/api/article/:id(\\d+)/delete', articleController.deleteArticle);
+router.post('/api/article/associate', articleController.associateClassToArticle);
 
 module.exports = router;
