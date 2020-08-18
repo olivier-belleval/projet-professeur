@@ -23,6 +23,44 @@ module.exports = {
         return result.rows[0];
     },
 
+    getAllKanbans: async () => {
+        
+        const query = {
+        text : `
+        SELECT * FROM "kanban".kanban_list_card_tag;
+        `
+        };
+        
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme de requette');
+            return
+        }
+        return result.rows;
+    },
+
+    getOneKanbansById: async (kanbanId) => {
+        
+        const query = {
+            text : `
+                SELECT * FROM "kanban".kanban_list_card_tag
+                WHERE kanban_id= $1;
+                `,
+            values: [kanbanId]
+        };
+        
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme de requette');
+            return;
+        }
+        return result.rows;
+    },
+
     deleteKanban: async (kanbanId) => {
 
         const query = {

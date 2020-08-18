@@ -23,10 +23,32 @@ module.exports = {
         }
     },
 
-    todo: async () => (_, response) => {
-        response.json({
-            status: "todo"
-        });
+    getAllKanbans:async (request, response, next) => {
+        try {
+
+            const allKanban = await kanbanDataMapper.getAllKanbans();
+
+            response.json({
+                allKanban
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
+    getOneKanbansById:async (request, response, next) => {
+        try {
+            const kanbanId = request.params.id
+            const allKanban = await kanbanDataMapper.getOneKanbansById(kanbanId);
+
+            response.json({
+                allKanban
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
     },
 
     deleteKanban: async (request, response) => {
@@ -44,5 +66,10 @@ module.exports = {
         };
     },
 
+    todo: async () => (_, response) => {
+        response.json({
+            status: "todo"
+        });
+    },
 
 }
