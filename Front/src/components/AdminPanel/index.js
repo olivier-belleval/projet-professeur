@@ -1,8 +1,9 @@
-import React from "react";
-import "./style.scss";
+import React from 'react';
+import './style.scss';
 
 const AdminPanel = () => (
   <header className="menu">
+    <a className="menu-title">O'MyProf</a>
     <nav className="menu-nav">
       <a className="menu-link">article</a>
       <a className="menu-link active">tableaux</a>
