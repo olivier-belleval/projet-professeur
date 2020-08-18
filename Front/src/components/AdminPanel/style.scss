@@ -1,0 +1,23 @@
+@use 'src/styles/vars';
+
+.menu {
+  text-align: center;
+  padding: 1em;
+  border-bottom: 1px solid vars.$primary-color;
+
+  &-nav {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  &-link {
+    margin: 0 1rem;
+    cursor: pointer;
+    color: vars.$dark-color;
+
+    &:hover,
+    &.active {
+      color: vars.$color;
+    }
+  }
+}
