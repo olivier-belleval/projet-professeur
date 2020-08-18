@@ -37,6 +37,23 @@ module.exports = {
         }
     },
 
+    getAllKanbansByClass: async (request, response, next) => {
+        try {
+            
+            const className = request.params.classname.replace('_',' ');
+
+            const allKanban = await kanbanDataMapper.getAllKanbansByClass(className);
+
+            response.json({
+                allKanban
+            });
+            
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
     getOneKanbansById:async (request, response, next) => {
         try {
             const kanbanId = request.params.id

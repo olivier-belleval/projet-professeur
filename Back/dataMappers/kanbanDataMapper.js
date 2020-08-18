@@ -27,7 +27,7 @@ module.exports = {
         
         const query = {
         text : `
-        SELECT * FROM "kanban".kanban_list_card_tag;
+        SELECT * FROM "kanban".kanban;
         `
         };
         
@@ -41,17 +41,64 @@ module.exports = {
         return result.rows;
     },
 
+    getAllKanbansByClass: async (className) => {
+        const query = {
+            text : `
+                SELECT ka.id,
+                    ka.title,
+                    ka.description,
+                    te.first_name || ' ' || te.last_name AS article_author,
+                    string_agg(distinct cl.username, ', ' ORDER BY cl.username) AS class_username
+                FROM "kanban".kanban ka
+                LEFT JOIN "kanban"."m2m_kanban_class" ka_cl 
+                    ON ka_cl.kanban_id = ka.id
+                LEFT JOIN "omyprof"."class" cl
+                    ON cl.id = ka_cl.class_id
+                LEFT JOIN "omyprof"."teacher" te
+                    ON te.id = ka.teacher_id
+                WHERE cl.username = $1
+                GROUP BY ka.id,cl.username, te.first_name, te.last_name;
+            `,
+            values: [className]
+            };
+            
+            const result = await client.query(query);
+    
+            if(!result) {
+                console.log('probleme de requette');
+                return
+            }
+            return result.rows;
+    },
+
     getOneKanbansById: async (kanbanId) => {
         
         const query = {
             text : `
-                SELECT * FROM "kanban".kanban_list_card_tag
-                WHERE kanban_id= $1;
+                SELECT 
+                    ka.id AS kanban_id,
+                    ka.background AS kanban_background,
+                    li.id AS list_id,
+                    li.name AS list_name,
+                    li.order AS list_order,
+                    ca.id AS card_id,
+                    ca.description AS card_description,
+                    ca.order AS card_order,
+                    ca.color AS card_color,
+                    ta.id AS tag_id,
+                    ta.name AS tag_name,
+                    ta.color AS tag_color
+                FROM "kanban"."kanban" ka
+                LEFT JOIN  "kanban"."list" li ON li.kanban_id = ka.id
+                LEFT JOIN "kanban"."card" ca ON ca.list_id = li.id 
+                LEFT JOIN "kanban"."m2m_tag_card" ta_ca ON ta_ca.card_id = ca.id 
+                LEFT JOIN "kanban"."tag" ta ON ta.id = ta_ca.tag_id
+                WHERE ka.id = $1
+                ORDER BY li.name;
                 `,
             values: [kanbanId]
         };
         
-
         const result = await client.query(query);
 
         if(!result) {
