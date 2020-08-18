@@ -9,7 +9,7 @@ router.post('/api/login', userController.login);
 router.get('/api/logout', userController.logout);
 
 router.get('/api/kanbans', kanbanController.getAllKanbans);
-router.get('/api/kanbans/class/:classname', kanbanController.getAllKanbansByClass);
+router.get('/api/kanbans/class/:classId', kanbanController.getAllKanbansByClass);
 router.get('/api/kanban/:id', kanbanController.getOneKanbansById);
 router.post('/api/kanban/create', kanbanController.createKanban);
 router.delete('/api/kanban/:id/delete', kanbanController.deleteKanban);

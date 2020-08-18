@@ -40,9 +40,9 @@ module.exports = {
     getAllKanbansByClass: async (request, response, next) => {
         try {
             
-            const className = request.params.classname.replace('_',' ');
+            const classId = request.params.classId;
 
-            const allKanban = await kanbanDataMapper.getAllKanbansByClass(className);
+            const allKanban = await kanbanDataMapper.getAllKanbansByClass(classId);
 
             response.json({
                 allKanban
