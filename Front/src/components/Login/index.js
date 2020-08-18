@@ -14,7 +14,6 @@ const Login = ({
   changeField,
   onOpenClick,
 }) => {
-  console.log(isLogged);
   // function to prevent from page reloading + function to change input's value asap user types
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -30,7 +29,7 @@ const Login = ({
       {!isLogged && !opened && (
         <button type="button" className="login-button" onClick={onOpenClick}> Connexion</button>
       )}
-      {!isLogged  && opened && !loading && (
+      {!isLogged && opened && !loading && (
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="login-form-inputs">
             <input

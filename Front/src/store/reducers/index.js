@@ -22,15 +22,15 @@ export default (state = initialState, action = {}) => {
         ...state,
         ...action.payload,
       };
-    case LOGIN_SUBMIT:
-      return {
-        ...state,
-        loading: true,
-      };
     case TOGGLE_LOGIN_FORM:
       return {
         ...state,
         loginOpened: !state.loginOpened,
+      };
+    case LOGIN_SUBMIT:
+      return {
+        ...state,
+        loading: true,
       };
     case LOGIN_SUBMIT_SUCCESS:
       return {

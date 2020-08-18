@@ -22,6 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   // changing loading value to true
   handleLogin: () => {
+    console.log('handlelogin:submit');
     dispatch(loginSubmit());
   },
   // toggle to open login form
