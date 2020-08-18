@@ -12,15 +12,18 @@ module.exports = {
         const result = await client.query('SELECT * FROM "omyprof"."class" c WHERE c.username = $1', [username]);
 
         // fin d'éxécution si aucun résultat
-
         if(result.rowCount === 0){
-            console.log('Aucun user trouvé en database.');
             return;
         }
 
         // on récupère le mdp stocké en bdd et on le compare au password reçu en request.body
 
         const comparison =  bcrypt.compareSync(password, result.rows[0].password);
+
+        // fin d'éxécution si comparaison KO
+        if(!comparison) {
+            return;
+        }
 
         // si les deux mdp correspondent, on retourne la classe (et surtout son id et son nom)
         // on n'oublie pas de supprimer le mdp/la description/le teacher_id dans la réponse, pour des questions de sécurité
@@ -43,14 +46,18 @@ module.exports = {
 
         // fin d'éxécution si aucun résultat
 
-        if(!result) {
-            console.log('pas de username correspondant');
+        if(result.rowCount === 0) {
             return;
         }
 
         // et on le compare au password reçu en request.body
 
         const comparison =  bcrypt.compareSync(password, result.rows[0].password);
+
+        // fin d'éxécution si comparaison KO
+        if(!comparison) {
+            return;
+        }
 
         // si les deux mdp correspondent, on retourne la classe (et surtout son id et son nom)
         // on n'oublie pas de supprimer le mdp/first_name/last_name dans la réponse, pour des questions de sécurité
@@ -70,7 +77,7 @@ module.exports = {
 
         const pwd = 'classtest';
 
-        const hashedpwd = await bcrypt.hash(clear, 9);
+        const hashedpwd = await bcrypt.hash(pwd, 9);
 
         console.log(pwd, ' : ', hashedpwd);
 
@@ -83,7 +90,7 @@ module.exports = {
 
         const pwd = 'admintest';
 
-        const hashedpwd = await bcrypt.hash(clear, 9);
+        const hashedpwd = await bcrypt.hash(pwd, 9);
 
         console.log(pwd, ' : ', hashedpwd);
 

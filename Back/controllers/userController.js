@@ -25,11 +25,10 @@ module.exports = {
 
     adminLogin: async (request, response, next) => {
 
+
             // fin d'éxécution si username ou password ne sont pas renseignés
             if (!request.body.username || !request.body.password) {
-                // prévoir gestion 404 - next();
-                console.log('par ici!');
-                return;
+                return response.status(400).json({ data: 'mdp ou identifiant invalide' })
             }
 
             // appel datamapper pour vérification du username/password
