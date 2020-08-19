@@ -1,12 +1,19 @@
 import React from 'react';
 import './style.scss';
+import { NavLink } from 'react-router-dom';
 
 const Admin = () => (
   <div className="admin_menu">
     <h2 className="admin_menu-title">Tableau administrateur</h2>
-    <div className="admin_menu-button">Détails des articles</div>
-    <div className="admin_menu-button">Détails des tableaux</div>
-    <div className="admin_menu-button">Mon espace</div>
+    <NavLink exact to="/admin/articles" className="admin_menu-button">
+      <div>Détails des articles</div>
+    </NavLink>
+    <NavLink exact to="/admin/kanban" className="admin_menu-button">
+      <div>Détails des tableaux</div>
+    </NavLink>
+    <NavLink exact to="/admin/comptes" className="admin_menu-button">
+      <div>Mes comptes</div>
+    </NavLink>
   </div>
 );
 
