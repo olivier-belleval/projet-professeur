@@ -179,6 +179,21 @@ module.exports = {
         }
     },
 
+    deleteTag: async (request, response) => {
+        try {
+            // get the kanban id from params
+            const tagId = request.params.id;
+            const result = await kanbanDataMapper.deleteTag(tagId);
+            response.json({
+                status: result || "deleted" 
+            })
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error); 
+        };
+    },
+
 
     todo: async () => (_, response) => {
         response.json({

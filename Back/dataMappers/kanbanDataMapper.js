@@ -216,5 +216,22 @@ module.exports = {
         return result.rows[0];
     },
 
+    deleteTag: async (tagId) => {
+
+        const query = {
+            text : `DELETE FROM "kanban"."tag"
+                    WHERE id = $1`,
+            values: [tagId]
+          };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return;
+        }
+        return result;
+    },
+
     
 }

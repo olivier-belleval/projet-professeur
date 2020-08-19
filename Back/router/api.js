@@ -29,7 +29,7 @@ router.delete('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/delete', teacherMW.isA
 router.post('/list/:id(\\d+)/card/create', teacherMW.isATeacher, kanbanController.createCard);
 router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteCard);
 
-router.post('/tag/create', /*teacherMW.isATeacher,*/ kanbanController.createTag);
-router.delete('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deletelist);
+router.post('/tag/create', teacherMW.isATeacher, kanbanController.createTag);
+router.delete('/tag/:id(\\d+)/delete', /*teacherMW.isATeacher,*/ kanbanController.deleteTag);
 
 module.exports = router;
