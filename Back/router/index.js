@@ -2,12 +2,15 @@ const express = require("express");
 
 const router = express.Router();
 
-const connexionMW = require('../middlewares/connexionMW');
-const userController = require('../controllers/userController');
+const loginRouter = require('./login');
+const apiRouter = require('./api');
 
 
-router.post('/api/login', userController.classLogin);
-router.post('/api/admin/login', userController.adminLogin);
+
+router.use('/login', loginRouter)
+    .use('/api', apiRouter);
+
+
 
 module.exports = router;
 
