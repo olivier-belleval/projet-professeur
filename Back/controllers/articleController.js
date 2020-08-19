@@ -6,14 +6,6 @@ module.exports = {
 
     getAllArticlesWithClass: async (request, response, next) => {
 
-        // request.session.user = { id: 1, state: 'teacher' };
-        request.session.user = { id: 2, state: 'class'};
-
-        // fin d'éxécution si utilisateur n'est pas identifié
-        if (!request.session.user) {
-            return response.json({ error: 'Vous devez d\'abord vous connecter' });
-        };
-
         let result;
 
         // si l'utilisateur est professeur (accès à tous les articles)
@@ -34,13 +26,6 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        //request.session.user = { id: 1, state: 'teacher' };
-
-        // fin d'éxécution si utilisateur n'est pas identifié
-        if (!request.session.user) {
-            return response.json({ error: 'Vous devez d\'abord vous connecter' });
-        };
-
         const result = await articleDataMapper.getOneArticle(articleId);
 
         if (!result) {
@@ -55,17 +40,9 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        // request.session.user = { state: 'teacher', id: 1 };
-
-        // fin d'éxécution si utilisateur n'est pas identifié
-        if (!request.session.user) {
-            return response.json({ error: 'Vous devez d\'abord vous connecter' });
-        };
-
         if (request.session.user.state !== 'teacher') {
             return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour créer un article' });
         };
-
 
         const article = {
 
@@ -76,7 +53,6 @@ module.exports = {
             teacherId: request.session.user.id,
 
         };
-
 
         // vérification des données reçues 
 
@@ -94,6 +70,7 @@ module.exports = {
             mandatory.push('L\'article est vide!');
         }
 
+        // on renvoit les erreurs si il y en a
         if (mandatory.length > 0) {
             return response.json({ error: mandatory });
         }
@@ -102,20 +79,11 @@ module.exports = {
 
         return response.json({ result });
 
-
-
     },
 
     deleteArticle: async (request, response, next) => {
 
         const articleId = request.params.id;
-
-        //request.session.user = { id: 1, state: 'teacher' };
-
-        // fin d'éxécution si utilisateur n'est pas identifié
-        if (!request.session.user) {
-            return response.json({ error: 'Vous devez d\'abord vous connecter' });
-        };
 
         // fin d'éxécution si l'utilisateur n'est pas un teacher
         if (request.session.user.state !== 'teacher') {
@@ -134,12 +102,6 @@ module.exports = {
     },
 
     associateClassToArticle: async (request, response, next) => {
-
-        // request.session.user = { id: 1, state: 'teacher' };
-
-        if (!request.session.user) {
-            return response.json({ error: 'Vous devez d\'abord vous connecter' });
-        };
 
         // fin d'éxécution si l'utilisateur n'est pas un teacher
         if (request.session.user.state !== 'teacher') {
