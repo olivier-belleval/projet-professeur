@@ -1,0 +1,35 @@
+@use 'src/styles/vars.scss';
+.articles-view{
+  margin: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  &-title{
+    font-size: 2rem;
+    font-weight: 700;
+  }
+}
+
+.article {
+  margin: 2rem;
+
+  &-head{
+    margin-bottom: 1em;
+
+    &-title{
+    font-weight: 700;
+    font-size: 1.4em;
+    }
+  }
+
+  &-excerpt{
+    text-align: justify;
+  }
+
+  &-route{
+    text-align: right;
+  }
+  
+}
