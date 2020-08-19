@@ -30,6 +30,11 @@ router.post('/list/:id(\\d+)/card/create', teacherMW.isATeacher, kanbanControlle
 router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteCard);
 
 router.post('/tag/create', teacherMW.isATeacher, kanbanController.createTag);
-router.delete('/tag/:id(\\d+)/delete', /*teacherMW.isATeacher,*/ kanbanController.deleteTag);
+router.delete('/tag/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteTag);
+
+router.post('/card/:cardId(\\d+)/tag/:tagId(\\d+)/add', teacherMW.isATeacher, kanbanController.createAssociationTagToCard);
+router.delete('/card/:cardId(\\d+)/tag/:tagId(\\d+)/remove', teacherMW.isATeacher, kanbanController.deleteAssociationTagToCard);
+
+
 
 module.exports = router;

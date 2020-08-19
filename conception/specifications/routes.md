@@ -66,8 +66,8 @@
 | POST | /api/tag/create | kanbanController | Pour créer un tag |
 | PUT | /api/tag/:id/edit| kanbanController | Pour modifier un tag|
 | DELETE | /api/tag/:id/delete  | kanbanController | Pour supprimer un tag|
-| POST | /api/card/:id/tag/:id/add | kanbanController | Pour associer un tag à une carte|
-| DELETE | /api/card/:id/tag/:id/remove | kanbanController | Pour supprimer l'association d'un tag et d'une carte|
+| POST | /card/:cardId/tag/:tagId/add | kanbanController | Pour associer un tag à une carte|
+| DELETE | /card/:cardId/tag/:tagId/remove | kanbanController | Pour supprimer l'association d'un tag et d'une carte|
 | -| -| -| -|
 | GET | api/admin/classes | adminController | afficher liste des classes|
 | GET | api/admin/class/:id | adminController | afficher les détails d'une classe|

@@ -144,7 +144,7 @@ module.exports = {
 
     deleteCard: async (request, response) => {
         try {
-            // get the kanban id from params
+            // get the card id from params
             const listId = request.params.listId;
             const cardId = request.params.cardId;
             const result = await kanbanDataMapper.deleteCard(cardId, listId);
@@ -165,8 +165,7 @@ module.exports = {
 
             for (const key in request.body) {
                 newTagObject[key] = request.body[key];
-            };
-            console.log('newTagObject : ', newTagObject)            
+            };         
 
             const newTag = await kanbanDataMapper.createTag(newTagObject);
 
@@ -181,7 +180,7 @@ module.exports = {
 
     deleteTag: async (request, response) => {
         try {
-            // get the kanban id from params
+            // get the tag id from params
             const tagId = request.params.id;
             const result = await kanbanDataMapper.deleteTag(tagId);
             response.json({
@@ -194,6 +193,46 @@ module.exports = {
         };
     },
 
+    createAssociationTagToCard:async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const newTagCardObject = {};
+            // get the kanban id from params
+            newTagCardObject['tagId'] = request.params.tagId;
+            newTagCardObject['cardId'] = request.params.cardId;
+
+            for (const key in request.body) {
+                newTagCardObject[key] = request.body[key];
+            };           
+
+            const newTag = await kanbanDataMapper.createAssociationTagToCard(newTagCardObject);
+
+            response.json({
+                newTag
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
+    deleteAssociationTagToCard: async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const newTagCardObject = {};
+            // get the card and tag id from params
+            newTagCardObject['tagId'] = request.params.tagId;
+            newTagCardObject['cardId'] = request.params.cardId;
+            const result = await kanbanDataMapper.deleteAssociationTagToCard(newTagCardObject);
+            response.json({
+                status: result || "deleted" 
+            })
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error); 
+        };
+    },
 
     todo: async () => (_, response) => {
         response.json({
