@@ -132,6 +132,24 @@ module.exports = {
 
             return;
         }
-    }
+    },
+
+    removeAssociationClassToArticle: async (articleId, classId) => {
+
+        try {
+            const preparedQuery = {
+                text: `DELETE FROM "article"."m2m_article_class" WHERE article_id = $1 AND class_id = $2`,
+                values: [articleId, classId]
+            };
+
+            const result = await client.query(preparedQuery);
+
+            return 'Association supprimée!';
+
+        } catch (error) {
+
+            return;
+        }
+    },
 
 };
