@@ -20,7 +20,8 @@ module.exports = {
         // on stocke l'id de la classe, son username/nom et son state en cookie si l'authentification est réussie
         request.session.user = result;
         return response.json({ data: 'authentification réussie' });
-
+    },
+    
     logout: (request,response) => {
             
         if (!request.session) {
