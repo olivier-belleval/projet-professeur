@@ -26,9 +26,6 @@ module.exports = {
     getAllKanbans:async (request, response, next) => {
         try {
 
-            // request.session.user = { id: 1, state: 'teacher' };
-            //request.session.user = { id: 2, state: 'class'};
-
             // fin d'éxécution si utilisateur n'est pas identifié
             if (!request.session.user) {
                 return response.json({ error: 'Vous devez d\'abord vous connecter' });

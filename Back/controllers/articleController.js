@@ -6,16 +6,12 @@ module.exports = {
 
     getAllArticlesWithClass: async (request, response, next) => {
 
-        // request.session.user = { id: 1, state: 'teacher' };
-        request.session.user = { id: 2, state: 'class'};
-
         // fin d'éxécution si utilisateur n'est pas identifié
         if (!request.session.user) {
             return response.json({ error: 'Vous devez d\'abord vous connecter' });
         };
 
         let result;
-
         // si l'utilisateur est professeur (accès à tous les articles)
         if (request.session.user.state === 'teacher') {
             result = await articleDataMapper.getAllArticlesWithClass();

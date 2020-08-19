@@ -36,7 +36,9 @@ module.exports = {
     },
 
     adminLogin: async (request, response, next) => {
-
+        //pour test
+        //userDataMapper.createAdmin()
+        
         // fin d'éxécution si username ou password ne sont pas renseignés
         if (!request.body.username || !request.body.password) {
             return response.status(400).json({ error: 'mdp ou identifiant invalide' })
@@ -55,6 +57,5 @@ module.exports = {
         return response.json({ data: 'authentification réussie' });
 
     },
-
 
 }
