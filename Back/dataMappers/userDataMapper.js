@@ -32,7 +32,7 @@ module.exports = {
         delete result.rows[0].teacher_id;
         delete result.rows[0].description;
 
-        result.rows[0].state = 'student';
+        result.rows[0].state = 'class';
 
         return result.rows[0];
 
