@@ -1,13 +1,17 @@
 const express = require('express');
 const app = express();
 
+const cors = require('cors')
+
 require('dotenv').config();
 
 const router = require('./router');
 const session = require('express-session');
 
+// gestion du request.body
 app.use(express.urlencoded({extended: true}));
 
+// gestion session
 app.use(session({
 
     secret: process.env.SECRET,
@@ -15,6 +19,9 @@ app.use(session({
     saveUninitialized: true,
 
 }));
+
+// gestion CORS
+app.options('*',cors);
 
 app.use(router);
 
