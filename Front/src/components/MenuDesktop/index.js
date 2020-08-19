@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 
-const AdminPanel = () => (
+const MenuDesktop = () => (
   <header className="menu">
     <a className="menu-title">O'MyProf</a>
     <nav className="menu-nav">
@@ -13,4 +13,4 @@ const AdminPanel = () => (
   </header>
 );
 
-export default AdminPanel;
+export default MenuDesktop;

@@ -10,23 +10,23 @@
   &-icon {
     position:fixed;
     top: 10px;
-  left: 10px;
+    left: 10px;
+    z-index: 2;
   }
   &-menu {
-    background-color: rgba(232, 232, 232, 0.5);
+    background-color: rgba(232, 232, 232, 0.8);
     width: 200px;
     height: 100vh;
     position: fixed;
-    top: 30px;
-    left: 30px;
+    top: 0px;
+    left: 0px;
   }
   &-nav {
-    margin-top: 40px;
+    margin-top: 50px;
     margin-bottom: 50px;
-    color: vars.$primary-color;
-    &:hover {
-      background-color: vars.$dark-color;
-    }
+    color: vars.$dark-color;
+    font-size: 1.2em;
+    font-weight: bold;
   }
   &-button {
     font-size: 1.5em;
