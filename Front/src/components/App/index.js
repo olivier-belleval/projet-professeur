@@ -7,15 +7,17 @@ import './styles.scss';
 import HomePage from '../../containers/HomePage';
 import ArticleDetail from '../../containers/ArticleDetail';
 import ArticlesView from '../../containers/ArticlesView';
+import KanbansView from '../../containers/KanbansView';
 
 // == Composant
 const App = () => (
   <div className="app">
-    <Switch>
+    {/* <Switch>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/articles" component={ArticlesView} />
       <Route exact path="/article/:slug" component={ArticleDetail} />
-    </Switch>
+    </Switch> */}
+    <KanbansView />
   </div>
 );
 
