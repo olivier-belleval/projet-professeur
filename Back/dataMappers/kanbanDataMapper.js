@@ -197,5 +197,24 @@ module.exports = {
         return result;
     },
 
+    createTag: async (cardObject) => {
+        
+        const query = {
+            text : `INSERT INTO "kanban"."tag" 
+                    ("name", "color") 
+                    VALUES ($1, $2) returning *`,
+            values: [cardObject.name, cardObject.color]
+          };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return
+        }
+        console.log(result.rows[0]);
+        return result.rows[0];
+    },
+
     
 }

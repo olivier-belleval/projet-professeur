@@ -158,6 +158,27 @@ module.exports = {
         };
     },
 
+    createTag:async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const newTagObject = {};
+
+            for (const key in request.body) {
+                newTagObject[key] = request.body[key];
+            };
+            console.log('newTagObject : ', newTagObject)            
+
+            const newTag = await kanbanDataMapper.createTag(newTagObject);
+
+            response.json({
+                newTag
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
 
     todo: async () => (_, response) => {
         response.json({

@@ -8,7 +8,7 @@ const teacherMW = require('../middlewares/teacherMW');
 const articleController = require('../controllers/articleController');
 const kanbanController = require('../controllers/kanbanController');
 
-router.use(connexionMW.isUserConnected);
+//router.use(connexionMW.isUserConnected);
 
 // routes pour les articles
 router.get('/articles', articleController.getAllArticlesWithClass);
@@ -19,14 +19,17 @@ router.post('/article/associate', teacherMW.isATeacher, articleController.associ
 
 // routes pour les kanbans
 router.get('/kanbans', kanbanController.getAllKanbans);
-router.get('/kanban/:id', kanbanController.getOneKanbansById);
+router.get('/kanban/:id(\\d+)', kanbanController.getOneKanbansById);
 router.post('/kanban/create', teacherMW.isATeacher, kanbanController.createKanban);
-router.delete('/kanban/:id/delete', teacherMW.isATeacher, kanbanController.deleteKanban);
+router.delete('/kanban/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteKanban);
 
-router.post('/kanban/:id/list/create', teacherMW.isATeacher, kanbanController.createList);
-router.delete('/kanban/:kanbanId/list/:listId/delete', teacherMW.isATeacher, kanbanController.deletelist);
+router.post('/kanban/:id(\\d+)/list/create', teacherMW.isATeacher, kanbanController.createList);
+router.delete('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deletelist);
 
-router.post('/list/:id/card/create', teacherMW.isATeacher, kanbanController.createCard);
-router.delete('/list/:listId/card/:cardId/delete', teacherMW.isATeacher, kanbanController.deleteCard);
+router.post('/list/:id(\\d+)/card/create', teacherMW.isATeacher, kanbanController.createCard);
+router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteCard);
+
+router.post('/tag/create', /*teacherMW.isATeacher,*/ kanbanController.createTag);
+router.delete('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deletelist);
 
 module.exports = router;
