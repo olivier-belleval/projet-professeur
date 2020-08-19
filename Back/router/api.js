@@ -8,7 +8,7 @@ const teacherMW = require('../middlewares/teacherMW');
 const articleController = require('../controllers/articleController');
 const kanbanController = require('../controllers/kanbanController');
 
-//router.use(connexionMW.isUserConnected);
+router.use(connexionMW.isUserConnected);
 
 // routes pour les articles
 router.get('/articles', articleController.getAllArticlesWithClass);
