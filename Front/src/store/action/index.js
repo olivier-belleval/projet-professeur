@@ -6,10 +6,6 @@ export const TOGGLE_LOGIN_FORM = 'TOGGLE_LOGIN_FORM';
 export const LOGIN_SUBMIT_ERROR = 'LOGIN_SUBMIT_ERROR';
 
 
-// export const login = () => ({
-//   type: LOGIN,
-// });
-
 export const loginSubmitSuccess = (payload) => ({
   type: LOGIN_SUBMIT_SUCCESS,
   payload,
