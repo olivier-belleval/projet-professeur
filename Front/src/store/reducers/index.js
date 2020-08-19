@@ -7,6 +7,8 @@ import {
   LOGIN_CHANGE_TEACHER,
 } from '../action';
 
+import data from '../../data/articles';
+
 const initialState = {
   username: '',
   password: '',
@@ -14,8 +16,9 @@ const initialState = {
   loading: false,
   isLogged: false,
   loginOpened: false,
-  teacher:false,
+  teacher: false,
   classes: ['6ème A', '5eme D', '3eme B'],
+  articles: data,
 };
 
 export default (state = initialState, action = {}) => {

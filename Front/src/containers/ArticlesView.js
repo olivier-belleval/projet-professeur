@@ -3,7 +3,7 @@ import ArticlesView from '../components/ArticlesView';
 
 const mapStateToProps = (state) => ({
   teacher: state.teacher,
-  isLogged: state.isLogged,
+  articles: state.articles,
 });
 
 const mapDispatchToProps = null;

@@ -1,10 +1,11 @@
 @use 'src/styles/vars.scss';
 .articles-view{
   margin: 1rem;
-  display: flex;
+  // display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-evenly;
+  height: 100vh;
 
   &-title{
     font-size: 2rem;
@@ -14,6 +15,8 @@
 
 .article {
   margin: 2rem;
+  background-color: vars.$alt-dark-color;
+  padding: 0.8em;
 
   &-head{
     margin-bottom: 1em;
@@ -33,3 +36,10 @@
   }
   
 }
+
+// @media screen and (min-width:600px){
+//   .articles-view{
+//     width: 80%;
+//     margin: auto;
+//   }
+// }
