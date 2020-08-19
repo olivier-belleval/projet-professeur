@@ -6,9 +6,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 // == Import : local
 // Composants
-import App from 'src/components/App';
+// import App from 'src/components/App';
+import App from './components/App';
 // Store
-import store from 'src/store';
+// import store from 'src/store';
+import store from './store';
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)

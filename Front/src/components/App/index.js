@@ -8,6 +8,7 @@ import Article from '../Article';
 import Kanban from '../Kanban';
 import Admin from '../Admin';
 import Logout from '../Logout';
+import AdminArticle from '../AdminArticle';
 
 import './styles.css';
 
@@ -21,6 +22,7 @@ const App = () => (
       <Route exact path="/kanban" component={Kanban} />
       <Route exact path="/espace-admin" component={Admin} />
       <Route exact path="/se-deconnecter" component={Logout} />
+      <Route exact path="/admin/articles" component={AdminArticle} />
     </Switch>
 
   </div>

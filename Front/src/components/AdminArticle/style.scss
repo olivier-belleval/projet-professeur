@@ -1,0 +1,23 @@
+@use '../../styles/vars';
+
+.admin_panel_article {
+  background-color: vars.$lightest-color;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  &-title{
+    width: 80%;
+    padding: 1em;
+    margin-top: 3em;
+    background-color: vars.$dark-color;
+    border-radius: 5px;
+    color: vars.$lightest-color;
+    font-weight: bold;
+    margin-bottom: 4em;
+  }
+
+}
+
+
