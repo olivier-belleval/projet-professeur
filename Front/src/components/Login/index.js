@@ -7,6 +7,7 @@ const Login = ({
   username,
   password,
   isLogged,
+  // loginOpened,
   opened,
   loading,
   classes,
@@ -28,6 +29,7 @@ const Login = ({
   };
   return (
     <div className="login">
+    {console.log(opened)}
       {opened && loading && <span>Connexion en cours...</span>}
       {!isLogged && !opened && (
         <button type="button" className="login-button" onClick={onOpenClick}> Connexion</button>

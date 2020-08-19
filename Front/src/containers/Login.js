@@ -9,13 +9,13 @@ import {
 
 
 const mapStateToProps = (state) => ({
-  username: state.username,
-  password: state.password,
-  isLogged: state.isLogged,
-  opened: state.loginOpened,
-  loading: state.loading,
-  classes: state.classes,
-  teacher: state.teacher,
+  username: state.user.username,
+  password: state.user.password,
+  isLogged: state.user.isLogged,
+  opened: state.user.loginOpened,
+  loading: state.user.loading,
+  classes: state.user.classes,
+  teacher: state.user.teacher,
 });
 
 
@@ -31,6 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   // toggle to open login form
   onOpenClick: () => {
+    console.log('click')
     dispatch(toggleLoginForm());
   },
   //turn login window as teacher login windows

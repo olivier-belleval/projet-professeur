@@ -2,9 +2,8 @@ import { connect } from 'react-redux';
 import HomePage from '../components/HomePage';
 
 const mapStateToProps = (state) => ({
-  isClicked: state.isClicked,
-  isLogged: state.isLogged,
-  
+  isClicked: state.user.isClicked,
+  isLogged: state.user.isLogged,
 });
 
 const mapDispatchToProps = (dispatch)=> ({

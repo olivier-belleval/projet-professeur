@@ -7,8 +7,6 @@ import {
   LOGIN_CHANGE_TEACHER,
 } from '../action';
 
-
-
 const initialState = {
   username: '',
   password: '',
