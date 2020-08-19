@@ -85,9 +85,11 @@ module.exports = {
                     ca.description AS card_description,
                     ca.order AS card_order,
                     ca.color AS card_color,
+                    ca.list_id AS card_list_id,
                     ta.id AS tag_id,
                     ta.name AS tag_name,
-                    ta.color AS tag_color
+                    ta.color AS tag_color,
+                    ta_ca.card_id AS tag_card_id
                 FROM "kanban"."kanban" ka
                 LEFT JOIN  "kanban"."list" li ON li.kanban_id = ka.id
                 LEFT JOIN "kanban"."card" ca ON ca.list_id = li.id 

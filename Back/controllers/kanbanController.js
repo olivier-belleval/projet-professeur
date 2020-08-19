@@ -26,28 +26,31 @@ module.exports = {
     getAllKanbans:async (request, response, next) => {
         try {
 
-            const allKanban = await kanbanDataMapper.getAllKanbans();
+            // request.session.user = { id: 1, state: 'teacher' };
+            //request.session.user = { id: 2, state: 'class'};
 
-            response.json({
-                allKanban
+            // fin d'éxécution si utilisateur n'est pas identifié
+            if (!request.session.user) {
+                return response.json({ error: 'Vous devez d\'abord vous connecter' });
+            };
+
+            let result;
+
+            // si l'utilisateur est professeur (accès à tous les articles)
+            if (request.session.user.state === 'teacher') {
+                result = await kanbanDataMapper.getAllKanbans();
+            };
+
+            // si l'utilisateur est un élève (accès aux articles concernant la classe)
+            if (request.session.user.state === 'class') {
+                const classId = request.session.user.id;
+                result = await kanbanDataMapper.getAllKanbansByClass(classId);
+            };
+
+            return response.json({ 
+                result
             });
-        } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
-        }
-    },
 
-    getAllKanbansByClass: async (request, response, next) => {
-        try {
-            
-            const classId = request.params.classId;
-
-            const allKanban = await kanbanDataMapper.getAllKanbansByClass(classId);
-
-            response.json({
-                allKanban
-            });
-            
         } catch (error) {
             console.trace(error);
             response.status(500).json(error);
