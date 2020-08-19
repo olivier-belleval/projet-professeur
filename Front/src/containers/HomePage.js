@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import HomePage from '../components/HomePage';
 
-
 const mapStateToProps = (state) => ({
   isClicked: state.isClicked,
   isLogged: state.isLogged,
+  
 });
 
 const mapDispatchToProps = (dispatch)=> ({
@@ -15,5 +15,3 @@ const mapDispatchToProps = (dispatch)=> ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
-
-

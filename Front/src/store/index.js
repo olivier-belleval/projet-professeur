@@ -2,7 +2,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 
 // == Import : local
-import rootReducer from './reducers';
+import rootReducer from './reducers/root';
 import logMiddleware from './middleware/logMiddleware';
 import ajaxMiddleware from './middleware/ajaxMiddleware';
 

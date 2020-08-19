@@ -1,6 +1,7 @@
 export default [
   {
     id: 1,
+    slug: 'angular-une-bonne-idee',
     category: 'Angular',
     title: 'Angular, une fausse bonne idée ?',
     excerpt:
@@ -8,6 +9,7 @@ export default [
   },
   {
     id: 2,
+    slug: 'react-une-bonne-idee',
     category: 'React',
     title: 'React, une vraie bonne idée ?',
     excerpt:
@@ -15,6 +17,7 @@ export default [
   },
   {
     id: 3,
+    slug: 'o-clock',
     category: 'O’clock',
     title: 'O’clock, une vraie bonne école ?',
     excerpt:
@@ -22,6 +25,7 @@ export default [
   },
   {
     id: 4,
+    slug: 'a-t-on-besoin-de',
     category: 'Autre',
     title: 'Pourquoi a-t-on besoin de développeurs ?',
     excerpt:
@@ -29,6 +33,7 @@ export default [
   },
   {
     id: 5,
+    slug: 'react-native',
     category: 'React',
     title: 'React-Native, la solution mobile ?',
     excerpt:
@@ -36,6 +41,7 @@ export default [
   },
   {
     id: 6,
+    slug: 'des-questions',
     category: 'Autre',
     title: 'Dis donc, que des questions ?',
     excerpt:

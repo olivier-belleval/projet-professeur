@@ -1,0 +1,39 @@
+@use 'src/styles/vars.scss';
+
+.article-detail{
+  width: 90%;
+  margin: auto;
+
+  &-head{
+
+    padding: 1.2em;
+    background-color: vars.$color;
+
+    &-title{
+      font-weight: 700;
+      font-size: 2em;
+      margin-bottom: 0.5em;
+      color: vars.$lightest-color;
+    }
+
+    &-subtitle {
+      font-weight: 700;
+      font-style: italic;
+    }
+  }
+  
+  &-content {
+      text-align: justify;
+      padding: 1em;
+      background-color: vars.$lightest-color;
+  }
+  &-back {
+      margin-top: 1em;
+      color: vars.$lightest-color;
+      padding: 0.5em;
+      border-radius: 5px;
+      width: fit-content;
+      background-color: vars.$color;
+
+  }
+}

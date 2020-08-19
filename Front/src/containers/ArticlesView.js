@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 import ArticlesView from '../components/ArticlesView';
 
 const mapStateToProps = (state) => ({
-  teacher: state.teacher,
-  articles: state.articles,
+  articles: state.articles.articles,
 });
 
 const mapDispatchToProps = null;

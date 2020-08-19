@@ -3,6 +3,7 @@ import './style.scss';
 import Login from '../../containers/Login';
 import ArticlesView from '../../containers/ArticlesView';
 
+
 const HomePage = ({isLogged}
   ) => (
   <div className="homepage">
