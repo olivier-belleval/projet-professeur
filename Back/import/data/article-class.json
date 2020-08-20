@@ -1,0 +1,23 @@
+[
+    {
+        "article_id": "1",
+        "class_id": "1"
+    },
+    {
+        "article_id": "2",
+        "class_id": "1"
+    },
+    {
+        "article_id": "2",
+        "class_id": "2"
+    },
+    {
+        "article_id": "3",
+        "class_id": "3"
+    },
+    {
+        "article_id": "4",
+        "class_id": "2"
+    }
+    
+]

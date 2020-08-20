@@ -39,15 +39,11 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        if (request.session.user.state !== 'teacher') {
-            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour créer un article' });
-        };
-
         const article = {
 
             title: request.body.title,
             slug: slugify(request.body.title, { remove: /[*+~.()'"!:@]/g, lower: true }),
-            excerpt: request.body.excerpt,
+            excerpt: request.body.content.substring(0,200) + '...',
             content: request.body.content,
             teacherId: request.session.user.id,
 
@@ -59,10 +55,6 @@ module.exports = {
 
         if (!article.title) {
             mandatory.push('Le titre est obligatoire');
-        }
-
-        if (!article.excerpt) {
-            mandatory.push('L\'extrait est obligatoire');
         }
 
         if (!article.content) {
@@ -80,14 +72,19 @@ module.exports = {
 
     },
 
-    deleteArticle: async (request, response, next) => {
+    editArticle: async (request, response, next) => {
 
         const articleId = request.params.id;
 
-        // fin d'éxécution si l'utilisateur n'est pas un teacher
-        if (request.session.user.state !== 'teacher') {
-            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour supprimer un article!' });
-        }
+        const result = await articleDataMapper.editArticle(request.body, articleId);
+
+        return response.json({ result });
+
+    },
+
+    deleteArticle: async (request, response, next) => {
+
+        const articleId = request.params.id;
 
         const result = await articleDataMapper.deleteArticle(articleId);
 
@@ -102,16 +99,28 @@ module.exports = {
 
     associateClassToArticle: async (request, response, next) => {
 
-        // fin d'éxécution si l'utilisateur n'est pas un teacher
-        if (request.session.user.state !== 'teacher') {
-            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour supprimer un article!' });
-        };
+        const articleId = request.params.id;
 
-        const result = await articleDataMapper.associateClassToArticle(request.body.articleId, request.body.classId);
+        const result = await articleDataMapper.associateClassToArticle(articleId, request.body.classId);
 
         // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un article inexistant
         if (!result) {
             return response.json({ error: 'Impossible d\'associer cette classe à cet article' });
+        }
+
+        return response.json({ result });
+
+    },
+
+    removeAssociationClassToArticle: async (request, response, next) => {
+
+        const articleId = request.params.id;
+
+        const result = await articleDataMapper.removeAssociationClassToArticle(articleId, request.body.classId);
+
+        // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un article inexistant
+        if (!result) {
+            return response.json({ error: 'Impossible de supprimer cette association' });
         }
 
         return response.json({ result });

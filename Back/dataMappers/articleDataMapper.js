@@ -94,6 +94,35 @@ module.exports = {
 
     },
 
+    editArticle: async (article, articleId) => {
+
+        // on récupère les clés de l'objet et on les stocke dans l'array keys
+        const articleKeys = Object.keys(article);
+        const articleValues = Object.values(article);
+        const preparedQuery = {
+
+            // methode pour construire la requête: column1 = $1, column2 = $2, etc...
+            // clés.map( (_, index) => clés[index] = $index) ce qui donne:
+            // clé = $index, soit col1 = value1
+
+            text: `UPDATE "article"."article" SET
+            ${articleKeys.map( (_, index) => articleKeys[index] + ' = $' + (index+2))}
+            WHERE id = $1
+            RETURNING *`,
+
+            // on place les valeurs de l'objet article dans values
+
+            values: [articleId, ...articleValues]
+        };
+
+        console.log('requête sql:', preparedQuery.text);
+
+        const result = await client.query(preparedQuery);
+
+        return result.rows[0];
+
+    },
+
     deleteArticle: async (articleId) => {
 
 
@@ -132,6 +161,24 @@ module.exports = {
 
             return;
         }
-    }
+    },
+
+    removeAssociationClassToArticle: async (articleId, classId) => {
+
+        try {
+            const preparedQuery = {
+                text: `DELETE FROM "article"."m2m_article_class" WHERE article_id = $1 AND class_id = $2`,
+                values: [articleId, classId]
+            };
+
+            const result = await client.query(preparedQuery);
+
+            return 'Association supprimée!';
+
+        } catch (error) {
+
+            return;
+        }
+    },
 
 };
