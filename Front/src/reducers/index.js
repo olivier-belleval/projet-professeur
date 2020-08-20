@@ -3,6 +3,8 @@
 
 import { TOGGLE_LOGIN_FORM } from '../store/action';
 
+import data from '../data/articles';
+
 const initialState = {
   loginOpened: false,
   path: [
@@ -11,6 +13,7 @@ const initialState = {
     'espace admin',
     'se déconnecter',
   ],
+  data,
 };
 
 export default (state = initialState, action = {}) => {
