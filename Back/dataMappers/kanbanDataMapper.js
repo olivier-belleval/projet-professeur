@@ -169,6 +169,24 @@ module.exports = {
         }
     },
 
+    removeAssociationClassToKanban: async (kanbanId, classId) => {
+
+        try {
+            const preparedQuery = {
+                text: `DELETE FROM "kanban"."m2m_kanban_class" WHERE kanban_id = $1 AND class_id = $2`,
+                values: [kanbanId, classId]
+            };
+
+            const result = await client.query(preparedQuery);
+
+            return 'Association supprimée!';
+
+        } catch (error) {
+                console.log(error)
+            return;
+        }
+    },
+
     createList: async (listObject) => {
         
         const query = {

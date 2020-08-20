@@ -102,7 +102,7 @@ module.exports = {
 
     associateClassToKanban: async (request, response) => {
 
-        const result = await kanbanDataMapper.associateClassToKanban(request.body.kanbanId, request.body.classId);
+        const result = await kanbanDataMapper.associateClassToKanban(request.params.kanbanId, request.body.classId);
 
         // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un kanban inexistant
         if (!result) {
@@ -113,6 +113,20 @@ module.exports = {
 
     },
 
+    removeAssociationClassToKanban: async (request, response, next) => {
+
+        const kanbanId = request.params.id;
+
+        const result = await kanbanDataMapper.removeAssociationClassToKanban(kanbanId, request.body.classId);
+
+        // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un article inexistant
+        if (!result) {
+            return response.json({ error: 'Impossible de supprimer cette association' });
+        }
+
+        return response.json({ result });
+
+    },
 
     createList:async (request, response) => {
         try {
