@@ -12,12 +12,12 @@ import KanbansView from '../../containers/KanbansView';
 // == Composant
 const App = () => (
   <div className="app">
-    {/* <Switch>
+    <Switch>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/articles" component={ArticlesView} />
       <Route exact path="/article/:slug" component={ArticleDetail} />
-    </Switch> */}
-    <KanbansView />
+      <Route exact path="/kanbans" component={KanbansView} />
+    </Switch>
   </div>
 );
 
