@@ -36,30 +36,32 @@
 
 |Méthode|URL|Controller|Description|
 |-------|---|----------|-----------|
-| POST | /api/login | userController | Pour s'identifier |
-| POST | /api/logout | userController | Pour se déconnecter |
+| POST | /login/ | userController | Pour s'identifier en tant que class|
+| POST | /login/admin | userController | Pour s'identifier en tant que teacher|
+| POST | /login/logout | userController | Pour se déconnecter |
 | -| -| -| -|
 | GET | /api/articles | articleController | Pour afficher liste des articles en fonction de la classe|
 | GET | /api/article/:id | articleController | Pour afficher les détails d'un article |
 | POST | /api/article/write | articleController | Pour créer un article|
 | PUT | /api/article/:id/edit | articleController | Pour modifier un article |
 | DELETE | /api/article/:id/delete | articleController | Pour supprimer un article |
+| POST | /api/article/associate| articleController | Pour associer une class a un article|
+| POST | /api/article/:id/associate/remove | articleController | Pour retirer l’association une class a un article |
 | -| -| -| -|
 | GET | /api/kanbans | kanbanController | Pour afficher liste des kanbans en fonction de la classe|
 | GET | /api/kanban/:id | kanbanController | Pour afficher les détails d'un kanban |
-| GET | /api/kanban/class/:classname | kanbanController | Pour afficher les kanbans d'une classe |
 | POST | /api/kanban/create | kanbanController | Pour créer un kanban|
 | PUT | /api/kanban/:id/edit | kanbanController | Pour modifier un kanban |
 | DELETE | /api/kanban/:id/delete | kanbanController | Pour supprimer un kanban |
+| POST | /api/kaban/:articleId/associate | kanbanController | Pour associer une class a un kanban |
+| POST | /api/kanban/:id/associate/remove | kanbanController | Pour retirer l’association une class a un kanban |
 | -| -| -| -|
-| GET | /api/kanban/:id/lists | kanbanController | Pour afficher les listes d'un kanban |
 | POST | /api/kanban/:id/list/create | kanbanController | Pour créer une liste dans un kanban|
-| PUT | /api/kanban/:id/list/:id/edit | kanbanController | Pour modifier une liste d'un kanban|
+| PUT | /api/kanban/:kanbanId/list/:listId/edit | kanbanController | Pour modifier une liste d'un kanban|
 | DELETE | /api/kanban/:kanbanId/list/:listId/delete | kanbanController | Pour supprimer une liste d'un kanban |
 | -| -| -| -|
-| GET | /api/lists/:id/cards | kanbanController | Pour afficher les cartes d'une liste |
 | POST | /api/list/:id/card/create | kanbanController | Pour créer une carte dans une liste|
-| PUT | /api/list/:id/card/:id/edit | kanbanController | Pour modifier une carte dans une liste|
+| PUT | /api/list/:listId/card/:cardId/edit | kanbanController | Pour modifier une carte dans une liste|
 | DELETE | /api/list/:listId/card/:cardId/delete  | kanbanController | Pour supprimer une carte d'une liste |
 | -| -| -| -|
 | GET | /api/tags | kanbanController | Pour afficher la liste des tags |
