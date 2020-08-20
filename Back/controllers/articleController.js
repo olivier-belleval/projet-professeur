@@ -39,10 +39,6 @@ module.exports = {
 
         const articleId = request.params.id;
 
-        if (request.session.user.state !== 'teacher') {
-            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour créer un article' });
-        };
-
         const article = {
 
             title: request.body.title,
