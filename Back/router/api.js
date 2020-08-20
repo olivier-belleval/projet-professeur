@@ -23,6 +23,8 @@ router.get('/kanban/:id(\\d+)', kanbanController.getOneKanbansById);
 router.post('/kanban/create', teacherMW.isATeacher, kanbanController.createKanban);
 router.put('/kanban/:id(\\d+)/edit', teacherMW.isATeacher, kanbanController.editKanban);
 router.delete('/kanban/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteKanban);
+router.post('/kanban/:articleId(\\d+)/associate', /*teacherMW.isATeacher,*/ kanbanController.associateClassToKanban);
+router.post('/kanban/:id(\\d+)/associate/remove', teacherMW.isATeacher, kanbanController.todo);
 
 router.post('/kanban/:id(\\d+)/list/create', teacherMW.isATeacher, kanbanController.createList);
 router.put('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/edit', kanbanController.editList);

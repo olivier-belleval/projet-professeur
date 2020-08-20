@@ -6,11 +6,6 @@ module.exports = {
     getAllKanbans:async (request, response, next) => {
         try {
 
-            // fin d'éxécution si utilisateur n'est pas identifié
-            if (!request.session.user) {
-                return response.json({ error: 'Vous devez d\'abord vous connecter' });
-            };
-
             let result;
 
             // si l'utilisateur est professeur (accès à tous les articles)
@@ -104,6 +99,20 @@ module.exports = {
             response.status(500).json(error); 
         };
     },
+
+    associateClassToKanban: async (request, response) => {
+
+        const result = await kanbanDataMapper.associateClassToKanban(request.body.kanbanId, request.body.classId);
+
+        // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un kanban inexistant
+        if (!result) {
+            return response.json({ error: 'Impossible d\'associer cette classe à cet article' });
+        }
+
+        return response.json({ result });
+
+    },
+
 
     createList:async (request, response) => {
         try {

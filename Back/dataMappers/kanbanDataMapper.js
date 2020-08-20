@@ -150,6 +150,25 @@ module.exports = {
         return;
     },
 
+    associateClassToKanban: async (kanbanId, classId) => {
+
+        try {
+            const preparedQuery = {
+                text: `INSERT INTO "kanban"."m2m_kanban_class" ("kanban_id", "class_id")
+            VALUES ($1, $2)`,
+                values: [kanbanId, classId]
+            };
+
+            const result = await client.query(preparedQuery);
+
+            return 'Classe ajoutée à l\'kanban!';
+
+        } catch (error) {
+
+            return;
+        }
+    },
+
     createList: async (listObject) => {
         
         const query = {
