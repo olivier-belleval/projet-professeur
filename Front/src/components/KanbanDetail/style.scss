@@ -1,0 +1,69 @@
+@use 'src/styles/vars';
+
+.kanban-detail{
+  margin:1.3em;
+  &-head{
+    background-color: vars.$color;
+    padding: 2em 1em;
+
+    &--title{
+      font-weight: 700;
+      font-size: 1.7em;
+      color: vars.$lightest-color;
+    }
+    &--subtitle{
+      font-size: 1.2em;
+    }
+  }
+  &-grid{
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.kanban-list{
+    background-color: vars.$dark-color;
+    
+    &-title{
+      background-color: vars.$alt-dark-color;
+      padding: 1.5em;
+    }  
+  }
+
+.kanban-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  border-radius: 0 0 1em 1em;
+  background-color:vars.$lightest-color ;
+  margin: 0.3em;     
+      
+  &-content{
+    text-align: justify;
+    padding: 1em;
+  }
+  &-title{
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 700;
+    width: 100%;
+    background-color: vars.$light-color;
+    padding: 1em 0.5em;
+      }
+    }
+
+
+
+  @media screen and (min-width:600px){
+    .kanban-card{
+
+    &-content{
+      display: flex;
+      flex-wrap: wrap;
+      
+      &-item{
+        max-width:45%;
+      }
+    }}
+
+  }
