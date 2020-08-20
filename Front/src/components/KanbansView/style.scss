@@ -1,0 +1,41 @@
+@use 'src/styles/vars';
+
+.kanbans-view{
+margin:0.7em;
+  &-head{
+    padding: 2em;
+    margin-bottom: 2em;
+    background-color: vars.$alt-dark-color;
+
+    &-title{
+      font-weight: 700;
+      font-size: 2em;
+    }
+
+    &-subtitle{
+        
+    }
+  }
+
+  &-list{
+    background-color:vars.$lightest-color;
+  }
+}
+
+.kanban {
+  padding: 1em;
+  margin-bottom: 1em;
+  &:hover{
+    box-shadow: 5px 10px vars.$secondary-color;
+  }
+
+  &-title{
+    text-align: left;
+    font-size: 1.3em;
+    margin-bottom: 0.3em;
+  }
+
+  &-subtitle{
+    font-style: italic;
+  }
+}

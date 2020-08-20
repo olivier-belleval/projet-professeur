@@ -1,0 +1,45 @@
+@use 'src/styles/vars.scss';
+
+.login{
+  align-self: center;
+  display: flex;
+  justify-content: center;
+
+  &-loader{
+    width: 20%;
+  }
+
+  &-button{
+    padding: 1.6rem;
+  }
+
+  &-form{
+  background-color:vars.$color;
+  width: 80%;
+  border-radius: 5px;
+  padding: 1rem;
+
+    &-inputs{
+      margin: 5px;
+      
+      &>input,select{
+        margin: 10px;
+        border:none;
+        padding:10px;
+        width: 80%;
+        }
+      }
+  }
+  &-admin{
+    color:vars.$dark-color;
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
+    margin-top: 1.2rem;
+
+    &:hover{
+      color:vars.$lightest-color;
+    }
+  }
+}
+
