@@ -186,6 +186,28 @@ module.exports = {
         }
     },
 
+    editCard:async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const editCardObject = {};
+            for (const key in request.body) {
+                if (request.body[key] !== '') {
+                    editCardObject[key] = request.body[key];
+                }
+            };
+            editCardObject['list_id'] = request.params.kanbanId;
+
+            const editedCard = await kanbanDataMapper.editCard(editCardObject, request.params.cardId);
+
+            response.json({
+                editedCard
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
     deleteCard: async (request, response) => {
         try {
             // get the card id from params
@@ -228,6 +250,27 @@ module.exports = {
 
             response.json({
                 newTag
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
+    editTag:async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const editTagObject = {};
+            for (const key in request.body) {
+                if (request.body[key] !== '') {
+                    editTagObject[key] = request.body[key];
+                }
+            };
+            console.log('edit tag : ', editTagObject)
+            const editedTag = await kanbanDataMapper.editTag(editTagObject, request.params.id);
+
+            response.json({
+                editedTag
             });
         } catch (error) {
             console.trace(error);

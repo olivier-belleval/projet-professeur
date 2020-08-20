@@ -130,7 +130,6 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log('result : ',result.rows[0]);
         return result.rows[0];
     },
 
@@ -191,7 +190,6 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log('result : ',result.rows[0]);
         return result.rows[0];
     },
 
@@ -227,6 +225,30 @@ module.exports = {
             return
         }
         console.log(result.rows[0]);
+        return result.rows[0];
+    },
+
+    editCard: async (cardObject, cardId) => {
+        const fields = Object.keys(cardObject);
+        const keys = Object.keys(cardObject);
+        
+        const query = {
+            text: `
+                UPDATE "kanban"."card" SET
+                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
+                WHERE id = $1
+                RETURNING *
+                `
+            ,
+            values: [cardId, ...Object.values(cardObject)]
+        };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return
+        }
         return result.rows[0];
     },
 
@@ -280,6 +302,32 @@ module.exports = {
             return
         }
         console.log(result.rows[0]);
+        return result.rows[0];
+    },
+
+    editTag: async (tagObject, tagId) => {
+        const fields = Object.keys(tagObject);
+        const keys = Object.keys(tagObject);
+        
+        const query = {
+            text: `
+                UPDATE "kanban"."tag" SET
+                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
+                WHERE id = $1
+                RETURNING *
+                `
+            ,
+            values: [tagId, ...Object.values(tagObject)]
+        };
+        console.log('query edit tag : ',query)
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return
+        }
+        console.log('result : ', result)
         return result.rows[0];
     },
 

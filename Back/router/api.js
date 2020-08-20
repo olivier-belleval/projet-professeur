@@ -25,14 +25,16 @@ router.put('/kanban/:id(\\d+)/edit', teacherMW.isATeacher, kanbanController.edit
 router.delete('/kanban/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteKanban);
 
 router.post('/kanban/:id(\\d+)/list/create', teacherMW.isATeacher, kanbanController.createList);
-router.put('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/edit', kanbanController.editList)
+router.put('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/edit', kanbanController.editList);
 router.delete('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deletelist);
 
 router.post('/list/:id(\\d+)/card/create', teacherMW.isATeacher, kanbanController.createCard);
+router.put('/list/:listId(\\d+)/card/:cardId(\\d+)/edit',teacherMW.isATeacher, kanbanController.editCard);
 router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteCard);
 
-router.get('/tags', kanbanController.getAllTags)
+router.get('/tags', teacherMW.isATeacher, kanbanController.getAllTags)
 router.post('/tag/create', teacherMW.isATeacher, kanbanController.createTag);
+router.put('/tag/:id(\\d+)/edit', kanbanController.editTag)
 router.delete('/tag/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteTag);
 
 router.post('/card/:cardId(\\d+)/tag/:tagId(\\d+)/add', teacherMW.isATeacher, kanbanController.createAssociationTagToCard);
