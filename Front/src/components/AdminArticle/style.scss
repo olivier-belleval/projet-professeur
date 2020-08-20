@@ -36,10 +36,28 @@
       justify-content: space-between;
       flex-wrap: wrap;
 
+      // &-icons{
+      //   width: 30%;
+      //   display: flex;
+      //   flex-direction: row;
+      //   align-items: flex-end;
+      //   justify-content: space-between;
+      // }
+
     }
 
   }
 
 }
 
+//TODO intégrer dans le scss
 
+.admin_panel_article_content-part-icons {
+
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+
+}
