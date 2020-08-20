@@ -3,26 +3,6 @@ const client = require('./client');
 
 module.exports = {
 
-
-    createKanban: async (kanbanObject) => {
-        
-        const query = {
-            text : `INSERT INTO "kanban"."kanban" 
-                    ("title", "slug", "description", "background", "teacher_id") 
-                    VALUES ($1, $2, $3, $4, $5) returning *`,
-            values: [kanbanObject.title, kanbanObject.slug, kanbanObject.description, kanbanObject.background, kanbanObject.teacher_id]
-          };
-
-        const result = await client.query(query);
-
-        if(!result) {
-            console.log('probleme a l\'insert');
-            return
-        }
-        console.log(result.rows[0]);
-        return result.rows[0];
-    },
-
     getAllKanbans: async () => {
         
         const query = {
@@ -110,6 +90,50 @@ module.exports = {
         return result.rows;
     },
 
+    createKanban: async (kanbanObject) => {
+        
+        const query = {
+            text : `INSERT INTO "kanban"."kanban" 
+                    ("title", "slug", "description", "background", "teacher_id") 
+                    VALUES ($1, $2, $3, $4, $5) returning *`,
+            values: [kanbanObject.title, kanbanObject.slug, kanbanObject.description, kanbanObject.background, kanbanObject.teacher_id]
+          };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return
+        }
+        console.log(result.rows[0]);
+        return result.rows[0];
+    },
+
+    editKanban: async (kanbanObject, kanbanId) => {
+        const fields = Object.keys(kanbanObject);
+        const keys = Object.keys(kanbanObject);
+        
+        const query = {
+            text: `
+                UPDATE "kanban"."kanban" SET
+                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
+                WHERE id = $1
+                RETURNING *
+                `
+            ,
+            values: [kanbanId, ...Object.values(kanbanObject)]
+        };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return
+        }
+        console.log('result : ',result.rows[0]);
+        return result.rows[0];
+    },
+
     deleteKanban: async (kanbanId) => {
 
         const query = {
@@ -143,6 +167,31 @@ module.exports = {
             return
         }
         console.log(result.rows[0]);
+        return result.rows[0];
+    },
+
+    editList: async (listObject, listId) => {
+        const fields = Object.keys(listObject);
+        const keys = Object.keys(listObject);
+        
+        const query = {
+            text: `
+                UPDATE "kanban"."list" SET
+                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
+                WHERE id = $1
+                RETURNING *
+                `
+            ,
+            values: [listId, ...Object.values(listObject)]
+        };
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme a l\'insert');
+            return
+        }
+        console.log('result : ',result.rows[0]);
         return result.rows[0];
     },
 
@@ -195,6 +244,24 @@ module.exports = {
             return;
         }
         return result;
+    },
+
+    getAllTags: async () => {
+        
+        const query = {
+        text : `
+        SELECT * FROM "kanban".tag;
+        `
+        };
+        
+
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme de requette');
+            return
+        }
+        return result.rows;
     },
 
     createTag: async (cardObject) => {

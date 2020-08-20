@@ -21,14 +21,17 @@ router.post('/article/associate', teacherMW.isATeacher, articleController.associ
 router.get('/kanbans', kanbanController.getAllKanbans);
 router.get('/kanban/:id(\\d+)', kanbanController.getOneKanbansById);
 router.post('/kanban/create', teacherMW.isATeacher, kanbanController.createKanban);
+router.put('/kanban/:id(\\d+)/edit', teacherMW.isATeacher, kanbanController.editKanban);
 router.delete('/kanban/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteKanban);
 
 router.post('/kanban/:id(\\d+)/list/create', teacherMW.isATeacher, kanbanController.createList);
+router.put('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/edit', kanbanController.editList)
 router.delete('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deletelist);
 
 router.post('/list/:id(\\d+)/card/create', teacherMW.isATeacher, kanbanController.createCard);
 router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteCard);
 
+router.get('/tags', kanbanController.getAllTags)
 router.post('/tag/create', teacherMW.isATeacher, kanbanController.createTag);
 router.delete('/tag/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteTag);
 

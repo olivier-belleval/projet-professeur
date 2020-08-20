@@ -3,26 +3,6 @@ const slugify = require('slugify');
 
 module.exports = {
 
-    createKanban:async (request, response) => {
-        try {
-            // we create an object and store the request.body values
-            const newKanbanObject = {};
-            for (const key in request.body) {
-                newKanbanObject[key] = request.body[key];
-            };
-            newKanbanObject.slug = slugify(request.body.title, '-');
-
-            const newKanban = await kanbanDataMapper.createKanban(newKanbanObject);
-
-            response.json({
-                newKanban
-            });
-        } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
-        }
-    },
-
     getAllKanbans:async (request, response, next) => {
         try {
 
@@ -68,6 +48,48 @@ module.exports = {
         }
     },
 
+    createKanban:async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const newKanbanObject = {};
+            for (const key in request.body) {
+                newKanbanObject[key] = request.body[key];
+            };
+            newKanbanObject.slug = slugify(request.body.title, '-');
+
+            const newKanban = await kanbanDataMapper.createKanban(newKanbanObject);
+
+            response.json({
+                newKanban
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
+    editKanban:async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const editKanbanObject = {};
+            for (const key in request.body) {
+                if (request.body[key] !== '') {
+                    editKanbanObject[key] = request.body[key];
+                }
+            };
+            editKanbanObject.slug = slugify(request.body.title, '-');
+
+            const editedKanban = await kanbanDataMapper.editKanban(editKanbanObject, request.params.id);
+
+            response.json({
+                editedKanban
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
     deleteKanban: async (request, response) => {
         try {
             // get the kanban id from params
@@ -98,6 +120,28 @@ module.exports = {
 
             response.json({
                 newList
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
+    editList:async (request, response) => {
+        try {
+            // we create an object and store the request.body values
+            const editListObject = {};
+            for (const key in request.body) {
+                if (request.body[key] !== '') {
+                    editListObject[key] = request.body[key];
+                }
+            };
+            editListObject['kanban_id'] = request.params.kanbanId;
+
+            const editedList = await kanbanDataMapper.editList(editListObject, request.params.listId);
+
+            response.json({
+                editedList
             });
         } catch (error) {
             console.trace(error);
@@ -156,6 +200,19 @@ module.exports = {
             console.trace(error);
             response.status(500).json(error); 
         };
+    },
+
+    getAllTags:async (request, response, next) => {
+        try {
+            const result = await kanbanDataMapper.getAllTags();
+
+            response.json({
+                result
+            });
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
     },
 
     createTag:async (request, response) => {
@@ -239,5 +296,4 @@ module.exports = {
             status: "todo"
         });
     },
-
 }
