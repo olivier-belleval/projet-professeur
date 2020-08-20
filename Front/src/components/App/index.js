@@ -25,7 +25,6 @@ const App = () => (
       <Route exact path="/espace-admin" component={Admin} />
       <Route exact path="/se-deconnecter" component={Logout} />
       <Route exact path="/admin/articles" component={AdminArticle} />
-      {/* //<AdminArticle /> */}
     </Switch>
 
   </div>

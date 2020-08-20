@@ -5,7 +5,8 @@ import {
 } from 'react-icons/fa';
 import './style.scss';
 
-const AdminArticle = ({ list }) => {
+
+const AdminArticle = ({ list, onclickPen, onclickTrash, onclickJoin }) => {
   console.log(list);
   return (
     <div className="admin_panel_article">
@@ -18,9 +19,24 @@ const AdminArticle = ({ list }) => {
               <p>{article.class}</p>
             </div>
             <div className="admin_panel_article_content-part-icons">
-              <div className="admin_panel_article_content-part-modify"><FaPencilAlt /></div>
-              <div className="admin_panel_article_content-part-delete"><FaTrash /></div>
-              <div className="admin_panel_article_content-part-join"><FaInfinity /></div>
+              <div className="admin_panel_article_content-part-modify"><FaPencilAlt onClick={() => {
+                console.log('modify');
+                onclickPen();
+              }}
+              />
+              </div>
+              <div className="admin_panel_article_content-part-delete"><FaTrash onClick={() => {
+                console.log('delete');
+                onclickTrash();
+              }}
+              />
+              </div>
+              <div className="admin_panel_article_content-part-join"><FaInfinity onClick={() => {
+                console.log('join');
+                onclickJoin();
+              }}
+              />
+              </div>
             </div>
           </div>
         ))}
