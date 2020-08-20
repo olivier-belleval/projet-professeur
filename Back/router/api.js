@@ -15,6 +15,7 @@ router.get('/articles', articleController.getAllArticlesWithClass);
 router.get('/article/:id(\\d+)', articleController.getOneArticle);
 router.post('/article/write', teacherMW.isATeacher, articleController.createOneArticle);
 router.delete('/article/:id(\\d+)/delete', teacherMW.isATeacher, articleController.deleteArticle);
+router.post('/article/:id(\\d+)/edit', teacherMW.isATeacher, articleController.editArticle);
 router.post('/article/:id(\\d+)/associate', teacherMW.isATeacher, articleController.associateClassToArticle);
 router.post('/article/:id(\\d+)/associate/remove', teacherMW.isATeacher, articleController.removeAssociationClassToArticle);
 

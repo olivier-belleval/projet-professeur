@@ -76,14 +76,19 @@ module.exports = {
 
     },
 
-    deleteArticle: async (request, response, next) => {
+    editArticle: async (request, response, next) => {
 
         const articleId = request.params.id;
 
-        // fin d'éxécution si l'utilisateur n'est pas un teacher
-        if (request.session.user.state !== 'teacher') {
-            return response.json({ error: 'Vous n\'avez pas les droits nécessaires pour supprimer un article!' });
-        }
+        const result = await articleDataMapper.editArticle(request.body, articleId);
+
+        return response.json({ result });
+
+    },
+
+    deleteArticle: async (request, response, next) => {
+
+        const articleId = request.params.id;
 
         const result = await articleDataMapper.deleteArticle(articleId);
 
