@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.scss';
 import { Link } from 'react-router-dom';
+import { slugifyKanbanTitle } from '../../utils';
 
 const KanbansView = ({ kanbans }) => {
   console.log('kanban view');
@@ -15,7 +16,7 @@ const KanbansView = ({ kanbans }) => {
         </span>
       </div>
       {kanbans.map((kanban) => (
-        <Link to="/aremplir">
+        <Link to={slugifyKanbanTitle(kanban.title)}>
           <div className="kanbans-view-list">
             <div className="kanban">
               <h3 className="kanban-title">
