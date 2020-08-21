@@ -7,8 +7,7 @@ const Login = ({
   username,
   password,
   isLogged,
-  // loginOpened,
-  opened,
+  loginOpened,
   loading,
   classes,
   teacher,
@@ -29,12 +28,11 @@ const Login = ({
   };
   return (
     <div className="login">
-    {console.log(opened)}
-      {opened && loading && <span>Connexion en cours...</span>}
-      {!isLogged && !opened && (
+      { loginOpened && loading && <span>Connexion en cours...</span>}
+      {!isLogged && !loginOpened && (
         <button type="button" className="login-button" onClick={onOpenClick}> Connexion</button>
       )}
-      {!isLogged && opened && !loading && (
+      {!isLogged && loginOpened && !loading && (
         <div className="login-form">
         <form className="form" onSubmit={handleSubmit}>
           <div className="login-form-inputs">

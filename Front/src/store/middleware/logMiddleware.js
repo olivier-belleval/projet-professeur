@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError, loginSubmit,
-} from '../action';
+} from '../action/index';
 
 const logMiddleware = (store) => (next) => (action) => {
   console.log('middleware');

@@ -17,7 +17,7 @@ import Admin from '../Admin';
 // == Composant
 const App = () => (
   <div className="app">
-    <TogglerMenu />
+    
     <Switch>
       <Route exact path="/" component={HomePage} />
       <Route exact path="/articles" component={ArticlesView} />
@@ -26,7 +26,7 @@ const App = () => (
       <Route exact path="/kanban:slug" component={KanbanDetail} />
       <Route exact path="/admin/articles" component={AdminArticle} />
       <Route exact path="/espace-admin" component={Admin} />
-    </Switch>
+    </Switch><TogglerMenu />
 
 
 

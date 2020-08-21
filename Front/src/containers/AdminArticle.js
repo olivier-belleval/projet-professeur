@@ -3,7 +3,7 @@ import AdminArticle from '../components/AdminArticle';
 import { modifyArticle, deleteArticle, joinClass } from '../store/action';
 
 const mapState = (state) => ({
-  list: state.data,
+  list: state.articles.articles,
 });
 
 const mapDispatch = (dispatch) => ({

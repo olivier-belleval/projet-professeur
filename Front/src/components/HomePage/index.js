@@ -11,7 +11,7 @@ const HomePage = ({isLogged}
       O'My Prof
     </h1>
     
-    { !isLogged ? <ArticlesView /> : <Login />
+    { isLogged ? <ArticlesView /> : <Login />
     }
   </div>
 );

@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
   username: state.user.username,
   password: state.user.password,
   isLogged: state.user.isLogged,
-  opened: state.user.loginOpened,
+  loginOpened: state.user.loginOpened,
   loading: state.user.loading,
   classes: state.user.classes,
   teacher: state.user.teacher,

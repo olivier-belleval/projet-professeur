@@ -5,7 +5,7 @@ import {
   LOGIN_SUBMIT_SUCCESS,
   LOGIN_SUBMIT_ERROR,
   LOGIN_CHANGE_TEACHER,
-  TOGGLE_MENU
+  TOGGLE_MENU,
 } from '../action';
 
 const initialState = {
@@ -23,10 +23,9 @@ const initialState = {
     'espace admin',
     'se déconnecter',
   ],
-  data,}
+  opened: false,
 
-import data from '../../data/articles';
-
+};
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -43,7 +42,7 @@ export default (state = initialState, action = {}) => {
     case TOGGLE_MENU:
       return {
         ...state,
-        loginOpened: !state.loginOpened,
+        opened: !state.opened,
       };
     case LOGIN_SUBMIT:
       return {

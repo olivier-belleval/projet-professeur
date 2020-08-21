@@ -6,7 +6,10 @@ import './style.scss';
 
 import { slugifyTitle } from '../../utils';
 
-const TogglerMenu = ({ opened, onOpenClick, path }) => (
+const TogglerMenu = ({ opened, onOpenClick, path }) => {
+  console.log(opened)
+
+return (
   <div className="settings">
     <div className="settings-button" onClick={onOpenClick}>
       <div className="settings-icon">
@@ -27,6 +30,6 @@ const TogglerMenu = ({ opened, onOpenClick, path }) => (
     </div>
     )}
   </div>
-);
+)};
 
 export default TogglerMenu;

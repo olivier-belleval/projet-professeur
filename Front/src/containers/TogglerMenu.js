@@ -4,8 +4,8 @@ import TogglerMenu from '../components/TogglerMenu';
 import { toggleMenu } from '../store/action';
 
 const mapStateToProps = (state) => ({
-  opened: state.loginOpened,
-  path: state.path,
+  opened: state.user.opened,
+  path: state.user.path,
 });
 
 const mapDispatchToProps = (dispatch) => ({
