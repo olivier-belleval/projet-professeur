@@ -1,17 +1,14 @@
 import React from 'react';
 import KanbanCard from './KanbanCard';
 
-const KanbanList = () => (
+const KanbanList = ({kanban}) => (
   <div className="kanban-list">
 
     <div className="kanban-list-title">
-      Séance N°666
+      {kanban.list.name}
     </div>
     <div className="kanban-list-content">
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
-      <KanbanCard />
+    {kanban.list.map((card)=> <KanbanCard key={card.id} {...card}/>)}
 
     </div>
   </div>

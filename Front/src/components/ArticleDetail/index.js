@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const ArticleDetail = ({ article }) => {
   console.log(article);
 
+
   return (
     <div className="article-detail">
       <header className="article-detail-head">
