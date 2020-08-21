@@ -1,0 +1,5 @@
+%syntax-version=1.0.0
+%project=omyprof
+%uri=https://omyprof.io
+
+00-create-tables 2020-08-21T11:22:44Z "Etudiant O'clock",,, <etudiant@teleporteur> # initial migration: tables creation
