@@ -19,7 +19,7 @@ const initialState = {
   classes: ['6ème A', '5eme D', '3eme B'],
   path: [
     'articles',
-    'kanban',
+    'kanbans',
     'espace admin',
     'se déconnecter',
   ],

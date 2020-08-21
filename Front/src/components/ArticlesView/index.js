@@ -20,7 +20,7 @@ const ArticlesView = ({ articles }) => (
           {post.excerpt}
         </p>
         <div className="article-route">
-          <Link to={slugifyTitle(post.title)}>
+          <Link to={`article/${slugifyTitle(post.title)}`}>
             Lire la suite
           </Link>
         </div>

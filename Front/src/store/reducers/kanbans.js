@@ -1,4 +1,4 @@
-import { slugifyKanbanTitle } from '../../utils';
+import { slugifyTitle } from '../../utils';
 import { GET_KANBANS, GET_KANBANS_ERROR, GET_KANBANS_SUCCESS} from '../action/data-actions';
 import data from '../../data/kanbans';
 
@@ -37,8 +37,8 @@ export default (state = initialState, action = {}) => {
 
 export const getKanbanBySlug = (state, slug) => {
   const kanban = state.kanbans.kanbans.find((item) => {
-    const slugTitle = slugifyKanbanTitle(item.title);
-    const slugToFind = slugifyKanbanTitle(slug);
+    const slugTitle = slugifyTitle(item.title);
+    const slugToFind = slugifyTitle(slug);
     return slugTitle === slugToFind;
   });
 
