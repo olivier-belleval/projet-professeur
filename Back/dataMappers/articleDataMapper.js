@@ -8,13 +8,14 @@ module.exports = {
         a.id AS article_id,
         a.title AS article_title,
         a.excerpt AS article_excerpt,
-        string_agg(distinct c.username, ', ' ORDER BY c.username) AS class_name,
+        a.content AS article_content,
+        JSON_AGG(c.username) AS class_name,
         t.first_name || ' ' || t.last_name AS article_author
         FROM "article"."article" a
         JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
         JOIN "omyprof"."class" c ON m2m.class_id = c.id
         JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
-        GROUP BY a.id, a.title, a.excerpt, article_author`;
+        GROUP BY a.id, a.title, a.excerpt, a.content, article_author`;
 
         const result = await client.query(preparedQuery);
 
@@ -34,7 +35,7 @@ module.exports = {
 		    a.id AS article_id,
 		    a.title AS article_title,
 		    a.excerpt AS article_excerpt,
-		    string_agg(distinct c.username, ', ' ORDER BY c.username) AS class_name,
+		    JSON_AGG(c.username) AS class_name,
 		    t.first_name || ' ' || t.last_name AS article_author
 	        FROM "article"."article" a
 	        JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
@@ -182,3 +183,6 @@ module.exports = {
     },
 
 };
+
+
+
