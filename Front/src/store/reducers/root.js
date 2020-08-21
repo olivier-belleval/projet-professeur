@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import articles from './articles';
-import user from './index';
+import user from './user';
 import kanbans from './kanbans';
 
 export default combineReducers({
