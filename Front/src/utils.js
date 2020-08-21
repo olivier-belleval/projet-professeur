@@ -7,3 +7,4 @@ export const slugifyTitle = (title) => {
 export const slugifyKanbanTitle = (title) => {
   return `/article/${slugify(title, { strict: true, lower: true })}`
 }
+
