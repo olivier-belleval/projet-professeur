@@ -1,21 +1,18 @@
 @use '../../styles/vars';
 
 .admin_panel_article {
-  background-color: vars.$lightest-color;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   
   &-title{
-    width: 80%;
-    padding: 1em;
-    margin-top: 3em;
-    background-color: vars.$dark-color;
-    border-radius: 5px;
-    color: vars.$lightest-color;
-    font-weight: bold;
-    margin-bottom: 4em;
+     width: 90%;
+     font-weight: bold;
+    padding: 2em;
+    margin-bottom: 2em;
+    background-color: vars.$alt-dark-color;
+    
   }
 
   &-content{
@@ -25,16 +22,17 @@
     align-items: center;
 
     &-part{
-      width: 80%;
-      padding: 1em;
-      background-color: vars.$primary-color;
-      border-radius: 5px;
-      color: vars.$lightest-color;
-      font-weight: bold;
-      margin-bottom: 1em;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      
+       width: 90%;
+       padding: 1em;
+       background-color: vars.$lightest-color;
+      // border-radius: 5px;
+      // color: vars.$lightest-color;
+       //font-weight: bold;
+       margin-bottom: 1em;
+       display: flex;
+       justify-content: space-between;
+       flex-wrap: wrap;
 
       // &-icons{
       //   width: 30%;
@@ -64,4 +62,8 @@
 
 .admin_panel_article_content-part-class {
   display: flex;
+}
+
+.admin_panel_article-content-part-article {
+  font-weight: bold;
 }

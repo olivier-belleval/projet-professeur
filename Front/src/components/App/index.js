@@ -12,7 +12,7 @@ import Admin from '../Admin';
 import Logout from '../Logout';
 import AdminArticle from '../../containers/AdminArticle';
 
-import './styles.css';
+import './styles.scss';
 
 // == Composant
 const App = () => (
