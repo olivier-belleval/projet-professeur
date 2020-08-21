@@ -14,7 +14,7 @@ const tab = [
   'se-deconnecter'
 ]
 
-const TogglerMenu = ({ opened, onOpenClick, path }) => {
+const TogglerMenu = ({ opened, onOpenClick, path, handleLogout }) => {
   console.log(opened)
 
 return (
@@ -47,7 +47,7 @@ return (
           <div className="settings-nav">espace admin</div>
         </NavLink>
 
-        <NavLink key={"4"} exact to={'/se-deconnecter'}>
+        <NavLink key={"4"} exact to={'/se-deconnecter'} onClick={handleLogout}>
           <div className="settings-nav">se déconnecter</div>
         </NavLink> 
 

@@ -8,6 +8,10 @@ import {
   TOGGLE_MENU,
 } from '../action';
 
+import {
+  LOGOUT_SUCCESS,
+} from '../action/user';
+
 const initialState = {
   username: '',
   password: '',
@@ -70,6 +74,13 @@ export default (state = initialState, action = {}) => {
         ...state,
         teacher: !state.teacher,
       };
+      case LOGOUT_SUCCESS:
+        return {
+          ...state,
+          isLogged: !state.teacher,
+          username:'',
+          password:'',
+        };
     default:
       return state;
   }

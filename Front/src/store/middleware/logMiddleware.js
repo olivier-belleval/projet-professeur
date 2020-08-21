@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
-  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError, loginSubmit,
+  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError,
 } from '../action/index';
+import { LOGOUT, logoutSuccess } from '../action/user';
 
 const logMiddleware = (store) => (next) => (action) => {
   console.log('middleware');
@@ -17,7 +18,7 @@ const logMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'post',
-        url: 'http://localhost:3000/api/login',
+        url: 'http://localhost:3000/login',
         data: user,
         withCredentials: true,
       })
@@ -29,6 +30,22 @@ const logMiddleware = (store) => (next) => (action) => {
           store.dispatch(
             console.error(err),
             loginSubmitError('Mot de passe incorrect'),
+          );
+        });
+    case LOGOUT:
+      console.log('case logout');
+      axios({
+        method: 'post',
+        url: 'http://localhost:3000/logout',
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log('logout request');
+          store.dispatch(logoutSuccess());
+        })
+        .catch((err) => {
+          store.dispatch(
+            console.error(err),
           );
         });
 

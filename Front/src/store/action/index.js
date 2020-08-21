@@ -6,6 +6,7 @@ export const TOGGLE_LOGIN_FORM = 'TOGGLE_LOGIN_FORM';
 export const LOGIN_SUBMIT_ERROR = 'LOGIN_SUBMIT_ERROR';
 
 
+
 export const loginSubmitSuccess = (payload) => ({
   type: LOGIN_SUBMIT_SUCCESS,
   payload,
@@ -52,3 +53,4 @@ export const deleteArticle = () => ({
 export const joinClass = () => ({
   type: JOIN_CLASS,
 });
+

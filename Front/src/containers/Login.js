@@ -6,6 +6,7 @@ import {
   toggleLoginForm,
   loginChangeTeacher,
 } from '../store/action';
+import { logout } from '../store/action/user';
 
 
 const mapStateToProps = (state) => ({
@@ -29,6 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
     console.log('handlelogin:submit');
     dispatch(loginSubmit());
   },
+
   // toggle to open login form
   onOpenClick: () => {
     console.log('click')

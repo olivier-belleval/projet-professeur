@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import TogglerMenu from '../components/TogglerMenu';
 
 import { toggleMenu } from '../store/action';
+import { logout } from '../store/action/user';
 
 const mapStateToProps = (state) => ({
   opened: state.user.opened,
@@ -9,9 +10,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onOpenClick: () => {
-    console.log('open or close login form');
+  onOpenClick: () => {;
     dispatch(toggleMenu());
+  },
+  handleLogout: () => {
+    console.log('handle logout');
+    dispatch(logout());
   },
 });
 
