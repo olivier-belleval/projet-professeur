@@ -1,0 +1,42 @@
+@use '../../styles/vars';
+
+.settings {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 20px;
+  padding: 10px;
+  align-items: center;
+  &-icon {
+    color: black;
+    position:fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+  }
+  &-menu {
+    background-color: rgba(232, 232, 232, 0.8);
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+  }
+  &-nav {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: vars.$dark-color;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  &-button {
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: vars.$dark-color;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  }
+
