@@ -12,13 +12,13 @@ const logMiddleware = (store) => (next) => (action) => {
     case LOGIN_SUBMIT:
       console.log('case login submit');
       const user = {
-        username: store.getState().username,
-        password: store.getState().password,
+        username: store.getState().user.username,
+        password: store.getState().user.password,
       };
-
+      console.log('middleware request axios',user)
       axios({
         method: 'post',
-        url: 'http://localhost:3000/login',
+        url: 'http://localhost:3000/login/admin',
         data: user,
         withCredentials: true,
       })

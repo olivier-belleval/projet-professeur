@@ -1,12 +1,10 @@
 import { slugifyTitle } from '../../utils';
 import { GET_KANBANS, GET_KANBANS_ERROR, GET_KANBANS_SUCCESS} from '../action/data-actions';
-import data from '../../data/kanbans';
 
 export const initialState = {
   loading: false,
   error: '',
   list: [],
-  kanbans:data,
 };
 
 export default (state = initialState, action = {}) => {

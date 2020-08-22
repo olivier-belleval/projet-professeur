@@ -47,7 +47,7 @@ return (
           <div className="settings-nav">espace admin</div>
         </NavLink>
 
-        <NavLink key={"4"} exact to={'/se-deconnecter'} onClick={handleLogout}>
+        <NavLink key={"4"} exact to={'/'} onClick={handleLogout}>
           <div className="settings-nav">se déconnecter</div>
         </NavLink> 
 

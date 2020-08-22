@@ -5,7 +5,7 @@ import user from './user';
 import kanbans from './kanbans';
 
 export default combineReducers({
-  articles: articles,
-  user: user,
+  articles,
+  user,
   kanbans,
 });
