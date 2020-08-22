@@ -3,3 +3,5 @@
 %uri=https://omyprof.io
 
 00-create-tables 2020-08-21T11:22:44Z "Etudiant O'clock",,, <etudiant@teleporteur> # initial migration: tables creation
+10-user-queries 2020-08-22T15:15:32Z "Etudiant O'clock",,, <etudiant@teleporteur> # optimized queries for user methods
+20-article-queries 2020-08-22T15:32:23Z "Etudiant O'clock",,, <etudiant@teleporteur> # optimized queries for article methods

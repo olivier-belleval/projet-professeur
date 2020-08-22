@@ -80,33 +80,6 @@ module.exports = {
         const result = await client.query(preparedQuery);
 
         return result.rows[0];
-    },
-
-    // méthode de test (création d'une classe avec pwd encrypté)
-    createClass: async () => {
-
-        const pwd = 'classtest';
-
-        const hashedpwd = await bcrypt.hash(pwd, 9);
-
-        console.log(pwd, ' : ', hashedpwd);
-
-        await client.query(`INSERT INTO "omyprof"."class" ("username", "description", "password", "teacher_id") VALUES ('classtest', 'classtest', $1, 1)`, [hashedpwd]);
-
-    },
-
-    // méthode de test (création d'un admin avec pwd encrypté)
-    createAdmin: async () => {
-
-        const pwd = 'admintest';
-
-        const hashedpwd = await bcrypt.hash(pwd, 9);
-
-        console.log(pwd, ' : ', hashedpwd);
-
-        await client.query(`INSERT INTO "omyprof"."teacher" ("username", "password") VALUES ('admintest', $1)`, [hashedpwd]);
-
-    },
-
+    }
 
 }
