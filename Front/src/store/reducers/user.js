@@ -10,6 +10,8 @@ import {
 
 import {
   LOGOUT_SUCCESS,
+  GET_CLASSES,
+  GET_CLASSES_SUCCESS,
 } from '../action/user';
 
 const initialState = {
@@ -20,7 +22,7 @@ const initialState = {
   isLogged: false,
   loginOpened: false,
   teacher: false,
-  classes: ['6ème A', '5eme D', '3eme B'],
+  classes: [],
   path: [
     'articles',
     'kanbans',
@@ -81,6 +83,17 @@ export default (state = initialState, action = {}) => {
           username:'',
           password:'',
         };
+      case GET_CLASSES:
+        return {
+          ...state,
+          loading:true,
+        };
+      case GET_CLASSES_SUCCESS:
+        return {
+          ...state,
+          loading:false,
+          classes:[...action.payload],
+        }
     default:
       return state;
   }

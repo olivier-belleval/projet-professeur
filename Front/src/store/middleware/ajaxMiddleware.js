@@ -41,21 +41,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         store.dispatch(getKanbansError("Impossible de récupérer les kanbans..."))
       })
     break;
-    case CLASSES:
-      axios({
-        method: 'get',
-        url: `${url}/classes`,
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log(res.data);
-        store.dispatch(getClassesSuccess(res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-        store.dispatch(getClassesError("Impossible de récupérer les classes..."))
-      })
-    break;
     default:
       return;
   }

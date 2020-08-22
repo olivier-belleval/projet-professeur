@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError,
 } from '../action/index';
-import { LOGOUT, logoutSuccess } from '../action/user';
+import { LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess } from '../action/user';
 
 const logMiddleware = (store) => (next) => (action) => {
   console.log('middleware');
@@ -15,7 +15,7 @@ const logMiddleware = (store) => (next) => (action) => {
         username: store.getState().user.username,
         password: store.getState().user.password,
       };
-      console.log('middleware request axios',user)
+      console.log('middleware request axios', user);
       axios({
         method: 'post',
         url: 'http://localhost:3000/login/admin',
@@ -49,6 +49,23 @@ const logMiddleware = (store) => (next) => (action) => {
             console.error(err),
           );
         });
+      break;
+    case GET_CLASSES:
+      axios({
+        method: 'get',
+        url: 'http://localhost:3000/login',
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log(res.data.data);
+          store.dispatch(getClassesSuccess(res.data.data.class_usernames)); 
+          console.log('je vais au bout de ma requête');
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
+        })
+       
       break;
 
     default:

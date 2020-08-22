@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
 
@@ -16,6 +16,7 @@ const Login = ({
   changeField,
   onOpenClick,
   onTeacherClick,
+  getClasses,
 }) => {
   // function to prevent from page reloading + function to change input's value asap user types
   const handleSubmit = (evt) => {
@@ -26,6 +27,10 @@ const Login = ({
     const { name, value } = evt.target;
     changeField({ [name]: value });
   };
+  useEffect(() => {
+    getClasses();
+  }, []);
+
   return (
     <div className="login">
       { loginOpened && loading && <span>Connexion en cours...</span>}
@@ -53,8 +58,8 @@ const Login = ({
                 className="login-form-select"
               >
                 <option>je choisis ma classe</option>
-                {classes.map((truc) => (
-                  <option value={truc} key={truc}>{truc}</option>
+                {classes.map((item) => (
+                  <option value={item} key={item}>{item}</option>
                 ))}
               </select>
               )}

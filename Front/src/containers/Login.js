@@ -7,6 +7,7 @@ import {
   loginChangeTeacher,
 } from '../store/action';
 import { logout } from '../store/action/user';
+import { getClasses } from '../store/action/user'
 
 
 const mapStateToProps = (state) => ({
@@ -39,6 +40,9 @@ const mapDispatchToProps = (dispatch) => ({
   //turn login window as teacher login windows
   onTeacherClick: () => {
     dispatch(loginChangeTeacher());
+  },
+  getClasses: () => {
+    dispatch(getClasses());
   }
 });
 

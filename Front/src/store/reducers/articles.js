@@ -36,8 +36,8 @@ export default (state = initialState, action = {}) => {
 };
 
 export const getArticleBySlug = (state, slug) => {
-  const article = state.articles.articles.find((post) => {
-    const slugTitle = slugifyTitle(post.title);
+  const article = state.articles.list.find((post) => {
+    const slugTitle = slugifyTitle(post.article_title);
     const slugToFind = slugifyTitle(slug);
     return slugTitle === slugToFind;
   });
