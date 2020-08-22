@@ -44,7 +44,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
     case CLASSES:
       axios({
         method: 'get',
-        url: `${url}api/classes`,
+        url: `${url}/classes`,
         withCredentials: true,
       })
       .then((res) => {
