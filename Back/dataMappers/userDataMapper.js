@@ -72,6 +72,16 @@ module.exports = {
 
     },
 
+    getClassesUsernames: async () => {
+
+        const preparedQuery = `SELECT 
+        json_agg(c.username) AS class_usernames FROM "omyprof"."class" c`;
+
+        const result = await client.query(preparedQuery);
+
+        return result.rows[0];
+    },
+
     // méthode de test (création d'une classe avec pwd encrypté)
     createClass: async () => {
 

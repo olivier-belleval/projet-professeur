@@ -2,20 +2,50 @@ const client = require('./client');
 
 module.exports = {
 
+    // affiche seulement les articles qui ont une classe attribuée (page d'acceuil)
     getAllArticlesWithClass: async () => {
 
-        const preparedQuery = `SELECT
-        a.id AS article_id,
-        a.title AS article_title,
-        a.excerpt AS article_excerpt,
-        a.content AS article_content,
-        JSON_AGG(c.username) AS class_name,
-        t.first_name || ' ' || t.last_name AS article_author
+        const preparedQuery = `SELECT 
+        a.id AS article_id, 
+        a.title AS article_title, 
+        a.slug article_slug, 
+        a.excerpt article_excerpt, 
+        t.first_name || ' ' || t.last_name AS article_author,
+        COALESCE(json_agg(c.username) FILTER (WHERE c.username IS NOT NULL), null) AS class_username
         FROM "article"."article" a
         JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
         JOIN "omyprof"."class" c ON m2m.class_id = c.id
         JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
-        GROUP BY a.id, a.title, a.excerpt, a.content, article_author`;
+        GROUP BY a.id, a.title, a.slug, a.excerpt, article_author
+        ORDER BY article_id DESC`;
+
+        const result = await client.query(preparedQuery);
+
+        // fin d'execution si aucun article n'est trouvé - undefined
+        if (!result) {
+            return;
+        }
+
+        // retourne tous les articles
+        return result.rows;
+    },
+
+    // affiche tous les articles avec ou sans classe attribuée (page admin - liste des articles)
+    getAllArticlesWithOrWithoutClass: async () => {
+
+        const preparedQuery = `SELECT 
+        a.id AS article_id, 
+        a.title AS article_title, 
+        a.slug article_slug, 
+        a.excerpt article_excerpt, 
+        t.first_name || ' ' || t.last_name AS article_author,
+        COALESCE(json_agg(c.username) FILTER (WHERE c.username IS NOT NULL), null) AS class_username
+        FROM "article"."article" a
+        LEFT JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
+        LEFT JOIN "omyprof"."class" c ON m2m.class_id = c.id
+        LEFT JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
+        GROUP BY a.id, a.title, a.slug, a.excerpt, article_author
+        ORDER BY article_id DESC`;
 
         const result = await client.query(preparedQuery);
 
@@ -35,14 +65,14 @@ module.exports = {
 		    a.id AS article_id,
 		    a.title AS article_title,
 		    a.excerpt AS article_excerpt,
-		    JSON_AGG(c.username) AS class_name,
+		    c.username AS class_name,
 		    t.first_name || ' ' || t.last_name AS article_author
 	        FROM "article"."article" a
-	        JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
-	        JOIN "omyprof"."class" c ON m2m.class_id = c.id
-            JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
+	        LEFT JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
+	        LEFT JOIN "omyprof"."class" c ON m2m.class_id = c.id
+            LEFT JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
             WHERE c.id = $1
-	        GROUP BY a.id, a.title, a.excerpt, article_author`,
+            ORDER BY article_id DESC`,
             values: [classId]
         };
 

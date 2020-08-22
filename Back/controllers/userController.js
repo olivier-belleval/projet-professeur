@@ -58,4 +58,13 @@ module.exports = {
 
     },
 
+    // méthode pour récupérer tous les classes_usernames et les afficher dans le scroll (page de connexion)
+    getClassesUsernames: async (request, response, next) => {
+
+        const result = await userDataMapper.getClassesUsernames();
+
+        return response.json({ data: result });
+
+    }
+
 }
