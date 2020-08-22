@@ -32,6 +32,7 @@ const logMiddleware = (store) => (next) => (action) => {
             loginSubmitError('Mot de passe incorrect'),
           );
         });
+      break;
     case LOGOUT:
       console.log('case logout');
       axios({
@@ -48,6 +49,7 @@ const logMiddleware = (store) => (next) => (action) => {
             console.error(err),
           );
         });
+      break;
 
     default:
   }
