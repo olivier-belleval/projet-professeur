@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 import KanbansView from '../components/KanbansView';
+import { getKanbans} from '../store/action/data-actions';
 
 const mapStateToProps = (state) => ({
-  kanbans: state.kanbans.kanbans,
+  list: state.kanbans.list,
 });
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = (dispatch) => ({
+  getKanbans: () => {
+    dispatch(getKanbans());
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(KanbansView);

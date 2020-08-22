@@ -9,7 +9,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case GET_ARTICLES:
-      console.log('CASE get articles');
       axios({
         method: 'get',
         url: `${url}api/articles`,
@@ -18,7 +17,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         .then((res) => {
           console.log('mes data : ',res.data.result);
           store.dispatch(getArticlesSuccess(res.data.result));
-          console.log('fin du then');
         })
         .catch((err) => {
           console.log('mes erreurs de chargement : ',err);
@@ -29,12 +27,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
     case GET_KANBANS:
       axios({
         method: 'get',
-        url: `${url}kabans`,
+        url: `${url}api/kanbans`,
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
-        store.dispatch(getKanbansSuccess(res.data));
+        console.log(res.data.result);
+        store.dispatch(getKanbansSuccess(res.data.result));
       })
       .catch((err) => {
         console.log(err);

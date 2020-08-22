@@ -8,7 +8,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getArticles: () => {
-    console.log("i'm gonna get articles yahoo");
     dispatch(getArticles());
   },
 });

@@ -34,7 +34,7 @@ export default (state = initialState, action = {}) => {
 };
 
 export const getKanbanBySlug = (state, slug) => {
-  const kanban = state.kanbans.kanbans.find((item) => {
+  const kanban = state.kanbans.list.find((item) => {
     const slugTitle = slugifyTitle(item.title);
     const slugToFind = slugifyTitle(slug);
     return slugTitle === slugToFind;

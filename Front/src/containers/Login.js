@@ -6,6 +6,9 @@ import {
   toggleLoginForm,
   loginChangeTeacher,
 } from '../store/action';
+
+import { loginClassesSubmit } from '../store/action/user'
+
 import { logout } from '../store/action/user';
 import { getClasses } from '../store/action/user'
 
@@ -28,19 +31,22 @@ const mapDispatchToProps = (dispatch) => ({
   },
   // changing loading value to true
   handleLogin: () => {
-    console.log('handlelogin:submit');
     dispatch(loginSubmit());
+  },
+  // handle login for classes
+  handleClassesLogin: () => {
+    dispatch(loginClassesSubmit());
   },
 
   // toggle to open login form
   onOpenClick: () => {
-    console.log('click')
     dispatch(toggleLoginForm());
   },
   //turn login window as teacher login windows
   onTeacherClick: () => {
     dispatch(loginChangeTeacher());
   },
+  //get all classes from an axios request and deliver it into select input
   getClasses: () => {
     dispatch(getClasses());
   }

@@ -12,6 +12,7 @@ import {
   LOGOUT_SUCCESS,
   GET_CLASSES,
   GET_CLASSES_SUCCESS,
+  LOGIN_CLASSES_SUBMIT,
 } from '../action/user';
 
 const initialState = {
@@ -50,7 +51,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         opened: !state.opened,
       };
-    case LOGIN_SUBMIT:
+    case LOGIN_SUBMIT || LOGIN_CLASSES_SUBMIT:
       return {
         ...state,
         loading: true,

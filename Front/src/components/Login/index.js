@@ -13,6 +13,7 @@ const Login = ({
   teacher,
   // func which dispatch
   handleLogin,
+  handleClassesLogin,
   changeField,
   onOpenClick,
   onTeacherClick,
@@ -39,7 +40,7 @@ const Login = ({
       )}
       {!isLogged && loginOpened && !loading && (
         <div className="login-form">
-          <form className="form" onSubmit={handleSubmit}>
+          <form className="form" onSubmit={ teacher ? handleSubmit : handleClassesLogin }>
             <div className="login-form-inputs">
               {teacher && (
               <input
