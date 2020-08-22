@@ -34,40 +34,41 @@ const Login = ({
       )}
       {!isLogged && loginOpened && !loading && (
         <div className="login-form">
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="login-form-inputs">
-            {teacher && (
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="login-form-inputs">
+              {teacher && (
               <input
-              name="username"
-              value={username}
-              onChange={handleInputChange}
-              type="text"
-              placeholder="nom d'utilisateur"
-            />
-            )}
-            {!teacher && (
-            <select
-              name="username"
-              onChange={handleInputChange}
-              value={username}
-              className="login-form-select"
-            >
-            <option>je choisis ma classe</option>
-            {classes.map((truc) =>(
-              <option value={truc} key={truc}>{truc}</option>
-            ))}
-            </select>)}
-            <input
-              name="password"
-              value={password}
-              onChange={handleInputChange}
-              type="password"
-              placeholder="mot de passe"
-            />
-          </div>
-          <button type="submit" className="login-form-button">Se connecter</button>
-        </form>
-        <div className="login-admin" onClick={onTeacherClick}>espace {!teacher ? 'professeur' : 'élève'}</div>
+                name="username"
+                value={username}
+                onChange={handleInputChange}
+                type="text"
+                placeholder="nom d'utilisateur"
+              />
+              )}
+              {!teacher && (
+              <select
+                name="username"
+                onChange={handleInputChange}
+                value={username}
+                className="login-form-select"
+              >
+                <option>je choisis ma classe</option>
+                {classes.map((truc) => (
+                  <option value={truc} key={truc}>{truc}</option>
+                ))}
+              </select>
+              )}
+              <input
+                name="password"
+                value={password}
+                onChange={handleInputChange}
+                type="password"
+                placeholder="mot de passe"
+              />
+            </div>
+            <button type="submit" className="login-form-button">Se connecter</button>
+          </form>
+          <div className="login-admin" onClick={onTeacherClick}>espace {!teacher ? 'professeur' : 'élève'}</div>
         </div>
       )}
     </div>
