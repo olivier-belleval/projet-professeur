@@ -3,9 +3,8 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 import { slugifyTitle } from '../../utils';
 
-const KanbansView = ({ list, getKanbans }) => {
+const KanbansView = ({ list, getKanbans, getKanban }) => {
   useEffect(() => {
-    console.log('si non si non')
     getKanbans();
   }, []);
 
@@ -23,7 +22,7 @@ const KanbansView = ({ list, getKanbans }) => {
         <Link to={`kanban/${slugifyTitle(kanban.title)}`} key={kanban.title}>
           <div className="kanbans-view-list">
             <div className="kanban">
-              <h3 className="kanban-title">
+              <h3 className="kanban-title" onClick={()=>{getKanban(kanban.id)}}>
                 {kanban.title}
               </h3>
               <span className="kanban-subtitle">

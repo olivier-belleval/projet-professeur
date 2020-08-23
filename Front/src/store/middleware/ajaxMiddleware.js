@@ -1,6 +1,15 @@
 import axios from 'axios';
-import { GET_ARTICLES, getArticlesSuccess, getArticlesError } from '../action/data-actions';
-import { GET_KANBANS, getKanbansSuccess, getKanbansError }from '../action/data-actions';
+import {
+  GET_ARTICLES,
+  getArticlesSuccess,
+  getArticlesError,
+  GET_KANBANS,
+  getKanbansSuccess,
+  getKanbansError,
+  GET_KANBAN,
+  getKanbanSuccess,
+  getKanbanError,
+} from '../action/data-actions';
 
 const ajaxMiddleware = (store) => (next) => (action) => {
   const url = 'http://localhost:3000/';
@@ -15,14 +24,14 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log('mes data : ',res.data.result);
+          console.log('mes data : ', res.data.result);
           store.dispatch(getArticlesSuccess(res.data.result));
         })
         .catch((err) => {
-          console.log('mes erreurs de chargement : ',err);
-          store.dispatch(getArticlesError("Impossible de récupérer les articles..."))
+          console.log('mes erreurs de chargement : ', err);
+          store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
         });
-        
+
       break;
     case GET_KANBANS:
       axios({
@@ -30,19 +39,33 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         url: `${url}api/kanbans`,
         withCredentials: true,
       })
-      .then((res) => {
-        console.log(res.data.result);
-        store.dispatch(getKanbansSuccess(res.data.result));
+        .then((res) => {
+          console.log(res.data.result);
+          store.dispatch(getKanbansSuccess(res.data.result));
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+        });
+      break;
+    case GET_KANBAN:
+      const kanban_id = store.getState().kanbans.kanban_id
+      axios({
+        method: 'get',
+        url: `${url}api/kanban/${kanban_id}`,
+        withCredentials: true,
       })
-      .catch((err) => {
-        console.log(err);
-        store.dispatch(getKanbansError("Impossible de récupérer les kanbans..."))
-      })
-    break;
+        .then((res) => {
+          console.log(res.data);
+          store.dispatch(getKanbanSuccess(res.data.allKanban));
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(getKanbanError('Impossible de récupérer le kanban...'));
+        });
+      break;
     default:
-      return;
   }
-}
-
+};
 
 export default ajaxMiddleware;

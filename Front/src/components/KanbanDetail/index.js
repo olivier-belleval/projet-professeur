@@ -3,7 +3,7 @@ import './style.scss';
 import KanbanList from './KanbanList';
 
 const KanbanDetail = ({
-  kanban
+  kanban_detail,
 }) => {
   console.log('get stüpid -bülow');
   return (
@@ -11,18 +11,19 @@ const KanbanDetail = ({
       <header>
         <div className="kanban-detail-head">
           <h1 className="kanban-detail-head--title">
-            {kanban.title}
+            {kanban_detail.kanban_title}
           </h1>
           <span className="kanban-detail-head--subtitle">
-            {kanban.description}
+            {kanban_detail.kanban_description}
           </span>
         </div>
       </header>
       <main>
-      <div className="kanban-detail-grid">
-      <KanbanList {...kanban}/>
-      </div>
-        
+        <div className="kanban-detail-grid">
+          {kanban_detail.map((kanban) => <KanbanList key={kanban.id} {...kanban}/>)}
+
+        </div>
+
       </main>
     </div>
   );

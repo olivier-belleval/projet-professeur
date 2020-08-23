@@ -3,10 +3,10 @@ import KanbanDetail from '../components/KanbanDetail';
 import { getKanbanBySlug } from '../store/reducers/kanbans';
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps);
   const { slug } = ownProps.match.params;
   return {
     kanban: getKanbanBySlug(state, slug),
+    kanban_detail: state.kanbans.kanban_detail,
   };
 };
 
