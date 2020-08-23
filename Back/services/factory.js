@@ -102,10 +102,11 @@ module.exports = {
 let kanbansArray = Object.values(kanbans);
 
 kanbansArray.forEach(kanban => {
-  // for each kanban's object that contains more than one object we replace the object by an array
+  // for each kanban's object that contains more than one object we replace the object by an array and each empty array are replaced by null
   
   /**
    * {'1': {}, '2':{}} => [{},{}]
+   * item : [] => item: null
    */
   
     // we filter to avoid null values
