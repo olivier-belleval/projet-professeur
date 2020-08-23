@@ -1,4 +1,5 @@
 const kanbanDataMapper = require('../dataMappers/kanbanDataMapper');
+const {kanbansFormater} = require('../modules/factory')
 const slugify = require('slugify');
 
 module.exports = {
@@ -18,9 +19,10 @@ module.exports = {
                 const classId = request.session.user.id;
                 result = await kanbanDataMapper.getAllKanbansByClass(classId);
             };
-
+            const formatedResult = kanbansFormater(result);
+            console.log('kanbans :', formatedResult)
             return response.json({ 
-                result
+                formatedResult
             });
 
         } catch (error) {
