@@ -23,11 +23,6 @@
         "name": "La seconde liste du kanban 2",
         "order": "2",
         "kanban_id": "2"
-    },
-    {
-        "name": "La première liste du kanban 3",
-        "order": "1",
-        "kanban_id": "3"
     }
 
 ]

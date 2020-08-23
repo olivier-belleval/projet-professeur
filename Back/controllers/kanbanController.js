@@ -20,7 +20,6 @@ module.exports = {
                 result = await kanbanDataMapper.getAllKanbansByClass(classId);
             };
             const formatedResult = kanbansFormater(result);
-            console.log('kanbans :', formatedResult)
             return response.json({ 
                 formatedResult
             });
