@@ -43,7 +43,7 @@ module.exports = {
             LEFT JOIN "kanban"."card" ca ON ca.list_id = li.id 
             LEFT JOIN "kanban"."m2m_tag_card" ta_ca ON ta_ca.card_id = ca.id 
             LEFT JOIN "kanban"."tag" ta ON ta.id = ta_ca.tag_id;
-        `
+            `
         };
         
 
@@ -56,23 +56,6 @@ module.exports = {
         return result.rows;
     },
 
-    getAllKanbans2: async () => {
-        
-        const query = {
-        text : `
-        SELECT * FROM "kanban".kanban;
-        `
-        };
-        
-
-        const result = await client.query(query);
-
-        if(!result) {
-            console.log('probleme de requette');
-            return
-        }
-        return result.rows;
-    },
 
     getAllKanbansByClass: async (classId) => {
         const query = {
