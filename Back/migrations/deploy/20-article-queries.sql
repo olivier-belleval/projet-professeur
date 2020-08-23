@@ -16,9 +16,9 @@ $$
 		t.first_name || ' ' || t.last_name AS article_author,
 		COALESCE(json_agg(c.username) FILTER (WHERE c.username IS NOT NULL), null) AS class_username
 		FROM "article"."article" a
-			JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
-			JOIN "omyprof"."class" c ON m2m.class_id = c.id
-			JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
+		JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
+		JOIN "omyprof"."class" c ON m2m.class_id = c.id
+		JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
 		GROUP BY a.id, a.title, a.slug, a.excerpt, article_author
 		ORDER BY article_id DESC;
 $$
@@ -99,7 +99,7 @@ LANGUAGE SQL STRICT;
 
 CREATE FUNCTION delete_article(articleId INT) RETURNS "article"."article" AS
 $$
-    DELETE FROM "article"."article" WHERE id = $1 RETURNING *;
+    DELETE FROM "article"."article" WHERE id = articleId RETURNING *;
 $$
 LANGUAGE SQL STRICT;
 

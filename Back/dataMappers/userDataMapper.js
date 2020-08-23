@@ -9,7 +9,7 @@ module.exports = {
 
         // client.query pour récupérer infos contenu en bdd
 
-        const result = await client.query('SELECT * FROM "omyprof"."class" c WHERE c.username = $1', [username]);
+        const result = await client.query('SELECT * FROM get_class_by_username($1)', [username]);
 
         // fin d'éxécution si aucun résultat
         if(result.rowCount === 0){
@@ -42,7 +42,7 @@ module.exports = {
 
         // client.query pour récupérer infos contenu en bdd
 
-        const result = await client.query('SELECT * FROM "omyprof"."teacher" t WHERE t.username = $1', [username]);
+        const result = await client.query('SELECT * FROM get_teacher_by_username($1)', [username]);
 
         // fin d'éxécution si aucun résultat
 
@@ -74,10 +74,13 @@ module.exports = {
 
     getClassesUsernames: async () => {
 
-        const preparedQuery = `SELECT 
-        json_agg(c.username) AS class_usernames FROM "omyprof"."class" c`;
+        const preparedQuery = `SELECT * FROM class_usernames_type()`;
 
         const result = await client.query(preparedQuery);
+
+        if(!result.rows[0]) {
+            return;
+        }
 
         return result.rows[0];
     }
