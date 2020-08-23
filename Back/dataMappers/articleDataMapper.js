@@ -5,19 +5,7 @@ module.exports = {
     // affiche seulement les articles qui ont une classe attribuée (page d'acceuil)
     getAllArticlesWithClass: async () => {
 
-        const preparedQuery = `SELECT 
-        a.id AS article_id, 
-        a.title AS article_title, 
-        a.slug article_slug, 
-        a.excerpt article_excerpt, 
-        t.first_name || ' ' || t.last_name AS article_author,
-        COALESCE(json_agg(c.username) FILTER (WHERE c.username IS NOT NULL), null) AS class_username
-        FROM "article"."article" a
-        JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
-        JOIN "omyprof"."class" c ON m2m.class_id = c.id
-        JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
-        GROUP BY a.id, a.title, a.slug, a.excerpt, article_author
-        ORDER BY article_id DESC`;
+        const preparedQuery = `SELECT * FROM get_articles_with_associated_class()`;
 
         const result = await client.query(preparedQuery);
 
@@ -33,19 +21,7 @@ module.exports = {
     // affiche tous les articles avec ou sans classe attribuée (page admin - liste des articles)
     getAllArticlesWithOrWithoutClass: async () => {
 
-        const preparedQuery = `SELECT 
-        a.id AS article_id, 
-        a.title AS article_title, 
-        a.slug article_slug, 
-        a.excerpt article_excerpt, 
-        t.first_name || ' ' || t.last_name AS article_author,
-        COALESCE(json_agg(c.username) FILTER (WHERE c.username IS NOT NULL), null) AS class_username
-        FROM "article"."article" a
-        LEFT JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
-        LEFT JOIN "omyprof"."class" c ON m2m.class_id = c.id
-        LEFT JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
-        GROUP BY a.id, a.title, a.slug, a.excerpt, article_author
-        ORDER BY article_id DESC`;
+        const preparedQuery = `SELECT * FROM get_articles_without_associated_class()`;
 
         const result = await client.query(preparedQuery);
 
@@ -61,18 +37,7 @@ module.exports = {
     getArticlesByClass: async (classId) => {
 
         const preparedQuery = {
-            text: `SELECT
-		    a.id AS article_id,
-		    a.title AS article_title,
-		    a.excerpt AS article_excerpt,
-		    c.username AS class_name,
-		    t.first_name || ' ' || t.last_name AS article_author
-	        FROM "article"."article" a
-	        LEFT JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
-	        LEFT JOIN "omyprof"."class" c ON m2m.class_id = c.id
-            LEFT JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
-            WHERE c.id = $1
-            ORDER BY article_id DESC`,
+            text: `SELECT * FROM get_articles_by_class($1)`,
             values: [classId]
         };
 
@@ -90,18 +55,7 @@ module.exports = {
     getOneArticle: async (articleId) => {
 
         const preparedQuery = {
-            text: `SELECT
-		a.id AS article_id,
-		a.title AS article_title,
-		a.content AS article_content,
-		string_agg(distinct c.username, ', ' ORDER BY c.username) AS class_name,
-		t.first_name || ' ' || t.last_name AS article_author
-	    FROM "article"."article" a
-	    JOIN "article"."m2m_article_class" m2m ON a.id = m2m.article_id
-	    JOIN "omyprof"."class" c ON m2m.class_id = c.id
-        JOIN "omyprof"."teacher" t ON a.teacher_id = t.id
-        WHERE a.id = $1
-	    GROUP BY a.id, a.title, a.content, article_author`,
+            text: `SELECT * FROM get_article_by_id($1)`,
             values: [articleId]
         };
 
@@ -114,7 +68,7 @@ module.exports = {
     createOneArticle: async (article) => {
 
         const preparedQuery = {
-            text: `INSERT INTO "article"."article" ("title", "slug", "excerpt", "content", "teacher_id") VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            text: `SELECT * FROM create_article($1, $2, $3, $4, $5)`,
             values: [article.title, article.slug, article.excerpt, article.content, article.teacherId]
         };
 
@@ -137,7 +91,7 @@ module.exports = {
             // clé = $index, soit col1 = value1
 
             text: `UPDATE "article"."article" SET
-            ${articleKeys.map( (_, index) => articleKeys[index] + ' = $' + (index+2))}
+            ${articleKeys.map((_, index) => articleKeys[index] + ' = $' + (index + 2))}
             WHERE id = $1
             RETURNING *`,
 
@@ -160,7 +114,7 @@ module.exports = {
         // requiert changements bdd (delete on cascade sur FK)
 
         const preparedQuery = {
-            text: `DELETE FROM "article"."article" WHERE id = $1 RETURNING *`,
+            text: `SELECT * FROM delete_article($1)`,
             values: [articleId]
         };
 
@@ -179,8 +133,7 @@ module.exports = {
 
         try {
             const preparedQuery = {
-                text: `INSERT INTO "article"."m2m_article_class" ("article_id", "class_id")
-            VALUES ($1, $2)`,
+                text: `SELECT * FROM associate_class_to_article($1, $2)`,
                 values: [articleId, classId]
             };
 
@@ -196,20 +149,21 @@ module.exports = {
 
     removeAssociationClassToArticle: async (articleId, classId) => {
 
-        try {
-            const preparedQuery = {
-                text: `DELETE FROM "article"."m2m_article_class" WHERE article_id = $1 AND class_id = $2`,
-                values: [articleId, classId]
-            };
+        const preparedQuery = {
+            text: `SELECT * FROM remove_class_to_article_association($1, $2)`,
+            values: [articleId, classId]
+        };
 
-            const result = await client.query(preparedQuery);
+        const result = await client.query(preparedQuery);
 
-            return 'Association supprimée!';
+        console.log(result);
 
-        } catch (error) {
-
-            return;
+        if(!result.rows[0].id) {
+            return 'Cette association n\'existe pas';
         }
+
+        return 'Association supprimée!';
+
     },
 
 };
