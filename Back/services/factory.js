@@ -12,6 +12,8 @@ module.exports = {
       kan.slug = res[r].kanban_slug;
       kan.description = res[r].kanban_description;
       kan.background = res[r].kanban_background;
+
+      // if doesnt exist we create the kanban
       if (typeof kanbans[kan.id] === 'undefined') {
         kanbans[kan.id] = kan;
       };

@@ -1,5 +1,5 @@
 const kanbanDataMapper = require('../dataMappers/kanbanDataMapper');
-const {kanbansFormater} = require('../modules/factory')
+const {kanbansFormater} = require('../services/factory')
 const slugify = require('slugify');
 
 module.exports = {
