@@ -98,6 +98,9 @@ module.exports = {
                     ka.description AS kanban_description, 
                     ka.background AS kanban_background,
                     ka.teacher_id AS kanban_teacher_id,
+                    cl.id AS class_id,
+                    cl.username AS class_username,
+                    cl.description AS class_description,
                     li.id AS list_id,
                     li.name AS list_name,
                     li.order AS list_order,
@@ -112,7 +115,9 @@ module.exports = {
                     ta_ca.card_id AS tag_card_id
                 FROM "kanban"."kanban" ka
                 LEFT JOIN  "kanban"."list" li ON li.kanban_id = ka.id
-                LEFT JOIN "kanban"."card" ca ON ca.list_id = li.id 
+                LEFT JOIN "kanban"."card" ca ON ca.list_id = li.id
+                LEFT JOIN "kanban"."m2m_kanban_class" ka_cl ON ka_cl.kanban_id = ka.id 
+                LEFT JOIN "omyprof"."class" cl ON ka_cl.class_id = cl.id 
                 LEFT JOIN "kanban"."m2m_tag_card" ta_ca ON ta_ca.card_id = ca.id 
                 LEFT JOIN "kanban"."tag" ta ON ta.id = ta_ca.tag_id
                 WHERE ka.id = $1
