@@ -93,4 +93,15 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to get one kanbans by id
+
+CREATE FUNCTION "kanban".create_kanban(kanbanTitle TEXT, kanbanSlug TEXT, kanbanDescription TEXT, kanbanBackground TEXT, kanbanTeacherId INT) RETURNS SETOF "kanban".kanban AS
+$$
+INSERT INTO "kanban"."kanban" 
+    ("title", "slug", "description", "background", "teacher_id") 
+VALUES ($1, $2, $3, $4, $5) returning *;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;

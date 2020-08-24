@@ -10,4 +10,6 @@ DROP FUNCTION "kanban".get_one_kanbans_by_id(INT);
 
 DROP TYPE "kanban".constructed_kanban;
 
+DROP FUNCTION "kanban".create_kanban(TEXT, TEXT, TEXT, TEXT, INT);
+
 COMMIT;
