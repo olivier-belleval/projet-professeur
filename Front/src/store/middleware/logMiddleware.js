@@ -22,7 +22,7 @@ const logMiddleware = (store) => (next) => (action) => {
       console.log('middleware request axios', user);
       axios({
         method: 'post',
-        url: `${server}login/admin`,
+        url: `${local}login/admin`,
         data: user,
         withCredentials: true,
       })
@@ -40,7 +40,7 @@ const logMiddleware = (store) => (next) => (action) => {
       case LOGIN_CLASSES_SUBMIT:
       axios({
         method: 'post',
-        url: `${server}login/`,
+        url: `${local}login/`,
         data: user,
         withCredentials: true,
       })
@@ -59,7 +59,7 @@ const logMiddleware = (store) => (next) => (action) => {
       console.log('case logout');
       axios({
         method: 'post',
-        url: `${server}logout`,
+        url: `${local}logout`,
         withCredentials: true,
       })
         .then((res) => {
@@ -75,7 +75,7 @@ const logMiddleware = (store) => (next) => (action) => {
     case GET_CLASSES:
       axios({
         method: 'get',
-        url: `${server}login`,
+        url: `${local}login`,
         withCredentials: true,
       })
         .then((res) => {
