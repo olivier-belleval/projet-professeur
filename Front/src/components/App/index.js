@@ -11,6 +11,7 @@ import KanbansView from '../../containers/KanbansView';
 import KanbanDetail from '../../containers/KanbanDetail';
 import TogglerMenu from '../../containers/TogglerMenu';
 import AdminArticle from '../../containers/AdminArticle';
+import AdminKanban from '../../containers/AdminKanban';
 import Admin from '../Admin';
 
 // == Composant
@@ -29,6 +30,7 @@ const App = ({ isLogged, teacher}) => (
           <Route exact path="/kanbans" component={KanbansView} />
           <Route exact path="/kanban/:slug" component={KanbanDetail} />
           <Route exact path="/admin/articles" component={AdminArticle} />
+          <Route exact path="/admin/kanban" component={AdminKanban} />
           { teacher && <Route exact path="/espace-admin" component={Admin} />}
         </Switch>
       </div>

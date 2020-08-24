@@ -1,5 +1,5 @@
 import { GET_ARTICLES_ERROR, GET_ARTICLES_SUCCESS, GET_ARTICLES } from '../action/data-actions';
-import {DELETE_ARTICLE, DELETE_ARTICLE_ERROR, DELETE_ARTICLE_SUCCESS} from '../action/AdminArticle'
+import { DELETE_ARTICLE, DELETE_ARTICLE_ERROR, DELETE_ARTICLE_SUCCESS } from '../action/AdminArticle';
 import { slugifyTitle } from '../../utils';
 
 export const initialState = {
@@ -30,7 +30,7 @@ export default (state = initialState, action = {}) => {
         error: action.payload,
         list: [],
       };
-      case DELETE_ARTICLE:
+    case DELETE_ARTICLE:
       return {
         ...state,
         loading: true,
@@ -49,7 +49,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         error: action.payload,
-        article_id:'',
+        article_id: '',
         list: [],
       };
     default:

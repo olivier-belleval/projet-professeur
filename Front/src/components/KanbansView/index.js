@@ -21,7 +21,7 @@ const KanbansView = ({ list, getKanbans }) => {
       {list.map((kanban) => (
         <Link to={`kanban/${slugifyTitle(kanban.title)}`} key={kanban.title}>
           <div className="kanbans-view-list">
-          <div className="kanban">
+            <div className="kanban">
               <h3 className="kanban-title">
                 {kanban.title}
               </h3>
