@@ -49,22 +49,22 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
         });
       break;
-    case GET_KANBAN:
-      const kanban_id = store.getState().kanbans.kanban_id
-      axios({
-        method: 'get',
-        url: `${local}api/kanban/${kanban_id}`,
-        withCredentials: true,
-      })
-        .then((res) => {
-          console.log(res.data);
-          store.dispatch(getKanbanSuccess(res.data.allKanban));
-        })
-        .catch((err) => {
-          console.log(err);
-          store.dispatch(getKanbanError('Impossible de récupérer le kanban...'));
-        });
-      break;
+    // case GET_KANBAN:
+    //   const kanban_id = store.getState().kanbans.kanban_id
+    //   axios({
+    //     method: 'get',
+    //     url: `${local}api/kanban/${kanban_id}`,
+    //     withCredentials: true,
+    //   })
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       store.dispatch(getKanbanSuccess(res.data.allKanban));
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       store.dispatch(getKanbanError('Impossible de récupérer le kanban...'));
+    //     });
+    //   break;
     default:
   }
 };

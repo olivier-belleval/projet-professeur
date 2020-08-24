@@ -1,12 +1,10 @@
 import { GET_ARTICLES_ERROR, GET_ARTICLES_SUCCESS, GET_ARTICLES } from '../action/data-actions';
-import data from '../../data/articles';
 import { slugifyTitle } from '../../utils';
 
 export const initialState = {
   loading: false,
   error: '',
   list: [],
-  articles: data,
 };
 
 export default (state = initialState, action = {}) => {

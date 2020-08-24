@@ -12,7 +12,7 @@ const ArticlesView = ({ list, getArticles }) => {
     <div className="articles-view">
       <h1 className="articles-view-title"> Mes articles</h1>
       { list.map((post) => (
-        <article className="article">
+        <article className="article" key={post.article_title}>
           <div className="article-head">
             <h2 className="article-head-title" key={post.article_title}>
               {post.article_title}

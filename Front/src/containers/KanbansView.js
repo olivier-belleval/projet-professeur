@@ -11,9 +11,9 @@ const mapDispatchToProps = (dispatch) => ({
   getKanbans: () => {
     dispatch(getKanbans());
   },
-  getKanban: (id) => {
-    dispatch(getKanban(id))
-  }
+  // getKanban: (id) => {
+  //   dispatch(getKanban(id))
+  // }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(KanbansView);

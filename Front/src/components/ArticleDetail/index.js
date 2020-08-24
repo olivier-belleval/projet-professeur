@@ -3,7 +3,7 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 
 const ArticleDetail = ({ article }) => {
-  console.log(article);
+  console.log(typeof article);
 
 
   return (

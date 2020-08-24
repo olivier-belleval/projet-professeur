@@ -3,24 +3,25 @@ import './style.scss';
 import KanbanList from './KanbanList';
 
 const KanbanDetail = ({
-  kanban_detail,
+  kanban
 }) => {
-  console.log('get stüpid -bülow');
+  const { lists } = kanban;
+  console.log(lists)
   return (
     <div className="kanban-detail">
       <header>
         <div className="kanban-detail-head">
           <h1 className="kanban-detail-head--title">
-            {kanban_detail.kanban_title}
+            {kanban.title}
           </h1>
           <span className="kanban-detail-head--subtitle">
-            {kanban_detail.kanban_description}
+            {kanban.description}
           </span>
         </div>
       </header>
       <main>
         <div className="kanban-detail-grid">
-          {kanban_detail.map((kanban) => <KanbanList key={kanban.id} {...kanban}/>)}
+          {lists.map((list) => <KanbanList key={list.id} list={list}/>)}
 
         </div>
 
