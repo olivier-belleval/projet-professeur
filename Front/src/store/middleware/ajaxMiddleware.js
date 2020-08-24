@@ -71,7 +71,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       const articleId = store.getState().articles.article_id;
       axios({
         method: 'delete',
-        url: `${local}api/article/${articleId}`,
+        url: `${local}api/article/${articleId}/delete`,
         withCredentials: true,
       })
         .then((res) => {
