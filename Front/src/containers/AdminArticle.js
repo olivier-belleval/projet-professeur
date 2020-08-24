@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import AdminArticle from '../components/AdminArticle';
 import { modifyArticle, deleteArticle, joinClass } from '../store/action';
+import { getArticles } from '../store/action/data-actions';
 
 const mapState = (state) => ({
-  list: state.articles.articles,
+  list: state.articles.list,
 });
 
 const mapDispatch = (dispatch) => ({
@@ -20,6 +21,10 @@ const mapDispatch = (dispatch) => ({
   onclickJoin: () => {
     console.log("l'user veut associer de nouvelles classes");
     dispatch(joinClass());
+  },
+
+  getArticles: () => {
+    dispatch(getArticles());
   },
 });
 
