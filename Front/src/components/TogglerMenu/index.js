@@ -15,7 +15,6 @@ const tab = [
 ]
 
 const TogglerMenu = ({ opened, onOpenClick, path, handleLogout }) => {
-  console.log(opened)
 
 return (
   <div className="settings">

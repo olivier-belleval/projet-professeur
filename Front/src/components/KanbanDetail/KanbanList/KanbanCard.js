@@ -1,25 +1,23 @@
 import React from 'react';
 
-const KanbanCard = () => (
-  <div className="kanban-card"> 
+const KanbanCard = ({ card }) => (
+  <div className="kanban-card">
 
     <div className="kanban-card-title">
-      Titre de ma carte
+      {card.name}
     </div>
-    <Tag /> <Tag /> <Tag /> <Tag />
-<div className="kanban-card-content">
-    Continuer le dev
-    On continue de coder les fonctionalités de notre application ! Ajoute tout le HTML, le CSS et le Javascript qui te sembleront nécessaire. Soit inventif/inventive pour les interfaces graphiques !
+    {card.tags && card.tags.map((tag) => <Tag key={tag.id} tag={tag} />)}
+    <div className="kanban-card-content">
+      {card.description}
 
-    
-</div>
+    </div>
   </div>
 );
 
-const Tag = () => (
+const Tag = ({tag}) => (
   <span className="tag">
-    tag
+    {tag.name}
   </span>
-)
+);
 
 export default KanbanCard;

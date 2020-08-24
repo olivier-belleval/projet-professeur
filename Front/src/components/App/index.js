@@ -27,7 +27,7 @@ const App = ({ isLogged, teacher}) => (
           <Route exact path="/articles" component={ArticlesView} />
           <Route exact path="/article/:slug" component={ArticleDetail} />
           <Route exact path="/kanbans" component={KanbansView} />
-          <Route exact path="/kanban:slug" component={KanbanDetail} />
+          <Route exact path="/kanban/:slug" component={KanbanDetail} />
           <Route exact path="/admin/articles" component={AdminArticle} />
           { teacher && <Route exact path="/espace-admin" component={Admin} />}
         </Switch>
