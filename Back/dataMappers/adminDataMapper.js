@@ -67,9 +67,10 @@ module.exports = {
 
         const result = await client.query(preparedQuery);
 
+        // si une classe avec un nom identique existe déjà - retourne undefined
         if(result.rowCount === 0) {
             return;
-        }
+        };
 
         delete result.rows[0].password;
 
@@ -85,6 +86,10 @@ module.exports = {
         };
 
         const result = await client.query(preparedQuery);
+
+        if (!result.rows[0].id) {
+            return;
+        };
 
         return result.rows[0];
 

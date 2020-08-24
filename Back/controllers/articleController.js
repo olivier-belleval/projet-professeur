@@ -24,7 +24,7 @@ module.exports = {
 
         } catch (error) {
 
-            res.status(500).json(error.toString());
+            response.status(500).json(error.toString());
 
         };
     },
@@ -39,7 +39,7 @@ module.exports = {
 
             if (!result) {
 
-                response.status(404).json('Can\'t find article with id: ' + articleId);
+                return response.status(404).json('Can\'t find article with id: ' + articleId);
 
             };
 
@@ -47,7 +47,7 @@ module.exports = {
 
         } catch (error) {
 
-            res.status(500).json(error.toString());
+            response.status(500).json(error.toString());
 
         };
     },
@@ -177,6 +177,6 @@ module.exports = {
             response.status(500).json(error.toString());
 
         };
-    },
+    }
 
 };

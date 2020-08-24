@@ -114,7 +114,7 @@ module.exports = {
 
         if (!result.rows[0].id) {
             return;
-        }
+        };
 
         return result.rows[0];
 
@@ -138,9 +138,7 @@ module.exports = {
 
             return;
 
-        }
-            
-
+        };
     },
 
     // supprimer l'association d'une classe et d'un article
@@ -167,8 +165,7 @@ module.exports = {
             return;
 
         };
-
-    },
+    }
 
 };
 
