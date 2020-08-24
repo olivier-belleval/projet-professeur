@@ -82,4 +82,15 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to get one kanbans by id
+
+CREATE FUNCTION "kanban".get_one_kanbans_by_id(kanbanId INT) RETURNS SETOF "kanban".constructed_kanban AS
+$$
+SELECT * 
+FROM "kanban".get_all_kanbans() 
+WHERE kanban_id = kanbanId;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;
