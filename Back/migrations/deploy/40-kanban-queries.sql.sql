@@ -71,5 +71,15 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to get all kanbans and their dependencies for a class
+
+CREATE FUNCTION "kanban".get_all_kanbans_by_class(classId INT) RETURNS SETOF "kanban".constructed_kanban AS
+$$
+SELECT * 
+FROM "kanban".get_all_kanbans() 
+WHERE class_id = classId;
+$$
+
+LANGUAGE SQL STRICT;
 
 COMMIT;

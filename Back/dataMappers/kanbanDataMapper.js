@@ -26,20 +26,8 @@ module.exports = {
     getAllKanbansByClass: async (classId) => {
         const query = {
             text : `
-                SELECT ka.id,
-                    ka.title,
-                    ka.description,
-                    te.first_name || ' ' || te.last_name AS article_author,
-                    string_agg(distinct cl.username, ', ' ORDER BY cl.username) AS class_username
-                FROM "kanban".kanban ka
-                LEFT JOIN "kanban"."m2m_kanban_class" ka_cl 
-                    ON ka_cl.kanban_id = ka.id
-                LEFT JOIN "omyprof"."class" cl
-                    ON cl.id = ka_cl.class_id
-                LEFT JOIN "omyprof"."teacher" te
-                    ON te.id = ka.teacher_id
-                WHERE cl.id = $1
-                GROUP BY ka.id,cl.username, te.first_name, te.last_name;
+                SELECT * 
+                FROM "kanban".get_all_kanbans_by_class(${classId})
             `,
             values: [classId]
             };
