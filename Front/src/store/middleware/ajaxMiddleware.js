@@ -41,8 +41,8 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data.result);
-          store.dispatch(getKanbansSuccess(res.data.result));
+          console.log(res.data.formatedResult);
+          store.dispatch(getKanbansSuccess(res.data.formatedResult));
         })
         .catch((err) => {
           console.log(err);
