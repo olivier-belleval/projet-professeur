@@ -120,4 +120,14 @@ RETURNING *;
 $$ 
 LANGUAGE SQL;
 
+-- function to delete a kanban
+
+CREATE FUNCTION "kanban".delete_kanban(kanbanId INT) RETURNS SETOF "kanban".kanban AS
+$$
+DELETE FROM "kanban"."kanban"
+WHERE id = kanbanId returning *;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;

@@ -69,7 +69,6 @@ module.exports = {
                 `,
             values: [kanbanObject.title, kanbanObject.slug, kanbanObject.description, kanbanObject.background, kanbanObject.teacher_id]
           };
-          con
 
         const result = await client.query(query);
 
@@ -86,7 +85,7 @@ module.exports = {
         
         const query = {
             text: `
-            select * from "kanban".update_kanban($1,$2,$3,$4,$5)
+            SELECT * FROM "kanban".update_kanban($1,$2,$3,$4,$5)
                 `
             ,
             values: [kanbanId, kanbanObject.title,kanbanObject.slug,kanbanObject.description,kanbanObject.background]
@@ -106,8 +105,9 @@ module.exports = {
     deleteKanban: async (kanbanId) => {
 
         const query = {
-            text : `DELETE FROM "kanban"."kanban"
-                    WHERE id = $1`,
+            text : `
+            SELECT * FROM "kanban".delete_kanban($1);
+            `,
             values: [kanbanId]
           };
 
@@ -117,7 +117,7 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        return;
+        return result;
     },
 
     associateClassToKanban: async (kanbanId, classId) => {

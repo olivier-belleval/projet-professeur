@@ -94,7 +94,8 @@ module.exports = {
             const kanbanId = request.params.id;
             const result = await kanbanDataMapper.deleteKanban(kanbanId);
             response.json({
-                status: result || "deleted"
+                status: "deleted",
+                result
             })
 
         } catch (error) {

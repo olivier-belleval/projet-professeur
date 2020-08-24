@@ -14,4 +14,6 @@ DROP FUNCTION "kanban".create_kanban(TEXT, TEXT, TEXT, TEXT, INT);
 
 DROP FUNCTION "kanban".update_kanban(INT, TEXT, TEXT, TEXT, TEXT);
 
+DROP FUNCTION "kanban".delete_kanban(INT);
+
 COMMIT;
