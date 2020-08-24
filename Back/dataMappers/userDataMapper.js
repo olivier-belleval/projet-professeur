@@ -74,7 +74,7 @@ module.exports = {
 
     getClassesUsernames: async () => {
 
-        const preparedQuery = `SELECT * FROM class_usernames_type()`;
+        const preparedQuery = `SELECT * FROM get_all_classes_usernames()`;
 
         const result = await client.query(preparedQuery);
 
