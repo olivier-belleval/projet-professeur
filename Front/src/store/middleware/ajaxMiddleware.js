@@ -11,6 +11,8 @@ import {
   getKanbanError,
 } from '../action/data-actions';
 
+import{DELETE_ARTICLE, deleteArticleError, deleteArticleSuccess} from '../action/AdminArticle';
+
 const ajaxMiddleware = (store) => (next) => (action) => {
   const local = 'http://localhost:3000/';
   const server = 'http://54.90.32.97:3000/';
@@ -65,6 +67,21 @@ const ajaxMiddleware = (store) => (next) => (action) => {
     //       store.dispatch(getKanbanError('Impossible de récupérer le kanban...'));
     //     });
     //   break;
+    case DELETE_ARTICLE:
+      const articleId = store.getState().articles.article_id;
+      axios({
+        method: 'delete',
+        url: `${local}api/article/${articleId}`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log(res.data);
+          store.dispatch(deleteArticleSuccess(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(deleteArticleError('Impossible de récupérer les kanbans...'));
+        });
     default:
   }
 };

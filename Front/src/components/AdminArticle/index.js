@@ -6,7 +6,7 @@ import {
 import './style.scss';
 
 const AdminArticle = ({
-  list, onclickPen, onclickTrash, onclickJoin,
+  list, onclickPen, deleteArticle, onclickJoin,
 }) => (
   <div className="admin_panel_article">
     <h1 className="admin_panel_article-title"> Espace administrateur - gestion des articles </h1>
@@ -24,7 +24,7 @@ const AdminArticle = ({
             />
             </div>
             <div className="admin_panel_article_content-part-delete"><FaTrash onClick={() => {
-              onclickTrash();
+              deleteArticle(article.article_id);
             }}
             />
             </div>
