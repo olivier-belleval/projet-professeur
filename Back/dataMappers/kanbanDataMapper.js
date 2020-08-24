@@ -86,14 +86,13 @@ module.exports = {
         
         const query = {
             text: `
-                UPDATE "kanban"."kanban" SET
-                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
-                WHERE id = $1
-                RETURNING *
+            select * from "kanban".update_kanban($1,$2,$3,$4,$5)
                 `
             ,
-            values: [kanbanId, ...Object.values(kanbanObject)]
+            values: [kanbanId, kanbanObject.title,kanbanObject.slug,kanbanObject.description,kanbanObject.background]
         };
+
+        console.log('query : ', query)
 
         const result = await client.query(query);
 

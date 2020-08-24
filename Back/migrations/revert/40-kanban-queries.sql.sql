@@ -12,4 +12,6 @@ DROP TYPE "kanban".constructed_kanban;
 
 DROP FUNCTION "kanban".create_kanban(TEXT, TEXT, TEXT, TEXT, INT);
 
+DROP FUNCTION "kanban".update_kanban(INT, TEXT, TEXT, TEXT, TEXT);
+
 COMMIT;

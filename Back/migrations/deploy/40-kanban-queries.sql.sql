@@ -82,7 +82,7 @@ $$
 
 LANGUAGE SQL STRICT;
 
--- function to get one kanbans by id
+-- function to get one kanban by id
 
 CREATE FUNCTION "kanban".get_one_kanbans_by_id(kanbanId INT) RETURNS SETOF "kanban".constructed_kanban AS
 $$
@@ -93,7 +93,7 @@ $$
 
 LANGUAGE SQL STRICT;
 
--- function to get one kanbans by id
+-- function to create a kanban
 
 CREATE FUNCTION "kanban".create_kanban(kanbanTitle TEXT, kanbanSlug TEXT, kanbanDescription TEXT, kanbanBackground TEXT, kanbanTeacherId INT) RETURNS SETOF "kanban".kanban AS
 $$
@@ -103,5 +103,21 @@ VALUES ($1, $2, $3, $4, $5) returning *;
 $$
 
 LANGUAGE SQL STRICT;
+
+-- function to edite a kanban
+
+CREATE OR REPLACE
+FUNCTION "kanban".update_kanban(kanbanId INT, kanbanTitle TEXT, kanbanSlug TEXT, kanbanDescription TEXT, kanbanBackground TEXT)
+RETURNS "kanban".kanban AS
+$$
+UPDATE "kanban".kanban SET
+	"title" = COALESCE(kanbanTitle, "title", 'false'),
+	"slug" = COALESCE(kanbanSlug, "slug", 'false', 'false'),
+	"description" = COALESCE(kanbanDescription, "description", 'false'),
+	"background" = COALESCE(kanbanBackground, "background", 'false')
+WHERE id = kanbanId
+RETURNING *;
+$$ 
+LANGUAGE SQL;
 
 COMMIT;
