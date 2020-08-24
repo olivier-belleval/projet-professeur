@@ -25,7 +25,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log('mes data : ', res.data.result);
+          console.log('mes data : ', res.data);
           store.dispatch(getArticlesSuccess(res.data.result));
         })
         .catch((err) => {

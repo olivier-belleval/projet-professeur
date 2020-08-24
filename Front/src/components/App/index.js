@@ -1,6 +1,6 @@
 // == Import npm
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // == Import
 import './styles.scss';
@@ -13,25 +13,26 @@ import TogglerMenu from '../../containers/TogglerMenu';
 import AdminArticle from '../../containers/AdminArticle';
 import Admin from '../Admin';
 
-
 // == Composant
-const App = () => (
+const App = ({ isLogged, teacher}) => (
+
   <div className="app">
-    <TogglerMenu />
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route exact path="/articles" component={ArticlesView} />
-      <Route exact path="/article/:slug" component={ArticleDetail} />
-      <Route exact path="/kanbans" component={KanbansView} />
-      <Route exact path="/kanban:slug" component={KanbanDetail} />
-      <Route exact path="/admin/articles" component={AdminArticle} />
-      <Route exact path="/espace-admin" component={Admin} />
-    </Switch>
+    <Route exact path="/" component={HomePage} />
 
+    { isLogged ? (
+      <div>
+        <TogglerMenu />
+        <Switch>
 
-
-
-
+          <Route exact path="/articles" component={ArticlesView} />
+          <Route exact path="/article/:slug" component={ArticleDetail} />
+          <Route exact path="/kanbans" component={KanbansView} />
+          <Route exact path="/kanban:slug" component={KanbanDetail} />
+          <Route exact path="/admin/articles" component={AdminArticle} />
+          { teacher && <Route exact path="/espace-admin" component={Admin} />}
+        </Switch>
+      </div>
+    ) : <Redirect to="/" />}
 
   </div>
 );

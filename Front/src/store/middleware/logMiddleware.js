@@ -58,12 +58,13 @@ const logMiddleware = (store) => (next) => (action) => {
     case LOGOUT:
       console.log('case logout');
       axios({
-        method: 'post',
-        url: `${local}logout`,
+        method: 'get',
+        url: `${local}login/logout`,
         withCredentials: true,
+
       })
         .then((res) => {
-          console.log('logout request');
+          console.log('logout request', res);
           store.dispatch(logoutSuccess());
         })
         .catch((err) => {

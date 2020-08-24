@@ -4,6 +4,7 @@ import HomePage from '../components/HomePage';
 const mapStateToProps = (state) => ({
   isClicked: state.user.isClicked,
   isLogged: state.user.isLogged,
+  teacher: state.user.teacher,
 });
 
 const mapDispatchToProps = (dispatch) => ({

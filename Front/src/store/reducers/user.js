@@ -61,7 +61,6 @@ export default (state = initialState, action = {}) => {
         ...state,
         isLogged: true,
         loading: false,
-        username: '',
         password: '',
         loginErrorMessage: '',
       };
