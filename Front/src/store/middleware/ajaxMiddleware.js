@@ -12,7 +12,8 @@ import {
 } from '../action/data-actions';
 
 const ajaxMiddleware = (store) => (next) => (action) => {
-  const url = 'http://localhost:3000/';
+  const local = 'http://localhost:3000/';
+  const server = 'http://54.90.32.97:3000/';
 
   next(action);
 
@@ -20,7 +21,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
     case GET_ARTICLES:
       axios({
         method: 'get',
-        url: `${url}api/articles`,
+        url: `${local}api/articles`,
         withCredentials: true,
       })
         .then((res) => {
@@ -36,7 +37,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
     case GET_KANBANS:
       axios({
         method: 'get',
-        url: `${url}api/kanbans`,
+        url: `${local}api/kanbans`,
         withCredentials: true,
       })
         .then((res) => {
@@ -52,7 +53,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       const kanban_id = store.getState().kanbans.kanban_id
       axios({
         method: 'get',
-        url: `${url}api/kanban/${kanban_id}`,
+        url: `${local}api/kanban/${kanban_id}`,
         withCredentials: true,
       })
         .then((res) => {

@@ -5,7 +5,8 @@ import {
 import { LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT } from '../action/user';
 
 const logMiddleware = (store) => (next) => (action) => {
-  console.log('middleware');
+  const local = 'http://localhost:3000/';
+  const server = 'http://54.90.32.97:3000/';
   
   const user = {
         username: store.getState().user.username,
@@ -21,7 +22,7 @@ const logMiddleware = (store) => (next) => (action) => {
       console.log('middleware request axios', user);
       axios({
         method: 'post',
-        url: 'http://localhost:3000/login/admin',
+        url: `${server}login/admin`,
         data: user,
         withCredentials: true,
       })
@@ -39,7 +40,7 @@ const logMiddleware = (store) => (next) => (action) => {
       case LOGIN_CLASSES_SUBMIT:
       axios({
         method: 'post',
-        url: 'http://localhost:3000/login/',
+        url: `${server}login/`,
         data: user,
         withCredentials: true,
       })
@@ -58,7 +59,7 @@ const logMiddleware = (store) => (next) => (action) => {
       console.log('case logout');
       axios({
         method: 'post',
-        url: 'http://localhost:3000/logout',
+        url: `${server}logout`,
         withCredentials: true,
       })
         .then((res) => {
@@ -74,7 +75,7 @@ const logMiddleware = (store) => (next) => (action) => {
     case GET_CLASSES:
       axios({
         method: 'get',
-        url: 'http://localhost:3000/login',
+        url: `${server}login`,
         withCredentials: true,
       })
         .then((res) => {
@@ -86,7 +87,7 @@ const logMiddleware = (store) => (next) => (action) => {
           console.log(err);
           store.dispatch(getClassesError('Impossible de récupérer les classes...'));
         })
-       
+
       break;
 
     default:
