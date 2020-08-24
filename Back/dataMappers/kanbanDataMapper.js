@@ -7,42 +7,8 @@ module.exports = {
         
         const query = {
         text : `
-            SELECT 
-                ka.id AS kanban_id, 
-                ka.title AS kanban_title, 
-                ka.slug AS kanban_slug, 
-                ka.description AS kanban_description, 
-                ka.background AS kanban_background,
-                ka.teacher_id AS kanban_teacher_id,
-                te.id AS teacher_id,
-                te.username AS teacher_username,
-                te.first_name AS teacher_first_name,
-                te.last_name AS teacher_last_name,
-                cl.id AS class_id,
-                cl.username AS class_username,
-                cl.description AS class_description,
-                li.id AS list_id, 
-                li.name AS list_name, 
-                li.order AS list_order, 
-                li.kanban_id AS list_kanban_id,
-                ca.id AS card_id, 
-                ca.description AS card_description, 
-                ca.order AS card_order, 
-                ca.color AS card_color,
-                ca.list_id AS card_list_id,
-                ta.id AS tag_id, 
-                ta.name AS tag_name, 
-                ta.color AS tag_color, 
-                ta_ca.tag_id AS m2m_tag_id,
-                ta_ca.card_id AS m2m_card_id
-            FROM "kanban"."kanban" ka 
-            LEFT JOIN "kanban"."list" li ON li.kanban_id = ka.id 
-            LEFT JOIN "omyprof"."teacher" te ON ka.teacher_id = te.id 
-            LEFT JOIN "kanban"."m2m_kanban_class" ka_cl ON ka_cl.kanban_id = ka.id 
-            LEFT JOIN "omyprof"."class" cl ON ka_cl.class_id = cl.id 
-            LEFT JOIN "kanban"."card" ca ON ca.list_id = li.id 
-            LEFT JOIN "kanban"."m2m_tag_card" ta_ca ON ta_ca.card_id = ca.id 
-            LEFT JOIN "kanban"."tag" ta ON ta.id = ta_ca.tag_id;
+            SELECT * 
+            FROM "kanban".get_all_kanbans();
             `
         };
         
