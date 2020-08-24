@@ -33,10 +33,12 @@ module.exports = {
     getOneKanbansById:async (request, response, next) => {
         try {
             const kanbanId = request.params.id
-            const allKanban = await kanbanDataMapper.getOneKanbansById(kanbanId);
+            const result = await kanbanDataMapper.getOneKanbansById(kanbanId);
+
+            const formatedResult = kanbansFormater(result);
 
             response.json({
-                allKanban
+                formatedResult
             });
         } catch (error) {
             console.trace(error);
