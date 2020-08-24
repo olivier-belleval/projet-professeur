@@ -92,8 +92,12 @@ module.exports = {
         const query = {
             text : `
                 SELECT 
-                    ka.id AS kanban_id,
+                    ka.id AS kanban_id, 
+                    ka.title AS kanban_title, 
+                    ka.slug AS kanban_slug, 
+                    ka.description AS kanban_description, 
                     ka.background AS kanban_background,
+                    ka.teacher_id AS kanban_teacher_id,
                     li.id AS list_id,
                     li.name AS list_name,
                     li.order AS list_order,
