@@ -6,7 +6,7 @@ DROP FUNCTION "kanban".get_all_kanbans();
 
 DROP FUNCTION "kanban".get_all_kanbans_by_class(INT);
 
-DROP FUNCTION "kanban".get_one_kanbans_by_id(INT);
+DROP FUNCTION "kanban".get_one_kanban_by_id(INT);
 
 DROP TYPE "kanban".constructed_kanban;
 
@@ -20,7 +20,7 @@ DROP FUNCTION "kanban".associate_class_to_kanban(INT, INT);
 
 DROP FUNCTION "kanban".remove_association_class_to_kanban(INT, INT);
 
-DROP FUNCTION "kanban".get_one_list_by_id(INT, INT);
+DROP FUNCTION "kanban".get_one_list_by_id(INT);
 
 DROP FUNCTION "kanban".create_list(TEXT, INT, INT);
 

@@ -1,73 +1,123 @@
 const kanbanDataMapper = require('../dataMappers/kanbanDataMapper');
 const {kanbansFormater} = require('../services/factory')
 const slugify = require('slugify');
+const utility = require('../module/utility');
 
 module.exports = {
 
-    getAllKanbans:async (request, response, next) => {
+    getAllKanbans:async (request, response) => {
+
         try {
 
-            let result;
+            let pre_result;
 
             // si l'utilisateur est professeur (accès à tous les articles)
             if (request.session.user.state === 'teacher') {
-                result = await kanbanDataMapper.getAllKanbans();
+                pre_result = await kanbanDataMapper.getAllKanbans();
             };
 
             // si l'utilisateur est un élève (accès aux articles concernant la classe)
             if (request.session.user.state === 'class') {
                 const classId = request.session.user.id;
-                result = await kanbanDataMapper.getAllKanbansByClass(classId);
+                pre_result = await kanbanDataMapper.getAllKanbansByClass(classId);
             };
-            const formatedResult = kanbansFormater(result);
-            return response.json({ 
-                formatedResult
-            });
+
+            const result = kanbansFormater(pre_result);
+
+            return response.status(200)
+                .json({ 
+                    data: result 
+                });
 
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error.toString());
         }
     },
 
-    getOneKanbansById:async (request, response, next) => {
+    getOneKanbansById:async (request, response) => {
+
         try {
-            const kanbanId = request.params.id
-            const result = await kanbanDataMapper.getOneKanbansById(kanbanId);
 
-            const formatedResult = kanbansFormater(result);
+            const kanbanId = Number(request.params.id);
 
-            response.json({
-                formatedResult
-            });
+            const pre_result = await kanbanDataMapper.getOneKanbansById(kanbanId);
+
+            if(!pre_result) {
+                return response.status(400)
+                    .json('Can\'t find kanban with id: ' + kanbanId);
+            }
+
+            const result = kanbansFormater(pre_result);
+
+            response.status(200)
+                .json({
+                    data: result
+                });
+
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error.toString());
         }
     },
 
     createKanban:async (request, response) => {
+
         try {
+
             // we create an object and store the request.body values
             const newKanbanObject = {};
+
             for (const key in request.body) {
                 newKanbanObject[key] = request.body[key];
             };
+
+            const mandatory = [];
+
+            if (!newKanbanObject.title) {
+                mandatory.push('Le titre est obligatoire');
+            };
+
+            if (!newKanbanObject.description) {
+                mandatory.push('La description est vide!');
+            };
+
+            // on renvoie les erreurs si il y en a
+            if (mandatory.length > 0) {
+
+                return response.status(400)
+                    .json(mandatory);
+            };
+            
             newKanbanObject.slug = slugify(request.body.title, '-');
+            newKanbanObject.teacher_id = request.session.user.id;
 
-            const newKanban = await kanbanDataMapper.createKanban(newKanbanObject);
+            const result = await kanbanDataMapper.createKanban(newKanbanObject);
 
-            response.json({
-                newKanban
-            });
+
+            if(!result) {
+                response.status(400)
+                    .json({message: "erreur a la creation"})
+            }
+
+            response.status(200)
+                .json({
+                    data: result
+                });
+
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error.toString());
         }
     },
 
     editKanban:async (request, response) => {
+
         try {
+
             // we create an object and store the request.body values
             const editKanbanObject = {};
             for (const key in request.body) {
@@ -75,107 +125,197 @@ module.exports = {
                     editKanbanObject[key] = request.body[key];
                 }
             };
+
+            // fin d'éxécution si aucune modification
+            if (utility.isEmpty(editKanbanObject)) {
+
+                return response.status(400).json('Fields are all empty.');
+
+            };
+
             if (request.body.title) {
                 editKanbanObject.slug = slugify(request.body.title, '-');
             }
-            
 
-            const editedKanban = await kanbanDataMapper.editKanban(editKanbanObject, request.params.id);
+            editKanbanObject.kanbanId = request.params.id;
 
-            response.json({
-                editedKanban
-            });
+            const result = await kanbanDataMapper.editKanban(editKanbanObject);
+
+            if (!result) {
+                return response.status(400)
+                    .json('Failed to edit kanban with id ' + editKanbanObject.kanbanId);
+            };
+
+            response.status(200)
+                .json({
+                    message: 'kanban has been successfully edited',
+                    data: result
+                });
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error);
         }
     },
 
     deleteKanban: async (request, response) => {
+
         try {
+
             // get the kanban id from params
             const kanbanId = request.params.id;
+
             const result = await kanbanDataMapper.deleteKanban(kanbanId);
-            response.json({
-                status: "deleted",
-                result
-            })
+
+            if (!result) {
+                return response.status(400)
+                    .json('Failed to delete kanban with id ' + kanbanId);
+            };
+
+            response.status(200)
+                .json({
+                    message: 'kanban has been successfully removed',
+                    data: result
+                });
 
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error); 
+
+            response.status(500)
+                .json(error.toString());
         };
     },
 
     associateClassToKanban: async (request, response) => {
 
-        const result = await kanbanDataMapper.associateClassToKanban(request.params.kanbanId, request.body.classId);
+        try {
 
-        // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un kanban inexistant
-        if (!result) {
-            return response.json({ error: 'Impossible d\'associer cette classe à cet article' });
+            const result = await kanbanDataMapper.associateClassToKanban(request.params.kanbanId, request.body.classId);
+
+            // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un kanban inexistant
+            if (!result) {
+
+                return response.status(400)
+                    .json('Association failed');
+            };
+
+            response.status(200)
+                .json({
+                    message: 'Association has been successfully added',
+                    data: result
+                });
+
+        } catch (error) {
+
+            response.status(500)
+                .json(error.toString());
         }
-
-        return response.json({ result });
-
     },
 
     removeAssociationClassToKanban: async (request, response, next) => {
 
-        const kanbanId = request.params.id;
+        try {
 
-        const result = await kanbanDataMapper.removeAssociationClassToKanban(kanbanId, request.body.classId);
+            const kanbanId = request.params.id;
 
-        // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un article inexistant
-        if (!result) {
-            return response.json({ error: 'Impossible de supprimer cette association' });
+            const result = await kanbanDataMapper.removeAssociationClassToKanban(kanbanId, request.body.classId);
+
+            // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un article inexistant
+            if (!result) {
+
+                return response.status(400)
+                    .json('Failed to remove association');
+            }
+
+            response.status(200)
+                .json({ 
+                    message: 'Association has been successfully removed', 
+                    data: result
+                });
+
+        } catch (error) {
+            
+            response.status(500)
+                .json(error.toString());
+
         }
-
-        return response.json({ result });
-
     },
 
     getOneListById: async (request, response, next) => {
+
         try {
-            const kanbanId = request.params.kanbanId
+
             const listId = request.params.listId
-            const result = await kanbanDataMapper.getOneListById(kanbanId, listId);
 
-            //const result = kanbansFormater(pre_result)
+            const result = await kanbanDataMapper.getOneListById(listId);
 
-            response.json({
-                result
-            });
+            if(!result) {
+
+                return response.status(400)
+                    .json('Can\'t find list with id: ' + listId);
+            }
+
+            response.status(200)
+                .json({
+                    data: result
+                });
 
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error.toString());
         }
     },
 
     createList:async (request, response) => {
+
         try {
+
             // we create an object and store the request.body values
             const newListObject = {};
             newListObject['kanban_id'] = request.params.id;
 
             for (const key in request.body) {
                 newListObject[key] = request.body[key];
-            };         
+            };
 
-            const result = await kanbanDataMapper.createList(resultObject);
+            const mandatory = [];
 
-            response.json({
-                result
-            });
+            if (!newListObject.name) {
+                mandatory.push('Le titre est obligatoire');
+            };
+
+            if (!newListObject.order) {
+                mandatory.push('La position est vide!');
+            };
+
+            // on renvoie les erreurs si il y en a
+            if (mandatory.length > 0) {
+                return response.status(400).json(mandatory);
+            };
+
+            const result = await kanbanDataMapper.createList(newListObject);
+
+            if(!result) {
+                response.status(400)
+                    .json({message: "erreur a la creation"})
+            }
+
+            response.status(200)
+                .json({
+                    data: result
+                });
+                
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+            
+            response.status(500)
+                .json(error.toString());
         }
     },
 
     editList:async (request, response) => {
+
         try {
+
             // we create an object and store the request.body values
             const editListObject = {};
             for (const key in request.body) {
@@ -183,51 +323,86 @@ module.exports = {
                     editListObject[key] = request.body[key];
                 }
             };
+
+            // fin d'éxécution si aucune modification
+            if (utility.isEmpty(editListObject)) {
+
+                return response.status(400).json('Fields are all empty.');
+
+            };
+
             editListObject['list_id'] = request.params.listId;
             editListObject['kanban_id'] = request.params.kanbanId;
 
+            const result = await kanbanDataMapper.editList(editListObject);
 
+            if (!result) {
 
-            const result = await kanbanDataMapper.editList(editListObject, request.params.listId);
+                return response.status(400)
+                    .json('Failed to edit kanban with id ' + editListObject.list_id);
+            };
 
-            response.json({
-                result
-            });
+            response.status(200)
+                .json({
+                    message: 'list has been successfully edited',
+                    data: result
+                });
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error.toString());
         }
     },
 
     deletelist: async (request, response) => {
         try {
-            // get the kanban id from params
-            const kanbanId = request.params.kanbanId;
+            // get the list id from params
             const listId = request.params.listId;
-            const result = await kanbanDataMapper.deleteList(listId, kanbanId);
-            response.json({
-                status: result || "deleted" 
-            })
+
+            const result = await kanbanDataMapper.deleteList(listId);
+
+            if (!result) {
+                return response.status(400)
+                    .json('Failed to delete list with id ' + listId);
+            };
+
+            response.status(200)
+                .json({
+                    message: 'list has been successfully removed',
+                    data: result
+                });
 
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error); 
+            
+            response.status(500)
+                .json(error.toString());
         };
     },
 
     getOneCardById: async (request, response, next) => {
+
         try {
+
             const cardId = request.params.cardId
             const listId = request.params.listId
+
             const result = await kanbanDataMapper.getOneCardById(cardId, listId);
 
-            response.json({
-                result
-            });
+            if(!result) {
+                return response.status(400)
+                    .json('Can\'t find card with id: ' + cardId);
+            }
+
+            response.status(200)
+                .json({
+                    data: result
+                });
 
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+            
+            response.status(500)
+
+                .json(error.toString());
         }
     },
 
@@ -235,20 +410,49 @@ module.exports = {
         try {
             // we create an object and store the request.body values
             const newCardObject = {};
-            newCardObject['list_id'] = request.params.id;
 
             for (const key in request.body) {
                 newCardObject[key] = request.body[key];
-            };         
+            };
+            
+            const mandatory = [];
 
-            const newCard = await kanbanDataMapper.createCard(newCardObject);
+            if (!newCardObject.description) {
+                mandatory.push('La description est obligatoire');
+            };
 
-            response.json({
-                newCard
-            });
+            if (!newCardObject.order) {
+                mandatory.push('La position est vide!');
+            };
+
+            // on renvoie les erreurs si il y en a
+            if (mandatory.length > 0) {
+
+                return response.status(400)
+                    .json(mandatory);
+            };
+
+            newCardObject['list_id'] = request.params.id;
+
+            const result = await kanbanDataMapper.createCard(newCardObject);
+
+            console.log('result : ', result)
+
+            if(!result) {
+                
+                response.status(400)
+                    .json({message: "erreur a la creation"})
+            }
+
+            response.status(200)
+                .json({
+                    data: result
+                });
+
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+            
+            response.status(500)
+                .json(error.toString());
         }
     },
 
@@ -262,123 +466,221 @@ module.exports = {
                     editCardObject[key] = request.body[key];
                 }
             };
+
+            if (utility.isEmpty(editCardObject)) {
+
+                return response.status(400).json('Fields are all empty.');
+
+            };
+
             editCardObject['card_id'] = request.params.cardId;
             editCardObject['list_id'] = request.params.listId;
 
-            const editedCard = await kanbanDataMapper.editCard(editCardObject);
+            const result = await kanbanDataMapper.editCard(editCardObject);
 
-            response.json({
-                editedCard
+            if (!result) {
+                return response.status(400)
+                    .json('Failed to edit kanban with id ' + editCardObject.card_id);
+            };
+
+            response.status(200)
+            .json({
+                message: 'kanban has been successfully edited',
+                data: result
             });
+
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+            
+            response.status(500)
+                .json(error);
         }
     },
 
     deleteCard: async (request, response) => {
+        
         try {
+
             // get the card id from params
             const listId = request.params.listId;
             const cardId = request.params.cardId;
+
             const result = await kanbanDataMapper.deleteCard(cardId, listId);
-            response.json({
-                status: result || "deleted" 
-            })
+
+            if (!result) {
+
+                return response.status(400)
+                    .json('Failed to delete card with id ' + cardId);
+            };
+
+            response.status(200)
+                .json({
+                    message: 'card has been successfully removed',
+                    data: result
+                });
 
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error); 
+            
+            response.status(500)
+                .json(error.toString());
         };
     },
 
     getAllTags:async (request, response, next) => {
+
         try {
+
             const result = await kanbanDataMapper.getAllTags();
 
-            response.json({
-                result
-            });
+            return response.status(200)
+                .json({ 
+                    data: result 
+                });
+
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error.toString());
         }
     },
 
     getOneTagById: async (request, response, next) => {
+
         try {
-            const tagId = request.params.id
+
+            const tagId = request.params.id;
+
             const result = await kanbanDataMapper.getOneTagById(tagId);
 
-            response.json({
-                result
-            });
+            if(!result) {
+                return response.status(400)
+                    .json('Can\'t find tag with id: ' + tagId);
+            }
+
+            response.status(200)
+                .json({
+                    data: result
+                });
 
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error.toString());
         }
     },
 
     createTag:async (request, response) => {
+
         try {
+
             // we create an object and store the request.body values
             const newTagObject = {};
 
             for (const key in request.body) {
                 newTagObject[key] = request.body[key];
-            };         
+            };
 
-            const newTag = await kanbanDataMapper.createTag(newTagObject);
+            const mandatory = [];
 
-            response.json({
-                newTag
-            });
+            if (!newTagObject.name) {
+                mandatory.push('Le nom est obligatoire');
+            };
+
+            // on renvoie les erreurs si il y en a
+            if (mandatory.length > 0) {
+                return response.status(400).json(mandatory);
+            };
+
+            const result = await kanbanDataMapper.createTag(newTagObject);
+
+            if(!result) {
+                response.status(400)
+                    .json({message: "erreur a la creation"})
+            }
+
+            response.status(200)
+                .json({
+                    data: result
+                });
+
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error.toString());
         }
     },
 
     editTag:async (request, response) => {
+
         try {
+
             // we create an object and store the request.body values
             const editTagObject = {};
-            editTagObject['tagId'] = request.params.id;
+            
             for (const key in request.body) {
                 if (request.body[key] !== '') {
                     editTagObject[key] = request.body[key];
                 }
             };
-            console.log('edit tag : ', editTagObject)
-            const editedTag = await kanbanDataMapper.editTag(editTagObject);
 
-            response.json({
-                editedTag
-            });
+            if (utility.isEmpty(editTagObject)) {
+                console.log('utility')
+                return response.status(400).json('Fields are all empty.');
+
+            };
+
+            editTagObject['tagId'] = request.params.id;
+
+            const result = await kanbanDataMapper.editTag(editTagObject);
+
+            if (!result) {
+                return response.status(400)
+                    .json('Failed to edit tag with id ' + editTagObject.tagId);
+            }
+
+            response.status(200)
+                .json({
+                    message: 'tag has been successfully edited',
+                    data: result
+                });
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error);
         }
     },
 
     deleteTag: async (request, response) => {
+
         try {
+
             // get the tag id from params
             const tagId = request.params.id;
+
             const result = await kanbanDataMapper.deleteTag(tagId);
-            response.json({
-                status: result || "deleted" 
-            })
+
+            if (!result) {
+
+                return response.status(400)
+                    .json('Failed to delete tag with id ' + tagId);
+            };
+
+            response.status(200)
+                .json({
+                    message: 'tag has been successfully removed',
+                    data: result
+                });
 
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error); 
+
+            response.status(500)
+                .json(error.toString());
         };
     },
 
     createAssociationTagToCard:async (request, response) => {
+
         try {
+
             // we create an object and store the request.body values
             const newTagCardObject = {};
             // get the kanban id from params
@@ -391,12 +693,22 @@ module.exports = {
 
             const result = await kanbanDataMapper.createAssociationTagToCard(newTagCardObject);
 
-            response.json({
-                result
-            });
+            if (!result) {
+
+                return response.status(400)
+                    .json('Association failed');
+            };
+
+            response.status(200)
+                .json({
+                    message: 'Association has been successfully added',
+                    data: result
+                });
+
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error);
+
+            response.status(500)
+                .json(error.toString());
         }
     },
 
@@ -407,15 +719,25 @@ module.exports = {
             // get the card and tag id from params
             newTagCardObject['tagId'] = request.params.tagId;
             newTagCardObject['cardId'] = request.params.cardId;
+
             const result = await kanbanDataMapper.deleteAssociationTagToCard(newTagCardObject);
-            response.json({
-                status: "deleted",
-                result
-            })
+            
+            if (!result) {
+
+                return response.status(400)
+                    .json('Failed to delete card with id ' + newTagCardObject.tagId);
+            };
+
+            response.status(200)
+                .json({
+                    message: 'Association has been successfully removed',
+                    data: result
+                });
 
         } catch (error) {
-            console.trace(error);
-            response.status(500).json(error); 
+            
+            response.status(500)
+                .json(error.toString());
         };
     },
 

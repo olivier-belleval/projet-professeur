@@ -40,7 +40,7 @@ module.exports = {
 
             if (!result) {
 
-                return response.status(404).json('Can\'t find article with id: ' + articleId);
+                return response.status(400).json('Can\'t find article with id: ' + articleId);
 
             };
 
@@ -56,8 +56,6 @@ module.exports = {
     createOneArticle: async function (request, response, next) {
 
         try {
-
-            const articleId = request.params.id;
 
             const article = {
 
@@ -88,7 +86,7 @@ module.exports = {
 
             const result = await articleDataMapper.createOneArticle(article);
 
-            response.status(200).json({ message: 'Article has been successfully created', result });
+            response.status(200).json({ message: 'Article has been successfully created', data: result });
 
         } catch (error) {
 
