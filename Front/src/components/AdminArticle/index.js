@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
   FaPencilAlt, FaTrash, FaPlusCircle, FaInfinity,
@@ -7,8 +7,12 @@ import {
 import './style.scss';
 
 const AdminArticle = ({
-  list, onclickPen, deleteArticle, onclickJoin,
-}) => (
+  list, onclickPen, deleteArticle, onclickJoin, getArticles
+}) => {
+  useEffect(() => {
+    getArticles();
+  }, []);
+  return(
   <div className="admin_panel_article">
     <h1 className="admin_panel_article-title"> Espace administrateur - gestion des articles </h1>
     <div className="admin_panel_article-content">
@@ -46,6 +50,6 @@ const AdminArticle = ({
       </div>
     </div>
   </div>
-);
+)};
 
 export default AdminArticle;

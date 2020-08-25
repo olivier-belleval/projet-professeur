@@ -14,6 +14,7 @@ export default (state = initialState, action = {}) => {
     case GET_ARTICLES:
       return {
         ...state,
+        list:[],
         loading: true,
       };
     case GET_ARTICLES_SUCCESS:

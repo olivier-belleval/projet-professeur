@@ -30,7 +30,7 @@ const TextEditorArticle = ({changeField, title, content, handleArticleSubmit}) =
     onChange={handleInputChange} 
     className="input-content"
     />
-    <button type="submit" className="text-editor-article-button">Let's go baby ! </button>
+    <button type="submit" className="text-editor-article-button" redirect="/admin/articles">Let's go baby ! </button>
   </form>
   </div>
 )};
