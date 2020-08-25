@@ -221,5 +221,17 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to create a card
+
+CREATE FUNCTION "kanban".create_card(cardDescription TEXT, cardOrder INT, cardColor TEXT, listId INT) 
+RETURNS SETOF "kanban".card AS
+$$
+INSERT INTO "kanban"."card" 
+    ("description", "order","color", "list_id") 
+VALUES ($1, $2, $3, $4) 
+RETURNING *;
+$$
+
+LANGUAGE SQL STRICT;
 
 COMMIT;

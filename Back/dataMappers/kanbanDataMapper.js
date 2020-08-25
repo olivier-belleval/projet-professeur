@@ -263,9 +263,9 @@ module.exports = {
     createCard: async (cardObject) => {
         
         const query = {
-            text : `INSERT INTO "kanban"."card" 
-                    ("description", "order", "color", "list_id") 
-                    VALUES ($1, $2, $3, $4) returning *`,
+            text : `
+                SELECT *
+                FROM "kanban".create_card($1, $2, $3, $4)`,
             values: [cardObject.description, cardObject.order, cardObject.color, cardObject.list_id]
           };
 
@@ -275,7 +275,6 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log(result.rows[0]);
         return result.rows[0];
     },
 
