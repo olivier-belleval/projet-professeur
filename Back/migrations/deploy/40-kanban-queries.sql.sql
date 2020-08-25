@@ -184,4 +184,29 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to edite a list
+
+CREATE FUNCTION "kanban".update_list(listId INT, listName TEXT, listOrder INT)
+RETURNS "kanban".list AS
+$$
+UPDATE "kanban".list SET
+	"name" = COALESCE(listName, "name"),
+	"order" = COALESCE(listOrder, "order")
+WHERE id = listId
+RETURNING *;
+$$ 
+LANGUAGE SQL;
+
+-- function to delete a list
+
+CREATE FUNCTION "kanban".delete_list(listId INT) 
+RETURNS SETOF "kanban".list AS
+$$
+DELETE FROM "kanban"."list"
+WHERE id = listId 
+RETURNING *;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;

@@ -161,8 +161,7 @@ module.exports = {
 
             for (const key in request.body) {
                 newListObject[key] = request.body[key];
-            };
-            console.log('newListObject : ', newListObject)            
+            };         
 
             const newList = await kanbanDataMapper.createList(newListObject);
 

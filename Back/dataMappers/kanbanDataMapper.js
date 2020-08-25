@@ -185,9 +185,10 @@ module.exports = {
     createList: async (listObject) => {
         
         const query = {
-            text : `INSERT INTO "kanban"."list" 
-                    ("name", "order", "kanban_id") 
-                    VALUES ($1, $2, $3) returning *`,
+            text : `
+                SELECT *
+                FROM "kanban".create_list($1, $2, $3)
+            `,
             values: [listObject.name, listObject.order, listObject.kanban_id]
           };
 
@@ -197,7 +198,6 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log(result.rows[0]);
         return result.rows[0];
     },
 
@@ -207,13 +207,11 @@ module.exports = {
         
         const query = {
             text: `
-                UPDATE "kanban"."list" SET
-                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
-                WHERE id = $1
-                RETURNING *
+                SELECT *
+                FROM "kanban".update_list($1, $2, $3)
                 `
             ,
-            values: [listId, ...Object.values(listObject)]
+            values: [listObject.kanban_id, listObject.name, listObject.order]
         };
 
         const result = await client.query(query);
