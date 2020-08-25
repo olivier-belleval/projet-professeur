@@ -13,6 +13,16 @@ module.exports = {
 
     },
 
+    getAllArticlesWithoutClasses: async () => {
+
+        const preparedQuery = `SELECT * FROM get_articles_without_associated_class()`;
+
+        const result = await client.query(preparedQuery);
+
+        return result.rows;
+
+    },
+
     getOneClass: async (classId) => {
 
         const preparedQuery = {

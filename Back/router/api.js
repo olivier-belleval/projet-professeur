@@ -48,6 +48,7 @@ router.delete('/card/:cardId(\\d+)/tag/:tagId(\\d+)/remove', teacherMW.isATeache
 // routes pour la partie admin
 
 router.get('/admin/classes', teacherMW.isATeacher, adminController.getAllClasses);
+router.get('/admin/articles', teacherMW.isATeacher, adminController.getAllArticlesWithoutClasses);
 router.get('/admin/class/:id(\\d+)', teacherMW.isATeacher, adminController.getOneClass);
 router.post('/admin/class/create', teacherMW.isATeacher, adminController.createClass);
 router.put('/admin/class/:id(\\d+)/edit', teacherMW.isATeacher, adminController.editClass);

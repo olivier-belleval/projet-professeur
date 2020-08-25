@@ -18,6 +18,22 @@ module.exports = {
         };
     },
 
+    getAllArticlesWithoutClasses: async (request, response) => {
+
+        try {
+
+            const result = await adminDataMapper.getAllArticlesWithoutClasses();
+
+            response.status(200).json({ data: result });
+
+        } catch (error) {
+
+            response.status(500).json(error.toString());
+
+        };
+
+    },
+
     getOneClass: async (request, response) => {
 
         try {
