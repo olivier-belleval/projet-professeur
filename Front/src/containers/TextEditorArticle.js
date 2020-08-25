@@ -1,17 +1,21 @@
 import { connect } from 'react-redux';
 import TextEditorArticle from '../components/TextEditorArticle';
 
-import { updateEditorState } from '../store/action/editor-actions';
+import { updateEditorState, createArticleSubmit} from '../store/action/editor-actions';
 
 const mapStateToProps = (state) => ({
   title: state.editor.title,
   content: state.editor.content,
-  excerpt: state.editor.excerpt,
+  loading: state.editor.loading,
+  message: state.editor.message,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeField: (changedData) => {
     dispatch(updateEditorState(changedData));
+  },
+  handleArticleSubmit: () => {
+    dispatch(createArticleSubmit());
   },
 });
 

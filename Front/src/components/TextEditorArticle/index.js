@@ -2,16 +2,20 @@ import React, {useEffect} from 'react';
 import './style.scss';
 import 'draft-js/dist/Draft.css';
 
-const TextEditorArticle = ({changeField, title, content, excerpt}) => {
+const TextEditorArticle = ({changeField, title, content, handleArticleSubmit}) => {
   console.log('text edit');
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
     changeField({ [name]: value });
   };
- 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    handleArticleSubmit();
+  };
+
   return(
   <div className="text-editor-article">
-    <form>
+    <form onSubmit={handleSubmit}>
     <input 
     name="title" 
     value={title}
@@ -25,13 +29,6 @@ const TextEditorArticle = ({changeField, title, content, excerpt}) => {
     placeholder='Contenu de mon  article...' 
     onChange={handleInputChange} 
     className="input-content"
-    />
-    <textarea 
-    name="excerpt" 
-    value={excerpt}
-    placeholder='Résumé de mon  article...' 
-    onChange={handleInputChange} 
-    className="input-excerpt"
     />
     <button type="submit" className="text-editor-article-button">Let's go baby ! </button>
   </form>

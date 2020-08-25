@@ -19,7 +19,7 @@ input,textarea{
 }
 .input{
 
-  &-title, &-content, &-excerpt{
+  &-title, &-content{
     width: 90%;
     border:lightgray 1px solid;
     &:focus{
@@ -27,13 +27,8 @@ input,textarea{
       outline:none
     }
   }
-  &-title{
-    
-  }
   &-content{
-    min-height: 15em;
+    min-height: 25em;
   }
-  &-excerpt{
-    min-height: 5em;
-  }
+
 }

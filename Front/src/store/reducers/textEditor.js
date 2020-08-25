@@ -1,10 +1,12 @@
-import { UPDATE_EDITOR_STATE } from '../action/editor-actions';
+import {
+  UPDATE_EDITOR_STATE, CREATE_ARTICLE_SUMIT, CREATE_ARTICLE_ERROR, CREATE_ARTICLE_SUCCESS,
+} from '../action/editor-actions';
 
 const initialState = {
   title: '',
-  content:'',
-  excerpt:'',
-
+  content: '',
+  loading:false,
+  message:'',
 };
 
 export default (state = initialState, action = {}) => {
@@ -14,6 +16,27 @@ export default (state = initialState, action = {}) => {
         ...state,
         ...action.payload,
       };
+    case CREATE_ARTICLE_SUMIT:
+      return {
+        ...state,
+        loading: true,
+        message: '',
+      };
+    case CREATE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        title: '',
+        content: '',
+        message: 'L\'article a été ajouté !',
+      };
+    case CREATE_ARTICLE_ERROR:
+      return {
+        ...state,
+        loading: false,
+        message: 'Il y a eu une erreur à l\'envoi de votre article',
+      };
+
     default:
       return state;
   }
