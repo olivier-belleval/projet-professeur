@@ -4,6 +4,7 @@ export const DELETE_ARTICLE_SUCCESS = 'DELETE_ARTICLE_SUCCESS';
 export const DELETE_ARTICLE_ERROR = 'DELETE_ARTICLE_ERROR';
 export const JOIN_CLASS = 'JOIN_CLASS';
 export const GET_ARTICLES_ADMIN_PANEL = 'GET_ARTICLES_ADMIN_PANEL';
+export const EDIT_ARTICLE = 'EDIT_ARTICLE';
 
 export const modifyArticle = () => ({
   type: MODIFY_ARTICLE,
@@ -29,4 +30,9 @@ export const joinClass = () => ({
 
 export const getArticlesAdminPanel = () => ({
   type: GET_ARTICLES_ADMIN_PANEL,
-})
+});
+
+export const editArticle = (payload) => ({
+  type: EDIT_ARTICLE,
+  payload,
+});

@@ -1,6 +1,13 @@
 import {
-  UPDATE_EDITOR_STATE, CREATE_ARTICLE_SUMIT, CREATE_ARTICLE_ERROR, CREATE_ARTICLE_SUCCESS,
+  UPDATE_EDITOR_STATE,
+  CREATE_ARTICLE_SUMIT,
+  CREATE_ARTICLE_ERROR,
+  CREATE_ARTICLE_SUCCESS,
+
 } from '../action/editor-actions';
+import {
+  EDIT_ARTICLE
+} from '../action/AdminArticle'
 
 const initialState = {
   title: '',
@@ -8,6 +15,7 @@ const initialState = {
   loading:false,
   message:'',
   send: false,
+  id:'',
 };
 
 export default (state = initialState, action = {}) => {
@@ -39,6 +47,11 @@ export default (state = initialState, action = {}) => {
         loading: false,
         message: 'Il y a eu une erreur à l\'envoi de votre article',
         send: false,
+      };
+    case EDIT_ARTICLE:
+      return {
+        ...state,
+        id: action.payload,
       };
 
     default:

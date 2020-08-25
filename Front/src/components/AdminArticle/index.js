@@ -7,7 +7,12 @@ import {
 import './style.scss';
 
 const AdminArticle = ({
-  list, onclickPen, deleteArticle, onclickJoin, getArticles,
+  list,
+  onclickPen,
+  deleteArticle,
+  onclickJoin,
+  getArticles,
+  editArticle
 }) => {
   useEffect(() => {
     getArticles();
@@ -28,7 +33,7 @@ const AdminArticle = ({
 
             <div className="admin_panel_article_content-part-icons">
               <div className="admin_panel_article_content-part-modify"><FaPencilAlt onClick={() => {
-                onclickPen();
+                editArticle(article.article_id);
               }}
               />
               </div>
