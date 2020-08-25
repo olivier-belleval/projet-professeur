@@ -14,6 +14,8 @@ DROP TYPE article;
 
 DROP FUNCTION create_article(TEXT, TEXT, TEXT, TEXT, INT);
 
+DROP FUNCTION edit_article(INT, TEXT, TEXT, TEXT, TEXT);
+
 DROP FUNCTION delete_article(INT);
 
 DROP FUNCTION associate_class_to_article(INT, INT);

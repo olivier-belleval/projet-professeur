@@ -34,6 +34,19 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- fonction pour modifier une classe
+
+CREATE FUNCTION edit_class(classId INT, name TEXT, descr TEXT) RETURNS "omyprof"."class" AS
+$$
+    UPDATE "omyprof"."class" SET
+        "username" = COALESCE(name, "username"),
+	    "description" = COALESCE(descr, "description")
+    WHERE id = classId
+    RETURNING *;
+$$
+
+LANGUAGE SQL;
+
 -- fonction pour supprimer une classe
 
 CREATE FUNCTION delete_class(classId INT) RETURNS "omyprof"."class" AS

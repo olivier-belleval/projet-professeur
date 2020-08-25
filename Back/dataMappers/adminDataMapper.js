@@ -45,24 +45,11 @@ module.exports = {
 
     editClass: async (data, classId) => {
 
-        // on récupère les clés de l'objet et on les stocke dans l'array keys
-        const dataKeys = Object.keys(data);
-        const dataValues = Object.values(data);
-
         const preparedQuery = {
 
-            // methode pour construire la requête: column1 = $1, column2 = $2, etc...
-            // clés.map( (_, index) => clés[index] = $index) ce qui donne:
-            // clé = $index, soit col1 = value1
-
-            text: `UPDATE "omyprof"."class" SET
-            ${dataKeys.map((_, index) => dataKeys[index] + ' = $' + (index + 2))}
-            WHERE id = $1
-            RETURNING *`,
-
-            // on place les valeurs de l'objet data dans values
-
-            values: [classId, ...dataValues]
+            text: `SELECT * FROM edit_class($1, $2, $3)`,
+            values: [classId, data.username, data.description]
+            
         };
 
         const result = await client.query(preparedQuery);

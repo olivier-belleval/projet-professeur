@@ -95,6 +95,22 @@ $$
 $$
 LANGUAGE SQL STRICT;
 
+
+-- fonction pour modifier un article
+
+CREATE FUNCTION edit_article(articleId INT, articleTitle TEXT, articleSlug TEXT, articleExcerpt TEXT, articleContent TEXT) RETURNS "article"."article" AS
+$$
+    UPDATE "article"."article" SET
+        "title" = COALESCE(articleTitle, "title"),
+	    "slug" = COALESCE(articleSlug, "slug"),
+	    "excerpt" = COALESCE(articleExcerpt, "excerpt"),
+	    "content" = COALESCE(articleContent, "content")
+    WHERE id = articleId
+    RETURNING *;
+$$
+
+LANGUAGE SQL;
+
 -- fonction pour supprimer un article
 
 CREATE FUNCTION delete_article(articleId INT) RETURNS "article"."article" AS
