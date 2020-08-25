@@ -42,4 +42,6 @@ DROP FUNCTION "kanban".get_one_tag(INT);
 
 DROP FUNCTION "kanban".create_tag(TEXT, TEXT);
 
+DROP FUNCTION "kanban".update_tag(INT, TEXT, TEXT);
+
 COMMIT;

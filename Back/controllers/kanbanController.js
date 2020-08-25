@@ -344,13 +344,14 @@ module.exports = {
         try {
             // we create an object and store the request.body values
             const editTagObject = {};
+            editTagObject['tagId'] = request.params.id;
             for (const key in request.body) {
                 if (request.body[key] !== '') {
                     editTagObject[key] = request.body[key];
                 }
             };
             console.log('edit tag : ', editTagObject)
-            const editedTag = await kanbanDataMapper.editTag(editTagObject, request.params.id);
+            const editedTag = await kanbanDataMapper.editTag(editTagObject);
 
             response.json({
                 editedTag

@@ -297,4 +297,17 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to edite a tag
+
+CREATE FUNCTION "kanban".update_tag(tagId INT, tagName TEXT, tagColor TEXT)
+RETURNS "kanban".tag AS
+$$
+UPDATE "kanban".tag SET
+	"name" = COALESCE(tagName, "name"),
+	"color" = COALESCE(tagColor, "color")
+WHERE id = tagId
+RETURNING *;
+$$ 
+LANGUAGE SQL;
+
 COMMIT;

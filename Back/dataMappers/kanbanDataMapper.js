@@ -373,20 +373,15 @@ module.exports = {
     },
 
     editTag: async (tagObject, tagId) => {
-        const fields = Object.keys(tagObject);
-        const keys = Object.keys(tagObject);
         
         const query = {
             text: `
-                UPDATE "kanban"."tag" SET
-                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
-                WHERE id = $1
-                RETURNING *
+                SELECT *
+                FROM "kanban".update_tag($1, $2, $3)
                 `
             ,
-            values: [tagId, ...Object.values(tagObject)]
+            values: [tagObject.tagId, tagObject.name, tagObject.color]
         };
-        console.log('query edit tag : ',query)
 
         const result = await client.query(query);
 
@@ -394,7 +389,6 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log('result : ', result)
         return result.rows[0];
     },
 
