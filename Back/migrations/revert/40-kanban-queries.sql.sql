@@ -34,4 +34,6 @@ DROP FUNCTION "kanban".create_card(TEXT, INT, TEXT, INT);
 
 DROP FUNCTION "kanban".update_card(INT, TEXT, INT, TEXT, INT);
 
+DROP FUNCTION "kanban".delete_card(INT);
+
 COMMIT;

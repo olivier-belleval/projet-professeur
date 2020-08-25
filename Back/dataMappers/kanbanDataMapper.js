@@ -300,8 +300,10 @@ module.exports = {
 
     deleteCard: async (cardId, listId) => {
         const query = {
-            text : `DELETE FROM "kanban"."card"
-                    WHERE id = $1`,
+            text : `
+            SELECT *
+            FROM "kanban".delete_card($1) 
+            `,
             values: [cardId]
           };
 

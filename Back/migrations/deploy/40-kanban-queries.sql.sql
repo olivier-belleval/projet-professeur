@@ -249,4 +249,16 @@ RETURNING *;
 $$ 
 LANGUAGE SQL;
 
+-- function to delete a card
+
+CREATE FUNCTION "kanban".delete_card(cardId INT) 
+RETURNS SETOF "kanban".card AS
+$$
+DELETE FROM "kanban"."card"
+WHERE id = cardId 
+RETURNING *;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;
