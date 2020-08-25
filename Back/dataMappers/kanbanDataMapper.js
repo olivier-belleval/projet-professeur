@@ -279,18 +279,14 @@ module.exports = {
     },
 
     editCard: async (cardObject, cardId) => {
-        const fields = Object.keys(cardObject);
-        const keys = Object.keys(cardObject);
         
         const query = {
             text: `
-                UPDATE "kanban"."card" SET
-                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
-                WHERE id = $1
-                RETURNING *
+                SELECT *
+                FROM "kanban".update_card($1, $2, $3, $4, $5)
                 `
             ,
-            values: [cardId, ...Object.values(cardObject)]
+            values: [cardObject.card_id, cardObject.description, cardObject.order, cardObject.color, cardObject.list_id]
         };
 
         const result = await client.query(query);

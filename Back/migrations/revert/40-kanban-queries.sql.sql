@@ -32,4 +32,6 @@ DROP FUNCTION "kanban".get_one_card_by_id(INT, INT);
 
 DROP FUNCTION "kanban".create_card(TEXT, INT, TEXT, INT);
 
+DROP FUNCTION "kanban".update_card(INT, TEXT, INT, TEXT, INT);
+
 COMMIT;

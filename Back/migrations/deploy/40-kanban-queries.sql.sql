@@ -234,4 +234,19 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to edite a list
+
+CREATE FUNCTION "kanban".update_card(cardId INT, cardDescription TEXT, cardOrder INT,cardColor TEXT, listId INT)
+RETURNS "kanban".card AS
+$$
+UPDATE "kanban".card SET
+	"description" = COALESCE(cardDescription, "description"),
+	"order" = COALESCE(cardOrder, "order"),
+	"color" = COALESCE(cardColor, "color"),
+	"list_id" = COALESCE(listId, "list_id")
+WHERE id = cardId
+RETURNING *;
+$$ 
+LANGUAGE SQL;
+
 COMMIT;

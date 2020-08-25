@@ -261,9 +261,10 @@ module.exports = {
                     editCardObject[key] = request.body[key];
                 }
             };
-            editCardObject['list_id'] = request.params.kanbanId;
+            editCardObject['card_id'] = request.params.cardId;
+            editCardObject['list_id'] = request.params.listId;
 
-            const editedCard = await kanbanDataMapper.editCard(editCardObject, request.params.cardId);
+            const editedCard = await kanbanDataMapper.editCard(editCardObject);
 
             response.json({
                 editedCard
