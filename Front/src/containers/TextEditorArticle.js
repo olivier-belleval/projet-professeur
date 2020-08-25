@@ -8,6 +8,7 @@ const mapStateToProps = (state) => ({
   content: state.editor.content,
   loading: state.editor.loading,
   message: state.editor.message,
+  send: state.editor.send,
 });
 
 const mapDispatchToProps = (dispatch) => ({

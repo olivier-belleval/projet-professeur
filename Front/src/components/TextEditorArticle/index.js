@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 import './style.scss';
 import 'draft-js/dist/Draft.css';
 
-const TextEditorArticle = ({changeField, title, content, handleArticleSubmit}) => {
+const TextEditorArticle = ({changeField, title, content, handleArticleSubmit, send}) => {
   console.log('text edit');
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -30,7 +31,9 @@ const TextEditorArticle = ({changeField, title, content, handleArticleSubmit}) =
     onChange={handleInputChange} 
     className="input-content"
     />
-    <button type="submit" className="text-editor-article-button" redirect="/admin/articles">Let's go baby ! </button>
+    <button type="submit" className="text-editor-article-button"> 
+    Let's go baby !</button>
+    {send && <Redirect to="/admin/articles" />}
   </form>
   </div>
 )};

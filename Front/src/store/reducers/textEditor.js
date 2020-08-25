@@ -7,6 +7,7 @@ const initialState = {
   content: '',
   loading:false,
   message:'',
+  send: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -21,6 +22,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: true,
         message: '',
+        send: true,
       };
     case CREATE_ARTICLE_SUCCESS:
       return {
@@ -29,12 +31,14 @@ export default (state = initialState, action = {}) => {
         title: '',
         content: '',
         message: 'L\'article a été ajouté !',
+        send: false,
       };
     case CREATE_ARTICLE_ERROR:
       return {
         ...state,
         loading: false,
         message: 'Il y a eu une erreur à l\'envoi de votre article',
+        send: false,
       };
 
     default:
