@@ -4,11 +4,11 @@ module.exports = {
     isUserConnected: (request, response, next) => {
 
         if (!request.session.user) {
-            response.json({ error: 'Vous devez être connecté pour continuer' });
+            response.status(400).json('You must be logged in order to continue');
         } else {
             next();
         }
 
     }
 
-}
+};
