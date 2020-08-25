@@ -1,4 +1,5 @@
 const adminDataMapper = require('../dataMappers/adminDataMapper');
+const utility = require('../module/utility');
 
 module.exports = {
 
@@ -78,7 +79,7 @@ module.exports = {
             if (!result) {
 
                 return response.status(404).json('A class with a similar username already exists.');
-                
+
             }
 
             response.status(200).json({ message: 'Class has been created successfully', data: result });
@@ -96,7 +97,26 @@ module.exports = {
 
             const classId = request.params.id;
 
-            const result = await adminDataMapper.editClass(request.body, classId);
+            const data = {};
+
+            // on récupère les éléments transmis dans request body
+            for (const input in request.body) {
+
+                // on exclue les champs vides
+                if (request.body[input] !== '') {
+                    data[input] = request.body[input];
+                };
+
+            };
+
+            // fin d'éxécution si aucune modification
+            if (utility.isEmpty(data)) {
+
+                return response.status(400).json('Fields are all empty.');
+
+            };
+
+            const result = await adminDataMapper.editClass(data, classId);
 
             if (!result) {
 

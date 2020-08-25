@@ -74,26 +74,12 @@ module.exports = {
     // modification d'un article
     editArticle: async (article, articleId) => {
 
-        // on récupère les clés de l'objet et on les stocke dans l'array keys
-        const articleKeys = Object.keys(article);
-        const articleValues = Object.values(article);
         const preparedQuery = {
 
-            // methode pour construire la requête: column1 = $1, column2 = $2, etc...
-            // clés.map( (_, index) => clés[index] = $index) ce qui donne:
-            // clé = $index, soit col1 = value1
-
-            text: `UPDATE "article"."article" SET
-            ${articleKeys.map((_, index) => articleKeys[index] + ' = $' + (index + 2))}
-            WHERE id = $1
-            RETURNING *`,
-
-            // on place les valeurs de l'objet article dans values
-
-            values: [articleId, ...articleValues]
+            text: `SELECT * FROM edit_article($1, $2, $3, $4, $5)`,
+            values: [articleId, article.title, article.slug, article.excerpt, article.content]
+            
         };
-
-        //console.log('requête sql:', preparedQuery.text);
 
         const result = await client.query(preparedQuery);
 
@@ -134,7 +120,7 @@ module.exports = {
 
             return result.rows[0];
 
-        } catch(error) {
+        } catch (error) {
 
             return;
 
@@ -150,9 +136,9 @@ module.exports = {
                 text: `SELECT * FROM remove_class_to_article_association($1, $2)`,
                 values: [articleId, classId]
             };
-    
+
             const result = await client.query(preparedQuery);
-    
+
             // si l'article ou la classe n'existent pas
             if (!result.rows[0].id) {
                 return;

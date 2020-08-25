@@ -1,6 +1,7 @@
-const slugify = require('slugify');
 
 const articleDataMapper = require('../dataMappers/articleDataMapper');
+const slugify = require('slugify');
+const utility = require('../module/utility');
 
 module.exports = {
 
@@ -102,7 +103,40 @@ module.exports = {
 
             const articleId = request.params.id;
 
-            const result = await articleDataMapper.editArticle(request.body, articleId);
+            const article = {};
+
+            // on récupère les éléments transmis dans request body
+            for (const input in request.body) {
+
+                // on exclue les champs vides
+                if (request.body[input] !== '') {
+                    article[input] = request.body[input];
+                };
+
+            };
+
+            // fin d'éxécution si aucune modification
+            if (utility.isEmpty(article)) {
+
+                return response.status(400).json('Fields are all empty.');
+
+            };
+
+            // création du slug si le titre a été modifié
+            if (article.title) {
+
+                article.slug = slugify(article.title, { remove: /[*+~.()'"!:@]/g, lower: true });
+
+            };
+
+            // création de l'excerpt si le content a été modifié
+            if (article.content) {
+
+                article.excerpt = article.content.substring(0, 200) + '...';
+
+            };
+
+            const result = await articleDataMapper.editArticle(article, articleId);
 
             if (!result) {
                 return response.status(400).json('Failed to edit article with id ' + articleId);

@@ -8,6 +8,8 @@ DROP FUNCTION get_class_by_id(INT);
 
 DROP FUNCTION create_class(TEXT, TEXT, TEXT, INT);
 
+DROP FUNCTION edit_class (INT, TEXT, TEXT);
+
 DROP FUNCTION delete_class(INT);
 
 DROP TYPE constructed_class;
