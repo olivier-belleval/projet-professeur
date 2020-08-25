@@ -241,6 +241,25 @@ module.exports = {
         return result;
     },
 
+    getOneCardById: async (listId, cardId) => {
+        
+        const query = {
+            text : `
+                SELECT * 
+                FROM "kanban".get_one_card_by_id($1, $2);
+                `,
+            values: [listId, cardId]
+        };
+        
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme de requette');
+            return;
+        }
+        return result.rows[0];
+    },
+
     createCard: async (cardObject) => {
         
         const query = {

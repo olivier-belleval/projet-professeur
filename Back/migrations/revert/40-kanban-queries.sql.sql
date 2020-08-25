@@ -28,4 +28,6 @@ DROP FUNCTION "kanban".update_list(INT, TEXT, INT);
 
 DROP FUNCTION "kanban".delete_list(INT);
 
+DROP FUNCTION "kanban".get_one_card_by_id(INT, INT);
+
 COMMIT;

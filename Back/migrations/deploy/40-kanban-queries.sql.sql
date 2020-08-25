@@ -159,7 +159,7 @@ $$
 
 LANGUAGE SQL STRICT;
 
--- function to get one kanban by id
+-- function to get one list by id
 
 CREATE FUNCTION "kanban".get_one_list_by_id(kanbanId INT, listId INT) 
 RETURNS SETOF "kanban".list AS
@@ -208,5 +208,18 @@ RETURNING *;
 $$
 
 LANGUAGE SQL STRICT;
+
+-- function to get one card by id
+
+CREATE FUNCTION "kanban".get_one_card_by_id(listId INT, cardId INT) 
+RETURNS SETOF "kanban".card AS
+$$
+SELECT * 
+FROM "kanban".card
+WHERE id = listId;
+$$
+
+LANGUAGE SQL STRICT;
+
 
 COMMIT;

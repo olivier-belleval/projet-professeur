@@ -141,7 +141,7 @@ module.exports = {
             const listId = request.params.listId
             const result = await kanbanDataMapper.getOneListById(kanbanId, listId);
 
-            //const result = kanbansFormater(pre_result);
+            //const result = kanbansFormater(pre_result)
 
             response.json({
                 result
@@ -213,6 +213,22 @@ module.exports = {
             console.trace(error);
             response.status(500).json(error); 
         };
+    },
+
+    getOneCardById: async (request, response, next) => {
+        try {
+            const cardId = request.params.cardId
+            const listId = request.params.listId
+            const result = await kanbanDataMapper.getOneCardById(cardId, listId);
+
+            response.json({
+                result
+            });
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
     },
 
     createCard:async (request, response) => {
