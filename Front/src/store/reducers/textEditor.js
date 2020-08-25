@@ -1,8 +1,10 @@
-import { EditorState } from 'draft-js';
 import { UPDATE_EDITOR_STATE } from '../action/editor-actions';
 
 const initialState = {
-  editorState: EditorState.createEmpty(),
+  title: '',
+  content:'',
+  excerpt:'',
+
 };
 
 export default (state = initialState, action = {}) => {
@@ -10,7 +12,7 @@ export default (state = initialState, action = {}) => {
     case UPDATE_EDITOR_STATE:
       return {
         ...state,
-        editorState: action.payload,
+        ...action.payload,
       };
     default:
       return state;

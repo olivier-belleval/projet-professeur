@@ -3,10 +3,37 @@
 .text-editor-article {
   border: 1px solid rgb(199, 199, 199);
   border-radius: 5px;
-  min-height: 6em;
+  height: 100vh;
   margin: auto;
-  width: 400px;
+  width: fit-content;
   background-color: white;
   margin-top: 3rem;
   padding: 1em;
+
+}
+
+input,textarea{
+  margin: 1em;
+  border-radius: 5px;
+  padding: 5px;
+}
+.input{
+
+  &-title, &-content, &-excerpt{
+    width: 90%;
+    border:lightgray 1px solid;
+    &:focus{
+      box-shadow: 5px 10px vars.$light-color;
+      outline:none
+    }
+  }
+  &-title{
+    
+  }
+  &-content{
+    min-height: 15em;
+  }
+  &-excerpt{
+    min-height: 5em;
+  }
 }

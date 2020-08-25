@@ -4,12 +4,14 @@ import TextEditorArticle from '../components/TextEditorArticle';
 import { updateEditorState } from '../store/action/editor-actions';
 
 const mapStateToProps = (state) => ({
-  editorState: state.editor.editorState,
+  title: state.editor.title,
+  content: state.editor.content,
+  excerpt: state.editor.excerpt,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeField: (editorState) => {
-    dispatch(updateEditorState(editorState));
+  changeField: (changedData) => {
+    dispatch(updateEditorState(changedData));
   },
 });
 
