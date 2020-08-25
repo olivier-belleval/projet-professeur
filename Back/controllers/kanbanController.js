@@ -409,7 +409,8 @@ module.exports = {
             newTagCardObject['cardId'] = request.params.cardId;
             const result = await kanbanDataMapper.deleteAssociationTagToCard(newTagCardObject);
             response.json({
-                status: result || "deleted" 
+                status: "deleted",
+                result
             })
 
         } catch (error) {

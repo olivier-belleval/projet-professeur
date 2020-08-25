@@ -334,4 +334,16 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function remove association tag to card
+
+CREATE FUNCTION "kanban".remove_association_tag_to_card(cardId INT, tagId INT) 
+RETURNS SETOF "kanban"."m2m_tag_card" AS
+$$
+DELETE FROM "kanban"."m2m_tag_card" 
+WHERE card_id = $1 AND tag_id = $2
+RETURNING *
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;

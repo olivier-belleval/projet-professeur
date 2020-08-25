@@ -48,4 +48,6 @@ DROP FUNCTION "kanban".delete_tag(INT);
 
 DROP FUNCTION "kanban".associate_tag_to_card(INT, INT);
 
+DROP FUNCTION "kanban".remove_association_tag_to_card(INT, INT);
+
 COMMIT;

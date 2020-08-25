@@ -426,16 +426,17 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log(result.rows[0]);
         return result.rows[0];
     },
 
     deleteAssociationTagToCard: async (tagCardObject) => {
 
         const query = {
-            text : `DELETE FROM "kanban"."m2m_tag_card"
-                    WHERE tag_id = $1 AND card_id = $2`,
-            values: [tagCardObject.tagId, tagCardObject.cardId]
+            text : `
+                SELECT *
+                FROM "kanban".remove_association_tag_to_card($1, $2)
+                `,
+            values: [tagCardObject.cardId, tagCardObject.tagId]
           };
 
         const result = await client.query(query);
