@@ -1,4 +1,4 @@
-import { 
+import {
   CHANGE_FIELD,
   TOGGLE_LOGIN_FORM,
   LOGIN_SUBMIT,
@@ -76,24 +76,24 @@ export default (state = initialState, action = {}) => {
         ...state,
         teacher: !state.teacher,
       };
-      case LOGOUT_SUCCESS:
-        return {
-          ...state,
-          isLogged: !state.teacher,
-          username:'',
-          password:'',
-        };
-      case GET_CLASSES:
-        return {
-          ...state,
-          loading:true,
-        };
-      case GET_CLASSES_SUCCESS:
-        return {
-          ...state,
-          loading:false,
-          classes:[...action.payload],
-        }
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isLogged: !state.teacher,
+        username: '',
+        password: '',
+      };
+    case GET_CLASSES:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_CLASSES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        classes: [...action.payload],
+      };
     default:
       return state;
   }

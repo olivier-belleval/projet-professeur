@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import {Link} from 'react-router-dom';
 
 import {
   FaPencilAlt, FaTrash, FaPlusCircle, FaInfinity,
@@ -39,7 +40,9 @@ const AdminArticle = ({
 
       <div className="admin_panel_article-content-part">
         <p>Ajouter un article</p>
-        <FaPlusCircle />
+        <Link exact to={'/admin/nouvel-article'}>
+          <FaPlusCircle />
+        </Link>
       </div>
     </div>
   </div>
