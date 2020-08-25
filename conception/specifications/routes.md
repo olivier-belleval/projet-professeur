@@ -66,6 +66,7 @@
 | DELETE | /api/list/:listId/card/:cardId/delete  | kanbanController | Pour supprimer une carte d'une liste |
 | -| -| -| -|
 | GET | /api/tags | kanbanController | Pour afficher la liste des tags |
+| GET | /api/tag | kanbanController | Pour afficher un tag |
 | POST | /api/tag/create | kanbanController | Pour créer un tag |
 | PUT | /api/tag/:id/edit| kanbanController | Pour modifier un tag|
 | DELETE | /api/tag/:id/delete  | kanbanController | Pour supprimer un tag|

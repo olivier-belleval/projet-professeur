@@ -272,4 +272,16 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to get one tag by id
+
+CREATE FUNCTION "kanban".get_one_tag(tagId INT) 
+RETURNS SETOF "kanban".tag AS
+$$
+SELECT * 
+FROM "kanban".tag
+WHERE id = tagId;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;

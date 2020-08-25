@@ -305,6 +305,21 @@ module.exports = {
         }
     },
 
+    getOneTagById: async (request, response, next) => {
+        try {
+            const tagId = request.params.id
+            const result = await kanbanDataMapper.getOneTagById(tagId);
+
+            response.json({
+                result
+            });
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
     createTag:async (request, response) => {
         try {
             // we create an object and store the request.body values

@@ -320,7 +320,8 @@ module.exports = {
         
         const query = {
         text : `
-        SELECT * FROM "kanban".get_all_tag() ;
+        SELECT * 
+        FROM "kanban".get_all_tag() ;
         `
         };
         
@@ -332,6 +333,25 @@ module.exports = {
             return
         }
         return result.rows;
+    },
+
+    getOneTagById: async (tagId) => {
+        
+        const query = {
+            text : `
+            SELECT * 
+            FROM "kanban".get_one_tag($1);
+                `,
+            values: [tagId]
+        };
+        
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme de requette');
+            return;
+        }
+        return result.rows[0];
     },
 
     createTag: async (cardObject) => {

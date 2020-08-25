@@ -40,6 +40,7 @@ router.put('/list/:listId(\\d+)/card/:cardId(\\d+)/edit',teacherMW.isATeacher, k
 router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteCard);
 
 router.get('/tags', teacherMW.isATeacher, kanbanController.getAllTags)
+router.get('/tag/:id(\\d+)', teacherMW.isATeacher, kanbanController.getOneTagById)
 router.post('/tag/create', teacherMW.isATeacher, kanbanController.createTag);
 router.put('/tag/:id(\\d+)/edit', kanbanController.editTag)
 router.delete('/tag/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteTag);
