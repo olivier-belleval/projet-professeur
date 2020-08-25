@@ -38,4 +38,8 @@ DROP FUNCTION "kanban".delete_card(INT);
 
 DROP FUNCTION "kanban".get_all_tag();
 
+DROP FUNCTION "kanban".get_one_tag(INT);
+
+DROP FUNCTION "kanban".create_tag(TEXT, TEXT);
+
 COMMIT;

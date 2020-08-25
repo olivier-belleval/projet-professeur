@@ -357,9 +357,9 @@ module.exports = {
     createTag: async (cardObject) => {
         
         const query = {
-            text : `INSERT INTO "kanban"."tag" 
-                    ("name", "color") 
-                    VALUES ($1, $2) returning *`,
+            text : `
+                SELECT *
+                FROM "kanban".create_tag($1, $2) `,
             values: [cardObject.name, cardObject.color]
           };
 
@@ -369,7 +369,6 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log(result.rows[0]);
         return result.rows[0];
     },
 

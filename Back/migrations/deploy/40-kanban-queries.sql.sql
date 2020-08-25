@@ -284,4 +284,17 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to create a tag
+
+CREATE FUNCTION "kanban".create_tag(tagName TEXT, tagColor TEXT) 
+RETURNS SETOF "kanban".tag AS
+$$
+INSERT INTO "kanban"."tag" 
+    ("name", "color") 
+VALUES ($1, $2) 
+RETURNING *;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;
