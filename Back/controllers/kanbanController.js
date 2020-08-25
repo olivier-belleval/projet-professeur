@@ -75,7 +75,10 @@ module.exports = {
                     editKanbanObject[key] = request.body[key];
                 }
             };
-            editKanbanObject.slug = slugify(request.body.title, '-');
+            if (request.body.title) {
+                editKanbanObject.slug = slugify(request.body.title, '-');
+            }
+            
 
             const editedKanban = await kanbanDataMapper.editKanban(editKanbanObject, request.params.id);
 
@@ -94,7 +97,8 @@ module.exports = {
             const kanbanId = request.params.id;
             const result = await kanbanDataMapper.deleteKanban(kanbanId);
             response.json({
-                status: result || "deleted"
+                status: "deleted",
+                result
             })
 
         } catch (error) {
@@ -131,6 +135,24 @@ module.exports = {
 
     },
 
+    getOneListById: async (request, response, next) => {
+        try {
+            const kanbanId = request.params.kanbanId
+            const listId = request.params.listId
+            const result = await kanbanDataMapper.getOneListById(kanbanId, listId);
+
+            //const result = kanbansFormater(pre_result)
+
+            response.json({
+                result
+            });
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
     createList:async (request, response) => {
         try {
             // we create an object and store the request.body values
@@ -139,13 +161,12 @@ module.exports = {
 
             for (const key in request.body) {
                 newListObject[key] = request.body[key];
-            };
-            console.log('newListObject : ', newListObject)            
+            };         
 
-            const newList = await kanbanDataMapper.createList(newListObject);
+            const result = await kanbanDataMapper.createList(resultObject);
 
             response.json({
-                newList
+                result
             });
         } catch (error) {
             console.trace(error);
@@ -162,12 +183,15 @@ module.exports = {
                     editListObject[key] = request.body[key];
                 }
             };
+            editListObject['list_id'] = request.params.listId;
             editListObject['kanban_id'] = request.params.kanbanId;
 
-            const editedList = await kanbanDataMapper.editList(editListObject, request.params.listId);
+
+
+            const result = await kanbanDataMapper.editList(editListObject, request.params.listId);
 
             response.json({
-                editedList
+                result
             });
         } catch (error) {
             console.trace(error);
@@ -189,6 +213,22 @@ module.exports = {
             console.trace(error);
             response.status(500).json(error); 
         };
+    },
+
+    getOneCardById: async (request, response, next) => {
+        try {
+            const cardId = request.params.cardId
+            const listId = request.params.listId
+            const result = await kanbanDataMapper.getOneCardById(cardId, listId);
+
+            response.json({
+                result
+            });
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
     },
 
     createCard:async (request, response) => {
@@ -215,15 +255,17 @@ module.exports = {
     editCard:async (request, response) => {
         try {
             // we create an object and store the request.body values
+            
             const editCardObject = {};
             for (const key in request.body) {
                 if (request.body[key] !== '') {
                     editCardObject[key] = request.body[key];
                 }
             };
-            editCardObject['list_id'] = request.params.kanbanId;
+            editCardObject['card_id'] = request.params.cardId;
+            editCardObject['list_id'] = request.params.listId;
 
-            const editedCard = await kanbanDataMapper.editCard(editCardObject, request.params.cardId);
+            const editedCard = await kanbanDataMapper.editCard(editCardObject);
 
             response.json({
                 editedCard
@@ -263,6 +305,21 @@ module.exports = {
         }
     },
 
+    getOneTagById: async (request, response, next) => {
+        try {
+            const tagId = request.params.id
+            const result = await kanbanDataMapper.getOneTagById(tagId);
+
+            response.json({
+                result
+            });
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
     createTag:async (request, response) => {
         try {
             // we create an object and store the request.body values
@@ -287,13 +344,14 @@ module.exports = {
         try {
             // we create an object and store the request.body values
             const editTagObject = {};
+            editTagObject['tagId'] = request.params.id;
             for (const key in request.body) {
                 if (request.body[key] !== '') {
                     editTagObject[key] = request.body[key];
                 }
             };
             console.log('edit tag : ', editTagObject)
-            const editedTag = await kanbanDataMapper.editTag(editTagObject, request.params.id);
+            const editedTag = await kanbanDataMapper.editTag(editTagObject);
 
             response.json({
                 editedTag
@@ -331,10 +389,10 @@ module.exports = {
                 newTagCardObject[key] = request.body[key];
             };           
 
-            const newTag = await kanbanDataMapper.createAssociationTagToCard(newTagCardObject);
+            const result = await kanbanDataMapper.createAssociationTagToCard(newTagCardObject);
 
             response.json({
-                newTag
+                result
             });
         } catch (error) {
             console.trace(error);
@@ -351,7 +409,8 @@ module.exports = {
             newTagCardObject['cardId'] = request.params.cardId;
             const result = await kanbanDataMapper.deleteAssociationTagToCard(newTagCardObject);
             response.json({
-                status: result || "deleted" 
+                status: "deleted",
+                result
             })
 
         } catch (error) {

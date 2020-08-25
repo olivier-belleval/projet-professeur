@@ -7,42 +7,8 @@ module.exports = {
         
         const query = {
         text : `
-            SELECT 
-                ka.id AS kanban_id, 
-                ka.title AS kanban_title, 
-                ka.slug AS kanban_slug, 
-                ka.description AS kanban_description, 
-                ka.background AS kanban_background,
-                ka.teacher_id AS kanban_teacher_id,
-                te.id AS teacher_id,
-                te.username AS teacher_username,
-                te.first_name AS teacher_first_name,
-                te.last_name AS teacher_last_name,
-                cl.id AS class_id,
-                cl.username AS class_username,
-                cl.description AS class_description,
-                li.id AS list_id, 
-                li.name AS list_name, 
-                li.order AS list_order, 
-                li.kanban_id AS list_kanban_id,
-                ca.id AS card_id, 
-                ca.description AS card_description, 
-                ca.order AS card_order, 
-                ca.color AS card_color,
-                ca.list_id AS card_list_id,
-                ta.id AS tag_id, 
-                ta.name AS tag_name, 
-                ta.color AS tag_color, 
-                ta_ca.tag_id AS m2m_tag_id,
-                ta_ca.card_id AS m2m_card_id
-            FROM "kanban"."kanban" ka 
-            LEFT JOIN "kanban"."list" li ON li.kanban_id = ka.id 
-            LEFT JOIN "omyprof"."teacher" te ON ka.teacher_id = te.id 
-            LEFT JOIN "kanban"."m2m_kanban_class" ka_cl ON ka_cl.kanban_id = ka.id 
-            LEFT JOIN "omyprof"."class" cl ON ka_cl.class_id = cl.id 
-            LEFT JOIN "kanban"."card" ca ON ca.list_id = li.id 
-            LEFT JOIN "kanban"."m2m_tag_card" ta_ca ON ta_ca.card_id = ca.id 
-            LEFT JOIN "kanban"."tag" ta ON ta.id = ta_ca.tag_id;
+            SELECT * 
+            FROM "kanban".get_all_kanbans();
             `
         };
         
@@ -60,20 +26,8 @@ module.exports = {
     getAllKanbansByClass: async (classId) => {
         const query = {
             text : `
-                SELECT ka.id,
-                    ka.title,
-                    ka.description,
-                    te.first_name || ' ' || te.last_name AS article_author,
-                    string_agg(distinct cl.username, ', ' ORDER BY cl.username) AS class_username
-                FROM "kanban".kanban ka
-                LEFT JOIN "kanban"."m2m_kanban_class" ka_cl 
-                    ON ka_cl.kanban_id = ka.id
-                LEFT JOIN "omyprof"."class" cl
-                    ON cl.id = ka_cl.class_id
-                LEFT JOIN "omyprof"."teacher" te
-                    ON te.id = ka.teacher_id
-                WHERE cl.id = $1
-                GROUP BY ka.id,cl.username, te.first_name, te.last_name;
+                SELECT * 
+                FROM "kanban".get_all_kanbans_by_class($1)
             `,
             values: [classId]
             };
@@ -91,37 +45,8 @@ module.exports = {
         
         const query = {
             text : `
-                SELECT 
-                    ka.id AS kanban_id, 
-                    ka.title AS kanban_title, 
-                    ka.slug AS kanban_slug, 
-                    ka.description AS kanban_description, 
-                    ka.background AS kanban_background,
-                    ka.teacher_id AS kanban_teacher_id,
-                    cl.id AS class_id,
-                    cl.username AS class_username,
-                    cl.description AS class_description,
-                    li.id AS list_id,
-                    li.name AS list_name,
-                    li.order AS list_order,
-                    ca.id AS card_id,
-                    ca.description AS card_description,
-                    ca.order AS card_order,
-                    ca.color AS card_color,
-                    ca.list_id AS card_list_id,
-                    ta.id AS tag_id,
-                    ta.name AS tag_name,
-                    ta.color AS tag_color,
-                    ta_ca.card_id AS tag_card_id
-                FROM "kanban"."kanban" ka
-                LEFT JOIN  "kanban"."list" li ON li.kanban_id = ka.id
-                LEFT JOIN "kanban"."card" ca ON ca.list_id = li.id
-                LEFT JOIN "kanban"."m2m_kanban_class" ka_cl ON ka_cl.kanban_id = ka.id 
-                LEFT JOIN "omyprof"."class" cl ON ka_cl.class_id = cl.id 
-                LEFT JOIN "kanban"."m2m_tag_card" ta_ca ON ta_ca.card_id = ca.id 
-                LEFT JOIN "kanban"."tag" ta ON ta.id = ta_ca.tag_id
-                WHERE ka.id = $1
-                ORDER BY li.name;
+                SELECT * 
+                FROM "kanban".get_one_kanbans_by_id($1);
                 `,
             values: [kanbanId]
         };
@@ -138,9 +63,10 @@ module.exports = {
     createKanban: async (kanbanObject) => {
         
         const query = {
-            text : `INSERT INTO "kanban"."kanban" 
-                    ("title", "slug", "description", "background", "teacher_id") 
-                    VALUES ($1, $2, $3, $4, $5) returning *`,
+            text : `
+                SELECT *
+                FROM"kanban".create_kanban($1, $2, $3, $4, $5)
+                `,
             values: [kanbanObject.title, kanbanObject.slug, kanbanObject.description, kanbanObject.background, kanbanObject.teacher_id]
           };
 
@@ -150,7 +76,6 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log(result.rows[0]);
         return result.rows[0];
     },
 
@@ -160,14 +85,13 @@ module.exports = {
         
         const query = {
             text: `
-                UPDATE "kanban"."kanban" SET
-                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
-                WHERE id = $1
-                RETURNING *
+            SELECT * FROM "kanban".update_kanban($1,$2,$3,$4,$5)
                 `
             ,
-            values: [kanbanId, ...Object.values(kanbanObject)]
+            values: [kanbanId, kanbanObject.title,kanbanObject.slug,kanbanObject.description,kanbanObject.background]
         };
+
+        console.log('query : ', query)
 
         const result = await client.query(query);
 
@@ -181,8 +105,9 @@ module.exports = {
     deleteKanban: async (kanbanId) => {
 
         const query = {
-            text : `DELETE FROM "kanban"."kanban"
-                    WHERE id = $1`,
+            text : `
+            SELECT * FROM "kanban".delete_kanban($1);
+            `,
             values: [kanbanId]
           };
 
@@ -192,39 +117,45 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        return;
+        return result;
     },
 
     associateClassToKanban: async (kanbanId, classId) => {
 
         try {
             const preparedQuery = {
-                text: `INSERT INTO "kanban"."m2m_kanban_class" ("kanban_id", "class_id")
-            VALUES ($1, $2)`,
+                text: `
+                SELECT * 
+                FROM "kanban".associate_class_to_kanban($1, $2)
+                `,
                 values: [kanbanId, classId]
             };
 
             const result = await client.query(preparedQuery);
 
-            return 'Classe ajoutée à l\'kanban!';
+            return result;
 
         } catch (error) {
 
-            return;
+            return error;
         }
+        
     },
 
     removeAssociationClassToKanban: async (kanbanId, classId) => {
 
         try {
             const preparedQuery = {
-                text: `DELETE FROM "kanban"."m2m_kanban_class" WHERE kanban_id = $1 AND class_id = $2`,
+                text: `
+                SELECT * 
+                FROM "kanban".remove_association_classto_kanban($1, $2)
+                `,
                 values: [kanbanId, classId]
             };
 
             const result = await client.query(preparedQuery);
 
-            return 'Association supprimée!';
+            return result;
 
         } catch (error) {
                 console.log(error)
@@ -232,12 +163,32 @@ module.exports = {
         }
     },
 
+    getOneListById: async (kanbanId, listId) => {
+        
+        const query = {
+            text : `
+                SELECT * 
+                FROM "kanban".get_one_list_by_id($1, $2);
+                `,
+            values: [kanbanId, listId]
+        };
+        
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme de requette');
+            return;
+        }
+        return result.rows[0];
+    },
+
     createList: async (listObject) => {
         
         const query = {
-            text : `INSERT INTO "kanban"."list" 
-                    ("name", "order", "kanban_id") 
-                    VALUES ($1, $2, $3) returning *`,
+            text : `
+                SELECT *
+                FROM "kanban".create_list($1, $2, $3)
+            `,
             values: [listObject.name, listObject.order, listObject.kanban_id]
           };
 
@@ -247,7 +198,6 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log(result.rows[0]);
         return result.rows[0];
     },
 
@@ -257,13 +207,11 @@ module.exports = {
         
         const query = {
             text: `
-                UPDATE "kanban"."list" SET
-                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
-                WHERE id = $1
-                RETURNING *
+                SELECT *
+                FROM "kanban".update_list($1, $2, $3)
                 `
             ,
-            values: [listId, ...Object.values(listObject)]
+            values: [listObject.list_id, listObject.name, listObject.order]
         };
 
         const result = await client.query(query);
@@ -277,8 +225,10 @@ module.exports = {
 
     deleteList: async (listId, kanbanId) => {
         const query = {
-            text : `DELETE FROM "kanban"."list"
-                    WHERE id = $1`,
+            text : `
+                SELECT *
+                FROM "kanban".delete_list($1)
+                `,
             values: [listId]
           };
 
@@ -291,12 +241,31 @@ module.exports = {
         return result;
     },
 
+    getOneCardById: async (listId, cardId) => {
+        
+        const query = {
+            text : `
+                SELECT * 
+                FROM "kanban".get_one_card_by_id($1, $2);
+                `,
+            values: [listId, cardId]
+        };
+        
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme de requette');
+            return;
+        }
+        return result.rows[0];
+    },
+
     createCard: async (cardObject) => {
         
         const query = {
-            text : `INSERT INTO "kanban"."card" 
-                    ("description", "order", "color", "list_id") 
-                    VALUES ($1, $2, $3, $4) returning *`,
+            text : `
+                SELECT *
+                FROM "kanban".create_card($1, $2, $3, $4)`,
             values: [cardObject.description, cardObject.order, cardObject.color, cardObject.list_id]
           };
 
@@ -306,23 +275,18 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log(result.rows[0]);
         return result.rows[0];
     },
 
     editCard: async (cardObject, cardId) => {
-        const fields = Object.keys(cardObject);
-        const keys = Object.keys(cardObject);
         
         const query = {
             text: `
-                UPDATE "kanban"."card" SET
-                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
-                WHERE id = $1
-                RETURNING *
+                SELECT *
+                FROM "kanban".update_card($1, $2, $3, $4, $5)
                 `
             ,
-            values: [cardId, ...Object.values(cardObject)]
+            values: [cardObject.card_id, cardObject.description, cardObject.order, cardObject.color, cardObject.list_id]
         };
 
         const result = await client.query(query);
@@ -336,8 +300,10 @@ module.exports = {
 
     deleteCard: async (cardId, listId) => {
         const query = {
-            text : `DELETE FROM "kanban"."card"
-                    WHERE id = $1`,
+            text : `
+            SELECT *
+            FROM "kanban".delete_card($1) 
+            `,
             values: [cardId]
           };
 
@@ -354,7 +320,8 @@ module.exports = {
         
         const query = {
         text : `
-        SELECT * FROM "kanban".tag;
+        SELECT * 
+        FROM "kanban".get_all_tag() ;
         `
         };
         
@@ -368,12 +335,31 @@ module.exports = {
         return result.rows;
     },
 
+    getOneTagById: async (tagId) => {
+        
+        const query = {
+            text : `
+            SELECT * 
+            FROM "kanban".get_one_tag($1);
+                `,
+            values: [tagId]
+        };
+        
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme de requette');
+            return;
+        }
+        return result.rows[0];
+    },
+
     createTag: async (cardObject) => {
         
         const query = {
-            text : `INSERT INTO "kanban"."tag" 
-                    ("name", "color") 
-                    VALUES ($1, $2) returning *`,
+            text : `
+                SELECT *
+                FROM "kanban".create_tag($1, $2) `,
             values: [cardObject.name, cardObject.color]
           };
 
@@ -383,25 +369,19 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log(result.rows[0]);
         return result.rows[0];
     },
 
     editTag: async (tagObject, tagId) => {
-        const fields = Object.keys(tagObject);
-        const keys = Object.keys(tagObject);
         
         const query = {
             text: `
-                UPDATE "kanban"."tag" SET
-                ${fields.map( (_, index) => keys[index] + ' = $' + (index+2))}
-                WHERE id = $1
-                RETURNING *
+                SELECT *
+                FROM "kanban".update_tag($1, $2, $3)
                 `
             ,
-            values: [tagId, ...Object.values(tagObject)]
+            values: [tagObject.tagId, tagObject.name, tagObject.color]
         };
-        console.log('query edit tag : ',query)
 
         const result = await client.query(query);
 
@@ -409,15 +389,16 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log('result : ', result)
         return result.rows[0];
     },
 
     deleteTag: async (tagId) => {
 
         const query = {
-            text : `DELETE FROM "kanban"."tag"
-                    WHERE id = $1`,
+            text : `
+                SELECT *
+                FROM "kanban".delete_tag($1)
+                `,
             values: [tagId]
           };
 
@@ -433,10 +414,10 @@ module.exports = {
     createAssociationTagToCard: async (cardObject) => {
         
         const query = {
-            text : `INSERT INTO "kanban"."m2m_tag_card" 
-                    ("tag_id", "card_id") 
-                    VALUES ($1, $2) returning *`,
-            values: [cardObject.tagId, cardObject.cardId]
+            text : `
+                SELECT *
+                FROM "kanban".associate_tag_to_card($1, $2) `,
+            values: [cardObject.cardId, cardObject.tagId]
           };
 
         const result = await client.query(query);
@@ -445,16 +426,17 @@ module.exports = {
             console.log('probleme a l\'insert');
             return
         }
-        console.log(result.rows[0]);
         return result.rows[0];
     },
 
     deleteAssociationTagToCard: async (tagCardObject) => {
 
         const query = {
-            text : `DELETE FROM "kanban"."m2m_tag_card"
-                    WHERE tag_id = $1 AND card_id = $2`,
-            values: [tagCardObject.tagId, tagCardObject.cardId]
+            text : `
+                SELECT *
+                FROM "kanban".remove_association_tag_to_card($1, $2)
+                `,
+            values: [tagCardObject.cardId, tagCardObject.tagId]
           };
 
         const result = await client.query(query);

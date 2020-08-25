@@ -29,15 +29,18 @@ router.delete('/kanban/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController
 router.post('/kanban/:kanbanId(\\d+)/associate', teacherMW.isATeacher, kanbanController.associateClassToKanban);
 router.post('/kanban/:id(\\d+)/associate/remove', teacherMW.isATeacher, kanbanController.removeAssociationClassToKanban);
 
+router.get('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)', teacherMW.isATeacher, kanbanController.getOneListById)
 router.post('/kanban/:id(\\d+)/list/create', teacherMW.isATeacher, kanbanController.createList);
 router.put('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/edit', kanbanController.editList);
 router.delete('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deletelist);
 
+router.get('/list/:listId(\\d+)/card/:cardId(\\d+)', teacherMW.isATeacher, kanbanController.getOneCardById)
 router.post('/list/:id(\\d+)/card/create', teacherMW.isATeacher, kanbanController.createCard);
 router.put('/list/:listId(\\d+)/card/:cardId(\\d+)/edit',teacherMW.isATeacher, kanbanController.editCard);
 router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteCard);
 
 router.get('/tags', teacherMW.isATeacher, kanbanController.getAllTags)
+router.get('/tag/:id(\\d+)', teacherMW.isATeacher, kanbanController.getOneTagById)
 router.post('/tag/create', teacherMW.isATeacher, kanbanController.createTag);
 router.put('/tag/:id(\\d+)/edit', kanbanController.editTag)
 router.delete('/tag/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteTag);

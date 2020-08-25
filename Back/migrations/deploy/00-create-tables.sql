@@ -58,7 +58,7 @@ CREATE TABLE "kanban"."list" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL,
     "order" INT NOT NULL,
-    "kanban_id" INT REFERENCES "kanban"."kanban"("id")
+    "kanban_id" INT REFERENCES "kanban"."kanban"("id") ON DELETE CASCADE
 );
 
 CREATE TABLE "kanban"."card" (
