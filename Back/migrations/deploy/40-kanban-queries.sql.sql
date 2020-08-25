@@ -73,7 +73,8 @@ LANGUAGE SQL STRICT;
 
 -- function to get all kanbans and their dependencies for a class
 
-CREATE FUNCTION "kanban".get_all_kanbans_by_class(classId INT) RETURNS SETOF "kanban".constructed_kanban AS
+CREATE FUNCTION "kanban".get_all_kanbans_by_class(classId INT) 
+RETURNS SETOF "kanban".constructed_kanban AS
 $$
 SELECT * 
 FROM "kanban".get_all_kanbans() 
@@ -84,7 +85,8 @@ LANGUAGE SQL STRICT;
 
 -- function to get one kanban by id
 
-CREATE FUNCTION "kanban".get_one_kanbans_by_id(kanbanId INT) RETURNS SETOF "kanban".constructed_kanban AS
+CREATE FUNCTION "kanban".get_one_kanbans_by_id(kanbanId INT) 
+RETURNS SETOF "kanban".constructed_kanban AS
 $$
 SELECT * 
 FROM "kanban".get_all_kanbans() 
@@ -95,26 +97,27 @@ LANGUAGE SQL STRICT;
 
 -- function to create a kanban
 
-CREATE FUNCTION "kanban".create_kanban(kanbanTitle TEXT, kanbanSlug TEXT, kanbanDescription TEXT, kanbanBackground TEXT, kanbanTeacherId INT) RETURNS SETOF "kanban".kanban AS
+CREATE FUNCTION "kanban".create_kanban(kanbanTitle TEXT, kanbanSlug TEXT, kanbanDescription TEXT, kanbanBackground TEXT, kanbanTeacherId INT) 
+RETURNS SETOF "kanban".kanban AS
 $$
 INSERT INTO "kanban"."kanban" 
     ("title", "slug", "description", "background", "teacher_id") 
-VALUES ($1, $2, $3, $4, $5) returning *;
+VALUES ($1, $2, $3, $4, $5) 
+RETURNING *;
 $$
 
 LANGUAGE SQL STRICT;
 
 -- function to edite a kanban
 
-CREATE OR REPLACE
-FUNCTION "kanban".update_kanban(kanbanId INT, kanbanTitle TEXT, kanbanSlug TEXT, kanbanDescription TEXT, kanbanBackground TEXT)
+CREATE FUNCTION "kanban".update_kanban(kanbanId INT, kanbanTitle TEXT, kanbanSlug TEXT, kanbanDescription TEXT, kanbanBackground TEXT)
 RETURNS "kanban".kanban AS
 $$
 UPDATE "kanban".kanban SET
-	"title" = COALESCE(kanbanTitle, "title", 'false'),
-	"slug" = COALESCE(kanbanSlug, "slug", 'false', 'false'),
-	"description" = COALESCE(kanbanDescription, "description", 'false'),
-	"background" = COALESCE(kanbanBackground, "background", 'false')
+	"title" = COALESCE(kanbanTitle, "title"),
+	"slug" = COALESCE(kanbanSlug, "slug"),
+	"description" = COALESCE(kanbanDescription, "description"),
+	"background" = COALESCE(kanbanBackground, "background")
 WHERE id = kanbanId
 RETURNING *;
 $$ 
@@ -122,10 +125,36 @@ LANGUAGE SQL;
 
 -- function to delete a kanban
 
-CREATE FUNCTION "kanban".delete_kanban(kanbanId INT) RETURNS SETOF "kanban".kanban AS
+CREATE FUNCTION "kanban".delete_kanban(kanbanId INT) 
+RETURNS SETOF "kanban".kanban AS
 $$
 DELETE FROM "kanban"."kanban"
-WHERE id = kanbanId returning *;
+WHERE id = kanbanId 
+RETURNING *;
+$$
+
+LANGUAGE SQL STRICT;
+
+-- function to associate class to kanban
+
+CREATE FUNCTION "kanban".associate_class_to_kanban(kanbanId INT, classId INT) 
+RETURNS SETOF "kanban"."m2m_kanban_class" AS
+$$
+INSERT INTO "kanban"."m2m_kanban_class" ("kanban_id", "class_id")
+VALUES ($1, $2)
+RETURNING *;
+$$
+
+LANGUAGE SQL STRICT;
+
+-- function remove association
+
+CREATE FUNCTION "kanban".remove_association_classto_kanban(kanbanId INT, classId INT) 
+RETURNS SETOF "kanban"."m2m_kanban_class" AS
+$$
+DELETE FROM "kanban"."m2m_kanban_class" 
+WHERE kanban_id = $1 AND class_id = $2
+RETURNING *
 $$
 
 LANGUAGE SQL STRICT;

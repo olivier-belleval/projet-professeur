@@ -124,32 +124,38 @@ module.exports = {
 
         try {
             const preparedQuery = {
-                text: `INSERT INTO "kanban"."m2m_kanban_class" ("kanban_id", "class_id")
-            VALUES ($1, $2)`,
+                text: `
+                SELECT * 
+                FROM "kanban".associate_class_to_kanban($1, $2)
+                `,
                 values: [kanbanId, classId]
             };
 
             const result = await client.query(preparedQuery);
 
-            return 'Classe ajoutée à l\'kanban!';
+            return result;
 
         } catch (error) {
 
-            return;
+            return error;
         }
+        
     },
 
     removeAssociationClassToKanban: async (kanbanId, classId) => {
 
         try {
             const preparedQuery = {
-                text: `DELETE FROM "kanban"."m2m_kanban_class" WHERE kanban_id = $1 AND class_id = $2`,
+                text: `
+                SELECT * 
+                FROM "kanban".remove_association_classto_kanban($1, $2)
+                `,
                 values: [kanbanId, classId]
             };
 
             const result = await client.query(preparedQuery);
 
-            return 'Association supprimée!';
+            return result;
 
         } catch (error) {
                 console.log(error)
