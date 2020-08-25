@@ -149,12 +149,24 @@ LANGUAGE SQL STRICT;
 
 -- function remove association
 
-CREATE FUNCTION "kanban".remove_association_classto_kanban(kanbanId INT, classId INT) 
+CREATE FUNCTION "kanban".remove_association_class_to_kanban(kanbanId INT, classId INT) 
 RETURNS SETOF "kanban"."m2m_kanban_class" AS
 $$
 DELETE FROM "kanban"."m2m_kanban_class" 
 WHERE kanban_id = $1 AND class_id = $2
 RETURNING *
+$$
+
+LANGUAGE SQL STRICT;
+
+-- function to get one kanban by id
+
+CREATE FUNCTION "kanban".get_one_list_by_id(kanbanId INT, listId INT) 
+RETURNS SETOF "kanban".list AS
+$$
+SELECT * 
+FROM "kanban".list
+WHERE id = kanbanId;
 $$
 
 LANGUAGE SQL STRICT;

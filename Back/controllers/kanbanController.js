@@ -132,6 +132,24 @@ module.exports = {
 
     },
 
+    getOneListById: async (request, response, next) => {
+        try {
+            const kanbanId = request.params.kanbanId
+            const listId = request.params.listId
+            const result = await kanbanDataMapper.getOneListById(kanbanId, listId);
+
+            //const result = kanbansFormater(pre_result);
+
+            response.json({
+                result
+            });
+
+        } catch (error) {
+            console.trace(error);
+            response.status(500).json(error);
+        }
+    },
+
     createList:async (request, response) => {
         try {
             // we create an object and store the request.body values

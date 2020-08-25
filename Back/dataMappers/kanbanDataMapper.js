@@ -163,6 +163,25 @@ module.exports = {
         }
     },
 
+    getOneListById: async (kanbanId, listId) => {
+        
+        const query = {
+            text : `
+                SELECT * 
+                FROM "kanban".get_one_list_by_id($1, $2);
+                `,
+            values: [kanbanId, listId]
+        };
+        
+        const result = await client.query(query);
+
+        if(!result) {
+            console.log('probleme de requette');
+            return;
+        }
+        return result.rows[0];
+    },
+
     createList: async (listObject) => {
         
         const query = {

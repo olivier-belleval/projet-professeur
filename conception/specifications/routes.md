@@ -56,6 +56,7 @@
 | POST | /api/kaban/:articleId/associate | kanbanController | Pour associer une class a un kanban |
 | POST | /api/kanban/:id/associate/remove | kanbanController | Pour retirer l’association une class a un kanban |
 | -| -| -| -|
+| GET | /api/kanban/:id/list/:id | kanbanController | Pour afficher une liste d'un kanban|
 | POST | /api/kanban/:id/list/create | kanbanController | Pour créer une liste dans un kanban|
 | PUT | /api/kanban/:kanbanId/list/:listId/edit | kanbanController | Pour modifier une liste d'un kanban|
 | DELETE | /api/kanban/:kanbanId/list/:listId/delete | kanbanController | Pour supprimer une liste d'un kanban |

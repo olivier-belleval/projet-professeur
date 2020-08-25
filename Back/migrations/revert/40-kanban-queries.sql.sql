@@ -18,6 +18,8 @@ DROP FUNCTION "kanban".delete_kanban(INT);
 
 DROP FUNCTION "kanban".associate_class_to_kanban(INT, INT);
 
-DROP FUNCTION "kanban".remove_association_classto_kanban(INT, INT);
+DROP FUNCTION "kanban".remove_association_class_to_kanban(INT, INT);
+
+DROP FUNCTION "kanban".get_one_list_by_id(INT, INT);
 
 COMMIT;
