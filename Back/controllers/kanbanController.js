@@ -163,10 +163,10 @@ module.exports = {
                 newListObject[key] = request.body[key];
             };         
 
-            const newList = await kanbanDataMapper.createList(newListObject);
+            const result = await kanbanDataMapper.createList(resultObject);
 
             response.json({
-                newList
+                result
             });
         } catch (error) {
             console.trace(error);
@@ -183,12 +183,15 @@ module.exports = {
                     editListObject[key] = request.body[key];
                 }
             };
+            editListObject['list_id'] = request.params.listId;
             editListObject['kanban_id'] = request.params.kanbanId;
 
-            const editedList = await kanbanDataMapper.editList(editListObject, request.params.listId);
+
+
+            const result = await kanbanDataMapper.editList(editListObject, request.params.listId);
 
             response.json({
-                editedList
+                result
             });
         } catch (error) {
             console.trace(error);

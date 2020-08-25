@@ -211,7 +211,7 @@ module.exports = {
                 FROM "kanban".update_list($1, $2, $3)
                 `
             ,
-            values: [listObject.kanban_id, listObject.name, listObject.order]
+            values: [listObject.list_id, listObject.name, listObject.order]
         };
 
         const result = await client.query(query);
@@ -225,8 +225,10 @@ module.exports = {
 
     deleteList: async (listId, kanbanId) => {
         const query = {
-            text : `DELETE FROM "kanban"."list"
-                    WHERE id = $1`,
+            text : `
+                SELECT *
+                FROM "kanban".delete_list($1)
+                `,
             values: [listId]
           };
 
