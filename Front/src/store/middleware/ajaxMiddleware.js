@@ -76,12 +76,25 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       })
         .then((res) => {
           console.log(res.data);
-          store.dispatch(deleteArticleSuccess(res.data));
+          store.dispatch(deleteArticleSuccess());
         })
         .catch((err) => {
           console.log(err);
-          store.dispatch(deleteArticleError('Impossible de récupérer les kanbans...'));
+          store.dispatch(deleteArticleError('Impossible de supprimer'));
         });
+        axios({
+          method: 'get',
+          url: `${local}api/articles`,
+          withCredentials: true,
+        })
+          .then((res) => {
+            console.log('mes data : ', res.data);
+            store.dispatch(getArticlesSuccess(res.data.result));
+          })
+          .catch((err) => {
+            console.log('mes erreurs de chargement : ', err);
+            store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+          });
     default:
   }
 };
