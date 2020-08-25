@@ -389,10 +389,10 @@ module.exports = {
                 newTagCardObject[key] = request.body[key];
             };           
 
-            const newTag = await kanbanDataMapper.createAssociationTagToCard(newTagCardObject);
+            const result = await kanbanDataMapper.createAssociationTagToCard(newTagCardObject);
 
             response.json({
-                newTag
+                result
             });
         } catch (error) {
             console.trace(error);

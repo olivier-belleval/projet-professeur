@@ -44,4 +44,8 @@ DROP FUNCTION "kanban".create_tag(TEXT, TEXT);
 
 DROP FUNCTION "kanban".update_tag(INT, TEXT, TEXT);
 
+DROP FUNCTION "kanban".delete_tag(INT);
+
+DROP FUNCTION "kanban".associate_tag_to_card(INT, INT);
+
 COMMIT;

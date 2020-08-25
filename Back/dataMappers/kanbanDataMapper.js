@@ -395,8 +395,10 @@ module.exports = {
     deleteTag: async (tagId) => {
 
         const query = {
-            text : `DELETE FROM "kanban"."tag"
-                    WHERE id = $1`,
+            text : `
+                SELECT *
+                FROM "kanban".delete_tag($1)
+                `,
             values: [tagId]
           };
 
@@ -412,10 +414,10 @@ module.exports = {
     createAssociationTagToCard: async (cardObject) => {
         
         const query = {
-            text : `INSERT INTO "kanban"."m2m_tag_card" 
-                    ("tag_id", "card_id") 
-                    VALUES ($1, $2) returning *`,
-            values: [cardObject.tagId, cardObject.cardId]
+            text : `
+                SELECT *
+                FROM "kanban".associate_tag_to_card($1, $2) `,
+            values: [cardObject.cardId, cardObject.tagId]
           };
 
         const result = await client.query(query);

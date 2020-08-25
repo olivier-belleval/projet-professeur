@@ -310,4 +310,28 @@ RETURNING *;
 $$ 
 LANGUAGE SQL;
 
+-- function to delete a tag
+
+CREATE FUNCTION "kanban".delete_tag(tagId INT) 
+RETURNS SETOF "kanban".tag AS
+$$
+DELETE FROM "kanban"."tag"
+WHERE id = tagId 
+RETURNING *;
+$$
+
+LANGUAGE SQL STRICT;
+
+-- function to associate tag to card
+
+CREATE FUNCTION "kanban".associate_tag_to_card(cardId INT, tagId INT) 
+RETURNS SETOF "kanban"."m2m_tag_card" AS
+$$
+INSERT INTO "kanban"."m2m_tag_card" ("card_id", "tag_id")
+VALUES ($1, $2)
+RETURNING *;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;
