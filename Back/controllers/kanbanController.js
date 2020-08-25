@@ -75,7 +75,10 @@ module.exports = {
                     editKanbanObject[key] = request.body[key];
                 }
             };
-            editKanbanObject.slug = slugify(request.body.title, '-');
+            if (request.body.title) {
+                editKanbanObject.slug = slugify(request.body.title, '-');
+            }
+            
 
             const editedKanban = await kanbanDataMapper.editKanban(editKanbanObject, request.params.id);
 

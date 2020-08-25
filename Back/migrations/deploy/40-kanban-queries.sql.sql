@@ -171,4 +171,17 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to create a list
+
+CREATE FUNCTION "kanban".create_list(listName TEXT, listOrder INT, kanbanId INT) 
+RETURNS SETOF "kanban".list AS
+$$
+INSERT INTO "kanban"."list" 
+    ("name", "order", "kanban_id") 
+VALUES ($1, $2, $3) 
+RETURNING *;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;

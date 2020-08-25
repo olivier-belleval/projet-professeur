@@ -22,4 +22,6 @@ DROP FUNCTION "kanban".remove_association_class_to_kanban(INT, INT);
 
 DROP FUNCTION "kanban".get_one_list_by_id(INT, INT);
 
+--DROP FUNCTION "kanban".create_list(TEXT, INT, INT) 
+
 COMMIT;
