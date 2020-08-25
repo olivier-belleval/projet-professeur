@@ -261,4 +261,15 @@ $$
 
 LANGUAGE SQL STRICT;
 
+-- function to get all tags
+
+CREATE FUNCTION "kanban".get_all_tag() 
+RETURNS SETOF "kanban".tag AS
+$$
+SELECT * 
+FROM "kanban".tag;
+$$
+
+LANGUAGE SQL STRICT;
+
 COMMIT;

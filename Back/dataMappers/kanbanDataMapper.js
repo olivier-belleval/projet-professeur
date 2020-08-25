@@ -320,7 +320,7 @@ module.exports = {
         
         const query = {
         text : `
-        SELECT * FROM "kanban".tag;
+        SELECT * FROM "kanban".get_all_tag() ;
         `
         };
         
