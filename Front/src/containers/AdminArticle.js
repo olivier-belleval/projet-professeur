@@ -26,7 +26,7 @@ const mapDispatch = (dispatch) => ({
   },
 
   editArticle: (id) => {
-    console.log("modifier", id);
+    console.log('modifier', id);
     dispatch(editArticle(id));
   },
 });

@@ -58,3 +58,8 @@ export default (state = initialState, action = {}) => {
       return state;
   }
 };
+
+export const getItemById = (state, id) => {
+  const item = state.articles.list.find((elem) => elem.article_id === id);
+  return item;
+};

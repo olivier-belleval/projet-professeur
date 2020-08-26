@@ -13,9 +13,10 @@ import TogglerMenu from '../../containers/TogglerMenu';
 import AdminArticle from '../../containers/AdminArticle';
 import TextEditorArticle from '../../containers/TextEditorArticle';
 import Admin from '../Admin';
+import Test from '../Test';
 
 // == Composant
-const App = ({ isLogged, teacher}) => (
+const App = ({ isLogged, teacher }) => (
 
   <div className="app">
     <Route exact path="/" component={HomePage} />
@@ -29,11 +30,13 @@ const App = ({ isLogged, teacher}) => (
           <Route exact path="/article/:slug" component={ArticleDetail} />
           <Route exact path="/kanbans" component={KanbansView} />
           <Route exact path="/kanban/:slug" component={KanbanDetail} />
-          <Route exact path="/admin/articles" component={AdminArticle} />
+
           { teacher && (
             <Switch>
-            <Route exact path="/espace-admin" component={Admin} />
-            <Route exact path="/admin/nouvel-article" component={TextEditorArticle} />
+              <Route exact path="/admin/articles" component={AdminArticle} />
+              <Route exact path="/espace-admin" component={Admin} />
+              <Route exact path="/admin/nouvel-article" component={TextEditorArticle} />
+              <Route exact path="admin/edit/article/:id" component={TextEditorArticle} />
             </Switch>
           )}
         </Switch>
