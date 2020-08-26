@@ -23,7 +23,7 @@ CREATE TABLE "omyprof"."class" (
     "username" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
     "description" TEXT,
-    "teacher_id" INT REFERENCES "omyprof"."teacher"("id")
+    "teacher_id" INT NOT NULL REFERENCES "omyprof"."teacher"("id")
 );
 
 -- TABLES DU SCHEMA ARTICLE
@@ -34,7 +34,7 @@ CREATE TABLE "article"."article" (
     "slug" TEXT NOT NULL,
     "excerpt" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "teacher_id" INT REFERENCES "omyprof"."teacher"("id")
+    "teacher_id" INT NOT NULL REFERENCES "omyprof"."teacher"("id")
 );
 
 CREATE TABLE "article"."m2m_article_class" (
@@ -51,14 +51,14 @@ CREATE TABLE "kanban"."kanban" (
     "slug" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "background" TEXT DEFAULT '#FFFFFF',
-    "teacher_id" INT REFERENCES "omyprof"."teacher"("id")
+    "teacher_id" INT NOT NULL REFERENCES "omyprof"."teacher"("id")
 );
 
 CREATE TABLE "kanban"."list" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL,
     "order" INT NOT NULL,
-    "kanban_id" INT REFERENCES "kanban"."kanban"("id") ON DELETE CASCADE
+    "kanban_id" INT NOT NULL REFERENCES "kanban"."kanban"("id") ON DELETE CASCADE
 );
 
 CREATE TABLE "kanban"."card" (
@@ -72,7 +72,7 @@ CREATE TABLE "kanban"."card" (
 CREATE TABLE "kanban"."tag" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL,
-    "color" TEXT DEFAULT '#FFFFFF' NOT NULL
+    "color" TEXT DEFAULT '#FFFFFF'
 );
 
 CREATE TABLE "kanban"."m2m_tag_card" (
