@@ -4,11 +4,11 @@ BEGIN;
 
 -- fonction pour récupérer toutes les classes
 
-CREATE TYPE constructed_class AS ("class_username" TEXT, "class_description" TEXT);
+CREATE TYPE constructed_class AS ("class_id" INT, "class_username" TEXT, "class_description" TEXT);
 
 CREATE FUNCTION get_all_classes() RETURNS SETOF constructed_class AS
 $$
-SELECT c.username, c.description 
+SELECT c.id, c.username, c.description 
 FROM "omyprof"."class" c;
 $$
 
@@ -18,7 +18,7 @@ LANGUAGE SQL STRICT;
 
 CREATE FUNCTION get_class_by_id(classId INT) RETURNS constructed_class AS
 $$
-SELECT c.username, c.description 
+SELECT c.id, c.username, c.description 
 FROM "omyprof"."class" c
 WHERE c.id = classId;
 $$

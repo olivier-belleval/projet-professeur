@@ -20,11 +20,13 @@ LANGUAGE SQL STRICT;
 
 -- fonction pour récupérer tous les usernames de la table omyprof.class
 
-CREATE TYPE class_usernames_type AS ("class_usernames" JSON);
+CREATE TYPE class_usernames_type AS ("class_id" INT, "class_usernames" TEXT);
 
-CREATE FUNCTION get_all_classes_usernames() RETURNS class_usernames_type AS
+CREATE FUNCTION get_all_classes_usernames() RETURNS SETOF class_usernames_type AS
 $$
-SELECT json_agg(c.username) AS class_usernames FROM "omyprof"."class" c;
+SELECT
+c.id, c.username
+FROM "omyprof"."class" c;
 $$
 LANGUAGE SQL STRICT;
 
