@@ -18,10 +18,17 @@ import {
 } from '../action/editor-actions';
 
 import {
+  GET_CLASSES,
+  getClassesError,
+  getClassesSuccess,
+} from '../action/user';
+
+import {
   GET_ARTICLES_ADMIN_PANEL, DELETE_ARTICLE, deleteArticleError, deleteArticleSuccess,
 } from '../action/AdminArticle';
 
 import { DELETE_KANBAN, deleteKanbanError, deleteKanbanSuccess } from '../action/AdminKanban';
+import { DELETE_CLASS, deleteClassError, deleteClassSuccess } from '../action/AdminClass';
 
 const ajaxMiddleware = (store) => (next) => (action) => {
   const local = 'http://localhost:3000/';
@@ -191,6 +198,37 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         .catch((err) => {
           console.log('mes erreurs de chargement : ', err);
           store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+        });
+
+      break;
+
+    case DELETE_CLASS:
+      const ClassId = store.getState().user.classe_id;
+      axios({
+        method: 'delete',
+        url: `${local}api/admin/class/${ClassId}/delete`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log(res.data);
+          store.dispatch(deleteClassSuccess());
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(deleteClassError('Impossible de supprimer la classe'));
+        });
+      axios({
+        method: 'get',
+        url: `${local}api/admin/class`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log('mes data : ', res.data);
+          store.dispatch(getClassesSuccess(res.data.result));
+        })
+        .catch((err) => {
+          console.log('mes erreurs de chargement : ', err);
+          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
         });
 
       break;
