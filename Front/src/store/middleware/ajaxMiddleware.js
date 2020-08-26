@@ -21,6 +21,8 @@ import {
   GET_ARTICLES_ADMIN_PANEL, DELETE_ARTICLE, deleteArticleError, deleteArticleSuccess,
 } from '../action/AdminArticle';
 
+import { DELETE_KANBAN, deleteKanbanError, deleteKanbanSuccess } from '../action/AdminKanban';
+
 const ajaxMiddleware = (store) => (next) => (action) => {
   const local = 'http://localhost:3000/';
   const server = 'http://54.90.32.97:3000/';
@@ -108,6 +110,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
             method: 'get',
             url: `${local}api/articles`,
             withCredentials: true,
+
           })
             .then((res) => {
               console.log('mes data : ', res.data);
@@ -158,6 +161,40 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
         });
       break;
+
+    case DELETE_KANBAN:
+      const kanbanId = store.getState().kanbans.kanban_id;
+      axios({
+        method: 'delete',
+        url: `${local}api/kanban/${kanbanId}/delete`,
+        withCredentials: true,
+        crossorigin: true,
+
+      })
+        .then((res) => {
+          console.log(res.data);
+          store.dispatch(deleteKanbanSuccess());
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(deleteKanbanError('Impossible de supprimer les kanbans'));
+        });
+      axios({
+        method: 'get',
+        url: `${local}api/kanbans`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log('mes data : ', res.data);
+          store.dispatch(getKanbanSuccess(res.data.result));
+        })
+        .catch((err) => {
+          console.log('mes erreurs de chargement : ', err);
+          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+        });
+
+      break;
+
     default:
   }
 };
