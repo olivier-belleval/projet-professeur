@@ -71,9 +71,9 @@ router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeac
 
 router.get('/tags', teacherMW.isATeacher, kanbanController.getAllTags);
 router.get('/tag/:id(\\d+)', teacherMW.isATeacher, kanbanController.getOneTagById);
-router.post('/tag/create', teacherMW.isATeacher, kanbanController.createTag);
-router.put('/tag/:id(\\d+)/edit', teacherMW.isATeacher, validateBody(createTag), kanbanController.editTag);
-router.delete('/tag/:id(\\d+)/delete', teacherMW.isATeacher, validateBody(editTag), kanbanController.deleteTag);
+router.post('/tag/create', validateBody(createTag), teacherMW.isATeacher, kanbanController.createTag);
+router.put('/tag/:id(\\d+)/edit', teacherMW.isATeacher, validateBody(editTag), kanbanController.editTag);
+router.delete('/tag/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteTag);
 
 router.post('/card/:cardId(\\d+)/tag/:tagId(\\d+)/add', teacherMW.isATeacher, kanbanController.createAssociationTagToCard);
 router.delete('/card/:cardId(\\d+)/tag/:tagId(\\d+)/remove', teacherMW.isATeacher, kanbanController.deleteAssociationTagToCard);
