@@ -1,4 +1,4 @@
-import { DELETE_CLASS, DELETE_CLASS_ERROR, DELETE_CLASS_SUCCESS } from '../action/AdminClass';
+import { DELETE_CLASS, DELETE_CLASS_ERROR, DELETE_CLASS_SUCCESS, GET_CLASSES_ADMIN_PANEL } from '../action/AdminClass';
 
 
 const initialState = {
@@ -12,6 +12,11 @@ const initialState = {
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    case GET_CLASSES_ADMIN_PANEL:
+      return {
+        ...state,
+        loading: true,
+      };
     case DELETE_CLASS:
       return {
         ...state,

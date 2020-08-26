@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -7,15 +7,22 @@ import {
 } from 'react-icons/fa';
 import './style.scss';
 
-const AdminClass = ({ list, onclickPen, deleteClass, }) => {
-  console.log(list);
+const AdminClass = ({
+  list,
+  onclickPen,
+  deleteClass,
+  getClasses,
+}) => {
+  useEffect(() => {
+    getClasses();
+  }, []);
   return (
     <div className="admin_panel_class">
       <h1 className="admin_panel_class-title"> Espace administrateur - gestion des classes </h1>
       <div className="admin_panel_class-content">
         {list.map((classe) => (
-          <div className="admin_panel_class-content-part" key={classe}>
-            <div className="admin_panel_class-content-part-class">{classe}</div>
+          <div className="admin_panel_class-content-part" key={classe.class_username}>
+            <div className="admin_panel_class-content-part-class">{classe.class_username}</div>
             <div className="admin_panel_class_content-part-icons">
               <div className="admin_panel_class_content-part-modify"><FaPencilAlt onClick={() => {
                 console.log('modify');

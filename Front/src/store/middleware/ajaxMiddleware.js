@@ -34,7 +34,7 @@ import {
 } from '../action/AdminArticle';
 
 import { DELETE_KANBAN, deleteKanbanError, deleteKanbanSuccess } from '../action/AdminKanban';
-import { DELETE_CLASS, deleteClassError, deleteClassSuccess } from '../action/AdminClass';
+import { GET_CLASSES_ADMIN_PANEL, DELETE_CLASS, deleteClassError, deleteClassSuccess } from '../action/AdminClass';
 
 const ajaxMiddleware = (store) => (next) => (action) => {
   const local = 'http://localhost:3000/';
@@ -72,6 +72,23 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         .catch((err) => {
           console.log('mes erreurs de chargement : ', err);
           store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+        });
+
+      break;
+
+    case GET_CLASSES_ADMIN_PANEL:
+      axios({
+        method: 'get',
+        url: `${local}api/admin/classes`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log('mes data : ', res.data);
+          store.dispatch(getClassesSuccess(res.data.data));
+        })
+        .catch((err) => {
+          console.log('mes erreurs de chargement : ', err);
+          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
         });
 
       break;

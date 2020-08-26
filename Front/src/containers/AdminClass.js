@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import AdminClass from '../components/AdminClass';
-import { modifyClass, deleteClass } from '../store/action/AdminClass';
+import { modifyClass, deleteClass, getClassesAdminPanel } from '../store/action/AdminClass';
 
 const mapState = (state) => ({
   list: state.user.classes,
@@ -16,6 +16,10 @@ const mapDispatch = (dispatch) => ({
   deleteClass: (id) => {
     console.log("l'user veut supprimer la classe");
     dispatch(deleteClass(id));
+  },
+
+  getClasses: () => {
+    dispatch(getClassesAdminPanel());
   },
 
 });
