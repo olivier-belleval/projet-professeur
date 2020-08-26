@@ -72,7 +72,7 @@ CREATE TABLE "kanban"."card" (
 CREATE TABLE "kanban"."tag" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL,
-    "color" TEXT DEFAULT '#FFFFFF'
+    "color" TEXT DEFAULT '#FFFFFF' NOT NULL
 );
 
 CREATE TABLE "kanban"."m2m_tag_card" (

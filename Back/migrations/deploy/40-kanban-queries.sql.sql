@@ -85,7 +85,7 @@ LANGUAGE SQL STRICT;
 
 -- function to get one kanban by id
 
-CREATE FUNCTION "kanban".get_one_kanbans_by_id(kanbanId INT) 
+CREATE FUNCTION "kanban".get_one_kanban_by_id(kanbanId INT) 
 RETURNS SETOF "kanban".constructed_kanban AS
 $$
 SELECT * 
@@ -161,12 +161,12 @@ LANGUAGE SQL STRICT;
 
 -- function to get one list by id
 
-CREATE FUNCTION "kanban".get_one_list_by_id(kanbanId INT, listId INT) 
+CREATE FUNCTION "kanban".get_one_list_by_id(listId INT) 
 RETURNS SETOF "kanban".list AS
 $$
 SELECT * 
 FROM "kanban".list
-WHERE id = kanbanId;
+WHERE id = listId;
 $$
 
 LANGUAGE SQL STRICT;
