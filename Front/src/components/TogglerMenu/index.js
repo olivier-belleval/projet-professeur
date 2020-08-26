@@ -26,14 +26,6 @@ return (
     {opened && (
     <div className="settings-menu">
 
-      {/* {
-      tab.map((url) => (
-        <NavLink key={url} exact to={url}>
-          <div className="settings-nav">{url}</div>
-        </NavLink>
-      ))
-    } */}
-
         <NavLink key={"1"} exact to={'/articles'}>
           <div className="settings-nav">articles</div>
         </NavLink>

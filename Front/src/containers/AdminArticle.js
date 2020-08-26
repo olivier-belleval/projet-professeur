@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import AdminArticle from '../components/AdminArticle';
 import { modifyArticle, joinClass } from '../store/action';
 import { getArticles, getArticle } from '../store/action/data-actions';
-import { deleteArticle} from '../store/action/AdminArticle'
+import { deleteArticle, getArticlesAdminPanel } from '../store/action/AdminArticle'
 
 const mapState = (state) => ({
   list: state.articles.list,
@@ -21,7 +21,7 @@ const mapDispatch = (dispatch) => ({
   },
 
   getArticles: () => {
-    dispatch(getArticles());
+    dispatch(getArticlesAdminPanel());
   },
 
   deleteArticle : (id) => {
