@@ -12,6 +12,7 @@ const adminController = require('../controllers/adminController');
 router.use(connexionMW.isUserConnected);
 
 // routes pour les articles
+
 router.get('/articles', articleController.getAllArticlesWithClass);
 router.get('/article/:id(\\d+)', articleController.getOneArticle);
 router.post('/article/write', teacherMW.isATeacher, articleController.createOneArticle);
@@ -21,6 +22,7 @@ router.post('/article/:id(\\d+)/associate', teacherMW.isATeacher, articleControl
 router.delete('/article/:id(\\d+)/associate/remove', teacherMW.isATeacher, articleController.removeAssociationClassToArticle);
 
 // routes pour les kanbans
+
 router.get('/kanbans', kanbanController.getAllKanbans);
 router.get('/kanban/:id(\\d+)', kanbanController.getOneKanbansById);
 router.post('/kanban/create', teacherMW.isATeacher, kanbanController.createKanban);
@@ -29,15 +31,21 @@ router.delete('/kanban/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController
 router.post('/kanban/:kanbanId(\\d+)/associate', teacherMW.isATeacher, kanbanController.associateClassToKanban);
 router.post('/kanban/:id(\\d+)/associate/remove', teacherMW.isATeacher, kanbanController.removeAssociationClassToKanban);
 
+// routes pour les listes
+
 router.get('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)', teacherMW.isATeacher, kanbanController.getOneListById)
 router.post('/kanban/:id(\\d+)/list/create', teacherMW.isATeacher, kanbanController.createList);
 router.put('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/edit', kanbanController.editList);
 router.delete('/kanban/:kanbanId(\\d+)/list/:listId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deletelist);
 
+// routes pour les cartes
+
 router.get('/list/:listId(\\d+)/card/:cardId(\\d+)', teacherMW.isATeacher, kanbanController.getOneCardById)
 router.post('/list/:id(\\d+)/card/create', teacherMW.isATeacher, kanbanController.createCard);
 router.put('/list/:listId(\\d+)/card/:cardId(\\d+)/edit',teacherMW.isATeacher, kanbanController.editCard);
 router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteCard);
+
+// routes pour les tags
 
 router.get('/tags', teacherMW.isATeacher, kanbanController.getAllTags)
 router.get('/tag/:id(\\d+)', teacherMW.isATeacher, kanbanController.getOneTagById)

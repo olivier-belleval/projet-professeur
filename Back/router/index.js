@@ -7,7 +7,6 @@ const apiRouter = require('./api');
 const errorMW = require('../middlewares/error')
 
 
-
 router.use('/login', loginRouter)
     .use('/api', apiRouter)
     .use(errorMW.error404);

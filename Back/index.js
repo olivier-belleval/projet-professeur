@@ -9,14 +9,6 @@ require('dotenv').config();
 const router = require('./router');
 const session = require('express-session');
 
-app.use((request, response, next) => {
-    response.header('Access-Control-Allow-Origin', 'http://localhost:8080');
-    response.header('Access-Control-Allow-Credentials', true);
-    response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    response.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
-
 // gestion du request.body
 app.use(express.urlencoded({extended: true}));
 
@@ -30,6 +22,20 @@ app.use(session({
     saveUninitialized: true,
 
 }));
+
+const whiteListOrigin = ['http://localhost:8080',]
+
+// gestion des cors
+var corsOptions = {
+    origin: whiteListOrigin,
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+    preflightContinue: false,
+    credentials: true
+  }
+
+app.use(cors(corsOptions));
+
+app.options('*', cors());
 
 app.use(router);
 
