@@ -18,6 +18,12 @@ import {
 } from '../action/editor-actions';
 
 import {
+  CREATE_CLASS_SUMIT,
+  createClassSuccess,
+  createClassError,
+} from '../action/class-editor-action';
+
+import {
   GET_CLASSES,
   getClassesError,
   getClassesSuccess,
@@ -76,8 +82,8 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data.formatedResult);
-          store.dispatch(getKanbansSuccess(res.data.formatedResult));
+          console.log(res.data.data);
+          store.dispatch(getKanbansSuccess(res.data.data));
         })
         .catch((err) => {
           console.log(err);
@@ -166,6 +172,40 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         .catch((err) => {
           console.log('mes erreurs de chargement : ', err);
           store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+        });
+      break;
+
+    case CREATE_CLASS_SUMIT:
+
+      axios({
+        method: 'post',
+        url: `${local}api/admin/class/create`,
+        withCredentials: true,
+        data: {
+          title: store.getState().editorClass.title,
+          content: store.getState().editorClass.content,
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          store.dispatch(createClassSuccess());
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(createClassError('Impossible de créer la classe'));
+        });
+      axios({
+        method: 'get',
+        url: `${local}api/admin/classes`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log('mes data : ', res.data);
+          store.dispatch(getClassesSuccess(res.data.data));
+        })
+        .catch((err) => {
+          console.log('mes erreurs de chargement : ', err);
+          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
         });
       break;
 

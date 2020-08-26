@@ -81,7 +81,7 @@ const logMiddleware = (store) => (next) => (action) => {
       })
         .then((res) => {
           console.log(res.data.data);
-          store.dispatch(getClassesSuccess(res.data.data.class_usernames)); 
+          store.dispatch(getClassesSuccess(res.data.data[0].class_usernames));
           console.log('je vais au bout de ma requête');
         })
         .catch((err) => {

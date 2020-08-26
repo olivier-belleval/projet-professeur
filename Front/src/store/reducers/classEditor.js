@@ -1,13 +1,13 @@
 import {
   UPDATE_EDITOR_STATE,
-  CREATE_ARTICLE_SUMIT,
-  CREATE_ARTICLE_ERROR,
-  CREATE_ARTICLE_SUCCESS,
+  CREATE_CLASS_SUMIT,
+  CREATE_CLASS_ERROR,
+  CREATE_CLASS_SUCCESS,
 
-} from '../action/editor-actions';
+} from '../action/class-editor-action';
 import {
-  EDIT_ARTICLE,
-} from '../action/AdminArticle';
+  EDIT_CLASS,
+} from '../action/AdminClass';
 
 const initialState = {
   title: '',
@@ -25,30 +25,30 @@ export default (state = initialState, action = {}) => {
         ...state,
         ...action.payload,
       };
-    case CREATE_ARTICLE_SUMIT:
+    case CREATE_CLASS_SUMIT:
       return {
         ...state,
         loading: true,
         message: '',
         send: true,
       };
-    case CREATE_ARTICLE_SUCCESS:
+    case CREATE_CLASS_SUCCESS:
       return {
         ...state,
         loading: false,
         title: '',
         content: '',
-        message: 'L\'article a été ajouté !',
+        message: 'La classe a été ajouté !',
         send: false,
       };
-    case CREATE_ARTICLE_ERROR:
+    case CREATE_CLASS_ERROR:
       return {
         ...state,
         loading: false,
-        message: 'Il y a eu une erreur à l\'envoi de votre article',
+        message: 'Il y a eu une erreur à l\'envoi de votre classe',
         send: false,
       };
-    case EDIT_ARTICLE:
+    case EDIT_CLASS:
       return {
         ...state,
         id: action.payload,

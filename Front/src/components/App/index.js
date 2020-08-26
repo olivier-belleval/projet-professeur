@@ -14,10 +14,11 @@ import AdminArticle from '../../containers/AdminArticle';
 import AdminKanban from '../../containers/AdminKanban';
 import AdminClass from '../../containers/AdminClass';
 import TextEditorArticle from '../../containers/TextEditorArticle';
+import TextEditorClass from '../../containers/TextEditorClass';
 import Admin from '../Admin';
 
 // == Composant
-const App = ({ isLogged, teacher}) => (
+const App = ({ isLogged, teacher }) => (
 
   <div className="app">
     <Route exact path="/" component={HomePage} />
@@ -36,8 +37,9 @@ const App = ({ isLogged, teacher}) => (
           <Route exact path="/admin/comptes" component={AdminClass} />
           { teacher && (
             <Switch>
-            <Route exact path="/espace-admin" component={Admin} />
-            <Route exact path="/admin/nouvel-article" component={TextEditorArticle} />
+              <Route exact path="/espace-admin" component={Admin} />
+              <Route exact path="/admin/nouvel-article" component={TextEditorArticle} />
+              <Route exact path="/admin/nouvelle-classe" component={TextEditorClass} />
             </Switch>
           )}
         </Switch>

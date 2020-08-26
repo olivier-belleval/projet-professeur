@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import {
   FaPencilAlt, FaTrash, FaPlusCircle,
 } from 'react-icons/fa';
@@ -33,7 +35,9 @@ const AdminClass = ({ list, onclickPen, deleteClass, }) => {
 
         <div className="admin_panel_class-content-part">
           <p>Ajouter une classe</p>
-          <FaPlusCircle />
+          <Link exact to="/admin/nouvelle-classe">
+            <FaPlusCircle />
+          </Link>
         </div>
       </div>
     </div>
