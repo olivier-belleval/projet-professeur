@@ -3,10 +3,12 @@ import './style.scss';
 import KanbanList from './KanbanList';
 
 const KanbanDetail = ({
-  kanban
+  kanban,
+  onOpenClick,
+  modalOpen
 }) => {
   const { lists } = kanban;
-  console.log(lists)
+  console.log(modalOpen)
   return (
     <div className="kanban-detail">
       <header>
@@ -21,13 +23,19 @@ const KanbanDetail = ({
       </header>
       <main>
         <div className="kanban-detail-grid">
-          {lists.map((list) => <KanbanList key={list.id} list={list}/>)}
+          {lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick}/>)}
 
         </div>
-
+        {/* {modalOpen && (<CardModal/>)} */}
       </main>
     </div>
   );
 };
+
+const CardModal = () => (
+  <div className="card-modal">
+    Coucou
+  </div>
+)
 
 export default KanbanDetail;

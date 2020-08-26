@@ -13,7 +13,6 @@ import TogglerMenu from '../../containers/TogglerMenu';
 import AdminArticle from '../../containers/AdminArticle';
 import TextEditorArticle from '../../containers/TextEditorArticle';
 import Admin from '../Admin';
-import Test from '../Test';
 
 // == Composant
 const App = ({ isLogged, teacher }) => (

@@ -1,5 +1,6 @@
 import { slugifyTitle } from '../../utils';
 import { GET_KANBANS, GET_KANBANS_ERROR, GET_KANBANS_SUCCESS, GET_KANBAN, GET_KANBAN_ERROR, GET_KANBAN_SUCCESS } from '../action/data-actions';
+import { TOGGLE_MODAL_CARD } from '../action/create-actions';
 
 export const initialState = {
   loading: false,
@@ -7,10 +8,16 @@ export const initialState = {
   list: [],
   kanban_id: '',
   kanban_detail: [],
+  modalOpen: false,
 };
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    case TOGGLE_MODAL_CARD:
+      return {
+        ...state,
+        modalOpen: true,
+      };
     case GET_KANBANS:
       return {
         ...state,

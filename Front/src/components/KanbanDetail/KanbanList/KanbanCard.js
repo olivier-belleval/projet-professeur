@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const KanbanCard = ({ card }) => (
   <div className="kanban-card">
 
@@ -19,5 +20,7 @@ const Tag = ({tag}) => (
     {tag.name}
   </span>
 );
+
+
 
 export default KanbanCard;

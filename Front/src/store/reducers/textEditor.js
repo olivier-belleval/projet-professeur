@@ -7,7 +7,7 @@ import {
 } from '../action/editor-actions';
 import {
   EDIT_ARTICLE
-} from '../action/AdminArticle'
+} from '../action/AdminArticle';
 
 const initialState = {
   title: '',
