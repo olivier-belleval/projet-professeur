@@ -9,6 +9,7 @@ const { createClassSchema, editClassSchema } = require('../../validation/schemas
 
 
 const adminController = require('../../controllers/adminController');
+const filesController = require('../../controllers/filesController');
 
 // vérification connexion admin
 
@@ -23,5 +24,8 @@ router.post('/class/create', validateBody(createClassSchema), adminController.cr
 router.put('/class/:id(\\d+)/edit', validateBody(editClassSchema), adminController.editClass);
 router.delete('/class/:id(\\d+)/delete', adminController.deleteClass);
 
+router.post('/file/upload', filesController.uploadFile);
+router.post('/file/delete', filesController.deleteFile);
+router.get('/file/all', filesController.findAllFiles);
 
 module.exports = router;
