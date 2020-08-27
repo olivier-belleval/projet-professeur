@@ -5,7 +5,7 @@ const utility = require('../module/utility');
 
 module.exports = {
 
-    getAllArticlesWithClass: async (request, response, next) => {
+    getAllArticlesWithClass: async (request, response) => {
 
         try {
 
@@ -30,7 +30,7 @@ module.exports = {
         };
     },
 
-    getOneArticle: async (request, response, next) => {
+    getOneArticle: async (request, response) => {
 
         try {
 
@@ -53,7 +53,7 @@ module.exports = {
         };
     },
 
-    createOneArticle: async function (request, response, next) {
+    createOneArticle: async function (request, response) {
 
         try {
 
@@ -67,26 +67,9 @@ module.exports = {
 
             };
 
-            // vérification des données reçues 
-
-            const mandatory = [];
-
-            if (!article.title) {
-                mandatory.push('Le titre est obligatoire');
-            };
-
-            if (!article.content) {
-                mandatory.push('L\'article est vide!');
-            };
-
-            // on renvoie les erreurs si il y en a
-            if (mandatory.length > 0) {
-                return response.status(400).json(mandatory);
-            };
-
             const result = await articleDataMapper.createOneArticle(article);
 
-            response.status(200).json({ message: 'Article has been successfully created', data: result });
+            response.status(200).json({ message: 'Article has been successfully created.', data: result });
 
         } catch (error) {
 
@@ -95,7 +78,7 @@ module.exports = {
         };
     },
 
-    editArticle: async (request, response, next) => {
+    editArticle: async (request, response) => {
 
         try {
 
@@ -137,10 +120,10 @@ module.exports = {
             const result = await articleDataMapper.editArticle(article, articleId);
 
             if (!result) {
-                return response.status(400).json('Failed to edit article with id ' + articleId);
+                return response.status(400).json('Failed to edit article with id ' + articleId + '.');
             };
 
-            response.status(200).json({ message: 'Article has been successfully edited', data: result });
+            response.status(200).json({ message: 'Article has been successfully edited.', data: result });
 
         } catch (error) {
 
@@ -148,7 +131,7 @@ module.exports = {
         };
     },
 
-    deleteArticle: async (request, response, next) => {
+    deleteArticle: async (request, response) => {
 
         try {
 
@@ -157,10 +140,10 @@ module.exports = {
             const result = await articleDataMapper.deleteArticle(articleId);
 
             if (!result) {
-                return response.status(400).json('Failed to delete article with id ' + articleId);
+                return response.status(400).json('Failed to delete article with id ' + articleId + '.');
             };
 
-            response.status(200).json({ message: 'Article has been successfully removed', data: result });
+            response.status(200).json({ message: 'Article has been successfully removed.', data: result });
 
         } catch (error) {
 
@@ -169,19 +152,20 @@ module.exports = {
         };
     },
 
-    associateClassToArticle: async (request, response, next) => {
+    associateClassToArticle: async (request, response) => {
 
         try {
 
             const articleId = request.params.id;
+            const classId = request.body.classId;
 
-            const result = await articleDataMapper.associateClassToArticle(articleId, request.body.classId);
+            const result = await articleDataMapper.associateClassToArticle(articleId, classId);
 
             if (!result) {
-                return response.status(400).json('Association failed');
+                return response.status(400).json('Association failed.');
             };
 
-            response.status(200).json({ message: 'Association has been successfully added', data: result });
+            response.status(200).json({ message: 'Association has been successfully added.', data: result });
 
         } catch (error) {
 
@@ -190,19 +174,20 @@ module.exports = {
         };
     },
 
-    removeAssociationClassToArticle: async (request, response, next) => {
+    removeAssociationClassToArticle: async (request, response) => {
 
         try {
 
             const articleId = request.params.id;
+            const classId = request.body.classId;
 
-            const result = await articleDataMapper.removeAssociationClassToArticle(articleId, request.body.classId);
+            const result = await articleDataMapper.removeAssociationClassToArticle(articleId, classId);
 
             if (!result) {
-                return response.status(400).json('Failed to remove association');
+                return response.status(400).json('Failed to remove association.');
             }
 
-            response.status(200).json({ message: 'Association has been successfully removed', data: result });
+            response.status(200).json({ message: 'Association has been successfully removed.', data: result });
 
         } catch (error) {
 

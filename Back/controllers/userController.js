@@ -2,13 +2,13 @@ const userDataMapper = require('../dataMappers/userDataMapper');
 
 module.exports = {
 
-    classLogin: async (request, response, next) => {
+    classLogin: async (request, response) => {
 
         try {
 
             // fin d'éxécution si username ou password ne sont pas renseignés
             if (!request.body.username || !request.body.password) {
-                return response.status(400).json('Username or password cannot be blank');
+                return response.status(400).json('Username or password cannot be blank.');
             };
 
             // appel datamapper pour vérification du username/password
@@ -16,7 +16,7 @@ module.exports = {
 
             // fin d'éxécution si aucun résultat
             if (!result) {
-                return response.status(400).json('Invalid username or password - Failed to connect');
+                return response.status(400).json('Invalid username or password - Failed to connect.');
             };
 
             // on stocke l'id de la classe, son username/nom et son state en cookie si l'authentification est réussie
@@ -33,7 +33,6 @@ module.exports = {
 
     logout: (request, response) => {
 
-
         try {
 
             if (!request.session) {
@@ -44,9 +43,9 @@ module.exports = {
             } else {
 
                 // if active session then destroy it and the cookie
-                request.session.destroy()
-                response.clearCookie('connect.sid') // clean up!
-                return response.status(200).json('Successful logout');
+                request.session.destroy();
+                response.clearCookie('connect.sid'); // clean up!
+                return response.status(200).json('Successful logout.');
 
             };
 
@@ -57,21 +56,21 @@ module.exports = {
         };
     },
 
-    adminLogin: async (request, response, next) => {
+    adminLogin: async (request, response) => {
 
         try {
 
             // fin d'éxécution si username ou password ne sont pas renseignés
             if (!request.body.username || !request.body.password) {
-                return response.status(400).json('Username or password cannot be blank');
-            }
+                return response.status(400).json('Username or password cannot be blank.');
+            };
 
             // appel datamapper pour vérification du username/password
             const result = await userDataMapper.checkTeacher(request.body.username, request.body.password);
 
             // fin d'éxécution si aucun résultat
             if (!result) {
-                return response.status(400).json('Invalid username or password - Failed to connect');
+                return response.status(400).json('Invalid username or password - Failed to connect.');
             };
 
             // on stocke l'id du teacher, son username et son state en cookie si l'authentification est réussie
@@ -88,7 +87,7 @@ module.exports = {
     },
 
     // méthode pour récupérer tous les classes_usernames et les afficher dans le scroll (page de connexion)
-    getClassesUsernames: async (request, response, next) => {
+    getClassesUsernames: async (_, response) => {
 
         try {
 
@@ -103,4 +102,4 @@ module.exports = {
         };
     }
 
-}
+};

@@ -3,7 +3,7 @@ const utility = require('../module/utility');
 
 module.exports = {
 
-    getAllClasses: async (request, response) => {
+    getAllClasses: async (_, response) => {
 
         try {
 
@@ -18,7 +18,7 @@ module.exports = {
         };
     },
 
-    getAllArticlesWithoutClasses: async (request, response) => {
+    getAllArticlesWithoutClasses: async (_, response) => {
 
         try {
 
@@ -44,7 +44,7 @@ module.exports = {
 
             if (!result) {
 
-                return response.status(404).json('Can\'t find class with id: ' + classId);
+                return response.status(404).json('Can\'t find class with id: ' + classId + '.');
 
             };
 
@@ -69,27 +69,6 @@ module.exports = {
 
             };
 
-            // vérification des données reçues 
-
-            const mandatory = [];
-
-            if (!data.username) {
-                mandatory.push('Username cannot be blank.');
-            };
-
-            if (!data.password) {
-                mandatory.push('Password cannot be blank.');
-            };
-
-            if (!data.description) {
-                mandatory.push('Description cannot be blank.')
-            };
-
-            // on renvoit les erreurs si il y en a
-            if (mandatory.length > 0) {
-                return response.status(400).json(mandatory);
-            };
-
             const result = await adminDataMapper.createClass(data);
 
             if (!result) {
@@ -98,7 +77,7 @@ module.exports = {
 
             }
 
-            response.status(200).json({ message: 'Class has been created successfully', data: result });
+            response.status(200).json({ message: 'Class has been created successfully.', data: result });
 
         } catch (error) {
 
@@ -120,7 +99,9 @@ module.exports = {
 
                 // on exclue les champs vides
                 if (request.body[input] !== '') {
+
                     data[input] = request.body[input];
+
                 };
 
             };
@@ -136,11 +117,11 @@ module.exports = {
 
             if (!result) {
 
-                return response.status(400).json('Failed to edit class with id ' + classId);
+                return response.status(400).json('Failed to edit class with id ' + classId + '.');
 
             };
 
-            response.status(200).json({ message: 'Class has been edited successfully', data: result });
+            response.status(200).json({ message: 'Class has been edited successfully.', data: result });
 
         } catch (error) {
 
@@ -159,11 +140,11 @@ module.exports = {
 
             if (!result) {
 
-                return response.status(400).json('Failed to delete class with id ' + classId);
+                return response.status(400).json('Failed to delete class with id ' + classId + '.');
 
             };
 
-            response.status(200).json({ message: 'Class has been deleted successfully', data: result });
+            response.status(200).json({ message: 'Class has been deleted successfully.', data: result });
 
         } catch (error) {
 
