@@ -4,6 +4,10 @@ export const DELETE_CLASS_SUCCESS = 'DELETE_CLASS_SUCCESS';
 export const DELETE_CLASS_ERROR = 'DELETE_CLASS_ERROR';
 export const EDIT_CLASS = 'EDIT_CLASS';
 export const GET_CLASSES_ADMIN_PANEL = 'GET_CLASSES_ADMIN_PANEL';
+//add
+// export const GET_CLASSES = 'GET_CLASSES';
+export const GET_CLASSES_SUCCESS = 'GET_CLASSES_SUCCESS';
+export const GET_CLASSES_ERROR = 'GET_CLASSES_ERROR';
 
 export const modifyClass = () => ({
   type: MODIFY_CLASS,
@@ -29,3 +33,19 @@ export const editClass = (payload) => ({
 export const getClassesAdminPanel = () => ({
   type: GET_CLASSES_ADMIN_PANEL,
 });
+
+//add
+export const getClassesSuccess = (payload) => ({
+  type: GET_CLASSES_SUCCESS,
+  payload,
+});
+
+export const getClassesError = (payload) => ({
+  type: GET_CLASSES_ERROR,
+  payload,
+});
+
+
+// export const getClasses = () => ({
+//   type: GET_CLASSES,
+// });

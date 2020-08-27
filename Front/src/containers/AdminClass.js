@@ -3,7 +3,8 @@ import AdminClass from '../components/AdminClass';
 import { modifyClass, deleteClass, getClassesAdminPanel } from '../store/action/AdminClass';
 
 const mapState = (state) => ({
-  list: state.user.classes,
+  list: state.classes.classes,
+  //list: state.user.classes,
   classe_id: state.classes.classe_id,
 });
 
