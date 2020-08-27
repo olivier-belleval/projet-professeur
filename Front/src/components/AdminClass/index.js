@@ -37,7 +37,7 @@ const AdminClass = ({
               </div>
               <div className="admin_panel_class_content-part-delete"><FaTrash onClick={() => {
                 console.log('delete', classe.class_id);
-                // deleteClass(classe.class_id);
+                deleteClass(classe.class_id);
               }}
               />
               </div>

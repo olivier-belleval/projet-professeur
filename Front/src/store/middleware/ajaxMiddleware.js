@@ -34,7 +34,13 @@ import {
 } from '../action/AdminArticle';
 
 import { DELETE_KANBAN, deleteKanbanError, deleteKanbanSuccess } from '../action/AdminKanban';
-import { GET_CLASSES_ADMIN_PANEL, DELETE_CLASS, deleteClassError, deleteClassSuccess } from '../action/AdminClass';
+
+import {
+  GET_CLASSES_ADMIN_PANEL,
+  DELETE_CLASS,
+  deleteClassError,
+  deleteClassSuccess,
+} from '../action/AdminClass';
 
 const ajaxMiddleware = (store) => (next) => (action) => {
   const local = 'http://localhost:3000/';
@@ -140,7 +146,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
             method: 'get',
             url: `${local}api/articles`,
             withCredentials: true,
-
           })
             .then((res) => {
               console.log('mes data : ', res.data);
@@ -260,7 +265,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       break;
 
     case DELETE_CLASS:
-      const ClassId = store.getState().user.classe_id;
+      const ClassId = store.getState().classes.class_id;
       axios({
         method: 'delete',
         url: `${local}api/admin/class/${ClassId}/delete`,
@@ -276,7 +281,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         });
       axios({
         method: 'get',
-        url: `${local}api/admin/class`,
+        url: `${local}api/admin/classes`,
         withCredentials: true,
       })
         .then((res) => {

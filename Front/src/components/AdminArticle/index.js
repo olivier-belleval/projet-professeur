@@ -18,6 +18,7 @@ const AdminArticle = ({
   useEffect(() => {
     getArticles();
   }, []);
+  console.log(list);
   return (
     <div className="admin_panel_article">
       <h1 className="admin_panel_article-title"> Espace administrateur - gestion des articles </h1>

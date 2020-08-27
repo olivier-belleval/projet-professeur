@@ -4,8 +4,7 @@ import { modifyClass, deleteClass, getClassesAdminPanel } from '../store/action/
 
 const mapState = (state) => ({
   list: state.classes.classes,
-  //list: state.user.classes,
-  classe_id: state.classes.classe_id,
+  class_id: state.classes.class_id,
 });
 
 const mapDispatch = (dispatch) => ({
@@ -15,7 +14,7 @@ const mapDispatch = (dispatch) => ({
   },
 
   deleteClass: (id) => {
-    console.log("l'user veut supprimer la classe");
+    console.log("l'user veut supprimer la classe", id);
     dispatch(deleteClass(id));
   },
 

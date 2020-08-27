@@ -1,12 +1,17 @@
 import {
-  DELETE_CLASS, DELETE_CLASS_ERROR, DELETE_CLASS_SUCCESS, GET_CLASSES_ADMIN_PANEL, GET_CLASSES_SUCCESS, GET_CLASSES_ERROR,
+  DELETE_CLASS,
+  DELETE_CLASS_ERROR,
+  DELETE_CLASS_SUCCESS,
+  GET_CLASSES_ADMIN_PANEL,
+  GET_CLASSES_SUCCESS,
+  GET_CLASSES_ERROR,
 } from '../action/AdminClass';
 
 const initialState = {
 
   loading: false,
   classes: [],
-  classe_id: '',
+  class_id: '',
   error: '',
 
 };
@@ -37,7 +42,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: true,
-        classe_id: action.payload,
+        class_id: action.payload,
       };
     case DELETE_CLASS_SUCCESS:
       return {
