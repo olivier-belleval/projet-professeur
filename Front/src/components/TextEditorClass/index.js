@@ -4,7 +4,7 @@ import './style.scss';
 import 'draft-js/dist/Draft.css';
 
 const TextEditorClass = ({
-  changeField, title, content, handleArticleSubmit, send,
+  changeField, username, password, description, handleClassSubmit, send,
 }) => {
   console.log('text edit');
   const handleInputChange = (evt) => {
@@ -13,23 +13,31 @@ const TextEditorClass = ({
   };
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleArticleSubmit();
+    handleClassSubmit();
   };
 
   return (
     <div className="text-editor-class">
       <form onSubmit={handleSubmit}>
         <input
-          name="title"
-          value={title}
-          placeholder="Titre"
+          name="username"
+          value={username}
+          placeholder="Nom de la classe"
+          onChange={handleInputChange}
+          className="input-title"
+        />
+        <input
+          name="password"
+          type="password"
+          value={password}
+          placeholder="Mot de passe"
           onChange={handleInputChange}
           className="input-title"
         />
         <textarea
-          name="content"
-          value={content}
-          placeholder="Description de la casse..."
+          name="description"
+          value={description}
+          placeholder="Description de la classe..."
           onChange={handleInputChange}
           className="input-content"
         />

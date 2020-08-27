@@ -4,8 +4,9 @@ import TextEditorClass from '../components/TextEditorClass';
 import { updateEditorState, createClassSubmit } from '../store/action/class-editor-action';
 
 const mapStateToProps = (state) => ({
-  title: state.editorClass.title,
-  content: state.editorClass.content,
+  username: state.editorClass.title,
+  password: state.editorClass.content,
+  description: state.editorClass.description,
   loading: state.editorClass.loading,
   message: state.editorClass.message,
   send: state.editorClass.send,
@@ -13,9 +14,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeField: (changedData) => {
+    console.log(changedData);
     dispatch(updateEditorState(changedData));
   },
-  handleArticleSubmit: () => {
+  handleClassSubmit: () => {
+    console.log('soumission formulaire');
     dispatch(createClassSubmit());
   },
 });

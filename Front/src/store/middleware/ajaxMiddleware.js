@@ -18,7 +18,7 @@ import {
 } from '../action/editor-actions';
 
 import {
-  CREATE_CLASS_SUMIT,
+  CREATE_CLASS_SUBMIT,
   createClassSuccess,
   createClassError,
 } from '../action/class-editor-action';
@@ -197,15 +197,16 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         });
       break;
 
-    case CREATE_CLASS_SUMIT:
+    case CREATE_CLASS_SUBMIT:
 
       axios({
         method: 'post',
         url: `${local}api/admin/class/create`,
         withCredentials: true,
         data: {
-          title: store.getState().editorClass.title,
-          content: store.getState().editorClass.content,
+          username: store.getState().editorClass.username,
+          password: store.getState().editorClass.password,
+          description: store.getState().editorClass.description,
         },
       })
         .then((res) => {

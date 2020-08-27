@@ -1,6 +1,6 @@
 import {
   UPDATE_EDITOR_STATE,
-  CREATE_CLASS_SUMIT,
+  CREATE_CLASS_SUBMIT,
   CREATE_CLASS_ERROR,
   CREATE_CLASS_SUCCESS,
 
@@ -10,8 +10,9 @@ import {
 } from '../action/AdminClass';
 
 const initialState = {
-  title: '',
-  content: '',
+  username: '',
+  password: '',
+  description: '',
   loading: false,
   message: '',
   send: false,
@@ -25,7 +26,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         ...action.payload,
       };
-    case CREATE_CLASS_SUMIT:
+    case CREATE_CLASS_SUBMIT:
       return {
         ...state,
         loading: true,
@@ -36,8 +37,9 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
-        title: '',
-        content: '',
+        username: '',
+        password: '',
+        description: '',
         message: 'La classe a été ajouté !',
         send: false,
       };

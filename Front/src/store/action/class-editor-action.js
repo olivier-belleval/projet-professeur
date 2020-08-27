@@ -1,5 +1,5 @@
 export const UPDATE_EDITOR_STATE = 'UPDATE_EDITOR_STATE';
-export const CREATE_CLASS_SUMIT = 'CREATE_CLASS_SUMIT';
+export const CREATE_CLASS_SUBMIT = 'CREATE_CLASS_SUBMIT';
 export const CREATE_CLASS_SUCCESS = 'CREATE_CLASS_SUCCESS';
 export const CREATE_CLASS_ERROR = 'CREATE_CLASS_ERROR';
 
@@ -9,7 +9,7 @@ export const updateEditorState = (payload) => ({
 });
 
 export const createClassSubmit = () => ({
-  type: CREATE_CLASS_SUMIT,
+  type: CREATE_CLASS_SUBMIT,
 });
 
 export const createClassError = (payload) => ({
