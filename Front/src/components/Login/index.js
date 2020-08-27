@@ -60,7 +60,7 @@ const Login = ({
               >
                 <option>je choisis ma classe</option>
                 {classes.map((item) => (
-                  <option value={item} key={item}>{item}</option>
+                  <option value={item} key={item.class_id}>{item.class_usernames}</option>
                 ))}
               </select>
               )}

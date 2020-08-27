@@ -1,6 +1,6 @@
 // == Import npm
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useParams } from 'react-router-dom';
 
 // == Import
 import './styles.scss';
@@ -13,6 +13,7 @@ import TogglerMenu from '../../containers/TogglerMenu';
 import AdminArticle from '../../containers/AdminArticle';
 import TextEditorArticle from '../../containers/TextEditorArticle';
 import Admin from '../Admin';
+
 
 // == Composant
 const App = ({ isLogged, teacher }) => (
@@ -35,13 +36,12 @@ const App = ({ isLogged, teacher }) => (
               <Route exact path="/admin/articles" component={AdminArticle} />
               <Route exact path="/espace-admin" component={Admin} />
               <Route exact path="/admin/nouvel-article" component={TextEditorArticle} />
-              <Route exact path="admin/edit/article/:id" component={TextEditorArticle} />
+              <Route exact path="/admin/edit/article/:id" component={TextEditorArticle} />
             </Switch>
           )}
         </Switch>
       </div>
     ) : <Redirect to="/" />}
-
   </div>
 );
 

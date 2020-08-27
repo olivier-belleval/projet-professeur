@@ -7,7 +7,7 @@ import { deleteArticle, getArticlesAdminPanel, editArticle } from '../store/acti
 const mapState = (state) => ({
   list: state.articles.list,
   article_id: state.articles.article_id,
-  id: state.editor.id,
+  id_edited_article: state.editor.id_edited_article,
 });
 
 const mapDispatch = (dispatch) => ({

@@ -17,9 +17,7 @@ const logMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case LOGIN_SUBMIT:
-      console.log('case login submit');
-      
-      console.log('middleware request axios', user);
+
       axios({
         method: 'post',
         url: `${local}login/admin`,
@@ -27,7 +25,6 @@ const logMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log('login request');
           store.dispatch(loginSubmitSuccess(res.data));
         })
         .catch((err) => {
@@ -45,7 +42,6 @@ const logMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log('login request');
           store.dispatch(loginSubmitSuccess(res.data));
         })
         .catch((err) => {
@@ -80,8 +76,8 @@ const logMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data.data);
-          store.dispatch(getClassesSuccess(res.data.data[0].class_usernames)); 
+          console.log(res.data);
+          store.dispatch(getClassesSuccess(res.data.data));
           console.log('je vais au bout de ma requête');
         })
         .catch((err) => {

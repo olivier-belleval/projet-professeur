@@ -1,21 +1,24 @@
 import { connect } from 'react-redux';
 import TextEditorArticle from '../components/TextEditorArticle';
 
-import { updateEditorState, createArticleSubmit } from '../store/action/editor-actions';
+import {
+  updateEditorState, createArticleSubmit, cancelEditingArticle, submitEditedArticle,
+} from '../store/action/editor-actions';
 import { getItemById } from '../store/reducers/textEditor';
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(id, ownProps);
-    const { id } = ownProps.match.params;
+  console.log(ownProps.match.params.id);
+  const id = Number(ownProps.match.params.id);
 
-  return{
-  article: getItemById(state, id),
-  title: state.editor.title,
-  content: state.editor.content,
-  loading: state.editor.loading,
-  message: state.editor.message,
-  send: state.editor.send,
-}
+  return {
+    articleEdited: getItemById(state, id),
+    title: state.editor.title,
+    content: state.editor.content,
+    loading: state.editor.loading,
+    message: state.editor.message,
+    send: state.editor.send,
+    editing: state.editor.editing,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,6 +27,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleArticleSubmit: () => {
     dispatch(createArticleSubmit());
+  },
+  cancelEditingArticle: () => {
+    dispatch(cancelEditingArticle());
+  },
+  handleArticleEdit: () => {
+    dispatch(submitEditedArticle());
   },
 });
 

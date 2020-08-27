@@ -1,6 +1,7 @@
 import { slugifyTitle } from '../../utils';
 import { GET_KANBANS, GET_KANBANS_ERROR, GET_KANBANS_SUCCESS, GET_KANBAN, GET_KANBAN_ERROR, GET_KANBAN_SUCCESS } from '../action/data-actions';
-import { TOGGLE_MODAL_CARD } from '../action/create-actions';
+
+import { TOGGLE_MODAL_CARD, CHANGE_FIELD_CARD } from '../action/create-actions';
 
 export const initialState = {
   loading: false,
@@ -9,6 +10,8 @@ export const initialState = {
   kanban_id: '',
   kanban_detail: [],
   modalOpen: false,
+  newCardTitle: '',
+  newCardContent: '',
 };
 
 export default (state = initialState, action = {}) => {
@@ -16,7 +19,12 @@ export default (state = initialState, action = {}) => {
     case TOGGLE_MODAL_CARD:
       return {
         ...state,
-        modalOpen: true,
+        modalOpen: !state.modalOpen,
+      };
+    case CHANGE_FIELD_CARD:
+      return {
+        ...state,
+        ...action.payload,
       };
     case GET_KANBANS:
       return {
@@ -66,6 +74,8 @@ export default (state = initialState, action = {}) => {
 
 export const getKanbanBySlug = (state, slug) => {
   const kanban = state.kanbans.list.find((item) => {
+    console.log(slug);
+    console.log(item);
     const slugTitle = slugifyTitle(item.title);
     const slugToFind = slugifyTitle(slug);
     return slugTitle === slugToFind;

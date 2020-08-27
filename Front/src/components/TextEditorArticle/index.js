@@ -1,12 +1,20 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import './style.scss';
-import 'draft-js/dist/Draft.css';
+
 
 const TextEditorArticle = ({
-  changeField, title, content, handleArticleSubmit, send,
+  changeField,
+  title,
+  content,
+  handleArticleSubmit,
+  send,
+  editing,
+  articleEdited,
+  cancelEditingArticle,
+  handleArticleEdit,
 }) => {
-  console.log('text edit');
+
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
     changeField({ [name]: value });
@@ -15,26 +23,32 @@ const TextEditorArticle = ({
     evt.preventDefault();
     handleArticleSubmit();
   };
+  const handleEdition = (evt) =>{
+    evt.preventDefault();
+    handleArticleEdit();
+  }
 
   return (
     <div className="text-editor-article">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={editing ? handleEdition : handleSubmit}>
         <input
           name="title"
-          value={title}
           placeholder="Titre"
           onChange={handleInputChange}
           className="input-title"
+          defaultValue={editing ? articleEdited.article_title : title}
         />
         <textarea
           name="content"
-          value={content}
-          placeholder="Contenu de mon  article..."
+          defaultValue={editing ? articleEdited.article_excerpt : content}
           onChange={handleInputChange}
           className="input-content"
         />
+        <button type="button" className="text-editor-article-button-cancel" onClick={cancelEditingArticle}>
+          <Link to="/admin/articles">Annuler</Link>
+        </button>
         <button type="submit" className="text-editor-article-button">
-          Let's go baby !
+          Envoyer
         </button>
         {send && <Redirect to="/admin/articles" />}
       </form>

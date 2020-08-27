@@ -13,10 +13,8 @@ const KanbanList = ({ list, onOpenClick }) => {
         </div>
         <div className="kanban-list-content">
           {list.cards && list.cards.map((card) => <KanbanCard key={card.id} card={card} />)}
-
-
         </div>
-      </div>;
+      </div>
   </div>
 );}
 

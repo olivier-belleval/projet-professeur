@@ -2,7 +2,7 @@
 
 .kanban-detail{
   margin:1.3em;
-  background-image: url(https://image.freepik.com/free-vector/gradient-dynamic-background-with-diagonal-elements_52683-13907.jpg);
+  background-color: vars.$lightest-color;
   padding: 1em;
   &-head{
     background-color: vars.$color;
@@ -39,7 +39,7 @@
 .kanban-card {
   display: flex;
   flex-wrap: wrap;
-
+  box-shadow: 5px 10px vars.$color;
   border-radius: 0 0 0.7em 0.7em;
   background-color:vars.$lightest-color ;
   margin-top: 1em;
@@ -71,7 +71,33 @@
   position: absolute;
   width: 400px;
   height: 400px;
-  background-color: red;
+  background-color:white;
+  top:30%;
+  left:40%;
+  border-radius:1em;
+  padding: 1em;
+  box-shadow: 5px 10px vars.$alt-dark-color;
+
+  &-input,&-textarea{
+    margin: 1em;
+    border-radius: 5px;
+    padding: 5px;
+    width: 90%;
+    border:lightgray 1px solid;
+    &:focus{
+      box-shadow: 5px 10px vars.$light-color;
+      outline:none
+    }
+  }
+
+  &-textarea{
+    height: 10rem;
+  }
+
+  &-close-button{
+    width: 100%;
+    text-align: right;
+  }
 }
 
   @media screen and (min-width:600px){

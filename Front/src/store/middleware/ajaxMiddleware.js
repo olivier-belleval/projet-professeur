@@ -15,6 +15,9 @@ import {
   CREATE_ARTICLE_SUMIT,
   createArticleSuccess,
   createArticleError,
+  SUBMIT_EDITED_ARTICLE,
+  editArticleError,
+  editArticleSuccess,
 } from '../action/editor-actions';
 
 import {
@@ -158,6 +161,40 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
         });
       break;
+
+    case SUBMIT_EDITED_ARTICLE:
+      let editedArticleId = store.getState().editor.id_edited_article
+      axios({
+        method: 'put',
+        url: `${local}api/article/${editedArticleId}/edit`,
+        withCredentials: true,
+        data: {
+          title: store.getState().editor.title,
+          content: store.getState().editor.content,
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          store.dispatch(editArticleSuccess());
+          axios({
+            method: 'get',
+            url: `${local}api/admin/articles`,
+            withCredentials: true,
+          })
+            .then((res) => {
+              console.log('mes data : ', res.data);
+              store.dispatch(getArticlesSuccess(res.data.data));
+            })
+            .catch((err) => {
+              console.log('mes erreurs de chargement : ', err);
+              store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(editArticleError('Impossible de créer'));
+        });
+        
     default:
   }
 };
