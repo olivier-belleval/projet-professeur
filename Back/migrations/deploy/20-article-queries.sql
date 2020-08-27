@@ -4,7 +4,7 @@ BEGIN;
 
 -- fonction pour afficher tous les articles avec une classe associée
 
-CREATE TYPE article_search_admin AS ("article_id" INT, "article_title" TEXT, "article_slug" TEXT, "article_excerpt" TEXT, "article_author" TEXT, "class_username" JSON);
+CREATE TYPE article_search_admin AS ("article_id" INT, "article_title" TEXT, "article_slug" TEXT, "article_excerpt" TEXT, "article_content" TEXT, "article_author" TEXT, "class_username" JSON);
 
 CREATE FUNCTION get_articles_with_associated_class () RETURNS SETOF article_search_admin AS
 $$
@@ -13,6 +13,7 @@ $$
 		a.title AS article_title, 
 		a.slug article_slug, 
 		a.excerpt article_excerpt, 
+        a.content AS article_content,
 		t.first_name || ' ' || t.last_name AS article_author,
 		COALESCE(json_agg(c.username) FILTER (WHERE c.username IS NOT NULL), null) AS class_username
 		FROM "article"."article" a
@@ -32,7 +33,8 @@ $$
         a.id AS article_id, 
         a.title AS article_title, 
         a.slug article_slug, 
-        a.excerpt article_excerpt, 
+        a.excerpt article_excerpt,
+        a.content AS article_content,
         t.first_name || ' ' || t.last_name AS article_author,
         COALESCE(json_agg(c.username) FILTER (WHERE c.username IS NOT NULL), null) AS class_username
         FROM "article"."article" a
