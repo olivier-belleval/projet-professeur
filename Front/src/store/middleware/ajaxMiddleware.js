@@ -212,24 +212,25 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         .then((res) => {
           console.log(res.data);
           store.dispatch(createClassSuccess());
+          axios({
+            method: 'get',
+            url: `${local}api/admin/classes`,
+            withCredentials: true,
+          })
+            .then((res) => {
+              console.log('mes data : ', res.data);
+              store.dispatch(getClassesSuccess(res.data.data));
+            })
+            .catch((err) => {
+              console.log('mes erreurs de chargement : ', err);
+              store.dispatch(getClassesError('Impossible de récupérer les classes...'));
+            });
         })
-        .catch((err) => {
+        .catch((err, res) => {
           console.log(err);
-          store.dispatch(createClassError('Impossible de créer la classe'));
+          store.dispatch(createClassError(res.data));
         });
-      axios({
-        method: 'get',
-        url: `${local}api/admin/classes`,
-        withCredentials: true,
-      })
-        .then((res) => {
-          console.log('mes data : ', res.data);
-          store.dispatch(getClassesSuccess(res.data.data));
-        })
-        .catch((err) => {
-          console.log('mes erreurs de chargement : ', err);
-          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
-        });
+
       break;
 
     case DELETE_KANBAN:

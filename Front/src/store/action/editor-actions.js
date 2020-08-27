@@ -9,10 +9,10 @@ export const updateEditorState = (payload) => ({
 });
 
 export const createArticleSubmit = () =>({
-  type: CREATE_ARTICLE_SUMIT
+  type: CREATE_ARTICLE_SUMIT,
 });
 
-export const createArticleError= (payload) =>({
+export const createArticleError = (payload) =>({
   type: CREATE_ARTICLE_ERROR,
   payload,
 });

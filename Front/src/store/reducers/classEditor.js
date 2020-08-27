@@ -1,5 +1,5 @@
 import {
-  UPDATE_EDITOR_STATE,
+  UPDATE_CLASS_EDITOR_STATE,
   CREATE_CLASS_SUBMIT,
   CREATE_CLASS_ERROR,
   CREATE_CLASS_SUCCESS,
@@ -21,7 +21,7 @@ const initialState = {
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case UPDATE_EDITOR_STATE:
+    case UPDATE_CLASS_EDITOR_STATE:
       return {
         ...state,
         ...action.payload,
@@ -55,7 +55,6 @@ export default (state = initialState, action = {}) => {
         ...state,
         id: action.payload,
       };
-
     default:
       return state;
   }
