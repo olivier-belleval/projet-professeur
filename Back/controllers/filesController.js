@@ -79,7 +79,7 @@ module.exports = {
     })
     },
 
-    findAllFiles: async (request, response, next) => {
+    findAllFiles: async (_, response) => {
     const dirPath = path.join(__dirname,'../files');
 
     fs.readdir(dirPath, (error, files) => {
@@ -128,14 +128,14 @@ module.exports = {
     });
     },
 
-    downloadFile: async (request, response, next) => {
+    downloadFile: async (request, response) => {
 
 
     const dirPath = path.join(__dirname,'../files');
 
-        const fileName = request.params.filename
+        const fileName = request.params.filename;
 
-        const file = dirPath+'/'+ fileName
+        const file = dirPath+'/'+ fileName;
         response.download(file);
 
     }
