@@ -45,24 +45,24 @@ module.exports = {
             response.status(500).send(err);
 
         }
-  },
+    },
 
-  deleteFile: async (request, response) => {
+    deleteFile: async (request, response) => {
 
     console.log('request.body.fileName in router: ',request.body.fileName )
-  
+
     const fileName = request.body.fileName;
 
     const path = './files/' + fileName;
 
     console.log('path: ', path)
-  
+
     fs.unlink(path, (err) => {
-      if (err) {
+    if (err) {
         console.error(err)
         return
-      } else {
-          response.json({
+    } else {
+        response.json({
 
             status: true,
             message: 'File is deleted',
@@ -73,16 +73,16 @@ module.exports = {
             }
         })
         console.log('well done !!!!')
-      }
-  
-      //file removed
+    }
+
+    //file removed
     })
-  },
+    },
 
-  findAllFiles: async (request, response, next) => {
-      const dirPath = path.join(__dirname,'../files');
+    findAllFiles: async (request, response, next) => {
+    const dirPath = path.join(__dirname,'../files');
 
-      fs.readdir(dirPath, (error, files) => {
+    fs.readdir(dirPath, (error, files) => {
 
         if (error) {
 
@@ -125,7 +125,19 @@ module.exports = {
             message: 'File(s) found',
             data: result
         })
-      });
-  }
+    });
+    },
+
+    downloadFile: async (request, response, next) => {
+
+
+    const dirPath = path.join(__dirname,'../files');
+
+        const fileName = request.params.filename
+
+        const file = dirPath+'/'+ fileName
+        response.download(file);
+
+    }
   
 }

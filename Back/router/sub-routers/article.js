@@ -21,4 +21,6 @@ router.post('/:id(\\d+)/associate', teacherMW.isATeacher, validateBody(associati
 router.delete('/:id(\\d+)/associate/remove', teacherMW.isATeacher,  validateBody(associationArticleClassSchema), articleController.removeAssociationClassToArticle);
 
 
+
+
 module.exports = router;
