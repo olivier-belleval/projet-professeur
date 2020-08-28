@@ -86,6 +86,8 @@ module.exports = {
 
             const result = await kanbanDataMapper.createKanban(newKanbanObject);
 
+
+
             response.status(200)
                 .json({
                     data: result
@@ -413,9 +415,15 @@ module.exports = {
 
             };
 
+            if (!newCardObject['color']) {
+                newCardObject['color'] = '#F0F';
+            };
+
             newCardObject['list_id'] = request.params.id;
 
             const result = await kanbanDataMapper.createCard(newCardObject);
+
+            console.log('data in controller: ', result)
 
             response.status(200)
                 .json({
