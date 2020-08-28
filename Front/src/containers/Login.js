@@ -7,12 +7,17 @@ import {
   loginChangeTeacher,
 } from '../store/action';
 
+import { loginClassesSubmit } from '../store/action/user'
+
+import { logout } from '../store/action/user';
+import { getClasses } from '../store/action/user'
+
 
 const mapStateToProps = (state) => ({
   username: state.user.username,
   password: state.user.password,
   isLogged: state.user.isLogged,
-  opened: state.user.loginOpened,
+  loginOpened: state.user.loginOpened,
   loading: state.user.loading,
   classes: state.user.classes,
   teacher: state.user.teacher,
@@ -26,17 +31,24 @@ const mapDispatchToProps = (dispatch) => ({
   },
   // changing loading value to true
   handleLogin: () => {
-    console.log('handlelogin:submit');
     dispatch(loginSubmit());
   },
+  // handle login for classes
+  handleClassesLogin: () => {
+    dispatch(loginClassesSubmit());
+  },
+
   // toggle to open login form
   onOpenClick: () => {
-    console.log('click')
     dispatch(toggleLoginForm());
   },
   //turn login window as teacher login windows
   onTeacherClick: () => {
     dispatch(loginChangeTeacher());
+  },
+  //get all classes from an axios request and deliver it into select input
+  getClasses: () => {
+    dispatch(getClasses());
   }
 });
 

@@ -1,28 +1,30 @@
 import axios from 'axios';
 import {
-  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError, loginSubmit,
-} from '../action';
+  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError,
+} from '../action/index';
+import { LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT } from '../action/user';
 
 const logMiddleware = (store) => (next) => (action) => {
-  console.log('middleware');
+  const local = 'http://localhost:3000/';
+  const server = 'http://54.90.32.97:3000/';
+  
+  const user = {
+        username: store.getState().user.username,
+        password: store.getState().user.password,
+      };
+
   next(action);
 
   switch (action.type) {
     case LOGIN_SUBMIT:
-      console.log('case login submit');
-      const user = {
-        username: store.getState().username,
-        password: store.getState().password,
-      };
 
       axios({
         method: 'post',
-        url: 'http://localhost:3000/api/login',
+        url: `${local}login/admin`,
         data: user,
         withCredentials: true,
       })
         .then((res) => {
-          console.log('login request');
           store.dispatch(loginSubmitSuccess(res.data));
         })
         .catch((err) => {
@@ -31,6 +33,59 @@ const logMiddleware = (store) => (next) => (action) => {
             loginSubmitError('Mot de passe incorrect'),
           );
         });
+      break;
+      case LOGIN_CLASSES_SUBMIT:
+      axios({
+        method: 'post',
+        url: `${local}login/`,
+        data: user,
+        withCredentials: true,
+      })
+        .then((res) => {
+          store.dispatch(loginSubmitSuccess(res.data));
+        })
+        .catch((err) => {
+          store.dispatch(
+            console.error(err),
+            loginSubmitError('Mot de passe incorrect'),
+          );
+        });
+      break;
+    case LOGOUT:
+      console.log('case logout');
+      axios({
+        method: 'get',
+        url: `${local}login/logout`,
+        withCredentials: true,
+
+      })
+        .then((res) => {
+          console.log('logout request', res);
+          store.dispatch(logoutSuccess());
+        })
+        .catch((err) => {
+          store.dispatch(
+            console.error(err),
+          );
+        });
+      break;
+    case GET_CLASSES:
+      axios({
+        method: 'get',
+        url: `${local}login`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log(res.data);
+          store.dispatch(getClassesSuccess(res.data.data));
+          console.log('je vais au bout de ma requête');
+        })
+        .catch((err) => {
+          console.log(err);
+          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
+        })
+
+      break;
 
     default:
   }

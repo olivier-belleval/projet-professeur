@@ -1,11 +1,17 @@
 import { combineReducers } from 'redux';
 
 import articles from './articles';
-import user from './index';
-import kanbans from './kanban';
+import user from './user';
+import kanbans from './kanbans';
+import editor from './textEditor';
+import classes from './classes';
+import editorClass from './classEditor';
 
 export default combineReducers({
-  articles: articles,
-  user: user,
+  articles,
+  user,
   kanbans,
+  editor,
+  classes,
+  editorClass,
 });

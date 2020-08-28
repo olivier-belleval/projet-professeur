@@ -1,0 +1,31 @@
+@use 'src/styles/vars';
+
+.menu {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  padding: 1em;
+  border-bottom: 1px solid vars.$primary-color;
+  background-color: vars.$light-color;
+
+  &-title {
+    color: vars.$dark-color;
+    font-size: 1.5em;
+  }
+
+  &-nav {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  &-link {
+    margin: 0 1rem;
+    cursor: pointer;
+    color: vars.$dark-color;
+
+    &:hover,
+    &.active {
+      color: vars.$color;
+    }
+  }
+}

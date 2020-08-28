@@ -56,12 +56,17 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "draft-js": "^0.11.7",
     "prop-types": "*",
     "react": "*",
     "react-dom": "*",
+    "react-icons": "^3.11.0",
     "react-redux": "*",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "*",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^1.2.1",
     "slugify": "^1.4.5",
     "styled-components": "*"
   }
