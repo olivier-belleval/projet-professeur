@@ -1,5 +1,14 @@
 import { slugifyTitle } from '../../utils';
-import { GET_KANBANS, GET_KANBANS_ERROR, GET_KANBANS_SUCCESS, GET_KANBAN, GET_KANBAN_ERROR, GET_KANBAN_SUCCESS } from '../action/data-actions';
+import {
+  GET_KANBANS,
+  GET_KANBANS_ERROR,
+  GET_KANBANS_SUCCESS,
+  GET_KANBAN,
+  GET_KANBAN_ERROR,
+  GET_KANBAN_SUCCESS,
+} from '../action/data-actions';
+
+import { DELETE_KANBAN, DELETE_KANBAN_ERROR, DELETE_KANBAN_SUCCESS } from '../action/AdminKanban';
 
 import {
   TOGGLE_MODAL_CARD,
@@ -77,7 +86,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         kanban_id: action.payload,
-        kanban_detail:[],
+        kanban_detail: [],
       };
     case GET_KANBAN_SUCCESS:
       return {
@@ -92,6 +101,28 @@ export default (state = initialState, action = {}) => {
         error: action.payload,
         kanban_detail: [],
         kanban_id: '',
+      };
+    case DELETE_KANBAN:
+      return {
+        ...state,
+        loading: true,
+        kanban_id: action.payload,
+      };
+    case DELETE_KANBAN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        list: [...action.payload],
+        kanban_id: '',
+        error: '',
+      };
+    case DELETE_KANBAN_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        kanban_id: '',
+        list: [],
       };
     default:
       return state;

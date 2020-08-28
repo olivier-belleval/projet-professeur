@@ -11,7 +11,10 @@ import KanbansView from '../../containers/KanbansView';
 import KanbanDetail from '../../containers/KanbanDetail';
 import TogglerMenu from '../../containers/TogglerMenu';
 import AdminArticle from '../../containers/AdminArticle';
+import AdminKanban from '../../containers/AdminKanban';
+import AdminClass from '../../containers/AdminClass';
 import TextEditorArticle from '../../containers/TextEditorArticle';
+import TextEditorClass from '../../containers/TextEditorClass';
 import Admin from '../Admin';
 
 
@@ -37,6 +40,9 @@ const App = ({ isLogged, teacher }) => (
               <Route exact path="/espace-admin" component={Admin} />
               <Route exact path="/admin/nouvel-article" component={TextEditorArticle} />
               <Route exact path="/admin/edit/article/:id" component={TextEditorArticle} />
+              <Route exact path="/admin/kanban" component={AdminKanban} />
+              <Route exact path="/admin/comptes" component={AdminClass} />
+              <Route exact path="/admin/nouvelle-classe" component={TextEditorClass} />
             </Switch>
           )}
         </Switch>

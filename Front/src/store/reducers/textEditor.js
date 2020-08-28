@@ -10,14 +10,14 @@ import {
 
 } from '../action/editor-actions';
 import {
-  EDIT_ARTICLE
+  EDIT_ARTICLE,
 } from '../action/AdminArticle';
 
 const initialState = {
   title: '',
   content: '',
-  loading:false,
-  message:'',
+  loading: false,
+  message: '',
   send: false,
   id_edited_article:'',
   editing: false,
@@ -25,6 +25,7 @@ const initialState = {
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    
     case CANCEL_EDITING_ARTICLE:
       return {
         ...state,

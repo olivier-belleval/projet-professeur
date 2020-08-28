@@ -25,9 +25,29 @@ import {
   createCardSuccess,
 } from '../action/create-actions';
 
+import {  CREATE_CLASS_SUBMIT,
+  createClassSuccess,
+  createClassError,
+} from '../action/class-editor-action';
+
+import {
+  GET_CLASSES,
+  getClassesError,
+  getClassesSuccess,
+} from '../action/user';
+
 import {
   GET_ARTICLES_ADMIN_PANEL, DELETE_ARTICLE, deleteArticleError, deleteArticleSuccess,
 } from '../action/AdminArticle';
+
+import { DELETE_KANBAN, deleteKanbanError, deleteKanbanSuccess } from '../action/AdminKanban';
+
+import {
+  GET_CLASSES_ADMIN_PANEL,
+  DELETE_CLASS,
+  deleteClassError,
+  deleteClassSuccess,
+} from '../action/AdminClass';
 
 const ajaxMiddleware = (store) => (next) => (action) => {
   const local = 'http://localhost:3000/';
@@ -35,52 +55,273 @@ const ajaxMiddleware = (store) => (next) => (action) => {
   next(action);
 
   switch (action.type) {
+
     case GET_ARTICLES:
       axios({
+
         method: 'get',
-        url: `${local}api/articles`,
+        url: `${local}api/article/all`,
         withCredentials: true,
+
       })
         .then((res) => {
-          console.log('mes data : ', res.data);
+
           store.dispatch(getArticlesSuccess(res.data.data));
+
         })
+
         .catch((err) => {
-          console.log('mes erreurs de chargement : ', err);
+
           store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+
         });
 
       break;
+
     case GET_ARTICLES_ADMIN_PANEL:
       axios({
+
+        method: 'get',
+        url: `${local}api/admin/article/all`,
+        withCredentials: true,
+
+      })
+        .then((res) => {
+
+          store.dispatch(getArticlesSuccess(res.data.data));
+
+        })
+
+        .catch((err) => {
+
+          store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+
+        });
+
+      break;
+
+    case CREATE_ARTICLE_SUMIT:
+
+      axios({
+
+        method: 'post',
+        url: `${local}api/article/write`,
+        withCredentials: true,
+        data: {
+          title: store.getState().editor.title,
+          content: store.getState().editor.content,
+
+        },
+      }).then((res) => {
+
+          store.dispatch(createArticleSuccess());
+
+        }).catch((err) => {
+
+          store.dispatch(createArticleError('Impossible de créer'));
+
+        });
+
+      axios({
+
         method: 'get',
         url: `${local}api/admin/articles`,
         withCredentials: true,
-      })
-        .then((res) => {
-          console.log('mes data : ', res.data);
+
+      }).then((res) => {
+          
           store.dispatch(getArticlesSuccess(res.data.data));
-        })
-        .catch((err) => {
-          console.log('mes erreurs de chargement : ', err);
+
+        }).catch((err) => {
+          
           store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+
         });
 
       break;
-    case GET_KANBANS:
+
+    case SUBMIT_EDITED_ARTICLE:
+
+      const editedArticleId = store.getState().editor.id_edited_article;
+
       axios({
+
+        method: 'put',
+        url: `${local}api/article/${editedArticleId}/edit`,
+        withCredentials: true,
+        data: {
+          title: store.getState().editor.title,
+          content: store.getState().editor.content,
+
+        },
+      }).then((res) => {
+          
+          store.dispatch(editArticleSuccess());
+
+        }).catch((err) => {
+          
+          store.dispatch(editArticleError('Impossible d\'éditer'));
+
+        });
+
+        break;
+
+    case DELETE_ARTICLE:
+
+      const articleId = store.getState().articles.article_id;
+
+      axios({
+
+        method: 'delete',
+        url: `${local}api/article/${articleId}/delete`,
+        withCredentials: true,
+
+      }).then((res) => {
+          
+          store.dispatch(deleteArticleSuccess());
+
+          axios({
+
+            method: 'get',
+            url: `${local}api/articles`,
+            withCredentials: true,
+
+          }).then((res) => {
+              
+              store.dispatch(getArticlesSuccess(res.data.data));
+
+            }).catch((err) => {
+              
+              store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+
+            });
+        }).catch((err) => {
+
+          store.dispatch(deleteArticleError('Impossible de supprimer'));
+
+        });
+
+      break;
+
+    case GET_CLASSES_ADMIN_PANEL:
+
+      axios({
+
+        method: 'get',
+        url: `${local}api/admin/classes`,
+        withCredentials: true,
+
+      }).then((res) => {
+
+          store.dispatch(getClassesSuccess(res.data.data));
+
+        }).catch((err) => {
+
+          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
+
+        });
+
+      break;
+
+    case CREATE_CLASS_SUBMIT:
+
+      axios({
+
+        method: 'post',
+        url: `${local}api/admin/class/create`,
+        withCredentials: true,
+        data: {
+          username: store.getState().editorClass.username,
+          password: store.getState().editorClass.password,
+          description: store.getState().editorClass.description,
+
+        },
+      }).then((res) => {
+          
+          store.dispatch(createClassSuccess());
+
+          axios({
+
+            method: 'get',
+            url: `${local}api/admin/classes`,
+            withCredentials: true,
+
+          })
+
+            .then((res) => {
+
+              store.dispatch(getClassesSuccess(res.data.data));
+
+            })
+            .catch((err) => {
+              
+              store.dispatch(getClassesError('Impossible de récupérer les classes...'));
+
+            });
+        }).catch((err, res) => {
+
+          store.dispatch(createClassError(res.data));
+
+        });
+
+        break;
+  
+    case DELETE_CLASS:
+
+      const ClassId = store.getState().classes.class_id;
+
+      axios({
+
+        method: 'delete',
+        url: `${local}api/admin/class/${ClassId}/delete`,
+        withCredentials: true,
+
+      }).then((res) => {
+          
+          store.dispatch(deleteClassSuccess());
+
+        }).catch((err) => {
+          
+          store.dispatch(deleteClassError('Impossible de supprimer la classe'));
+
+        });
+
+      axios({
+
+        method: 'get',
+        url: `${local}api/admin/classes`,
+        withCredentials: true,
+
+      }).then((res) => {
+          
+          store.dispatch(getClassesSuccess(res.data.result));
+
+        }).catch((err) => {
+          
+          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
+
+        });
+
+      break;
+
+    case GET_KANBANS:
+
+      axios({
+
         method: 'get',
         url: `${local}api/kanbans`,
         withCredentials: true,
-      })
-        .then((res) => {
-          console.log(res.data.data);
+
+      }).then((res) => {
+          
           store.dispatch(getKanbansSuccess(res.data.data));
-        })
-        .catch((err) => {
-          console.log(err);
+
+        }).catch((err) => {
+          
           store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+
         });
+
       break;
 
       // case GET_KANBAN:
@@ -100,118 +341,74 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       //     });
       //   break;
 
-    case DELETE_ARTICLE:
-      const articleId = store.getState().articles.article_id;
+
+    case DELETE_KANBAN:
+
+      const kanbanId = store.getState().kanbans.kanban_id;
 
       axios({
+
         method: 'delete',
-        url: `${local}api/article/${articleId}/delete`,
+        url: `${local}api/kanban/${kanbanId}/delete`,
         withCredentials: true,
-      })
-        .then((res) => {
-          console.log(res.data);
-          store.dispatch(deleteArticleSuccess());
-          axios({
-            method: 'get',
-            url: `${local}api/articles`,
-            withCredentials: true,
-          })
-            .then((res) => {
-              console.log('mes data : ', res.data);
-              store.dispatch(getArticlesSuccess(res.data.data));
-            })
-            .catch((err) => {
-              console.log('mes erreurs de chargement de ma deuxième requete : ', err);
-              store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-          store.dispatch(deleteArticleError('Impossible de supprimer'));
+        crossorigin: true,
+
+      }).then((res) => {
+          
+          store.dispatch(deleteKanbanSuccess());
+
+        }).catch((err) => {
+          
+          store.dispatch(deleteKanbanError('Impossible de supprimer les kanbans'));
+
         });
 
-      break;
+      axios({
 
-    case CREATE_ARTICLE_SUMIT:
-      axios({
-        method: 'post',
-        url: `${local}api/article/write`,
-        withCredentials: true,
-        data: {
-          title: store.getState().editor.title,
-          content: store.getState().editor.content,
-        },
-      })
-        .then((res) => {
-          console.log(res.data);
-          store.dispatch(createArticleSuccess());
-        })
-        .catch((err) => {
-          console.log(err);
-          store.dispatch(createArticleError('Impossible de créer'));
-        });
-      axios({
         method: 'get',
-        url: `${local}api/admin/articles`,
+        url: `${local}api/kanbans`,
         withCredentials: true,
-      })
-        .then((res) => {
-          console.log('mes data : ', res.data);
-          store.dispatch(getArticlesSuccess(res.data.data));
-        })
-        .catch((err) => {
-          console.log('mes erreurs de chargement : ', err);
-          store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
-        });
-      break;
 
-    case SUBMIT_EDITED_ARTICLE:
-      const editedArticleId = store.getState().editor.id_edited_article;
-      axios({
-        method: 'put',
-        url: `${local}api/article/${editedArticleId}/edit`,
-        withCredentials: true,
-        data: {
-          title: store.getState().editor.title,
-          content: store.getState().editor.content,
-        },
-      })
-        .then((res) => {
-          console.log(res.data);
-          store.dispatch(editArticleSuccess());
-        })
-        .catch((err) => {
-          console.log(err);
-          store.dispatch(editArticleError('Impossible d\'éditer'));
+      }).then((res) => {
+          
+          store.dispatch(getKanbanSuccess(res.data.result));
+
+        }).catch((err) => {
+          
+          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+
         });
-        break;
+
+      break;
 
     case CREATE_CARD_SUBMIT :
       let listId = store.getState().kanbans.list_id;
-
-      console.log("la création de card reçoit order :", Number(store.getState().kanbans.newCardOrder), " et la description : ", store.getState().kanbans.newCardContent, "et l'id passé en param est : ", listId);
+      // console.log("la création de card reçoit order :", Number(store.getState().kanbans.newCardOrder), " et la description : ", store.getState().kanbans.newCardContent, "et l'id passé en param est : ", listId);
 
       axios({
+
         method: 'post',
         url: `${local}api/list/${listId}/card/create`,
         withCredentials: true,
         data: {
           order: Number(store.getState().kanbans.newCardOrder),
           description: store.getState().kanbans.newCardContent,
+          color: '#fff',
+
         },
-      })
-        .then((res) => {
-          console.log(res);
+      }).then((res) => {
+        
           store.dispatch(createCardSuccess());
-        })
-        .catch((err, res) => {
-          console.log(err, res);
-          // store.dispatch(createCardError('Impossible de créer'));
+        }).catch((err) => {
+          
+          store.dispatch(createCardError('Impossible de créer'));
+
         });
 
       break;
-
+       
     default:
+      
   }
 };
 
