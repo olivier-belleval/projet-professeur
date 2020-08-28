@@ -21,12 +21,16 @@ import {
 } from '../action/editor-actions';
 
 import {
+  CREATE_CARD_SUBMIT,
+  createCardSuccess,
+} from '../action/create-actions';
+
+import {
   GET_ARTICLES_ADMIN_PANEL, DELETE_ARTICLE, deleteArticleError, deleteArticleSuccess,
 } from '../action/AdminArticle';
 
 const ajaxMiddleware = (store) => (next) => (action) => {
   const local = 'http://localhost:3000/';
-  const server = 'http://54.90.32.97:3000/';
 
   next(action);
 
@@ -129,7 +133,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       break;
 
     case CREATE_ARTICLE_SUMIT:
-
       axios({
         method: 'post',
         url: `${local}api/article/write`,
@@ -163,7 +166,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_EDITED_ARTICLE:
-      let editedArticleId = store.getState().editor.id_edited_article
+      const editedArticleId = store.getState().editor.id_edited_article;
       axios({
         method: 'put',
         url: `${local}api/article/${editedArticleId}/edit`,
@@ -176,25 +179,38 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         .then((res) => {
           console.log(res.data);
           store.dispatch(editArticleSuccess());
-          axios({
-            method: 'get',
-            url: `${local}api/admin/articles`,
-            withCredentials: true,
-          })
-            .then((res) => {
-              console.log('mes data : ', res.data);
-              store.dispatch(getArticlesSuccess(res.data.data));
-            })
-            .catch((err) => {
-              console.log('mes erreurs de chargement : ', err);
-              store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
-            });
         })
         .catch((err) => {
           console.log(err);
-          store.dispatch(editArticleError('Impossible de créer'));
+          store.dispatch(editArticleError('Impossible d\'éditer'));
         });
-        
+        break;
+
+    case CREATE_CARD_SUBMIT :
+      let listId = store.getState().kanbans.list_id;
+
+      console.log("la création de card reçoit order :", Number(store.getState().kanbans.newCardOrder), " et la description : ", store.getState().kanbans.newCardContent, "et l'id passé en param est : ", listId);
+
+      axios({
+        method: 'post',
+        url: `${local}api/list/${listId}/card/create`,
+        withCredentials: true,
+        data: {
+          order: Number(store.getState().kanbans.newCardOrder),
+          description: store.getState().kanbans.newCardContent,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          store.dispatch(createCardSuccess());
+        })
+        .catch((err, res) => {
+          console.log(err, res);
+          // store.dispatch(createCardError('Impossible de créer'));
+        });
+
+      break;
+
     default:
   }
 };

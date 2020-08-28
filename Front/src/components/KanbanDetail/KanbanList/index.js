@@ -9,7 +9,9 @@ const KanbanList = ({ list, onOpenClick }) => {
       <div className="kanban-list" key={list.id}>
         <div className="kanban-list-title">
           <span>{list.name}</span>
-          <span><AiFillPlusSquare onClick={onOpenClick}/></span>
+          <span><AiFillPlusSquare onClick={() => 
+          {onOpenClick(list.id)}
+            }/></span>
         </div>
         <div className="kanban-list-content">
           {list.cards && list.cards.map((card) => <KanbanCard key={card.id} card={card} />)}

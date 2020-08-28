@@ -32,10 +32,10 @@ export const loginSubmit = () => ({
 
 export const loginChangeTeacher = () => ({
   type: LOGIN_CHANGE_TEACHER,
-})
+});
+
 export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const MODIFY_ARTICLE = 'MODIFY_ARTICLE';
-
 export const JOIN_CLASS = 'JOIN_CLASS';
 
 export const toggleMenu = () => ({
@@ -49,4 +49,3 @@ export const modifyArticle = () => ({
 export const joinClass = () => ({
   type: JOIN_CLASS,
 });
-

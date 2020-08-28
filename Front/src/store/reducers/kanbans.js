@@ -1,7 +1,14 @@
 import { slugifyTitle } from '../../utils';
 import { GET_KANBANS, GET_KANBANS_ERROR, GET_KANBANS_SUCCESS, GET_KANBAN, GET_KANBAN_ERROR, GET_KANBAN_SUCCESS } from '../action/data-actions';
 
-import { TOGGLE_MODAL_CARD, CHANGE_FIELD_CARD } from '../action/create-actions';
+import {
+  TOGGLE_MODAL_CARD,
+  CHANGE_FIELD_CARD,
+  CREATE_CARD_ERROR,
+  CREATE_CARD_SUCCESS,
+  CREATE_CARD_SUBMIT,
+  HANDLE_EDIT_MODE,
+} from '../action/create-actions';
 
 export const initialState = {
   loading: false,
@@ -10,8 +17,10 @@ export const initialState = {
   kanban_id: '',
   kanban_detail: [],
   modalOpen: false,
-  newCardTitle: '',
+  newCardOrder: '',
   newCardContent: '',
+  list_id: '',
+  editMode: false,
 };
 
 export default (state = initialState, action = {}) => {
@@ -19,6 +28,24 @@ export default (state = initialState, action = {}) => {
     case TOGGLE_MODAL_CARD:
       return {
         ...state,
+        modalOpen: !state.modalOpen,
+        list_id: action.payload,
+      };
+    case HANDLE_EDIT_MODE:
+      return {
+        ...state,
+        editMode : !state.editMode,
+      }
+    case CREATE_CARD_SUBMIT:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CREATE_CARD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        list_id: '',
         modalOpen: !state.modalOpen,
       };
     case CHANGE_FIELD_CARD:
@@ -57,7 +84,6 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         kanban_detail: [...action.payload],
-        kanban_id: '',
       };
     case GET_KANBAN_ERROR:
       return {
@@ -74,8 +100,6 @@ export default (state = initialState, action = {}) => {
 
 export const getKanbanBySlug = (state, slug) => {
   const kanban = state.kanbans.list.find((item) => {
-    console.log(slug);
-    console.log(item);
     const slugTitle = slugifyTitle(item.title);
     const slugToFind = slugifyTitle(slug);
     return slugTitle === slugToFind;

@@ -38,7 +38,7 @@ export const getKanbansError = (payload) => ({
   type: GET_KANBANS_ERROR,
   payload,
 });
-export const getKanbansSuccess = (payload) =>({
+export const getKanbansSuccess = (payload) => ({
   type: GET_KANBANS_SUCCESS,
   payload,
 });

@@ -3,7 +3,7 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 import { slugifyTitle } from '../../utils';
 
-const KanbansView = ({ list, getKanbans }) => {
+const KanbansView = ({ list, getKanbans, getKanban }) => {
   useEffect(() => {
     getKanbans();
   }, []);
@@ -20,7 +20,7 @@ const KanbansView = ({ list, getKanbans }) => {
       </div>
       {list.map((kanban) => (
         <Link to={`kanban/${slugifyTitle(kanban.title)}`} key={kanban.title}>
-          <div className="kanbans-view-list">
+          <div className="kanbans-view-list" onClick={()=>{getKanban(kanban.id)}}>
           <div className="kanban">
               <h3 className="kanban-title">
                 {kanban.title}
