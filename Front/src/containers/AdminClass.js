@@ -21,7 +21,6 @@ const mapDispatch = (dispatch) => ({
   getClasses: () => {
     dispatch(getClassesAdminPanel());
   },
-
 });
 
 export default connect(mapState, mapDispatch)(AdminClass);

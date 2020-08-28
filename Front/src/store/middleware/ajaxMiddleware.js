@@ -144,12 +144,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           store.dispatch(deleteArticleSuccess());
           axios({
             method: 'get',
-            url: `${local}api/articles`,
+            url: `${local}api/admin/articles`,
             withCredentials: true,
           })
-            .then((res) => {
-              console.log('mes data : ', res.data);
-              store.dispatch(getArticlesSuccess(res.data.data));
+            .then((response) => {
+              console.log('mes data : ', response.data);
+              store.dispatch(getArticlesSuccess(response.data.data));
             })
             .catch((err) => {
               console.log('mes erreurs de chargement de ma deuxième requete : ', err);
@@ -240,7 +240,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         url: `${local}api/kanban/${kanbanId}/delete`,
         withCredentials: true,
         crossorigin: true,
-
       })
         .then((res) => {
           console.log(res.data);
@@ -268,31 +267,33 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case DELETE_CLASS:
       const ClassId = store.getState().classes.class_id;
+
       axios({
         method: 'delete',
         url: `${local}api/admin/class/${ClassId}/delete`,
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data);
+          console.log('>>>>>>>>>>>><CELUI LA  ', res.data);
           store.dispatch(deleteClassSuccess());
+          console.log('FIN DE MA REQUETE');
+          axios({
+            method: 'get',
+            url: `${local}api/admin/classes`,
+            withCredentials: true,
+          })
+            .then((response) => {
+              console.log('mes data : ', response.data);
+              store.dispatch(getClassesSuccess(response.data.data));
+            })
+            .catch((err) => {
+              console.log('mes erreurs de chargement : ', err);
+              store.dispatch(getClassesError('Impossible de récupérer les classes...'));
+            });
         })
         .catch((err) => {
           console.log(err);
           store.dispatch(deleteClassError('Impossible de supprimer la classe'));
-        });
-      axios({
-        method: 'get',
-        url: `${local}api/admin/classes`,
-        withCredentials: true,
-      })
-        .then((res) => {
-          console.log('mes data : ', res.data);
-          store.dispatch(getClassesSuccess(res.data.result));
-        })
-        .catch((err) => {
-          console.log('mes erreurs de chargement : ', err);
-          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
         });
 
       break;

@@ -49,7 +49,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         classes: [...action.payload],
-        classe_id: '',
+        class_id: '',
         error: '',
       };
     case DELETE_CLASS_ERROR:
@@ -57,8 +57,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         error: action.payload,
-        classe_id: '',
-        classes: [],
+        class_id: '',
       };
     default:
       return state;
