@@ -48,7 +48,6 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
-        classes: [...action.payload],
         classe_id: '',
         error: '',
       };

@@ -43,6 +43,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: true,
+        send: true,
         editing: false,
       };
     case EDIT_ARTICLE_SUCCESS || EDIT_ARTICLE_ERROR:
