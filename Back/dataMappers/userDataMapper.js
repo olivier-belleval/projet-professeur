@@ -72,8 +72,6 @@ module.exports = {
 
         const result = await client.query(preparedQuery);
 
-        console.log('result.rows :', result)
-
         return result.rows;
     }
 

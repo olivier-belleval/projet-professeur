@@ -79,3 +79,65 @@
 | POST | api/admin/class/create | adminController | créer une classe|
 | PUT | api/admin/class/:id/edit | adminController | modifier une classe|
 | DELETE | api/admin/class/:id/delete | adminController | supprimer une classe|
+
+
+# Besoins
+
+* = non obligatoire
+
+| fonction | endroit    |   infos   |
+|   -      |   -        |   -       |
+|   get one class   |   params(adresse)     |   class id |
+|   create class    |   body    |   username - password - description |
+|   create class    |   session    |    teacher id |
+|   edit class  |   params(adresse)    |   class id |
+|   edit class  |   body    |   username - password - description |
+|   delete class  |   params(adresse)    |   class id |
+| - | - | - |
+|   get one article |   params(adresse)  |  article id |
+|   create one article |    session |   user id |
+|   create one article |    body    |   title - content |
+|   edite article |    body    |   title - content |
+|   delete article |    params(adresse)    |   article id |
+| - | - | - |
+|   associate class to article |    params(adresse)    |   article id |
+|   associate class to article |    body    |   class id |
+|   remove association class to article |    body    |   class id |
+| - | - | - |
+|   get one kaban by id |    params(adresse)    |   kanban id |
+|   create kanban |    session    |   teacher id |
+|   create kanban |    body    |   titre - description - background * |
+|   edit kanban |    body    |   titre - description - background |
+|   delete kanban |    params(adresse)    |   kanban id |
+|   edit kanban |    body    |   titre - description - background |
+| - | - | - |
+|   associate class to kanban |    params(adresse)    |   kanban id |
+|   associate class to kanban |    body    |   class id |
+|   remove association class to kanban |    params(adresse)    |   kanban id |
+|   remove association class to kanban |    body    |   class id |
+| - | - | - |
+|   get one list by id |    params    |   list id |
+|   create list |    params    |   kanban id |
+|   create list |    body    |   name - order |
+|   edit list |    params    |   kanban id - list id|
+|   edit list |    body    |   name - order |
+|   delete list |    params    |   list id |
+| - | - | - |
+|   get one card by id |    params    |   card id - list id |
+|   create card |    params    |   list id |
+|   create card |    body    |   description - order - color *  |
+|   edit card |    params    |   list id - card id |
+|   edit card |    body    |   description - order - color  |
+|   delete card |   params  |   list id - card id   |
+| - | - | - |
+|   get one tag by id |    params    |   tag id |
+|   create tag |    body    |   name - color *  |
+|   edit tag |    params    |   tag id |
+|   edit tag |    body    |   name - color  |
+|   delete tag |   params  |   tag id   |
+| - | - | - |
+|   associate tag to card |    params(adresse)    |   tag id - card id |
+|   remove association tag to card |    params(adresse)    |   tag id - card id |
+| - | - | - |
+|   class login |    body    |   username - password |
+|   admin login |    body    |   username - password |
