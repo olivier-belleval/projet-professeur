@@ -5,19 +5,20 @@ import { Link } from 'react-router-dom';
 const ArticleDetail = ({ article }) => {
   console.log(article);
 
+
   return (
     <div className="article-detail">
       <header className="article-detail-head">
         <h2 className="article-detail-head-title">
-          {article.title}
+          {article.article_title}
         </h2>
         <p className="article-detail-head-subtitle">
-          Rédigé Victor Hugo le 36 janvier 1478
+          Rédigé {article.article_author} le 36 janvier 1478
         </p>
       </header>
       <main className="article-detail-content">
         <p>
-            {article.excerpt}
+            {article.article_excerpt}
         </p>
       </main>
       <footer>

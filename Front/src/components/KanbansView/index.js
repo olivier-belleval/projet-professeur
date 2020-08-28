@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './style.scss';
 import { Link } from 'react-router-dom';
+import { slugifyTitle } from '../../utils';
 
-const KanbansView = ({ kanbans }) => {
-  console.log('kanban view');
+const KanbansView = ({ list, getKanbans, getKanban }) => {
+  useEffect(() => {
+    getKanbans();
+  }, []);
+
   return (
     <div className="kanbans-view">
       <div className="kanbans-view-head">
@@ -14,10 +18,10 @@ const KanbansView = ({ kanbans }) => {
           Nom de la classe
         </span>
       </div>
-      {kanbans.map((kanban) => (
-        <Link to="/aremplir">
-          <div className="kanbans-view-list">
-            <div className="kanban">
+      {list.map((kanban) => (
+        <Link to={`kanban/${slugifyTitle(kanban.title)}`} key={kanban.title}>
+          <div className="kanbans-view-list" onClick={()=>{getKanban(kanban.id)}}>
+          <div className="kanban">
               <h3 className="kanban-title">
                 {kanban.title}
               </h3>
@@ -25,6 +29,7 @@ const KanbansView = ({ kanbans }) => {
                 {kanban.description}
               </span>
             </div>
+
           </div>
         </Link>
       ))}
