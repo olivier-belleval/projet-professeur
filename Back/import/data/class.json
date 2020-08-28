@@ -1,0 +1,20 @@
+[
+    {
+        "username": "6eme A",
+        "password": "class",
+        "description": "La classe de 6eme A ",
+        "teacher_id": "1"
+    },
+    {
+        "username": "5eme B",
+        "password": "class",
+        "description": "La classe de 5eme B ",
+        "teacher_id": "1"
+    },
+    {
+        "username": "Terminale ES 2",
+        "password": "class",
+        "description": "La classe de Terminale ES 2",
+        "teacher_id": "1"
+    }
+]
