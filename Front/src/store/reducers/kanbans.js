@@ -4,6 +4,7 @@ import {
   GET_KANBANS_ERROR,
   GET_KANBANS_SUCCESS,
   GET_KANBAN,
+  GET_KANBAN_ID,
   GET_KANBAN_ERROR,
   GET_KANBAN_SUCCESS,
 } from '../action/data-actions';
@@ -24,7 +25,7 @@ export const initialState = {
   error: '',
   list: [],
   kanban_id: '',
-  kanban_detail: [],
+  kanban: [],
   modalOpen: false,
   newCardOrder: '',
   newCardContent: '',
@@ -81,26 +82,29 @@ export default (state = initialState, action = {}) => {
         error: action.payload,
         list: [],
       };
+    case GET_KANBAN_ID:
+      return{
+        ...state,
+        kanban_id: action.payload,
+      }
     case GET_KANBAN:
       return {
         ...state,
-        loading: false,
-        kanban_id: action.payload,
-        kanban_detail: [],
+        loading: true,
+        kanban: [],
       };
     case GET_KANBAN_SUCCESS:
       return {
         ...state,
         loading: false,
-        kanban_detail: [...action.payload],
+        kanban: [...action.payload],
       };
     case GET_KANBAN_ERROR:
       return {
         ...state,
         loading: false,
         error: action.payload,
-        kanban_detail: [],
-        kanban_id: '',
+        kanban: [],
       };
     case DELETE_KANBAN:
       return {

@@ -15,8 +15,8 @@ const KanbanDetail = ({
   handleEditMode,
   editMode,
 }) => {
-  const { lists } = kanban;
-
+  console.log("JE SUIS DANS MON COMPOSANT POUR OLIVIER : ", kanban)
+  console.log("JE SUIS TOUJOURS LA ", kanban.lists)
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleCardSubmit();
@@ -47,7 +47,7 @@ const KanbanDetail = ({
       </header>
       <main>
         <div className="kanban-detail-grid">
-          {lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} />)}
+          {kanban.lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} />)}
         </div>
         {modalOpen && (
         <CardModal

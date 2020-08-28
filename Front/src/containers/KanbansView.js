@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import KanbansView from '../components/KanbansView';
-import { getKanbans, getKanban } from '../store/action/data-actions';
+import { getKanbans, getKanban, getKanbanId } from '../store/action/data-actions';
 
 const mapStateToProps = (state) => ({
   list: state.kanbans.list,
@@ -11,8 +11,14 @@ const mapDispatchToProps = (dispatch) => ({
   getKanbans: () => {
     dispatch(getKanbans());
   },
-  getKanban: (id) => {
-    dispatch(getKanban(id))
+
+  getKanban: () => {
+    dispatch(getKanban())
+  },
+
+  getKanbanId: (id) => {
+    console.log('je suis l\'id récupéré dans la liste des kanbans : ', id)
+    dispatch(getKanbanId(id))
   },
 });
 

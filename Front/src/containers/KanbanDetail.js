@@ -11,9 +11,14 @@ import {
 
 const mapStateToProps = (state, ownProps) => {
   const { slug } = ownProps.match.params;
+  console.log("Nos props ", ownProps);
+
+  console.log('container kanban: ',
+    state.kanbans.kanban
+  )
 
   return {
-    kanban: getKanbanBySlug(state, slug),
+    kanban: state.kanbans.kanban,
     modalOpen: state.kanbans.modalOpen,
     newCardOrder: state.kanbans.newCardOrder,
     newCardContent: state.kanbans.newCardContent,
@@ -23,7 +28,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onOpenClick: (id) => {
-    console.log(id);
+    console.log('id dans kanbanDetail:', id);
     dispatch(toggleModalCard(id));
   },
 
