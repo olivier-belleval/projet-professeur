@@ -1,0 +1,31 @@
+ 
+parameters:
+  username:
+    name: username
+    description: Username to use for login.
+    in: body
+    required: true
+    type: string
+  password:
+    name: password
+    description: password to use for login.
+    in: body
+    required: true
+    type: string
+
+tags:
+  - name: Login
+    description: Login management
+
+definitions:
+  classesusername:
+    properties:
+      username:
+          type: string
+
+  logedClass:
+    properties:
+      id:
+        type: string
+      username:
+        type: string
