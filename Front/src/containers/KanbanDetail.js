@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import KanbanDetail from '../components/KanbanDetail';
 import { getKanbanBySlug } from '../store/reducers/kanbans';
+import { getKanbanDetail } from '../store/action/data-actions';
 import {
   toggleModalCard,
   changeFieldCard,
@@ -18,6 +19,8 @@ const mapStateToProps = (state, ownProps) => {
     newCardOrder: state.kanbans.newCardOrder,
     newCardContent: state.kanbans.newCardContent,
     editMode: state.kanbans.editMode,
+    kanban_detail: state.kanbans.kanban_detail,
+    datas: state.kanbans.datas,
   };
 };
 
@@ -39,6 +42,10 @@ const mapDispatchToProps = (dispatch) => ({
   //change edit mode to edit kanban details
   handleEditMode: (changedData) => {
     dispatch(handleEditMode(changedData));
+  },
+
+  getKanbanDetail: () => {
+    dispatch(getKanbanDetail());
   },
 });
 

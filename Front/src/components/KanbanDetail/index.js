@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './style.scss';
 import { MdClose } from 'react-icons/md';
 import { AiFillPlusSquare } from 'react-icons/ai';
@@ -14,8 +14,14 @@ const KanbanDetail = ({
   handleCardSubmit,
   handleEditMode,
   editMode,
+  getKanbanDetail,
+  kanban_detail,
+  datas,
 }) => {
-  const { lists } = kanban;
+  // const { lists } = kanban;
+  useEffect(() => {
+    getKanbanDetail();
+  }, []);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -45,9 +51,10 @@ const KanbanDetail = ({
         </div>
 
       </header>
+      { datas && (
       <main>
         <div className="kanban-detail-grid">
-          {lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} />)}
+          {kanban_detail[0].lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} />)}
         </div>
         {modalOpen && (
         <CardModal
@@ -59,6 +66,7 @@ const KanbanDetail = ({
         />
         )}
       </main>
+      )}
     </div>
   );
 };
@@ -66,7 +74,6 @@ const KanbanDetail = ({
 const CardModal = ({
   onClick, changeField, newCardOrder, newCardContent, handleSubmit,
 }) => {
-
   // to put values into the state in the right field thanks to the name
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
