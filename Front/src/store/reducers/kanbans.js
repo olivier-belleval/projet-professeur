@@ -43,8 +43,8 @@ export default (state = initialState, action = {}) => {
     case HANDLE_EDIT_MODE:
       return {
         ...state,
-        editMode : !state.editMode,
-      }
+        editMode: !state.editMode,
+      };
     case CREATE_CARD_SUBMIT:
       return {
         ...state,
@@ -112,9 +112,9 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
-        list: [...action.payload],
         kanban_id: '',
         error: '',
+        list: [],
       };
     case DELETE_KANBAN_ERROR:
       return {

@@ -14,9 +14,8 @@ export const deleteKanban = (payload) => ({
   payload,
 });
 
-export const deleteKanbanSuccess = (payload) => ({
+export const deleteKanbanSuccess = () => ({
   type: DELETE_KANBAN_SUCCESS,
-  payload,
 });
 
 export const deleteKanbanError = (payload) => ({

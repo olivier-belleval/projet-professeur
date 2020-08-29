@@ -15,7 +15,7 @@ const mapDispatch = (dispatch) => ({
   },
 
   deleteKanban: (id) => {
-    console.log("l'user veut supprimer le tableau");
+    console.log("l'user veut supprimer le tableau", id);
     dispatch(deleteKanban(id));
   },
 

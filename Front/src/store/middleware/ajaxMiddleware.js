@@ -344,29 +344,33 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case DELETE_KANBAN:
 
+      const kanbanId = store.getState().kanbans.kanban_id;
+
       axios({
 
         method: 'delete',
         url: `${local}api/kanban/${kanbanId}/delete`,
         withCredentials: true,
-        crossorigin: true,
+        // crossorigin: true,
 
       }).then((res) => {
         store.dispatch(deleteKanbanSuccess());
+        axios({
+
+          method: 'get',
+          url: `${local}api/kanban/all`,
+          withCredentials: true,
+
+        }).then((res) => {
+          console.log('res data sa mere :', res.data);
+          store.dispatch(getKanbansSuccess(res.data.data));
+          console.log('ce que tu veux');
+        }).catch((err) => {
+          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+        });
       }).catch((err) => {
+        console.log('erreur :', err);
         store.dispatch(deleteKanbanError('Impossible de supprimer les kanbans'));
-      });
-
-      axios({
-
-        method: 'get',
-        url: `${local}api/kanban/all`,
-        withCredentials: true,
-
-      }).then((res) => {
-        store.dispatch(getKanbanSuccess(res.data.result));
-      }).catch((err) => {
-        store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
       });
 
       break;

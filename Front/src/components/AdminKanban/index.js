@@ -19,7 +19,7 @@ const AdminKanban = ({
       <h1 className="admin_panel_kanban-title"> Espace administrateur - gestion des articles </h1>
       <div className="admin_panel_kanban-content">
         {list.map((tableau) => (
-          <div className="admin_panel_kanban-content-part">
+          <div className="admin_panel_kanban-content-part" key={tableau.id}>
             <div className="admin_panel_kanban-content-part-tableau">{tableau.title}</div>
             <div className="admin_panel_kanban_content-part-class">
               <p>{tableau.description}</p>
@@ -49,7 +49,7 @@ const AdminKanban = ({
 
         <div className="admin_panel_kanban-content-part">
           <p>Ajouter un tableau</p>
-          <Link exact to="/admin/nouveau-kanban">
+          <Link exact="true" to="/admin/nouveau-kanban">
             <FaPlusCircle />
           </Link>
         </div>
