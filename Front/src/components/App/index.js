@@ -15,6 +15,7 @@ import AdminKanban from '../../containers/AdminKanban';
 import AdminClass from '../../containers/AdminClass';
 import TextEditorArticle from '../../containers/TextEditorArticle';
 import TextEditorClass from '../../containers/TextEditorClass';
+import TextEditorKanban from '../../containers/TextEditorKanban';
 import Admin from '../Admin';
 
 
@@ -43,6 +44,7 @@ const App = ({ isLogged, teacher }) => (
               <Route exact path="/admin/kanban" component={AdminKanban} />
               <Route exact path="/admin/comptes" component={AdminClass} />
               <Route exact path="/admin/nouvelle-classe" component={TextEditorClass} />
+              <Route exact path="/admin/nouveau-kanban" component={TextEditorKanban} />
             </Switch>
           )}
         </Switch>
