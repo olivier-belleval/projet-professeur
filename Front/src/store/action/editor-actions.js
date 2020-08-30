@@ -43,3 +43,4 @@ export const editArticleError = (payload) => ({
 export const submitEditedArticle = () => ({
   type: SUBMIT_EDITED_ARTICLE,
 });
+

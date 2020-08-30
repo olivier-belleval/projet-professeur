@@ -51,7 +51,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         title: '',
         content: '',
-        loading:false,
+        loading: false,
         send: false,
         id_edited_article:'',
       };

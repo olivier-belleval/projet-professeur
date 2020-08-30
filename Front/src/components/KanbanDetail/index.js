@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './style.scss';
 import { MdClose } from 'react-icons/md';
 import { AiFillPlusSquare } from 'react-icons/ai';
@@ -8,18 +8,41 @@ const KanbanDetail = ({
   kanban,
   onOpenClick,
   modalOpen,
-  changeFieldCard,
+  listModalOpen,
+  changeField,
   newCardOrder,
   newCardContent,
   handleCardSubmit,
   handleEditMode,
   editMode,
+  getKanbanDetail,
+  kanban_detail,
+  datas,
+  deleteCard,
+  getListId,
+  openListModal,
+  newListOrder,
+  newListTitle,
+  handleListSubmit,
 }) => {
-  const { lists } = kanban;
+
+  useEffect(() => {
+    getKanbanDetail();
+  }, []);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleCardSubmit();
+    if(listModalOpen){
+      handleListSubmit()
+    } 
+    else if (modalOpen){
+    handleCardSubmit();}
+  };
+
+
+  const handleInputChange = (evt) => {
+    const { name, value } = evt.target;
+    changeField({ [name]: value });
   };
 
   return (
@@ -39,26 +62,42 @@ const KanbanDetail = ({
               {kanban.description}
             </span>
           </div>
+
           <div className="kanban-detail-adding-button">
-            <AiFillPlusSquare />
+            <AiFillPlusSquare onClick={openListModal}/>
+            {listModalOpen && (
+              <ListModal
+                openListModal={openListModal}
+                changeField={handleInputChange}
+                handleSubmit={handleSubmit}
+                newListdOrder={newListOrder}
+                newListTitle={newListTitle}
+              />
+            )}
           </div>
         </div>
 
       </header>
-      <main>
-        <div className="kanban-detail-grid">
-          {lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} />)}
-        </div>
-        {modalOpen && (
-        <CardModal
-          onClick={onOpenClick}
-          changeField={changeFieldCard}
-          newCardOrder={newCardOrder}
-          newCardContent={newCardContent}
-          handleSubmit={handleSubmit}
-        />
-        )}
-      </main>
+
+      { datas && (
+        <main>
+
+          <div className="kanban-detail-grid">
+            {kanban_detail['0'].lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} deleteCard={deleteCard} getListId={getListId} />)}
+          </div>
+
+          {modalOpen && (
+            <CardModal
+              onClick={onOpenClick}
+              changeField={handleInputChange}
+              newCardOrder={newCardOrder}
+              newCardContent={newCardContent}
+              handleSubmit={handleSubmit}
+            />
+          )}
+
+        </main>
+      )}
     </div>
   );
 };
@@ -66,16 +105,11 @@ const KanbanDetail = ({
 const CardModal = ({
   onClick, changeField, newCardOrder, newCardContent, handleSubmit,
 }) => {
-
-  // to put values into the state in the right field thanks to the name
-  const handleInputChange = (evt) => {
-    const { name, value } = evt.target;
-    changeField({ [name]: value });
-  };
+console.log("modal de card");
 
   return (
-    <div className="card-modal">
-      <div className="card-modal-close-button">
+    <div className="modal">
+      <div className="modal-close-button">
         <MdClose onClick={onClick} />
       </div>
       <form onSubmit={handleSubmit}>
@@ -85,16 +119,53 @@ const CardModal = ({
           name="newCardOrder"
           value={newCardOrder}
           placeholder="Position de la carte"
-          className="card-modal-input"
-          onChange={handleInputChange}
+          className="modal-input"
+          onChange={changeField}
         />
         <textarea
           type="text"
           name="newCardContent"
           value={newCardContent}
           placeholder="Description"
-          className="card-modal-textarea"
-          onChange={handleInputChange}
+          className="modal-textarea"
+          onChange={changeField}
+        />
+        <button type="submit"> Ajouter</button>
+      </form>
+
+    </div>
+  );
+};
+
+const ListModal = ({
+  openListModal,
+  handleSubmit,
+  newListOrder,
+  newListTitle,
+  changeField
+}) => {
+  return (
+    <div className="modal">
+      <div className="modal-close-button">
+        <MdClose onClick={openListModal} />
+      </div>
+      <form onSubmit={handleSubmit}>
+        <h3> Ajouter une liste</h3>
+        <input
+          type="number"
+          name="newListOrder"
+          value={newListOrder}
+          placeholder="Position de la liste"
+          className="modal-input"
+          onChange={changeField}
+        />
+        <input
+          type="text"
+          name="newListTitle"
+          value={newListTitle}
+          placeholder="Nom de la liste"
+          className="modal-input"
+          onChange={changeField}
         />
         <button type="submit"> Ajouter</button>
       </form>
