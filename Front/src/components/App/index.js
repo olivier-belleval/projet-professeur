@@ -1,6 +1,8 @@
 // == Import npm
 import React from 'react';
-import { Route, Switch, Redirect, useParams } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react'
+
 
 // == Import
 import './styles.scss';
@@ -20,6 +22,7 @@ import Admin from '../Admin';
 
 // == Composant
 const App = ({ isLogged, teacher }) => (
+
 
   <div className="app">
     <Route exact path="/" component={HomePage} />
@@ -49,6 +52,7 @@ const App = ({ isLogged, teacher }) => (
       </div>
     ) : <Redirect to="/" />}
   </div>
+
 );
 
 // == Export

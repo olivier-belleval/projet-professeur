@@ -15,6 +15,7 @@ import { DELETE_KANBAN, DELETE_KANBAN_ERROR, DELETE_KANBAN_SUCCESS } from '../ac
 
 import {
   TOGGLE_MODAL_CARD,
+  TOGGLE_MODAL_LIST,
   CHANGE_FIELD_CARD,
   CREATE_CARD_ERROR,
   CREATE_CARD_SUCCESS,
@@ -32,12 +33,15 @@ export const initialState = {
   kanban_id: '',
   kanban_detail: [],
   modalOpen: false,
+  listModalOpen: false,
   newCardOrder: '',
   newCardContent: '',
   list_id: '',
   editMode: false,
   datas: false,
   card_id: '',
+  newListOrder: '',
+  newListTitle: '',
 };
 
 export default (state = initialState, action = {}) => {
@@ -48,11 +52,16 @@ export default (state = initialState, action = {}) => {
         modalOpen: !state.modalOpen,
         list_id: action.payload,
       };
+    case TOGGLE_MODAL_LIST:
+      return {
+        ...state,
+        listModalOpen: !state.modalOpen,
+      };
     case HANDLE_EDIT_MODE:
       return {
         ...state,
-        editMode : !state.editMode,
-      }
+        editMode: !state.editMode,
+      };
     case CREATE_CARD_SUBMIT:
       return {
         ...state,
