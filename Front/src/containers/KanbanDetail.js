@@ -1,13 +1,18 @@
 import { connect } from 'react-redux';
 import KanbanDetail from '../components/KanbanDetail';
 import { getKanbanBySlug } from '../store/reducers/kanbans';
-import { getKanbanDetail } from '../store/action/data-actions';
+
+import {
+  getKanbanDetail,
+  getListId,
+} from '../store/action/data-actions';
+
 import {
   toggleModalCard,
   changeFieldCard,
   createCardSubmit,
   handleEditMode,
-
+  deleteCard,
 } from '../store/action/create-actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -21,6 +26,8 @@ const mapStateToProps = (state, ownProps) => {
     editMode: state.kanbans.editMode,
     kanban_detail: state.kanbans.kanban_detail,
     datas: state.kanbans.datas,
+    card_id: state.kanbans.card_id,
+    list_id: state.kanbans.list_id,
   };
 };
 
@@ -46,6 +53,14 @@ const mapDispatchToProps = (dispatch) => ({
 
   getKanbanDetail: () => {
     dispatch(getKanbanDetail());
+  },
+
+  deleteCard: (id) => {
+    dispatch(deleteCard(id));
+  },
+
+  getListId: (id) => {
+    dispatch(getListId(id));
   },
 });
 

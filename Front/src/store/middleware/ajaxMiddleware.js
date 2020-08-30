@@ -25,6 +25,9 @@ import {
 import {
   CREATE_CARD_SUBMIT,
   createCardSuccess,
+  deleteCardSuccess,
+  deleteCardError,
+  DELETE_CARD,
 } from '../action/create-actions';
 
 import {
@@ -360,6 +363,36 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         });
       }).catch((err) => {
         store.dispatch(createCardError('Impossible de créer'));
+      });
+
+      break;
+
+    case DELETE_CARD:
+      const cardId = store.getState().kanbans.card_id;
+      const list = store.getState().kanbans.list_id;
+      const kanban = store.getState().kanbans.kanban_id;
+
+      axios({
+
+        method: 'delete',
+        url: `${local}api/kanban/list/${list}/card/${cardId}/delete`,
+        withCredentials: true,
+      }).then((res) => {
+        store.dispatch(deleteCardSuccess());
+
+        axios({
+          method: 'get',
+          url: `${local}api/kanban/${kanban}`,
+          withCredentials: true,
+
+      }).then((res) => {
+        store.dispatch(getKanbanDetailSuccess(res.data.data));
+      }).catch((err) => {
+        store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+      });
+      }).catch((err) => {
+        console.log(err);
+      // store.dispatch(createCardError('Impossible de créer'));
       });
 
       break;

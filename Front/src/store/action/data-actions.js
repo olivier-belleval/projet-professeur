@@ -20,6 +20,8 @@ export const GET_KANBAN_SUCCESS = 'GET_KANBAN_SUCCESS';
 export const GET_KANBAN_DETAIL = 'GET_KANBAN_DETAIL';
 export const GET_KANBAN_DETAIL_SUCCESS = 'GET_KANBAN_DETAIL_SUCCESS';
 
+export const GET_LIST_ID = 'GET_LIST_ID';
+
 
 // For all articles
 export const getArticles = () => ({
@@ -74,5 +76,10 @@ export const getKanbanSuccess = (payload) =>({
 // For ONE article
 export const getArticle = (payload) => ({
   type: GET_ARTICLE,
+  payload,
+});
+
+export const getListId = (payload) => ({
+  type: GET_LIST_ID,
   payload,
 });

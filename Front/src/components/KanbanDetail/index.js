@@ -17,8 +17,10 @@ const KanbanDetail = ({
   getKanbanDetail,
   kanban_detail,
   datas,
+  deleteCard,
+  getListId
 }) => {
-  // const { lists } = kanban;
+
   useEffect(() => {
     getKanbanDetail();
   }, []);
@@ -54,7 +56,7 @@ const KanbanDetail = ({
       { datas && (
       <main>
         <div className="kanban-detail-grid">
-          {kanban_detail[0].lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} />)}
+          {kanban_detail['0'].lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} deleteCard={deleteCard} getListId={getListId}/>)}
         </div>
         {modalOpen && (
         <CardModal

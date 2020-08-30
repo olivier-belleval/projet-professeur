@@ -8,6 +8,7 @@ import {
   GET_KANBAN_SUCCESS,
   GET_KANBAN_DETAIL,
   GET_KANBAN_DETAIL_SUCCESS,
+  GET_LIST_ID,
 } from '../action/data-actions';
 
 import { DELETE_KANBAN, DELETE_KANBAN_ERROR, DELETE_KANBAN_SUCCESS } from '../action/AdminKanban';
@@ -19,6 +20,9 @@ import {
   CREATE_CARD_SUCCESS,
   CREATE_CARD_SUBMIT,
   HANDLE_EDIT_MODE,
+  DELETE_CARD,
+  DELETE_CARD_SUCCESS,
+  DELETE_CARD_ERROR,
 } from '../action/create-actions';
 
 export const initialState = {
@@ -33,6 +37,7 @@ export const initialState = {
   list_id: '',
   editMode: false,
   datas: false,
+  card_id: '',
 };
 
 export default (state = initialState, action = {}) => {
@@ -137,6 +142,23 @@ export default (state = initialState, action = {}) => {
         error: action.payload,
         kanban_id: '',
         list: [],
+      };
+    case DELETE_CARD:
+      return {
+        ...state,
+        card_id: action.payload,
+        loading: true,
+      };
+    case DELETE_CARD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        card_id: '',
+      };
+    case GET_LIST_ID:
+      return {
+        ...state,
+        list_id: action.payload,
       };
     default:
       return state;

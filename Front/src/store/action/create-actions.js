@@ -5,6 +5,11 @@ export const CREATE_CARD_SUCCESS = 'CREATE_CARD_SUCCESS';
 export const CREATE_CARD_ERROR = 'CREATE_CARD_ERROR';
 export const HANDLE_EDIT_MODE = 'HANDLE_EDIT_MODE';
 
+export const DELETE_CARD = 'DELETE_CARD';
+export const DELETE_CARD_SUCCESS = 'DELETE_CARD_SUCCESS';
+export const DELETE_CARD_ERROR = 'DELETE_CARD_ERROR';
+
+
 export const toggleModalCard = (payload) => ({
   type: TOGGLE_MODAL_CARD,
   payload,
@@ -30,4 +35,18 @@ export const createCardError = () => ({
 
 export const handleEditMode = () => ({
   type: HANDLE_EDIT_MODE,
+});
+
+export const deleteCard = (payload) => ({
+  type: DELETE_CARD,
+  payload,
+});
+
+export const deleteCardSuccess = (payload) => ({
+  type: DELETE_CARD_SUCCESS,
+  payload,
+});
+
+export const deleteCardError = () => ({
+  type: DELETE_CARD_ERROR,
 });
