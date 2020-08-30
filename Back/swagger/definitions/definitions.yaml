@@ -1,33 +1,159 @@
 
 definitions:
 
-  Class:
+  Classes:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            class_id:
+              type: integer
+              example: 1
+            class_username:
+              type: string
+              example: 6eme A
+            class_description:
+              type: string
+              example: classe de niveau 6eme
+        example:
+          - class_id: 1
+            class_username: 6em A
+            class_description: niveau 6eme
+          - class_id: 2  
+            class_username: 5em B
+            class_description: niveau 5eme
+
+  ClassesUsername:
+    type: object
+    properties:
+      data:
+        type: array
+        items: 
+          type: object
+          properties:
+            class_id:
+              type: integer
+            class_username:
+              type: string
+        example:
+          - class_id: 1
+            class_username: 6em A
+          - class_id: 2  
+            class_username: 5em B
+
+  getOneClass:
+    properties:
+      class_id:
+        type: integer
+        example: 1
+      class_username:
+        type: string
+        example: 6eme A
+      class_description:
+        type: string
+        example: classe de niveau 6eme
+
+  createClass:
+    properties:
+      class_id:
+        type: integer
+        example: 1
+      class_username:
+        type: string
+        example: 6eme A
+      class_description:
+        type: string
+        example: classe de niveau 6eme
+      teacher_id:
+        type: integer
+        example: 1
+
+  Article:
     properties:
       id:
         type: integer
-      username:
+        example: 1
+      title:
         type: string
-      description:
+        example: comment s'integrer dans un groupe quand on a de l'acné
+      slug:
         type: string
+        example: comment-s-integrer-dans-un-groupe-quand-on-a-de-l-acne
+      excerpt:
+        type: string
+        example: comment s'integrer dans un groupe quand ...
+      content:
+        type: string
+        example: la vie d'adolenscent est compliquée ...
       teacher_id:
         type: integer
+        example: 1
 
-  Article:
+  ArticleWithClasses:
+    properties:
+      id:
+        type: integer
+        example: 1
+      title:
+        type: string
+        example: Article UN
+      slug:
+        type: string
+        example: article-un
+      excerpt:
+        type: string
+        example: Osti qui fa frette. Calvenusse de tabarnouche de mausus de cârosse de patente à gosse. J'ai finalement pogné la twist pour faire la poutine. Toryeu que c'est cheap cette esti de cochonnerie-là. T'es d...
+      content:
+        type: string
+        example: Osti qui fa frette. Calvenusse de tabarnouche de mausus de cârosse de patente à gosse. J'ai finalement pogné la twist pour faire la poutine. Toryeu que c'est cheap cette esti de cochonnerie-là. T'es de bonne heure sul piton toé à matin, quessé qui t'arrive ? Ferme-toé un peu le mâche-patate là, va prendre une marche ou quelque chose.
+      author:
+        type: string
+        example: chuck norris
+      class_username:
+        type: array
+        items: 
+            - type: string
+        example: 
+          - 6eme A 
+          - 5eme B
+        
+  ArticleView:
     properties:
       article_id:
         type: integer
       article_title:
         type: string
-      article_slug:
-        type: string
-      article_excerpt:
-        type: string
       article_content:
-        type: string
-      article_author:
         type: string
       class_username:
         type: array
         items: 
           oneOf:
             - type: string
+      article_author:
+        type: string
+        
+    example:
+      article_id: 1
+      article_title: ceci est un titre
+      article_content: ceci est le contenu de mon article
+      article_author: jean-claude dusse
+      class_username: 
+        - 6em A 
+
+  m2m_class_to_article:
+    properties:
+      id:
+        type: integer
+        example: 6
+      article_id:
+        type: integer
+        example: 1
+      class_id:
+        type: integer
+        example: 2
+
+  

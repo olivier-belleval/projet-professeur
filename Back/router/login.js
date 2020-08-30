@@ -28,13 +28,7 @@ const connexionSchema = require('../validation/schemas/connexion');
  *       200:
  *         description: login
  *         schema:
- *           type: object
- *           properties:
- *            id:
- *              type: integer
- *              format: int64
- *            username:
- *              type: string
+ *           $ref: '#/definitions/ClassesUsername'
  */
 router.get('/', userController.getClassesUsernames);
 
@@ -55,6 +49,7 @@ router.get('/', userController.getClassesUsernames);
  *         description: login
  *         schema:
  *           type: string
+ *           example: Successful login.
  */
 router.post('/', validateBody(connexionSchema), userController.classLogin);
 
@@ -74,6 +69,7 @@ router.post('/', validateBody(connexionSchema), userController.classLogin);
  *         description: login
  *         schema:
  *           type: string
+ *           example: Successful login.
  */
 router.post('/admin', validateBody(connexionSchema), userController.adminLogin);
 
@@ -88,6 +84,7 @@ router.post('/admin', validateBody(connexionSchema), userController.adminLogin);
  *         description: login
  *         schema:
  *           type: string
+ *           example: Successful logout.
  */
 router.get('/logout', userController.logout);
 

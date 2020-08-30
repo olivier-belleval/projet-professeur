@@ -36,13 +36,8 @@ router.use(teacherMW.isATeacher);
  *       200:
  *         description: Array of all classes
  *         schema:
- *          type: object
- *          properties:
- *              data:
- *                  type: array
- *                  items:
- *                      $ref: '#/definitions/Class'
- */
+ *          $ref: '#/definitions/Classes'
+ */ 
 router.get('/class/all', adminController.getAllClasses);
 
 /**
@@ -62,7 +57,8 @@ router.get('/class/all', adminController.getAllClasses);
  *              data:
  *                  type: array
  *                  items:
- *                      $ref: '#/definitions/Article'
+ *                      $ref: '#/definitions/ArticleWithClasses'
+ *                      
  */
 router.get('/article/all', adminController.getAllArticlesWithoutClasses);
 
@@ -74,6 +70,8 @@ router.get('/article/all', adminController.getAllArticlesWithoutClasses);
  *     tags: [Admin]
  *     produces:
  *       - application/json
+ *     parameters:
+ *       - $ref: '#/parameters/classId'
  *     responses:
  *       200:
  *         description: return the object class
@@ -81,7 +79,7 @@ router.get('/article/all', adminController.getAllArticlesWithoutClasses);
  *          type: object
  *          properties:
  *              data:
- *                  $ref: '#/definitions/Article'
+ *                  $ref: '#/definitions/getOneClass'
  */
 router.get('/class/:id(\\d+)', adminController.getOneClass);
 
@@ -106,8 +104,10 @@ router.get('/class/:id(\\d+)', adminController.getOneClass);
  *          properties:
  *              message:
  *                  type:  string
+ *                  example: Class has been created successfully.
  *              data:
- *                  $ref: '#/definitions/Class'
+ *                  $ref: '#/definitions/createClass'
+ *              
  */
 router.post('/class/create', validateBody(createClassSchema), adminController.createClass);
 
@@ -132,8 +132,9 @@ router.post('/class/create', validateBody(createClassSchema), adminController.cr
  *          properties:
  *              message:
  *                  type:  string
+ *                  example: Class has been edited successfully.
  *              data:
- *                  $ref: '#/definitions/Class'
+ *                  $ref: '#/definitions/createClass'
  */
 router.put('/class/:id(\\d+)/edit', validateBody(editClassSchema), adminController.editClass);
 
@@ -142,6 +143,7 @@ router.put('/class/:id(\\d+)/edit', validateBody(editClassSchema), adminControll
  * /api/admin/class/{id}/delete':
  *   delete:
  *     description: delete a Class
+ *     operationId: deleteClass
  *     tags: [Admin]
  *     produces:
  *       - application/json
@@ -155,8 +157,9 @@ router.put('/class/:id(\\d+)/edit', validateBody(editClassSchema), adminControll
  *          properties:
  *              message:
  *                  type:  string
+ *                  example: Class has been deleted successfully.
  *              data:
- *                  $ref: '#/definitions/Class'
+ *                  $ref: '#/definitions/createClass'
  */
 router.delete('/class/:id(\\d+)/delete', adminController.deleteClass);
 

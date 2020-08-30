@@ -6,30 +6,56 @@ parameters:
     in: body
     required: true
     type: string
+    example: 6eme A
   password:
     name: password
     description: password to use for login.
     in: body
     required: true
     type: string
+    example: un_password@super!safe
   description:
     name: description
     description: description of the class
     in: body
     required: true
     type: string
+    example: classe niveau 6eme
   teacherId:
     name: teacherId
     description: ID of the teacher
     in: session
     required: true
     type: integer
+    example: 1
   classId:
     name: classId
     description: ID of the class
     in: params
     required: true
     type: integer
+    example: 1
+  articleId:
+    name: articleId
+    description: ID of the article
+    in: params
+    required: true
+    type: integer
+    example: 1
+  title: 
+    name: title
+    description: title of the article
+    in: body
+    required: true
+    type: string
+    example: un titre
+  content: 
+    name: content
+    description: content of the article
+    in: body
+    required: true
+    type: string
+    example: content
 
 tags:
   - name: Login
