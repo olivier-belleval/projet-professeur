@@ -63,6 +63,8 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         list_id: '',
+        newCardOrder: '',
+        newCardContent: '',
         modalOpen: !state.modalOpen,
       };
     case CHANGE_FIELD_CARD:
