@@ -58,7 +58,7 @@ const options = {
         basePath: '/', // Base path (optional)
     },
     // List of files to be processes. You can also set globs './routes/*.js'
-    apis: ['router/**/*.js','swagger/definitions/parameters.yaml'],
+    apis: ['router/**/*.js','swagger/definitions/parameters.yaml','swagger/definitions/definitions.yaml'],
   };
   
   const specs = swaggerJSDoc(options);

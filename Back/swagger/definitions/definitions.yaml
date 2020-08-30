@@ -1,0 +1,33 @@
+
+definitions:
+
+  Class:
+    properties:
+      id:
+        type: integer
+      username:
+        type: string
+      description:
+        type: string
+      teacher_id:
+        type: integer
+
+  Article:
+    properties:
+      article_id:
+        type: integer
+      article_title:
+        type: string
+      article_slug:
+        type: string
+      article_excerpt:
+        type: string
+      article_content:
+        type: string
+      article_author:
+        type: string
+      class_username:
+        type: array
+        items: 
+          oneOf:
+            - type: string

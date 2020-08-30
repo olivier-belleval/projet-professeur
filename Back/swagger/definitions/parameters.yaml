@@ -12,20 +12,25 @@ parameters:
     in: body
     required: true
     type: string
+  description:
+    name: description
+    description: description of the class
+    in: body
+    required: true
+    type: string
+  teacherId:
+    name: teacherId
+    description: ID of the teacher
+    in: session
+    required: true
+    type: integer
+  classId:
+    name: classId
+    description: ID of the class
+    in: params
+    required: true
+    type: integer
 
 tags:
   - name: Login
     description: Login management
-
-definitions:
-  classesusername:
-    properties:
-      username:
-          type: string
-
-  logedClass:
-    properties:
-      id:
-        type: string
-      username:
-        type: string

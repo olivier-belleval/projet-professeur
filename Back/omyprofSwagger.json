@@ -88,7 +88,7 @@
                     "200": {
                         "description": "OK",
                         "schema":{
-                            "type":"object",
+                            "type":"array",
                             "properties": {
                                 "id":{
                                     "type":"integer",

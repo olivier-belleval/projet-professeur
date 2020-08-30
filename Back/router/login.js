@@ -16,7 +16,7 @@ const connexionSchema = require('../validation/schemas/connexion');
  */
 /**
  * @swagger
- * /login:
+ * /login/login:
  *   get:
  *     description: returns classes names
  *     tags: [Login]
@@ -41,7 +41,7 @@ router.get('/', userController.getClassesUsernames);
 
  /**
  * @swagger
- * /login:
+ * /login/login:
  *   post:
  *     description: Login to the application as class
  *     tags: [Login]
@@ -60,7 +60,7 @@ router.post('/', validateBody(connexionSchema), userController.classLogin);
 
  /**
  * @swagger
- * /admin:
+ * /login/admin:
  *   post:
  *     description: Login to the application as teacher
  *     tags: [Login]
@@ -79,7 +79,7 @@ router.post('/admin', validateBody(connexionSchema), userController.adminLogin);
 
 /**
  * @swagger
- * /logout:
+ * /login/logout:
  *   post:
  *     description: Logout to the application
  *     tags: [Login]
