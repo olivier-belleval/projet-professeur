@@ -13,7 +13,8 @@ import {
   createCardSubmit,
   handleEditMode,
   deleteCard,
-  toggleModalList
+  toggleModalList,
+  createListSubmit,
 } from '../store/action/create-actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -22,7 +23,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     kanban: getKanbanBySlug(state, slug),
     modalOpen: state.kanbans.modalOpen,
-    listModalOpen : state.kanbans.listModalOpen,
+    listModalOpen: state.kanbans.listModalOpen,
     newCardOrder: state.kanbans.newCardOrder,
     newCardContent: state.kanbans.newCardContent,
     editMode: state.kanbans.editMode,
@@ -71,6 +72,10 @@ const mapDispatchToProps = (dispatch) => ({
   openListModal: () => {
     dispatch(toggleModalList());
   },
+
+  handleListSubmit: () => {
+    dispatch(createListSubmit())
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(KanbanDetail);

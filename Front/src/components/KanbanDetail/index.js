@@ -23,6 +23,7 @@ const KanbanDetail = ({
   openListModal,
   newListOrder,
   newListTitle,
+  handleListSubmit,
 }) => {
 
   useEffect(() => {
@@ -31,8 +32,13 @@ const KanbanDetail = ({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleCardSubmit();
+    if(listModalOpen){
+      handleListSubmit()
+    } 
+    else if (modalOpen){
+    handleCardSubmit();}
   };
+
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -56,11 +62,12 @@ const KanbanDetail = ({
               {kanban.description}
             </span>
           </div>
+
           <div className="kanban-detail-adding-button">
             <AiFillPlusSquare onClick={openListModal}/>
             {listModalOpen && (
               <ListModal
-                onClick={openListModal}
+                openListModal={openListModal}
                 changeField={handleInputChange}
                 handleSubmit={handleSubmit}
                 newListdOrder={newListOrder}
@@ -131,7 +138,7 @@ console.log("modal de card");
 };
 
 const ListModal = ({
-  onClick,
+  openListModal,
   handleSubmit,
   newListOrder,
   newListTitle,
@@ -140,7 +147,7 @@ const ListModal = ({
   return (
     <div className="modal">
       <div className="modal-close-button">
-        <MdClose onClick={onClick} />
+        <MdClose onClick={openListModal} />
       </div>
       <form onSubmit={handleSubmit}>
         <h3> Ajouter une liste</h3>

@@ -8,11 +8,13 @@ export const CREATE_CARD_SUCCESS = 'CREATE_CARD_SUCCESS';
 export const CREATE_CARD_ERROR = 'CREATE_CARD_ERROR';
 export const HANDLE_EDIT_MODE = 'HANDLE_EDIT_MODE';
 
+export const CREATE_LIST_SUBMIT = 'HANDLE_LIST_SUBMIT';
+export const CREATE_LIST_SUCCESS = 'CREATE_LIST_SUCCESS';
+export const CREATE_LIST_ERROR = 'CREATE_LIST_ERROR';
 
 export const DELETE_CARD = 'DELETE_CARD';
 export const DELETE_CARD_SUCCESS = 'DELETE_CARD_SUCCESS';
 export const DELETE_CARD_ERROR = 'DELETE_CARD_ERROR';
-
 
 export const toggleModalCard = (payload) => ({
   type: TOGGLE_MODAL_CARD,
@@ -57,4 +59,17 @@ export const deleteCardError = () => ({
 
 export const toggleModalList = () => ({
   type: TOGGLE_MODAL_LIST,
+});
+
+export const createListSubmit = () => ({
+  type: CREATE_LIST_SUBMIT,
+});
+
+export const createListSuccess = (payload) => ({
+  type: CREATE_LIST_SUCCESS,
+  payload,
+});
+
+export const createListError = () => ({
+  type: CREATE_LIST_ERROR,
 });

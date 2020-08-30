@@ -24,6 +24,9 @@ import {
   DELETE_CARD,
   DELETE_CARD_SUCCESS,
   DELETE_CARD_ERROR,
+  CREATE_LIST_ERROR,
+  CREATE_LIST_SUCCESS,
+  CREATE_LIST_SUBMIT,
 } from '../action/create-actions';
 
 export const initialState = {
@@ -55,7 +58,7 @@ export default (state = initialState, action = {}) => {
     case TOGGLE_MODAL_LIST:
       return {
         ...state,
-        listModalOpen: !state.modalOpen,
+        listModalOpen: !state.listModalOpen,
       };
     case HANDLE_EDIT_MODE:
       return {
@@ -170,6 +173,27 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         list_id: action.payload,
+      };
+    case CREATE_LIST_SUBMIT:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CREATE_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        newListOrder: '',
+        newListTitle: '',
+        listModalOpen: !state.listModalOpen,
+      };
+    case CREATE_LIST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        newListOrder: '',
+        newListTitle: '',
+        listModalOpen: !state.listModalOpen,
       };
     default:
       return state;
