@@ -35,6 +35,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   // handle login for classes
   handleClassesLogin: () => {
+    console.log("Cas de login classes")
     dispatch(loginClassesSubmit());
   },
 

@@ -34,6 +34,7 @@ const logMiddleware = (store) => (next) => (action) => {
           );
         });
       break;
+      
       case LOGIN_CLASSES_SUBMIT:
       axios({
         method: 'post',
