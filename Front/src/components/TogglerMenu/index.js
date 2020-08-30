@@ -11,12 +11,12 @@ const tab = [
   'articles',
   'kanbans',
   'espace-admin',
-  'se-deconnecter'
-]
+  'se-deconnecter',
+];
 
-const TogglerMenu = ({ opened, onOpenClick, path, handleLogout }) => {
-
-return (
+const TogglerMenu = ({
+  opened, onOpenClick, path, handleLogout,
+}) => (
   <div className="settings">
     <div className="settings-button" onClick={onOpenClick}>
       <div className="settings-icon">
@@ -26,25 +26,25 @@ return (
     {opened && (
     <div className="settings-menu">
 
-        <NavLink key={"1"} exact to={'/articles'}>
-          <div className="settings-nav">articles</div>
-        </NavLink>
+      <NavLink key="1" exact to="/articles">
+        <div className="settings-nav" onClick={onOpenClick}>articles</div>
+      </NavLink>
 
-        <NavLink key={"2"} exact to={'/kanbans'}>
-          <div className="settings-nav">tableaux</div>
-        </NavLink>
+      <NavLink key="2" exact to="/kanbans">
+        <div className="settings-nav" onClick={onOpenClick}>tableaux</div>
+      </NavLink>
 
-        <NavLink key={"3"} exact to={'/espace-admin'}>
-          <div className="settings-nav">espace admin</div>
-        </NavLink>
+      <NavLink key="3" exact to="/espace-admin">
+        <div className="settings-nav" onClick={onOpenClick}>espace admin</div>
+      </NavLink>
 
-        <NavLink key={"4"} exact to={'/'} onClick={handleLogout}>
-          <div className="settings-nav">se déconnecter</div>
-        </NavLink> 
+      <NavLink key="4" exact to="/" onClick={handleLogout}>
+        <div className="settings-nav">se déconnecter</div>
+      </NavLink>
 
     </div>
     )}
   </div>
-)};
+);
 
 export default TogglerMenu;
