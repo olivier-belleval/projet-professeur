@@ -1,16 +1,13 @@
-export const MODIFY_CLASS = 'MODIFY_CLASS';
+
 export const DELETE_CLASS = 'DELETE_CLASS';
 export const DELETE_CLASS_SUCCESS = 'DELETE_CLASS_SUCCESS';
 export const DELETE_CLASS_ERROR = 'DELETE_CLASS_ERROR';
 export const EDIT_CLASS = 'EDIT_CLASS';
 export const GET_CLASSES_ADMIN_PANEL = 'GET_CLASSES_ADMIN_PANEL';
-
 export const GET_CLASSES_SUCCESS = 'GET_CLASSES_SUCCESS';
 export const GET_CLASSES_ERROR = 'GET_CLASSES_ERROR';
 
-export const modifyClass = () => ({
-  type: MODIFY_CLASS,
-});
+
 
 export const deleteClass = (payload) => ({
   type: DELETE_CLASS,

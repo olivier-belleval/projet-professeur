@@ -29,6 +29,9 @@ import {
   CREATE_CLASS_SUBMIT,
   createClassSuccess,
   createClassError,
+  SUBMIT_EDITED_CLASS,
+  editClassError,
+  editClassSuccess,
 } from '../action/class-editor-action';
 
 import {
@@ -233,6 +236,31 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           });
       }).catch((err, res) => {
         store.dispatch(createClassError(res.data));
+      });
+
+      break;
+
+    case SUBMIT_EDITED_CLASS:
+
+      const editedClassId = store.getState().editorClass.id_edited_class;
+
+      axios({
+
+        method: 'put',
+        url: `${local}api/admin/class/${editedClassId}/edit`,
+        withCredentials: true,
+        data: {
+          username: store.getState().editorClass.username,
+          password: store.getState().editorClass.password,
+          description: store.getState().editorClass.description,
+
+        },
+      }).then((res) => {
+        console.log('axios username :', store.getState().editorClass.username, 'axios password :', store.getState().editorClass.password, 'axios description :', store.getState().editorClass.description);
+        store.dispatch(editClassSuccess());
+        console.log('taddaaaaaaaaaa');
+      }).catch((err) => {
+        store.dispatch(editClassError('Impossible d\'éditer'));
       });
 
       break;
