@@ -79,6 +79,7 @@ router.get('/:id(\\d+)', articleController.getOneArticle);
  *          properties:
  *              message:
  *                  type:  string
+ *                  example: l'article a bien été crée.
  *              data:
  *                  $ref: '#/definitions/Article'
  */

@@ -61,9 +61,9 @@ const options = {
     apis: ['router/**/*.js','swagger/definitions/parameters.yaml','swagger/definitions/definitions.yaml'],
   };
   
-  const specs = swaggerJSDoc(options);
+const specs = swaggerJSDoc(options);
 
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 //app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
 

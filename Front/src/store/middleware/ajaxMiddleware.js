@@ -59,13 +59,7 @@ import {
 } from '../action/AdminClass';
 
 const ajaxMiddleware = (store) => (next) => (action) => {
-<<<<<<< HEAD
-=======
   const local = 'http://localhost:3000/';
-  const utils = {
-    kanbanId: '',
-  };
->>>>>>> develop
 
   const utils = {
     local : 'http://localhost:3000/',
@@ -127,28 +121,9 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         store.dispatch(createArticleSuccess());
         axios({
 
-<<<<<<< HEAD
-          store.dispatch(createArticleSuccess());
-          axios({
-
-            method: 'get',
-            url: `${utils.local}api/admin/article/all`,
-            withCredentials: true,
-    
-          }).then((res) => {
-              
-              store.dispatch(getArticlesSuccess(res.data.data));
-    
-            }).catch((err) => {
-              
-              store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
-    
-            });
-=======
           method: 'get',
           url: `${local}api/admin/article/all`,
           withCredentials: true,
->>>>>>> develop
 
         }).then((res) => {
           store.dispatch(getArticlesSuccess(res.data.data));
@@ -200,15 +175,9 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         axios({
 
-<<<<<<< HEAD
-            method: 'get',
-            url: `${utils.local}api/admin/article/all`,
-            withCredentials: true,
-=======
           method: 'get',
           url: `${local}api/admin/article/all`,
           withCredentials: true,
->>>>>>> develop
 
         }).then((res) => {
           store.dispatch(getArticlesSuccess(res.data.data));
@@ -251,20 +220,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         },
       }).then((res) => {
-<<<<<<< HEAD
-          
-          store.dispatch(createClassSuccess());
-
-          axios({
-
-            method: 'get',
-            url: `${utils.local}api/admin/class/all`,
-            withCredentials: true,
-
-          })
-=======
         store.dispatch(createClassSuccess());
->>>>>>> develop
 
         axios({
 
@@ -351,25 +307,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         });
       break;
 
-<<<<<<< HEAD
-    case GET_KANBAN:
-      utils.kanbanId = store.getState().kanbans.kanban_id;
-      axios({
-        method: 'get',
-        url: `${utils.local}api/kanban/${utils.kanbanId}`,
-        withCredentials: true,
-      }).then((res) => {
-          console.log(res.data);
-          store.dispatch(getKanbanSuccess(res.data.data));
-        }).catch((err) => {
-          console.log(err);
-          store.dispatch(getKanbanError('Impossible de récupérer le kanban...'));
-        });
-      break;
-
-
-=======
->>>>>>> develop
     case DELETE_KANBAN:
 
       axios({
@@ -414,26 +351,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         },
       }).then((res) => {
-<<<<<<< HEAD
-        
-          store.dispatch(createCardSuccess());
-
-          axios({
-
-            method: 'get',
-            url: `${utils.local}api/kanban/${kanbanId}`,
-            withCredentials: true,
-    
-          }).then((res) => {
-              
-              store.dispatch(getKanbanSuccess(res.data.data));
-    
-            }).catch((err) => {
-              
-              store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
-    
-            });
-=======
         store.dispatch(createCardSuccess());
 
         axios({
@@ -444,7 +361,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         }).then((res) => {
           store.dispatch(getKanbanSuccess(res.data.data));
->>>>>>> develop
         }).catch((err) => {
           store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
         });

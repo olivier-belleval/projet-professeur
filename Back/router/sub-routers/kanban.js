@@ -16,6 +16,7 @@ router.get('/:id(\\d+)', kanbanController.getOneKanbansById);
 router.post('/create', teacherMW.isATeacher, validateBody(createKanbanSchema), kanbanController.createKanban);
 router.put('/:id(\\d+)/edit', teacherMW.isATeacher, validateBody(editKanbanSchema), kanbanController.editKanban);
 router.delete('/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteKanban);
+
 router.post('/:kanbanId(\\d+)/associate', teacherMW.isATeacher, validateBody(associationKanbanClassSchema), kanbanController.associateClassToKanban);
 router.post('/:id(\\d+)/associate/remove', teacherMW.isATeacher, validateBody(associationKanbanClassSchema), kanbanController.removeAssociationClassToKanban);
 
