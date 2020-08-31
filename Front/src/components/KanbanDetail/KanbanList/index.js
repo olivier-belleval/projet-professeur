@@ -7,7 +7,7 @@ import { deleteCard } from '../../../store/action/create-actions';
 const KanbanList = ({ list, onOpenClick, deleteCard, getListId }) => {
 
   return(
-  <div>
+  <div style={{width:'100%'}}>
       <div className="kanban-list" key={list.id} onMouseEnter={() => {
           getListId(list.id)
       }}>

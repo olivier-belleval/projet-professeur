@@ -4,6 +4,8 @@
   margin:1.3em;
   background-color: vars.$lightest-color;
   padding: 1em;
+  position: relative;
+  overflow-y: hidden;
 
   &-adding-button{
     color:white;
@@ -21,6 +23,7 @@
       font-weight: 700;
       font-size: 1.7em;
       color: vars.$lightest-color;
+      font-family: vars.$font-title;
 
     }
     &--subtitle{
@@ -41,6 +44,7 @@
       font-size: 1.2em;
       display: flex;
       justify-content: space-around;
+      width: 100%;
     }  
   }
 
@@ -117,15 +121,36 @@
 
     }}
     .kanban-card{
-      max-width:45%;
+      width: 100%;
     }
   }
   @media screen and (min-width:1000px){
+    .kanban-detail{
+
+    }
     .kanban-detail-grid{
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: nowrap;      
+      width:100%;
+      overflow-x: auto;
     }
     .kanban-list{
-      max-width: 45%;
+      width: 25rem;
+    &-title{
+      height: 7rem;
     }
+    
+  &-content{
+    
+  }}
   }
+
+/*scrollbar*/
+
+::-webkit-scrollbar {
+  background-color: vars.$light-color;
+
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg,vars.$color,vars.$dark-color);
+}
