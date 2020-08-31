@@ -79,10 +79,9 @@ const KanbanDetail = ({
 
       </header>
 
-      { datas && (
+      { datas && kanban_detail['0'].lists && (
         <main>
-
-          <div className="kanban-detail-grid">
+            <div className="kanban-detail-grid">
             {kanban_detail['0'].lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} deleteCard={deleteCard} getListId={getListId} />)}
           </div>
 
@@ -96,6 +95,8 @@ const KanbanDetail = ({
               handleSubmit={handleSubmit}
             />
           )}
+
+          
 
         </main>
       )}

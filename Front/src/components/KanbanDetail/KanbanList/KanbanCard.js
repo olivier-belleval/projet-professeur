@@ -23,6 +23,4 @@ const Tag = ({tag}) => (
   </span>
 );
 
-
-
 export default KanbanCard;

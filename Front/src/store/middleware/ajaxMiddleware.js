@@ -160,9 +160,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         },
       }).then((res) => {
-        console.log('axios title :', store.getState().editor.title, 'axios content :', store.getState().editor.content);
         store.dispatch(editArticleSuccess());
-        console.log('taddaaaaaaaaaa');
       }).catch((err) => {
         store.dispatch(editArticleError('Impossible d\'éditer'));
       });
