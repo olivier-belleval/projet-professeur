@@ -49,6 +49,7 @@ const App = ({ isLogged, teacher }) => (
               <Route exact path="/admin/nouvelle-classe" component={TextEditorClass} />
               <Route exact path="/admin/edit/class/:id" component={TextEditorClass} />
               <Route exact path="/admin/nouveau-kanban" component={TextEditorKanban} />
+              <Route exact path="/admin/edit/kanban/:id" component={TextEditorKanban} />
             </Switch>
           )}
         </Switch>

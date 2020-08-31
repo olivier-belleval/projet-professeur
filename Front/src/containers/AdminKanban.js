@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
 import AdminKanban from '../components/AdminKanban';
-import { modifyKanban, deleteKanban, joinClass } from '../store/action/AdminKanban';
+import { editKanban, deleteKanban, joinClass } from '../store/action/AdminKanban';
 import { getKanbans, getKanban } from '../store/action/data-actions';
 
 const mapState = (state) => ({
   list: state.kanbans.list,
   kanban_id: state.kanbans.kanban_id,
+  id_edited_kanban: state.editorKanban.id_edited_kanban,
 });
 
 const mapDispatch = (dispatch) => ({
-  onclickPen: () => {
-    console.log("l'user veut modifier le tableau");
-    dispatch(modifyKanban());
+  editKanban: (id) => {
+    console.log("l'user veut modifier le tableau", id);
+    dispatch(editKanban(id));
   },
 
   deleteKanban: (id) => {

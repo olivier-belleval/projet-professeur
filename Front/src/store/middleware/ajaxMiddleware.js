@@ -46,6 +46,9 @@ import {
   CREATE_KANBAN_SUBMIT,
   createKanbanSuccess,
   createKanbanError,
+  SUBMIT_EDITED_KANBAN,
+  editKanbanError,
+  editKanbanSuccess,
 } from '../action/kanban-editor-action';
 
 import {
@@ -359,8 +362,8 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           url: `${local}api/kanban/all`,
           withCredentials: true,
         }).then((response) => {
-            store.dispatch(getKanbanSuccess(response.data.data));
-          })
+          store.dispatch(getKanbanSuccess(response.data.data));
+        })
           .catch((err) => {
             console.log(err);
             store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
@@ -454,11 +457,11 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           url: `${local}api/kanban/${kanban}`,
           withCredentials: true,
 
-      }).then((res) => {
-        store.dispatch(getKanbanDetailSuccess(res.data.data));
-      }).catch((err) => {
-        store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
-      });
+        }).then((res) => {
+          store.dispatch(getKanbanDetailSuccess(res.data.data));
+        }).catch((err) => {
+          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+        });
       }).catch((err) => {
         console.log(err);
       // store.dispatch(createCardError('Impossible de créer'));
@@ -493,6 +496,32 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         });
       }).catch((err) => {
         store.dispatch(createCardError('Impossible de créer'));
+      });
+
+      break;
+
+    case SUBMIT_EDITED_KANBAN:
+
+      const editedKanbanId = store.getState().editorKanban.id_edited_kanban;
+
+      axios({
+
+        method: 'put',
+        url: `${local}api/kanban/${editedKanbanId}/edit`,
+        withCredentials: true,
+        data: {
+          title: store.getState().editorKanban.title,
+          background: store.getState().editorKanban.background,
+          description: store.getState().editorKanban.description,
+
+        },
+      }).then((res) => {
+        console.log('axios title :', store.getState().editorKanban.title, 'axios background :', store.getState().editorKanban.background, 'axios description :', store.getState().editorKanban.description);
+        store.dispatch(editKanbanSuccess());
+        console.log('taddaaaaaaaaaa');
+      }).catch((err) => {
+        console.log(err);
+        store.dispatch(editKanbanError('Impossible d\'éditer'));
       });
 
       break;

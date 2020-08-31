@@ -1,10 +1,19 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import './style.scss';
 import 'draft-js/dist/Draft.css';
 
 const TextEditorKanban = ({
-  changeField, title, description, background, handleKanbanSubmit, send,
+  changeField,
+  title,
+  description,
+  background,
+  handleKanbanSubmit,
+  send,
+  editing,
+  kanbanEdited,
+  cancelEditingKanban,
+  handleKanbanEdit,
 }) => {
   console.log('text edit');
   const handleInputChange = (evt) => {
@@ -15,20 +24,24 @@ const TextEditorKanban = ({
     evt.preventDefault();
     handleKanbanSubmit();
   };
+  const handleEdition = (evt) => {
+    evt.preventDefault();
+    handleKanbanEdit();
+  };
 
   return (
     <div className="text-editor-kanban">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={editing ? handleEdition : handleSubmit}>
         <input
           name="title"
-          value={title}
+          defaultValue={editing ? kanbanEdited.title : title}
           placeholder="Titre du kanban"
           onChange={handleInputChange}
           className="input-title"
         />
         <input
           name="background"
-          value={background}
+          defaultValue={editing ? kanbanEdited.background : background}
           type="color"
           placeholder="Choisissez votre couleur"
           onChange={handleInputChange}
@@ -36,12 +49,14 @@ const TextEditorKanban = ({
         />
         <textarea
           name="description"
-          value={description}
+          defaultValue={editing ? kanbanEdited.description : description}
           placeholder="Contenu du Kanban..."
           onChange={handleInputChange}
           className="input-content"
         />
-
+        <button type="button" className="text-editor-kanban-button-cancel" onClick={cancelEditingKanban}>
+          <Link to="/admin/Kanban">Annuler</Link>
+        </button>
         <button type="submit" className="text-editor-kanban-button">
           Let's go baby !
         </button>

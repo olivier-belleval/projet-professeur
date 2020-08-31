@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-
 import { Link } from 'react-router-dom';
 
 import {
@@ -8,7 +7,11 @@ import {
 import './style.scss';
 
 const AdminKanban = ({
-  list, onclickPen, deleteKanban, onclickJoin, getKanbans,
+  list,
+  editKanban,
+  deleteKanban,
+  onclickJoin,
+  getKanbans,
 }) => {
   console.log(list);
   useEffect(() => {
@@ -25,11 +28,13 @@ const AdminKanban = ({
               <p>{tableau.description}</p>
             </div>
             <div className="admin_panel_kanban_content-part-icons">
-              <div className="admin_panel_kanban_content-part-modify"><FaPencilAlt onClick={() => {
-                console.log('modify', tableau.id);
-                onclickPen();
-              }}
-              />
+              <div className="admin_panel_class_content-part-modify">
+                <Link to={`/admin/edit/kanban/${tableau.id}`} key={tableau.id}>
+                  <FaPencilAlt onClick={() => {
+                    editKanban(tableau.id);
+                  }}
+                  />
+                </Link>
               </div>
               <div className="admin_panel_kanban_content-part-delete"><FaTrash onClick={() => {
                 console.log('delete', tableau.id);
