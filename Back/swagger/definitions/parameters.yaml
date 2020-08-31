@@ -16,11 +16,11 @@ parameters:
     example: un_password@super!safe
   description:
     name: description
-    description: description of the class
+    description: description of the item
     in: body
     required: true
     type: string
-    example: classe niveau 6eme
+    example: item description
   teacherId:
     name: teacherId
     description: ID of the teacher
@@ -44,18 +44,46 @@ parameters:
     example: 1
   title: 
     name: title
-    description: title of the article
+    description: title of the item
     in: body
     required: true
     type: string
-    example: un titre
+    example: item title
   content: 
     name: content
-    description: content of the article
+    description: content of the item
     in: body
     required: true
     type: string
-    example: content
+    example: content of the item
+  kanbanId:
+    name: kanbanId
+    description: ID of the kanban
+    in: params
+    required: true
+    type: integer
+    example: 1
+  listId:
+    name: listId
+    description: ID of the list
+    in: params
+    required: true
+    type: integer
+    example: 1
+  cardId:
+    name: cardId
+    description: ID of the card
+    in: params
+    required: true
+    type: integer
+    example: 1
+  tagId:
+    name: tagId
+    description: ID of the tag
+    in: params
+    required: true
+    type: integer
+    example: 1
 
 tags:
   - name: Login
