@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
 import AdminClass from '../components/AdminClass';
-import { modifyClass, deleteClass, getClassesAdminPanel } from '../store/action/AdminClass';
+import { editClass, deleteClass, getClassesAdminPanel } from '../store/action/AdminClass';
 
 const mapState = (state) => ({
   list: state.classes.classes,
   class_id: state.classes.class_id,
+  id_edited_class: state.editorClass.id_edited_class,
 });
 
 const mapDispatch = (dispatch) => ({
-  onclickPen: () => {
-    console.log("l'user veut modifier la classe");
-    dispatch(modifyClass());
+  editClass: (id) => {
+    console.log("l'user veut modifier la classe", id);
+    dispatch(editClass(id));
   },
 
   deleteClass: (id) => {

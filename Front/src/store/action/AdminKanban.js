@@ -2,6 +2,7 @@ export const MODIFY_KANBAN = 'MODIFY_KANBAN';
 export const DELETE_KANBAN = 'DELETE_KANBAN';
 export const DELETE_KANBAN_SUCCESS = 'DELETE_KANBAN_SUCCESS';
 export const DELETE_KANBAN_ERROR = 'DELETE_KANBAN_ERROR';
+export const EDIT_KANBAN = 'EDIT_KANBAN';
 export const JOIN_CLASS = 'JOIN_CLASS';
 
 export const modifyKanban = () => ({
@@ -13,9 +14,8 @@ export const deleteKanban = (payload) => ({
   payload,
 });
 
-export const deleteKanbanSuccess = (payload) => ({
+export const deleteKanbanSuccess = () => ({
   type: DELETE_KANBAN_SUCCESS,
-  payload,
 });
 
 export const deleteKanbanError = (payload) => ({
@@ -25,4 +25,9 @@ export const deleteKanbanError = (payload) => ({
 
 export const joinClass = () => ({
   type: JOIN_CLASS,
+});
+
+export const editKanban = (payload) => ({
+  type: EDIT_KANBAN,
+  payload,
 });

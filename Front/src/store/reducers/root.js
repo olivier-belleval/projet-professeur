@@ -6,6 +6,7 @@ import kanbans from './kanbans';
 import editor from './textEditor';
 import classes from './classes';
 import editorClass from './classEditor';
+import editorKanban from './kanbanEditor';
 
 export default combineReducers({
   articles,
@@ -14,4 +15,5 @@ export default combineReducers({
   editor,
   classes,
   editorClass,
+  editorKanban,
 });

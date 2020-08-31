@@ -37,7 +37,16 @@ import {
   CREATE_CLASS_SUBMIT,
   createClassSuccess,
   createClassError,
+  SUBMIT_EDITED_CLASS,
+  editClassError,
+  editClassSuccess,
 } from '../action/class-editor-action';
+
+import {
+  CREATE_KANBAN_SUBMIT,
+  createKanbanSuccess,
+  createKanbanError,
+} from '../action/kanban-editor-action';
 
 import {
   GET_CLASSES,
@@ -242,6 +251,31 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       break;
 
+    case SUBMIT_EDITED_CLASS:
+
+      const editedClassId = store.getState().editorClass.id_edited_class;
+
+      axios({
+
+        method: 'put',
+        url: `${local}api/admin/class/${editedClassId}/edit`,
+        withCredentials: true,
+        data: {
+          username: store.getState().editorClass.username,
+          password: store.getState().editorClass.password,
+          description: store.getState().editorClass.description,
+
+        },
+      }).then((res) => {
+        console.log('axios username :', store.getState().editorClass.username, 'axios password :', store.getState().editorClass.password, 'axios description :', store.getState().editorClass.description);
+        store.dispatch(editClassSuccess());
+        console.log('taddaaaaaaaaaa');
+      }).catch((err) => {
+        store.dispatch(editClassError('Impossible d\'éditer'));
+      });
+
+      break;
+
     case DELETE_CLASS:
 
       const ClassId = store.getState().classes.class_id;
@@ -307,31 +341,65 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         });
       break;
 
-    case DELETE_KANBAN:
-
+    case CREATE_KANBAN_SUBMIT:
       axios({
 
+        method: 'post',
+        url: `${local}api/kanban/create`,
+        withCredentials: true,
+        data: {
+          title: store.getState().editorKanban.title,
+          background: store.getState().editorKanban.background,
+          description: store.getState().editorKanban.description,
+
+        },
+      }).then((res) => {
+        console.log(res.data);
+        store.dispatch(createKanbanSuccess());
+        axios({
+          method: 'get',
+          url: `${local}api/kanban/all`,
+          withCredentials: true,
+        }).then((response) => {
+            store.dispatch(getKanbanSuccess(response.data.data));
+          })
+          .catch((err) => {
+            console.log(err);
+            store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+          });
+      }).catch((err, res) => {
+        console.log(err);
+        console.log(res.data);
+        store.dispatch(createKanbanError(res.data));
+      });
+
+      break;
+
+    case DELETE_KANBAN:
+
+      const kanbanId = store.getState().kanbans.kanban_id;
+      axios({
         method: 'delete',
         url: `${local}api/kanban/${kanbanId}/delete`,
         withCredentials: true,
-        crossorigin: true,
-
       }).then((res) => {
         store.dispatch(deleteKanbanSuccess());
+        axios({
+
+          method: 'get',
+          url: `${local}api/kanban/all`,
+          withCredentials: true,
+
+        }).then((res) => {
+          console.log('res data sa mere :', res.data);
+          store.dispatch(getKanbansSuccess(res.data.data));
+          console.log('ce que tu veux');
+        }).catch((err) => {
+          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+        });
       }).catch((err) => {
+        console.log('erreur :', err);
         store.dispatch(deleteKanbanError('Impossible de supprimer les kanbans'));
-      });
-
-      axios({
-
-        method: 'get',
-        url: `${local}api/kanban/all`,
-        withCredentials: true,
-
-      }).then((res) => {
-        store.dispatch(getKanbanSuccess(res.data.result));
-      }).catch((err) => {
-        store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
       });
 
       break;

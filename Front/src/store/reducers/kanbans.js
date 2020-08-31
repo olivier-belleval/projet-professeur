@@ -146,9 +146,9 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
-        list: [...action.payload],
         kanban_id: '',
         error: '',
+        list: [],
       };
     case DELETE_KANBAN_ERROR:
       return {

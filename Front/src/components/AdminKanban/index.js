@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import {
   FaPencilAlt, FaTrash, FaPlusCircle, FaInfinity,
 } from 'react-icons/fa';
 import './style.scss';
 
-const AdminKanban = ({ list, onclickPen, deleteKanban, onclickJoin, getKanbans, }) => {
+const AdminKanban = ({
+  list, onclickPen, deleteKanban, onclickJoin, getKanbans,
+}) => {
   console.log(list);
   useEffect(() => {
     getKanbans();
@@ -15,7 +19,7 @@ const AdminKanban = ({ list, onclickPen, deleteKanban, onclickJoin, getKanbans, 
       <h1 className="admin_panel_kanban-title"> Espace administrateur - gestion des articles </h1>
       <div className="admin_panel_kanban-content">
         {list.map((tableau) => (
-          <div className="admin_panel_kanban-content-part">
+          <div className="admin_panel_kanban-content-part" key={tableau.id}>
             <div className="admin_panel_kanban-content-part-tableau">{tableau.title}</div>
             <div className="admin_panel_kanban_content-part-class">
               <p>{tableau.description}</p>
@@ -45,7 +49,9 @@ const AdminKanban = ({ list, onclickPen, deleteKanban, onclickJoin, getKanbans, 
 
         <div className="admin_panel_kanban-content-part">
           <p>Ajouter un tableau</p>
-          <FaPlusCircle />
+          <Link exact="true" to="/admin/nouveau-kanban">
+            <FaPlusCircle />
+          </Link>
         </div>
       </div>
     </div>
