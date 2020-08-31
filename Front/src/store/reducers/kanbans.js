@@ -45,6 +45,7 @@ export const initialState = {
   card_id: '',
   newListOrder: '',
   newListTitle: '',
+  newCardColor: '',
 };
 
 export default (state = initialState, action = {}) => {

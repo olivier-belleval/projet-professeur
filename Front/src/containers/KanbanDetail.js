@@ -33,7 +33,7 @@ const mapStateToProps = (state, ownProps) => {
     list_id: state.kanbans.list_id,
     newListOrder: state.kanbans.newListOrder,
     newListTitle: state.kanbans.newListTitle,
-
+    newCardColor: state.kanbans.newCardColor,
   };
 };
 
