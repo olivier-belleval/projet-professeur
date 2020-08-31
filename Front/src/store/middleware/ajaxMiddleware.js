@@ -31,6 +31,9 @@ import {
   CREATE_LIST_SUBMIT,
   createListSuccess,
   createListError,
+  DELETE_LIST,
+  deleteListSuccess,
+  deleteListError,
 } from '../action/create-actions';
 
 import {
@@ -71,9 +74,8 @@ const ajaxMiddleware = (store) => (next) => (action) => {
   const local = 'http://localhost:3000/';
   const utils = {
     kanbanId: '',
+    listId: '',
   };
-
-  const kanbanId = store.getState().kanbans.kanban_id;
 
   next(action);
 
@@ -265,9 +267,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         },
       }).then((res) => {
-        console.log('axios username :', store.getState().editorClass.username, 'axios password :', store.getState().editorClass.password, 'axios description :', store.getState().editorClass.description);
         store.dispatch(editClassSuccess());
-        console.log('taddaaaaaaaaaa');
       }).catch((err) => {
         store.dispatch(editClassError('Impossible d\'éditer'));
       });
@@ -295,12 +295,11 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         }).then((res) => {
           console.log('res data sa mere :', res.data);
           store.dispatch(getClassesSuccess(res.data.data));
-          console.log(('ce que tu veux'));
+
         }).catch((err) => {
           store.dispatch(getClassesError('Impossible de récupérer les classes...'));
         });
       }).catch((err) => {
-        console.log('ouos : ', err);
         store.dispatch(deleteClassError('Impossible de supprimer la classe'));
       });
 
@@ -324,6 +323,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case GET_KANBAN_DETAIL:
       utils.kanbanId = store.getState().kanbans.kanban_id;
+
       axios({
         method: 'get',
         url: `${local}api/kanban/${utils.kanbanId}`,
@@ -359,8 +359,8 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           url: `${local}api/kanban/all`,
           withCredentials: true,
         }).then((response) => {
-            store.dispatch(getKanbanSuccess(response.data.data));
-          })
+          store.dispatch(getKanbanSuccess(response.data.data));
+        })
           .catch((err) => {
             console.log(err);
             store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
@@ -375,10 +375,11 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case DELETE_KANBAN:
 
-      const kanbanId = store.getState().kanbans.kanban_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
+
       axios({
         method: 'delete',
-        url: `${local}api/kanban/${kanbanId}/delete`,
+        url: `${local}api/kanban/${utils.kanbanId}/delete`,
         withCredentials: true,
       }).then((res) => {
         store.dispatch(deleteKanbanSuccess());
@@ -403,12 +404,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       break;
 
     case CREATE_CARD_SUBMIT:
-      const listId = store.getState().kanbans.list_id;
+      utils.listId = store.getState().kanbans.list_id;
 
       axios({
 
         method: 'post',
-        url: `${local}api/kanban/list/${listId}/card/create`,
+        url: `${local}api/kanban/list/${utils.listId}/card/create`,
         withCredentials: true,
         data: {
           order: Number(store.getState().kanbans.newCardOrder),
@@ -418,11 +419,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(createCardSuccess());
-
+        utils.kanbanId = store.getState().kanbans.kanban_id
+        
         axios({
 
           method: 'get',
-          url: `${local}api/kanban/${kanbanId}`,
+          url: `${local}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
@@ -439,7 +441,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
     case DELETE_CARD:
       const cardId = store.getState().kanbans.card_id;
       const list = store.getState().kanbans.list_id;
-      const kanban = store.getState().kanbans.kanban_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
 
       axios({
 
@@ -451,14 +453,14 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         axios({
           method: 'get',
-          url: `${local}api/kanban/${kanban}`,
+          url: `${local}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
-      }).then((res) => {
-        store.dispatch(getKanbanDetailSuccess(res.data.data));
-      }).catch((err) => {
-        store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
-      });
+        }).then((res) => {
+          store.dispatch(getKanbanDetailSuccess(res.data.data));
+        }).catch((err) => {
+          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+        });
       }).catch((err) => {
         console.log(err);
       // store.dispatch(createCardError('Impossible de créer'));
@@ -466,12 +468,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       break;
     case CREATE_LIST_SUBMIT:
-      const kanbanID = store.getState().kanbans.kanban_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
 
       axios({
 
         method: 'post',
-        url: `${local}api/kanban/${kanbanID}/list/create`,
+        url: `${local}api/kanban/${utils.kanbanId}/list/create`,
         withCredentials: true,
         data: {
           order: Number(store.getState().kanbans.newListOrder),
@@ -483,7 +485,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${local}api/kanban/${kanbanId}`,
+          url: `${local}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
@@ -493,6 +495,35 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         });
       }).catch((err) => {
         store.dispatch(createCardError('Impossible de créer'));
+      });
+
+      break;
+
+    case DELETE_LIST:
+      utils.listId = store.getState().kanbans.list_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
+
+      axios({
+
+        method: 'delete',
+        url: `${local}api/kanban/${utils.kanbanId}/list/${utils.listId}/delete`,
+        withCredentials: true,
+      }).then((res) => {
+        store.dispatch(deleteListSuccess());
+
+        axios({
+          method: 'get',
+          url: `${local}api/kanban/${utils.kanbanId}`,
+          withCredentials: true,
+
+        }).then((res) => {
+          store.dispatch(getKanbanDetailSuccess(res.data.data));
+        }).catch((err) => {
+          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+        });
+      }).catch((err) => {
+        console.log(err);
+      // store.dispatch(createCardError('Impossible de créer'));
       });
 
       break;

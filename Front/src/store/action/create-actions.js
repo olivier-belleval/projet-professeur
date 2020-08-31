@@ -16,6 +16,10 @@ export const DELETE_CARD = 'DELETE_CARD';
 export const DELETE_CARD_SUCCESS = 'DELETE_CARD_SUCCESS';
 export const DELETE_CARD_ERROR = 'DELETE_CARD_ERROR';
 
+export const DELETE_LIST = 'DELETE_LIST';
+export const DELETE_LIST_SUCCESS = 'DELETE_LIST_SUCCESS';
+export const DELETE_LIST_ERROR = 'DELETE_LIST_ERROR';
+
 export const toggleModalCard = (payload) => ({
   type: TOGGLE_MODAL_CARD,
   payload,
@@ -72,4 +76,20 @@ export const createListSuccess = (payload) => ({
 
 export const createListError = () => ({
   type: CREATE_LIST_ERROR,
+});
+
+// LIST ACTIONS
+
+export const deleteList = (payload) => ({
+  type: DELETE_LIST,
+  payload,
+});
+
+export const deleteListSuccess = (payload) => ({
+  type: DELETE_LIST_SUCCESS,
+  payload,
+});
+
+export const deleteListError = () => ({
+  type: DELETE_LIST_ERROR,
 });

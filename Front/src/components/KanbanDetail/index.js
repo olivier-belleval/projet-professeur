@@ -5,29 +5,34 @@ import { AiFillPlusSquare } from 'react-icons/ai';
 import KanbanList from './KanbanList';
 
 const KanbanDetail = ({
+  // Datas
   kanban,
-  onOpenClick,
   modalOpen,
   listModalOpen,
-  changeField,
   newCardOrder,
   newCardContent,
-  handleCardSubmit,
-  handleEditMode,
   editMode,
   getKanbanDetail,
   kanban_detail,
   datas,
+  newCardColor,
+  newListOrder,
+  newListTitle,
+
+  // Funtions
   deleteCard,
   getListId,
   openListModal,
-  newListOrder,
-  newListTitle,
   handleListSubmit,
-  newCardColor,
+  deleteList,
+  handleCardSubmit,
+  handleEditMode,
+  changeField,
+  onOpenClick,
 }) => {
   useEffect(() => {
     getKanbanDetail();
+    console.log("Console log du chargement de Kanban Detail")
   }, []);
 
   const handleSubmit = (evt) => {
@@ -79,10 +84,10 @@ const KanbanDetail = ({
 
       </header>
 
-      { datas && kanban_detail['0'].lists && (
+      { datas && kanban_detail && (
         <main>
             <div className="kanban-detail-grid">
-            {kanban_detail['0'].lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} deleteCard={deleteCard} getListId={getListId} />)}
+            {kanban_detail['0'].lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} deleteCard={deleteCard} getListId={getListId} deleteList={deleteList} />)}
           </div>
 
           {modalOpen && (
