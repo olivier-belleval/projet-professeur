@@ -29,6 +29,7 @@ const TextEditorKanban = ({
         <input
           name="background"
           value={background}
+          type="color"
           placeholder="Choisissez votre couleur"
           onChange={handleInputChange}
           className="input-title"
