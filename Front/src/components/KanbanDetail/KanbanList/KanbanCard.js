@@ -1,11 +1,13 @@
 import React from 'react';
+import { MdClose } from 'react-icons/md';
 
 
-const KanbanCard = ({ card }) => (
+
+const KanbanCard = ({ card, deleteCard }) => (
   <div className="kanban-card">
 
     <div className="kanban-card-title">
-      {card.name}
+      {card.name} <MdClose onClick={() =>{deleteCard(card.id)}}/>
     </div>
     {card.tags && card.tags.map((tag) => <Tag key={tag.id} tag={tag} />)}
     <div className="kanban-card-content">

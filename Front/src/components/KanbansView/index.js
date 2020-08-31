@@ -19,10 +19,8 @@ const KanbansView = ({ list, getKanbans, getKanban, getKanbanId }) => {
         </span>
       </div>
       {list.map((kanban) => (
-        <Link to={`kanban/${slugifyTitle(kanban.title)}`} key={kanban.id}>
-          <div className="kanbans-view-list" onClick={()=>{
-            getKanbanId().then(()=>{getKanban()})
-            }}>
+        <Link to={`kanban/${slugifyTitle(kanban.title)}`} key={kanban.title}>
+          <div className="kanbans-view-list" onMouseEnter={()=>{getKanban(kanban.id)}}>
           <div className="kanban">
               <h3 className="kanban-title">
                 {kanban.title}

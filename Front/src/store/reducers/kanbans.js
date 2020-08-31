@@ -7,17 +7,27 @@ import {
   GET_KANBAN_ID,
   GET_KANBAN_ERROR,
   GET_KANBAN_SUCCESS,
+  GET_KANBAN_DETAIL,
+  GET_KANBAN_DETAIL_SUCCESS,
+  GET_LIST_ID,
 } from '../action/data-actions';
 
 import { DELETE_KANBAN, DELETE_KANBAN_ERROR, DELETE_KANBAN_SUCCESS } from '../action/AdminKanban';
 
 import {
   TOGGLE_MODAL_CARD,
+  TOGGLE_MODAL_LIST,
   CHANGE_FIELD_CARD,
   CREATE_CARD_ERROR,
   CREATE_CARD_SUCCESS,
   CREATE_CARD_SUBMIT,
   HANDLE_EDIT_MODE,
+  DELETE_CARD,
+  DELETE_CARD_SUCCESS,
+  DELETE_CARD_ERROR,
+  CREATE_LIST_ERROR,
+  CREATE_LIST_SUCCESS,
+  CREATE_LIST_SUBMIT,
 } from '../action/create-actions';
 
 export const initialState = {
@@ -27,10 +37,15 @@ export const initialState = {
   kanban_id: '',
   kanban: [],
   modalOpen: false,
+  listModalOpen: false,
   newCardOrder: '',
   newCardContent: '',
   list_id: '',
   editMode: false,
+  datas: false,
+  card_id: '',
+  newListOrder: '',
+  newListTitle: '',
 };
 
 export default (state = initialState, action = {}) => {
@@ -41,11 +56,16 @@ export default (state = initialState, action = {}) => {
         modalOpen: !state.modalOpen,
         list_id: action.payload,
       };
+    case TOGGLE_MODAL_LIST:
+      return {
+        ...state,
+        listModalOpen: !state.listModalOpen,
+      };
     case HANDLE_EDIT_MODE:
       return {
         ...state,
-        editMode : !state.editMode,
-      }
+        editMode: !state.editMode,
+      };
     case CREATE_CARD_SUBMIT:
       return {
         ...state,
@@ -56,6 +76,8 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         list_id: '',
+        newCardOrder: '',
+        newCardContent: '',
         modalOpen: !state.modalOpen,
       };
     case CHANGE_FIELD_CARD:
@@ -90,8 +112,20 @@ export default (state = initialState, action = {}) => {
     case GET_KANBAN:
       return {
         ...state,
+        loading: false,
+        kanban_id: action.payload,
+      };
+    case GET_KANBAN_DETAIL:
+      return {
+        ...state,
         loading: true,
-        kanban: [],
+      };
+    case GET_KANBAN_DETAIL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        kanban_detail: [...action.payload],
+        datas: true,
       };
     case GET_KANBAN_SUCCESS:
       return {
@@ -127,6 +161,44 @@ export default (state = initialState, action = {}) => {
         error: action.payload,
         kanban_id: '',
         list: [],
+      };
+    case DELETE_CARD:
+      return {
+        ...state,
+        card_id: action.payload,
+        loading: true,
+      };
+    case DELETE_CARD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        card_id: '',
+      };
+    case GET_LIST_ID:
+      return {
+        ...state,
+        list_id: action.payload,
+      };
+    case CREATE_LIST_SUBMIT:
+      return {
+        ...state,
+        loading: true,
+      };
+    case CREATE_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        newListOrder: '',
+        newListTitle: '',
+        listModalOpen: !state.listModalOpen,
+      };
+    case CREATE_LIST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        newListOrder: '',
+        newListTitle: '',
+        listModalOpen: !state.listModalOpen,
       };
     default:
       return state;

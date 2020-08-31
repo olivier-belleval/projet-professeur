@@ -80,7 +80,7 @@ export default (state = initialState, action = {}) => {
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        isLogged: !state.teacher,
+        isLogged: false,
         username: '',
         password: '',
       };
