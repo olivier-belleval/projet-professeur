@@ -12,7 +12,7 @@ module.exports = {
     }).required(),
 
 
-    editkanbanSchema: Joi.object({
+    editKanbanSchema: Joi.object({
     
         title: Joi.string().min(3).allow('', null),
         description: Joi.string().allow('', null),
