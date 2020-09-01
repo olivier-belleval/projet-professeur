@@ -14,22 +14,27 @@
     width: 80%;
     padding: 1em;
     margin-top: 3em;
-    background-color: vars.$dark-color;
+    background-color: vars.$alt-dark-color;
     border-radius: 5px;
     color: vars.$lightest-color;
     font-family: vars.$font-title;
     font-size: 1.5rem;
     margin-bottom: 2.5em;
+    margin-top:2rem;
   }
 
   &-button {
-    width: 80%;
-    padding: 1em;
+    width: 30%;
+    padding: 3em;
     margin-top: 3em;
-    background-color: vars.$color;
+    background-color: vars.$primary-color;
     border-radius: 5px;
     color: vars.$lightest-color;
     font-weight: bold;
+
+    &:hover{
+      background-color: vars.$alt-dark-color;
+    }
   }
 }
 
