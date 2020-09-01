@@ -157,9 +157,9 @@ module.exports = {
         try {
 
             const articleId = request.params.id;
-            const classId = request.body.classId;
+            const className = request.body.className;
 
-            const result = await articleDataMapper.associateClassToArticle(articleId, classId);
+            const result = await articleDataMapper.associateClassToArticle(articleId, className);
 
             if (!result) {
                 return response.status(400).json('Association failed.');
@@ -179,9 +179,9 @@ module.exports = {
         try {
 
             const articleId = request.params.id;
-            const classId = request.body.classId;
+            const className = request.body.className;
 
-            const result = await articleDataMapper.removeAssociationClassToArticle(articleId, classId);
+            const result = await articleDataMapper.removeAssociationClassToArticle(articleId, className);
 
             if (!result) {
                 return response.status(400).json('Failed to remove association.');

@@ -123,17 +123,30 @@ LANGUAGE SQL STRICT;
 
 -- fonction pour associer une classe à un article
 
-CREATE FUNCTION associate_class_to_article(articleId INT, classId INT) RETURNS "article"."m2m_article_class" AS
+CREATE FUNCTION associate_class_to_article(articleId INT, className TEXT) RETURNS "article"."m2m_article_class" AS
 $$
-    INSERT INTO "article"."m2m_article_class" ("article_id", "class_id") VALUES (articleId, classId) RETURNING *;
+INSERT INTO "article"."m2m_article_class" ("article_id", "class_id") 
+
+SELECT articleId, "omyprof"."class"."id"
+FROM "omyprof"."class"
+WHERE "omyprof"."class"."username" = className
+
+RETURNING *;
 $$
 LANGUAGE SQL STRICT;
 
 -- fonction pour supprimer l'association d'une classe et du'n article
 
-CREATE FUNCTION remove_class_to_article_association(articleId INT, classId INT) RETURNS "article"."m2m_article_class" AS
+CREATE FUNCTION remove_class_to_article_association(articleId INT, className TEXT) RETURNS "article"."m2m_article_class" AS
 $$
-    DELETE FROM "article"."m2m_article_class" WHERE article_id = articleId AND class_id = classId RETURNING *;
+    DELETE
+    FROM "article"."m2m_article_class" m2m
+    USING "omyprof"."class" cl
+
+    WHERE m2m.article_id = articleId 
+    AND cl."username" = (className)
+
+    RETURNING m2m.*;
 $$
 LANGUAGE SQL STRICT;
 
