@@ -12,7 +12,7 @@ import ArticlesView from '../../containers/ArticlesView';
 import KanbansView from '../../containers/KanbansView';
 import KanbanDetail from '../../containers/KanbanDetail';
 import TogglerMenu from '../../containers/TogglerMenu';
-import MenuDesktop from '../MenuDesktop';
+import MenuDesktop from '../../containers/MenuDesktop';
 import AdminArticle from '../../containers/AdminArticle';
 import AdminKanban from '../../containers/AdminKanban';
 import AdminClass from '../../containers/AdminClass';
