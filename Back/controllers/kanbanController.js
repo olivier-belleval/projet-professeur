@@ -49,8 +49,9 @@ module.exports = {
     },
 
     /**
-     * Request one kanbans with all lists, card and tags associations
+     * Request one kanban with all lists, card and tags associations
      * @function
+     * @param {number} kanbanId the kanban's id
      * @returns {array} one kanban with associated lists, cards and tags
      */
     getOneKanbansById: async (request, response) => {
@@ -81,12 +82,12 @@ module.exports = {
     },
 
     /**
-     * create a  kanbans 
+     * create a  kanban
      * @function
      * @param {string} title - the kanban's title
      * @param {string} description - the kanban's description
      * @param {string} background - the kanban's background
-     * @param {number} teacher_id - the kanban's teacher_id
+     * @param {number} teacher_id - the teacher's id
      * @returns {object} created kanban
      */
     createKanban: async (request, response) => {
@@ -125,7 +126,8 @@ module.exports = {
      * @param {string} title - the kanban's title
      * @param {string} description - the kanban's description
      * @param {string} background - the kanban's background
-     * @param {number} teacher_id - the kanban's teacher_id
+     * @param {number} id - the kanban's id
+     * @param {number} teacher_id - the teacher's id
      * @returns {object} edited kanban
      */
     editKanban: async (request, response) => {
@@ -180,9 +182,9 @@ module.exports = {
     },
 
     /**
-     * delete a  kanbans 
+     * delete a  kanban
      * @function
-     * @param {number} id - the kanban's teacher_id
+     * @param {number} id - the teacher's id
      * @returns {object} deleted kanban
      */
     deleteKanban: async (request, response) => {
@@ -216,9 +218,9 @@ module.exports = {
     /**
      * associate a class to a kanbans 
      * @function
-     * @param {number} kanbanId - the kanban's teacher_id
-     * @param {string} id - the kanban's teacher_id
-     * @returns {object} deleted kanban
+     * @param {number} kanbanId - the kanban's id
+     * @param {string} className - the class name
+     * @returns {object} created association
      */
     associateClassToKanban: async (request, response) => {
 
@@ -251,6 +253,13 @@ module.exports = {
         };
     },
 
+    /**
+     * remove an association of a class to a kanbans 
+     * @function
+     * @param {number} kanbanId - the kanban's id
+     * @param {string} className - the class name
+     * @returns {object} removed association
+     */
     removeAssociationClassToKanban: async (request, response) => {
 
         try {
@@ -282,6 +291,12 @@ module.exports = {
         };
     },
 
+    /**
+     * get a list on db
+     * @function
+     * @param {number} listId - the list's id
+     * @returns {object} the object list
+     */
     getOneListById: async (request, response) => {
 
         try {
@@ -309,6 +324,14 @@ module.exports = {
         };
     },
 
+    /**
+     * create a list 
+     * @function
+     * @param {string} name - the kanban's name
+     * @param {number} order - the kanban's order
+     * @param {number} kanban_id - the kanban's id
+     * @returns {object} created list
+     */
     createList: async (request, response) => {
 
         try {
@@ -339,6 +362,15 @@ module.exports = {
         };
     },
 
+    /**
+     * edit a list 
+     * @function
+     * @param {string} name - the kanban's name
+     * @param {number} order - the kanban's order
+     * @param {listId} listId - the list's id
+     * @param {number} kanban_id - the kanban's id
+     * @returns {object} edited list
+     */
     editList: async (request, response) => {
 
         try {
@@ -388,6 +420,12 @@ module.exports = {
         };
     },
 
+    /**
+     * delete a  list 
+     * @function
+     * @param {number} listId - the list's id
+     * @returns {object} deleted list
+     */
     deletelist: async (request, response) => {
         try {
             // get the list id from params
@@ -416,6 +454,13 @@ module.exports = {
         };
     },
 
+     /**
+     * Request one card 
+     * @function
+     * @param {number} cardId the card's id
+     * @param {number} listId the list's id
+     * @returns {array} one card 
+     */
     getOneCardById: async (request, response) => {
 
         try {
@@ -446,6 +491,15 @@ module.exports = {
         };
     },
 
+    /**
+     * create a card 
+     * @function
+     * @param {string} description - the card's description
+     * @param {number} order - the card's order
+     * @param {string} color - the card's color
+     * @param {number} list_id - the list's id
+     * @returns {object} created card
+     */
     createCard: async (request, response) => {
 
         try {
@@ -483,6 +537,16 @@ module.exports = {
         };
     },
 
+    /**
+     * edit a card 
+     * @function
+     * @param {string} description - the card's description
+     * @param {number} order - the card's order
+     * @param {string} color - the card's color
+     * @param {number} cardId - the card's id
+     * @param {number} list_id - the list's id
+     * @returns {object} edited card
+     */
     editCard: async (request, response) => {
 
         try {
@@ -532,6 +596,13 @@ module.exports = {
         };
     },
 
+    /**
+     * delete a  card 
+     * @function
+     * @param {number} listId - the list's id
+     * @param {number} cardId - the card's id
+     * @returns {object} deleted card
+     */
     deleteCard: async (request, response) => {
 
         try {
@@ -563,6 +634,11 @@ module.exports = {
         };
     },
 
+    /**
+     * Request all tags 
+     * @function
+     * @returns {array} array of all tags 
+     */
     getAllTags: async (_, response) => {
 
         try {
@@ -581,6 +657,12 @@ module.exports = {
         }
     },
 
+    /**
+     * Request one kanban with all lists, card and tags associations
+     * @function
+     * @param {number} tagId the tag's id
+     * @returns {array} one kanban with associated lists, cards and tags
+     */
     getOneTagById: async (request, response) => {
 
         try {
@@ -609,6 +691,13 @@ module.exports = {
         };
     },
 
+    /**
+     * create a  tag
+     * @function
+     * @param {string} name - the tag's name
+     * @param {string} color - the tag's color
+     * @returns {object} created tag
+     */
     createTag: async (request, response) => {
 
         try {
@@ -638,6 +727,14 @@ module.exports = {
         };
     },
 
+    /**
+     * edit a  tag
+     * @function
+     * @param {string} name - the tag's name
+     * @param {string} color - the tag's color
+     * @param {number} id tag's id
+     * @returns {object} edited tag
+     */
     editTag: async (request, response) => {
 
         try {
@@ -686,6 +783,12 @@ module.exports = {
         };
     },
 
+    /**
+     * delete a  tag
+     * @function
+     * @param {number} id - the tag's id
+     * @returns {object} deleted tag
+     */
     deleteTag: async (request, response) => {
 
         try {
@@ -716,6 +819,13 @@ module.exports = {
         };
     },
 
+    /**
+     * associate a tag to a card 
+     * @function
+     * @param {number} tagId - the tag's id
+     * @param {string} cardId - the card's id
+     * @returns {object} created association
+     */
     createAssociationTagToCard: async (request, response) => {
 
         try {
@@ -756,6 +866,13 @@ module.exports = {
         };
     },
 
+    /**
+     * remove association of a tag to a card 
+     * @function
+     * @param {number} tagId - the tag's id
+     * @param {string} cardId - the card's id
+     * @returns {object} removed association
+     */
     deleteAssociationTagToCard: async (request, response) => {
 
         try {
