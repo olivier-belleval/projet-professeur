@@ -144,6 +144,7 @@ $$
     USING "omyprof"."class" cl
 
     WHERE m2m.article_id = articleId 
+    AND m2m.class_id = cl.id
     AND cl."username" = (className)
 
     RETURNING m2m.*;

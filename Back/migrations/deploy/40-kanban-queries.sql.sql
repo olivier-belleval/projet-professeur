@@ -137,11 +137,14 @@ LANGUAGE SQL STRICT;
 
 -- function to associate class to kanban
 
-CREATE FUNCTION "kanban".associate_class_to_kanban(kanbanId INT, classId INT) 
+CREATE FUNCTION "kanban".associate_class_to_kanban(kanbanId INT, className TEXT) 
 RETURNS SETOF "kanban"."m2m_kanban_class" AS
 $$
 INSERT INTO "kanban"."m2m_kanban_class" ("kanban_id", "class_id")
-VALUES ($1, $2)
+
+SELECT kanbanId, "omyprof"."class"."id"
+FROM "omyprof"."class"
+WHERE "omyprof"."class"."username" = className
 RETURNING *;
 $$
 
@@ -149,12 +152,18 @@ LANGUAGE SQL STRICT;
 
 -- function remove association
 
-CREATE FUNCTION "kanban".remove_association_class_to_kanban(kanbanId INT, classId INT) 
+CREATE FUNCTION "kanban".remove_association_class_to_kanban(kanbanId INT, className TEXT) 
 RETURNS SETOF "kanban"."m2m_kanban_class" AS
 $$
-DELETE FROM "kanban"."m2m_kanban_class" 
-WHERE kanban_id = $1 AND class_id = $2
-RETURNING *
+DELETE
+FROM "kanban"."m2m_kanban_class" m2m
+USING "omyprof"."class" cl
+
+WHERE m2m.kanban_id = kanbanId
+AND m2m.class_id = cl.id
+AND cl."username" = (className)
+
+    RETURNING m2m.*;
 $$
 
 LANGUAGE SQL STRICT;
