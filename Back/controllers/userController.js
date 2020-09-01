@@ -1,6 +1,7 @@
 const userDataMapper = require('../dataMappers/userDataMapper');
 
 module.exports = {
+    
 
     classLogin: async (request, response) => {
 
