@@ -10,7 +10,8 @@ module.exports = {
         const result = await client.query('SELECT * FROM get_class_by_username($1)', [username]);
 
         // fin d'éxécution si aucun résultat
-        if(result.rowCount === 0){
+
+        if(result.rowCount === 0 || result.rows[0].id === null){
             return;
         };
 
@@ -41,7 +42,7 @@ module.exports = {
         const result = await client.query('SELECT * FROM get_teacher_by_username($1)', [username]);
 
         // fin d'éxécution si aucun résultat
-        if(result.rowCount === 0) {
+        if(result.rowCount === 0 || result.rows[0].id === null) {
             return;
         };
 

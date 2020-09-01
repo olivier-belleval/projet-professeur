@@ -18,8 +18,12 @@ DROP FUNCTION edit_article(INT, TEXT, TEXT, TEXT, TEXT);
 
 DROP FUNCTION delete_article(INT);
 
-DROP FUNCTION associate_class_to_article(INT, INT);
+DROP FUNCTION IF EXISTS associate_class_to_article(INT, INT);
 
-DROP FUNCTION remove_class_to_article_association(INT, INT);
+DROP FUNCTION associate_class_to_article(INT, TEXT);
+
+DROP FUNCTION IF EXISTS remove_class_to_article_association(INT, INT);
+
+DROP FUNCTION remove_class_to_article_association(INT, TEXT);
 
 COMMIT;

@@ -21,7 +21,7 @@ module.exports = {
     
     associationArticleClassSchema: Joi.object({
     
-        classId: Joi.number().integer().min(1).required()
+        className: Joi.string().min(3).required()
         
     }).required()
 

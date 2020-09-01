@@ -107,13 +107,13 @@ module.exports = {
     },
 
     // associer une classe et un article
-    associateClassToArticle: async (articleId, classId) => {
+    associateClassToArticle: async (articleId, className) => {
 
         try {
 
             const preparedQuery = {
                 text: `SELECT * FROM associate_class_to_article($1, $2)`,
-                values: [articleId, classId]
+                values: [articleId, className]
             };
 
             const result = await client.query(preparedQuery);
@@ -128,13 +128,13 @@ module.exports = {
     },
 
     // supprimer l'association d'une classe et d'un article
-    removeAssociationClassToArticle: async (articleId, classId) => {
+    removeAssociationClassToArticle: async (articleId, className) => {
 
         try {
 
             const preparedQuery = {
                 text: `SELECT * FROM remove_class_to_article_association($1, $2)`,
-                values: [articleId, classId]
+                values: [articleId, className]
             };
 
             const result = await client.query(preparedQuery);
