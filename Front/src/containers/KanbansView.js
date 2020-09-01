@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import KanbansView from '../components/KanbansView';
 import { getKanbans, getKanban } from '../store/action/data-actions';
+import { closeMenu } from '../store/action';
 
 const mapStateToProps = (state) => ({
   list: state.kanbans.list,
@@ -13,6 +14,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getKanban: (id) => {
     dispatch(getKanban(id));
+  },
+
+  closeMenu: () => {
+    dispatch(closeMenu());
   },
 });
 

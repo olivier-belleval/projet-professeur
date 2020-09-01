@@ -12,13 +12,14 @@ const AdminKanban = ({
   deleteKanban,
   onclickJoin,
   getKanbans,
+  closeMenu,
 }) => {
   console.log(list);
   useEffect(() => {
     getKanbans();
   }, []);
   return (
-    <div className="admin_panel_kanban">
+    <div className="admin_panel_kanban" onClick={closeMenu}>
       <h1 className="admin_panel_kanban-title"> Espace administrateur - gestion des articles </h1>
       <div className="admin_panel_kanban-content">
         {list.map((tableau) => (

@@ -3,13 +3,13 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 import { slugifyTitle } from '../../utils';
 
-const ArticlesView = ({ list, getArticles }) => {
+const ArticlesView = ({ list, getArticles, closeMenu }) => {
   useEffect(() => {
     getArticles();
   }, []);
 
   return (
-    <div className="articles-view">
+    <div className="articles-view" onClick={closeMenu}>
       <h1 className="articles-view-title"> Mes articles</h1>
       { list.map((post) => (
         <article className="article" key={post.article_title}>

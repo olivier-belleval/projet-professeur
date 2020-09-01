@@ -2,12 +2,12 @@ import React from 'react';
 import './style.scss';
 import { Link } from 'react-router-dom';
 
-const ArticleDetail = ({ article }) => {
+const ArticleDetail = ({ article, closeMenu }) => {
   console.log(article);
 
 
   return (
-    <div className="article-detail">
+    <div className="article-detail" onClick={closeMenu}>
       <header className="article-detail-head">
         <h2 className="article-detail-head-title">
           {article.article_title}

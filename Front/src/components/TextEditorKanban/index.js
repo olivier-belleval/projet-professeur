@@ -14,6 +14,7 @@ const TextEditorKanban = ({
   kanbanEdited,
   cancelEditingKanban,
   handleKanbanEdit,
+  closeMenu,
 }) => {
   console.log('text edit');
   const handleInputChange = (evt) => {
@@ -30,7 +31,7 @@ const TextEditorKanban = ({
   };
 
   return (
-    <div className="text-editor-kanban">
+    <div className="text-editor-kanban" onClick={closeMenu}>
       <form onSubmit={editing ? handleEdition : handleSubmit}>
         <input
           name="title"

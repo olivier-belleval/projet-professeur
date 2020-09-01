@@ -25,6 +25,7 @@ const KanbanDetail = ({
   newListTitle,
   handleListSubmit,
   newCardColor,
+  closeMenu,
 }) => {
   useEffect(() => {
     getKanbanDetail();
@@ -46,7 +47,7 @@ const KanbanDetail = ({
   };
 
   return (
-    <div className="kanban-detail">
+    <div className="kanban-detail" onClick={closeMenu}>
       <header className="kanban-detail-header">
         <div className="kanban-detail-head">
           <div><h1 className="kanban-detail-head--title" onClick={handleEditMode}>

@@ -8,12 +8,16 @@
   padding: 10px;
   align-items: center;
   z-index:100;
+  
   &-icon {
     color: black;
     position:fixed;
     top: 10px;
     left: 10px;
     z-index: 2;
+    @media (min-width: 768px) {
+      display: none;
+    }
   }
   &-menu {
     background-color: rgba(232, 232, 232, 0.9);
@@ -39,5 +43,7 @@
     margin-right: 10px;
     cursor: pointer;
   }
+
+
   }
 

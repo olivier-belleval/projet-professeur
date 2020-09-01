@@ -14,6 +14,7 @@ const TextEditorClass = ({
   classEdited,
   cancelEditingClass,
   handleClassEdit,
+  closeMenu,
 }) => {
   console.log('text edit');
   const handleInputChange = (evt) => {
@@ -31,7 +32,7 @@ const TextEditorClass = ({
   };
 
   return (
-    <div className="text-editor-class">
+    <div className="text-editor-class" onClick={closeMenu}>
       <form onSubmit={editing ? handleEdition : handleSubmit}>
         <input
           name="username"

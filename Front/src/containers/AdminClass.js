@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import AdminClass from '../components/AdminClass';
 import { editClass, deleteClass, getClassesAdminPanel } from '../store/action/AdminClass';
+import { closeMenu } from '../store/action';
 
 const mapState = (state) => ({
   list: state.classes.classes,
@@ -21,6 +22,10 @@ const mapDispatch = (dispatch) => ({
 
   getClasses: () => {
     dispatch(getClassesAdminPanel());
+  },
+
+  closeMenu: () => {
+    dispatch(closeMenu());
   },
 
 });

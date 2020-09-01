@@ -1,8 +1,8 @@
 // == Import npm
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react'
-
+import { PersistGate } from 'redux-persist/integration/react';
+import 'semantic-ui-css/semantic.min.css';
 
 // == Import
 import './styles.scss';
@@ -12,18 +12,17 @@ import ArticlesView from '../../containers/ArticlesView';
 import KanbansView from '../../containers/KanbansView';
 import KanbanDetail from '../../containers/KanbanDetail';
 import TogglerMenu from '../../containers/TogglerMenu';
+import MenuDesktop from '../MenuDesktop';
 import AdminArticle from '../../containers/AdminArticle';
 import AdminKanban from '../../containers/AdminKanban';
 import AdminClass from '../../containers/AdminClass';
 import TextEditorArticle from '../../containers/TextEditorArticle';
 import TextEditorClass from '../../containers/TextEditorClass';
 import TextEditorKanban from '../../containers/TextEditorKanban';
-import Admin from '../Admin';
-
+import Admin from '../../containers/Admin';
 
 // == Composant
 const App = ({ isLogged, teacher }) => (
-
 
   <div className="app">
     <Route exact path="/" component={HomePage} />
@@ -31,6 +30,7 @@ const App = ({ isLogged, teacher }) => (
     { isLogged ? (
       <div>
         <TogglerMenu />
+        <MenuDesktop />
         <Switch>
 
           <Route exact path="/articles" component={ArticlesView} />

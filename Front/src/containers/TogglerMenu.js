@@ -13,6 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
   onOpenClick: () => {
     dispatch(toggleMenu());
   },
+
   handleLogout: () => {
     console.log('handle logout');
     dispatch(logout());

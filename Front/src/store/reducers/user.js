@@ -6,6 +6,7 @@ import {
   LOGIN_SUBMIT_ERROR,
   LOGIN_CHANGE_TEACHER,
   TOGGLE_MENU,
+  CLOSE_MENU,
 } from '../action';
 
 import {
@@ -14,7 +15,6 @@ import {
   GET_CLASSES_SUCCESS,
   LOGIN_CLASSES_SUBMIT,
 } from '../action/user';
-
 
 const initialState = {
   username: '',
@@ -51,6 +51,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         opened: !state.opened,
+      };
+    case CLOSE_MENU:
+      return {
+        ...state,
+        opened: false,
       };
     case LOGIN_SUBMIT || LOGIN_CLASSES_SUBMIT:
       return {

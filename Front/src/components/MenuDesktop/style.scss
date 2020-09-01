@@ -1,6 +1,9 @@
 @use 'src/styles/vars';
 
 .menu {
+  @media (max-width: 768px) {
+    display: none;
+  }
   display: flex;
   text-align: center;
   justify-content: space-between;

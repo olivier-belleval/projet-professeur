@@ -3,13 +3,13 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 import { slugifyTitle } from '../../utils';
 
-const KanbansView = ({ list, getKanbans, getKanban }) => {
+const KanbansView = ({ list, getKanbans, getKanban, closeMenu }) => {
   useEffect(() => {
     getKanbans();
   }, []);
 
   return (
-    <div className="kanbans-view">
+    <div className="kanbans-view" onClick={closeMenu}>
       <div className="kanbans-view-head">
         <h2 className="kanbans-view-head-title">
           Mes Tableaux

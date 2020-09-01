@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import AdminKanban from '../components/AdminKanban';
 import { editKanban, deleteKanban, joinClass } from '../store/action/AdminKanban';
 import { getKanbans, getKanban } from '../store/action/data-actions';
+import { closeMenu } from '../store/action';
 
 const mapState = (state) => ({
   list: state.kanbans.list,
@@ -27,6 +28,10 @@ const mapDispatch = (dispatch) => ({
   onclickJoin: () => {
     console.log("l'user veut associer de nouvelles classes");
     dispatch(joinClass());
+  },
+
+  closeMenu: () => {
+    dispatch(closeMenu());
   },
 });
 

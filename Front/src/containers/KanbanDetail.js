@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import KanbanDetail from '../components/KanbanDetail';
 import { getKanbanBySlug } from '../store/reducers/kanbans';
+import { closeMenu } from '../store/action';
 
 import {
   getKanbanDetail,
@@ -47,12 +48,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createCardSubmit());
   },
 
-  //controlled input for card form in kanban
+  // controlled input for card form in kanban
   changeField: (changedData) => {
     dispatch(changeFieldCard(changedData));
   },
 
-  //change edit mode to edit kanban details
+  // change edit mode to edit kanban details
   handleEditMode: (changedData) => {
     dispatch(handleEditMode(changedData));
   },
@@ -74,8 +75,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleListSubmit: () => {
-    dispatch(createListSubmit())
-  }
+    dispatch(createListSubmit());
+  },
+
+  closeMenu: () => {
+    dispatch(closeMenu());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(KanbanDetail);

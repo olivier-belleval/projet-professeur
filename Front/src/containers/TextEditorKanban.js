@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import TextEditorKanban from '../components/TextEditorKanban';
-
+import { closeMenu } from '../store/action';
 import {
   updateKanbanEditorState,
   createKanbanSubmit,
@@ -40,6 +40,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleKanbanEdit: () => {
     dispatch(submitEditedKanban());
+  },
+
+  closeMenu: () => {
+    dispatch(closeMenu());
   },
 });
 

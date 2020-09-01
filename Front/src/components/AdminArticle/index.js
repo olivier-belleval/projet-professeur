@@ -12,12 +12,13 @@ const AdminArticle = ({
   onclickJoin,
   getArticles,
   editArticle,
+  closeMenu,
 }) => {
   useEffect(() => {
     getArticles();
   }, []);
   return (
-    <div className="admin_panel_article">
+    <div className="admin_panel_article" onClick={closeMenu}>
       <h1 className="admin_panel_article-title"> Espace administrateur - gestion des articles </h1>
       <div className="admin_panel_article-content">
         {list.map((article) => (
@@ -55,7 +56,7 @@ const AdminArticle = ({
 
         <div className="admin_panel_article-content-part">
           <p>Ajouter un article</p>
-          <Link exact to="/admin/nouvel-article">
+          <Link exact="true" to="/admin/nouvel-article">
             <FaPlusCircle />
           </Link>
         </div>

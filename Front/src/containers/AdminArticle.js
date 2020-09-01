@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import AdminArticle from '../components/AdminArticle';
-import { modifyArticle, joinClass } from '../store/action';
+import { modifyArticle, joinClass, closeMenu } from '../store/action';
 import { getArticles, getArticle } from '../store/action/data-actions';
 import { deleteArticle, getArticlesAdminPanel, editArticle } from '../store/action/AdminArticle';
 
@@ -28,6 +28,10 @@ const mapDispatch = (dispatch) => ({
   editArticle: (id) => {
     console.log('modifier', id);
     dispatch(editArticle(id));
+  },
+
+  closeMenu: () => {
+    dispatch(closeMenu());
   },
 });
 
