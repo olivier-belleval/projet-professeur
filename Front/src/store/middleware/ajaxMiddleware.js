@@ -60,11 +60,11 @@ import {
 
 const ajaxMiddleware = (store) => (next) => (action) => {
   const local = 'http://localhost:3000/';
-  const utils = {
-    kanbanId: '',
-  };
 
-  const kanbanId = store.getState().kanbans.kanban_id;
+  const utils = {
+    local : 'http://localhost:3000/',
+    kanbanId: '',
+  }
 
   next(action);
 
@@ -73,7 +73,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${local}api/article/all`,
+        url: `${utils.local}api/article/all`,
         withCredentials: true,
 
       })
@@ -91,7 +91,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${local}api/admin/article/all`,
+        url: `${utils.local}api/admin/article/all`,
         withCredentials: true,
 
       })
@@ -110,7 +110,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${local}api/article/write`,
+        url: `${utils.local}api/article/write`,
         withCredentials: true,
         data: {
           title: store.getState().editor.title,
@@ -143,7 +143,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'put',
-        url: `${local}api/article/${editedArticleId}/edit`,
+        url: `${utils.local}api/article/${editedArticleId}/edit`,
         withCredentials: true,
         data: {
           title: store.getState().editor.title,
@@ -167,7 +167,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'delete',
-        url: `${local}api/article/${articleId}/delete`,
+        url: `${utils.local}api/article/${articleId}/delete`,
         withCredentials: true,
 
       }).then((res) => {
@@ -195,7 +195,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${local}api/admin/class/all`,
+        url: `${utils.local}api/admin/class/all`,
         withCredentials: true,
 
       }).then((res) => {
@@ -211,7 +211,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${local}api/admin/class/create`,
+        url: `${utils.local}api/admin/class/create`,
         withCredentials: true,
         data: {
           username: store.getState().editorClass.username,
@@ -249,7 +249,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'delete',
-        url: `${local}api/admin/class/${ClassId}/delete`,
+        url: `${utils.local}api/admin/class/${ClassId}/delete`,
         withCredentials: true,
 
       }).then((res) => {
@@ -279,7 +279,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${local}api/kanban/all`,
+        url: `${utils.local}api/kanban/all`,
         withCredentials: true,
 
       }).then((res) => {
@@ -312,7 +312,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'delete',
-        url: `${local}api/kanban/${kanbanId}/delete`,
+        url: `${utils.local}api/kanban/${kanbanId}/delete`,
         withCredentials: true,
         crossorigin: true,
 
@@ -325,7 +325,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${local}api/kanban/all`,
+        url: `${utils.local}api/kanban/all`,
         withCredentials: true,
 
       }).then((res) => {
@@ -342,7 +342,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${local}api/kanban/list/${listId}/card/create`,
+        url: `${utils.local}api/kanban/list/${listId}/card/create`,
         withCredentials: true,
         data: {
           order: Number(store.getState().kanbans.newCardOrder),

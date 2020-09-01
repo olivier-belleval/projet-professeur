@@ -3,7 +3,7 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 import { slugifyTitle } from '../../utils';
 
-const KanbansView = ({ list, getKanbans, getKanban }) => {
+const KanbansView = ({ list, getKanbans, getKanban, getKanbanId }) => {
   useEffect(() => {
     getKanbans();
   }, []);

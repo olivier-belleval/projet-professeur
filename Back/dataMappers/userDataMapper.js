@@ -1,4 +1,4 @@
-const client = require('./client');
+const client = require('../redis/cached-client');
 const bcrypt = require('bcrypt');
 
 
@@ -7,7 +7,12 @@ module.exports = {
 
     checkClass: async (username, password) => {
 
-        const result = await client.query('SELECT * FROM get_class_by_username($1)', [username]);
+        const preparedQuery = {
+            text: 'SELECT * FROM get_class_by_username($1)',
+            values: [username]
+        };
+
+        const result = await client.query(preparedQuery);
 
         // fin d'éxécution si aucun résultat
 
@@ -38,8 +43,15 @@ module.exports = {
 
     checkTeacher: async (username, password) => {
 
+        const preparedQuery = {
+
+            text: 'SELECT * FROM get_teacher_by_username($1)',
+            values: [username]
+
+        };
+
         // client.query pour récupérer infos contenu en bdd
-        const result = await client.query('SELECT * FROM get_teacher_by_username($1)', [username]);
+        const result = await client.query(preparedQuery);
 
         // fin d'éxécution si aucun résultat
         if(result.rowCount === 0 || result.rows[0].id === null) {
@@ -69,7 +81,9 @@ module.exports = {
 
     getClassesUsernames: async () => {
 
-        const preparedQuery = `SELECT * FROM get_all_classes_usernames()`;
+        const preparedQuery = {
+            text: `SELECT * FROM get_all_classes_usernames()`
+        };
 
         const result = await client.query(preparedQuery);
 

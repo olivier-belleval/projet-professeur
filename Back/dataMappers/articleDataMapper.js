@@ -1,11 +1,13 @@
-const client = require('./client');
+const client = require('../redis/cached-client');
 
 module.exports = {
 
     // affiche seulement les articles qui ont une classe attribuée (admin - page d'acceuil)
     getAllArticlesWithClass: async () => {
 
-        const preparedQuery = `SELECT * FROM get_articles_with_associated_class()`;
+        const preparedQuery = {
+            text: `SELECT * FROM get_articles_with_associated_class()`
+        };
 
         const result = await client.query(preparedQuery);
 
@@ -17,7 +19,9 @@ module.exports = {
     // affiche tous les articles avec ou sans classe attribuée (admin - liste des articles depuis l'espace admin)
     getAllArticlesWithOrWithoutClass: async () => {
 
-        const preparedQuery = `SELECT * FROM get_articles_without_associated_class()`;
+        const preparedQuery = {
+            text: `SELECT * FROM get_articles_without_associated_class()`
+        };
 
         const result = await client.query(preparedQuery);
 

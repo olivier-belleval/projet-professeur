@@ -1,4 +1,4 @@
-const client = require('./client');
+const client = require('../redis/cached-client');
 
 
 module.exports = {

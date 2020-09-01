@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import KanbansView from '../components/KanbansView';
-import { getKanbans, getKanban } from '../store/action/data-actions';
+import { getKanbans, getKanban, getKanbanId } from '../store/action/data-actions';
 
 const mapStateToProps = (state) => ({
   list: state.kanbans.list,
