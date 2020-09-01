@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
 
@@ -11,6 +11,7 @@ const Login = ({
   loading,
   classes,
   teacher,
+  message,
   // func which dispatch
   handleLogin,
   handleClassesLogin,
@@ -25,12 +26,10 @@ const Login = ({
     handleLogin();
   };
 
-
   const handleSubmitStudent = (evt) => {
     evt.preventDefault();
     handleClassesLogin();
   };
-
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -48,8 +47,13 @@ const Login = ({
       )}
       {!isLogged && loginOpened && !loading && (
         <div className="login-form">
-          <form className="form" onSubmit={ teacher ? handleSubmit : handleSubmitStudent }>
+          <form className="form" onSubmit={teacher ? handleSubmit : handleSubmitStudent}>
             <div className="login-form-inputs">
+              {message && (
+              <div className="login-form-error-message">
+                {message}
+              </div>
+              )}
               {teacher && (
               <input
                 name="username"

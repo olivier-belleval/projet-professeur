@@ -6,6 +6,10 @@
   flex-direction: column;
   justify-content: space-evenly;
   height: 100vh;
+  background-image: url('src/assets/images/classes.png');
+  background-position: bottom right;
+  background-size:70%;
+  background-repeat: no-repeat;
 
   &-title{
     font-size: 2rem;

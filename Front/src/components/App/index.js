@@ -29,7 +29,7 @@ const App = ({ isLogged, teacher }) => (
     <Route exact path="/" component={HomePage} />
 
     { isLogged ? (
-      <div>
+      <nav>
         <TogglerMenu />
         <Switch>
 
@@ -52,7 +52,7 @@ const App = ({ isLogged, teacher }) => (
             </Switch>
           )}
         </Switch>
-      </div>
+      </nav>
     ) : <Redirect to="/" />}
   </div>
 

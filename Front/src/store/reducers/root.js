@@ -7,6 +7,7 @@ import editor from './textEditor';
 import classes from './classes';
 import editorClass from './classEditor';
 import editorKanban from './kanbanEditor';
+import admin from './admin';
 
 export default combineReducers({
   articles,
@@ -16,4 +17,5 @@ export default combineReducers({
   classes,
   editorClass,
   editorKanban,
+  admin,
 });

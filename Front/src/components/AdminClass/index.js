@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { Dropdown } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 import { Link } from 'react-router-dom';
 
@@ -16,7 +18,7 @@ const AdminClass = ({
   useEffect(() => {
     getClasses();
   }, []);
-  console.log(list);
+
   return (
     <div className="admin_panel_class">
       <h1 className="admin_panel_class-title"> Espace administrateur - gestion des classes </h1>
@@ -58,5 +60,7 @@ const AdminClass = ({
     </div>
   );
 };
+
+
 
 export default AdminClass;

@@ -5,13 +5,15 @@ import {
 import { LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT } from '../action/user';
 
 const logMiddleware = (store) => (next) => (action) => {
-  const local = 'http://localhost:3000/';
-  const server = 'http://54.90.32.97:3000/';
   
-  const user = {
-        username: store.getState().user.username,
-        password: store.getState().user.password,
-      };
+  const utils = {
+    local: 'http://localhost:3000/',
+    distant: 'http://54.90.32.97:3000/',
+    user: {
+      username: store.getState().user.username,
+      password: store.getState().user.password,
+    },
+  };
 
   next(action);
 
@@ -20,8 +22,8 @@ const logMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'post',
-        url: `${local}login/admin`,
-        data: user,
+        url: `${utils.local}login/admin`,
+        data: utils.user,
         withCredentials: true,
       })
         .then((res) => {
@@ -38,8 +40,8 @@ const logMiddleware = (store) => (next) => (action) => {
       case LOGIN_CLASSES_SUBMIT:
       axios({
         method: 'post',
-        url: `${local}login/`,
-        data: user,
+        url: `${utils.local}login/`,
+        data: utils.user,
         withCredentials: true,
       })
         .then((res) => {
@@ -52,11 +54,12 @@ const logMiddleware = (store) => (next) => (action) => {
           );
         });
       break;
+
     case LOGOUT:
-      console.log('case logout');
+
       axios({
         method: 'get',
-        url: `${local}login/logout`,
+        url: `${utils.local}login/logout`,
         withCredentials: true,
 
       })
@@ -73,13 +76,12 @@ const logMiddleware = (store) => (next) => (action) => {
     case GET_CLASSES:
       axios({
         method: 'get',
-        url: `${local}login`,
+        url: `${utils.local}login`,
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data);
+          console.log('res.data GET_CLASSES dans logMiddleware : ', res.data);
           store.dispatch(getClassesSuccess(res.data.data));
-          console.log('je vais au bout de ma requête');
         })
         .catch((err) => {
           console.log(err);

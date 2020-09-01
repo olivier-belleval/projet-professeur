@@ -1,11 +1,28 @@
 import { connect } from 'react-redux';
 import AdminKanban from '../components/AdminKanban';
-import { modifyKanban, deleteKanban, joinClass } from '../store/action/AdminKanban';
+
+import {
+  modifyKanban,
+  deleteKanban,
+  submitAssociationKanban
+} from '../store/action/AdminKanban';
+
+import {
+  changeField,
+  toggleAddClassModal,
+} from '../store/action/AdminArticle';
+
+import { getClassesAdminPanel } from '../store/action/AdminClass';
+
 import { getKanbans, getKanban } from '../store/action/data-actions';
 
 const mapState = (state) => ({
   list: state.kanbans.list,
   kanban_id: state.kanbans.kanban_id,
+  modalOpen: state.admin.modalOpen,
+  item_id: state.admin.item_id,
+  classAdded: state.admin.classAdded,
+  classes: state.user.classes,
 });
 
 const mapDispatch = (dispatch) => ({
@@ -23,9 +40,20 @@ const mapDispatch = (dispatch) => ({
     dispatch(getKanbans());
   },
 
-  onclickJoin: () => {
-    console.log("l'user veut associer de nouvelles classes");
-    dispatch(joinClass());
+  changeField: (changedData) => {
+    dispatch(changeField(changedData));
+  },
+
+  onOpenClick: (id) => {
+    dispatch(toggleAddClassModal(id));
+  },
+
+  getClasses: () => {
+    dispatch(getClassesAdminPanel());
+  },
+
+  handleSubmitAssociation: () => {
+    dispatch(submitAssociationKanban());
   },
 });
 

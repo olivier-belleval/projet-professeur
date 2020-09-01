@@ -19,7 +19,7 @@ import {
 const initialState = {
   username: '',
   password: '',
-  loginErrorMessage: '',
+  message: '',
   loading: false,
   isLogged: false,
   loginOpened: false,
@@ -63,14 +63,15 @@ export default (state = initialState, action = {}) => {
         isLogged: true,
         loading: false,
         password: '',
-        loginErrorMessage: '',
+        message: '',
       };
     case LOGIN_SUBMIT_ERROR:
       return {
         ...state,
         loading: false,
-        username: action.payload,
-        loginErrorMessage: action.payload,
+        username: '',
+        password: '',
+        message: action.payload,
       };
     case LOGIN_CHANGE_TEACHER:
       return {

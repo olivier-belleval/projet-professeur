@@ -41,11 +41,3 @@ export const JOIN_CLASS = 'JOIN_CLASS';
 export const toggleMenu = () => ({
   type: TOGGLE_MENU,
 });
-
-export const modifyArticle = () => ({
-  type: MODIFY_ARTICLE,
-});
-
-export const joinClass = () => ({
-  type: JOIN_CLASS,
-});
