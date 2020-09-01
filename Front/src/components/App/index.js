@@ -2,7 +2,6 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import 'semantic-ui-css/semantic.min.css';
 
 // == Import
 import './styles.scss';
