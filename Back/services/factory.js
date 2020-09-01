@@ -1,5 +1,12 @@
 module.exports = {
+  /**
+   * format a simple array into array of object
+   * @function
+   * @param {array} request result from bdd
+   * @returns {array} the formated result
+   */
   kanbansFormater: (res) => {
+    
     // first step we create an object 'kanbans' that contains object
     let kanbans = {};
     // we take a request result named res
@@ -101,81 +108,81 @@ module.exports = {
     };
 
     // second step we create array in the kanbans obkect
-let kanbansArray = Object.values(kanbans);
+  let kanbansArray = Object.values(kanbans);
 
-kanbansArray.forEach(kanban => {
-  // for each kanban's object that contains more than one object we replace the object by an array and each empty array are replaced by null
-  
-  /**
-   * {'1': {}, '2':{}} => [{},{}]
-   * item : [] => item: null
-   */
-  
-    // we filter to avoid null values
-    kanban['classes'] = Object.values(kanban['classes']).filter(function (el) {
+  kanbansArray.forEach(kanban => {
+    // for each kanban's object that contains more than one object we replace the object by an array and each empty array are replaced by null
+    
+    /**
+     * {'1': {}, '2':{}} => [{},{}]
+     * item : [] => item: null
+     */
+    
+      // we filter to avoid null values
+      kanban['classes'] = Object.values(kanban['classes']).filter(function (el) {
 
-        return el.id != null;
+          return el.id != null;
 
-    });
+      });
 
-    // if array is empty then array egal null
-    if (kanban['classes'].length === 0) {
-        kanban['classes'] = null
-    }
+      // if array is empty then array egal null
+      if (kanban['classes'].length === 0) {
+          kanban['classes'] = null
+      }
 
-  
-    // same for the lists's object
-    // we filter to avoid null values
-    kanban['lists'] = Object.values(kanban['lists']).filter(function (el) {
+    
+      // same for the lists's object
+      // we filter to avoid null values
+      kanban['lists'] = Object.values(kanban['lists']).filter(function (el) {
 
-        return el.id != null;
+          return el.id != null;
 
-    });
+      });
 
-    // if array is empty then array egal null
-    if (kanban['lists'].length === 0) {
-        kanban['lists'] = null
-    }
+      // if array is empty then array egal null
+      if (kanban['lists'].length === 0) {
+          kanban['lists'] = null
+      }
 
-    // if lists egal 'null' do nothing
-    if (kanban['lists'] !== null) {
-        kanban['lists'].forEach( list => {
+      // if lists egal 'null' do nothing
+      if (kanban['lists'] !== null) {
+          kanban['lists'].forEach( list => {
 
-            // same for the cards's object
-            // we filter to avoid null values
-            list['cards'] = Object.values(list['cards']).filter(function (el) {
+              // same for the cards's object
+              // we filter to avoid null values
+              list['cards'] = Object.values(list['cards']).filter(function (el) {
 
-                return el.id != null;
+                  return el.id != null;
 
-            });
+              });
 
-            // if array is empty then array egal null
-            if (list['cards'].length === 0) {
-                list['cards'] = null
-            }
+              // if array is empty then array egal null
+              if (list['cards'].length === 0) {
+                  list['cards'] = null
+              }
 
-            // if cards egal 'null' do nothing
-            if (list['cards'] !== null) {
-                list['cards'].forEach( card => {
+              // if cards egal 'null' do nothing
+              if (list['cards'] !== null) {
+                  list['cards'].forEach( card => {
 
-                    // same for the tags's object
-                    // we filter to avoid null values
-                    card['tags'] = Object.values(card['tags']).filter(function (el) {
+                      // same for the tags's object
+                      // we filter to avoid null values
+                      card['tags'] = Object.values(card['tags']).filter(function (el) {
 
-                        return el.id != null;
+                          return el.id != null;
 
-                    });
+                      });
 
-                    // if array is empty then array egal null
-                    if (card['tags'].length === 0) {
-                        card['tags'] = null
-                    }
-                });
-            }
-            
-        });
-    }
-});
+                      // if array is empty then array egal null
+                      if (card['tags'].length === 0) {
+                          card['tags'] = null
+                      }
+                  });
+              }
+              
+          });
+      }
+  });
     return kanbansArray;
   }
 }

@@ -7,6 +7,11 @@ const utility = require('../module/utility');
 
 module.exports = {
 
+    /**
+     * Request all kanbans with all lists, card and tags associations
+     * @function
+     * @returns {array} array of all kanbans with associated lists, cards and tags
+     */
     getAllKanbans: async (request, response) => {
 
         try {
@@ -43,6 +48,11 @@ module.exports = {
         };
     },
 
+    /**
+     * Request one kanbans with all lists, card and tags associations
+     * @function
+     * @returns {array} one kanban with associated lists, cards and tags
+     */
     getOneKanbansById: async (request, response) => {
 
         try {
@@ -70,6 +80,15 @@ module.exports = {
         };
     },
 
+    /**
+     * create a  kanbans 
+     * @function
+     * @param {string} title - the kanban's title
+     * @param {string} description - the kanban's description
+     * @param {string} background - the kanban's background
+     * @param {number} teacher_id - the kanban's teacher_id
+     * @returns {object} created kanban
+     */
     createKanban: async (request, response) => {
 
         try {
@@ -100,6 +119,15 @@ module.exports = {
         };
     },
 
+    /**
+     * edit a  kanbans 
+     * @function
+     * @param {string} title - the kanban's title
+     * @param {string} description - the kanban's description
+     * @param {string} background - the kanban's background
+     * @param {number} teacher_id - the kanban's teacher_id
+     * @returns {object} edited kanban
+     */
     editKanban: async (request, response) => {
 
         try {
@@ -151,6 +179,12 @@ module.exports = {
         };
     },
 
+    /**
+     * delete a  kanbans 
+     * @function
+     * @param {number} id - the kanban's teacher_id
+     * @returns {object} deleted kanban
+     */
     deleteKanban: async (request, response) => {
 
         try {
@@ -179,6 +213,13 @@ module.exports = {
         };
     },
 
+    /**
+     * associate a class to a kanbans 
+     * @function
+     * @param {number} kanbanId - the kanban's teacher_id
+     * @param {string} id - the kanban's teacher_id
+     * @returns {object} deleted kanban
+     */
     associateClassToKanban: async (request, response) => {
 
         try {
