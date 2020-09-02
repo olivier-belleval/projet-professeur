@@ -31,6 +31,9 @@ import {
   CREATE_LIST_SUBMIT,
   createListSuccess,
   createListError,
+  DELETE_LIST,
+  deleteListSuccess,
+  deleteListError,
 } from '../action/create-actions';
 
 import {
@@ -58,10 +61,23 @@ import {
 } from '../action/user';
 
 import {
-  GET_ARTICLES_ADMIN_PANEL, DELETE_ARTICLE, deleteArticleError, deleteArticleSuccess,
+  GET_ARTICLES_ADMIN_PANEL,
+  DELETE_ARTICLE,
+  deleteArticleError,
+  deleteArticleSuccess,
+  SUBMIT_ASSOCIATION_ARTICLE,
+  associationArticleError,
+  associationArticleSuccess,
 } from '../action/AdminArticle';
 
-import { DELETE_KANBAN, deleteKanbanError, deleteKanbanSuccess } from '../action/AdminKanban';
+import {
+  DELETE_KANBAN,
+  deleteKanbanError,
+  deleteKanbanSuccess,
+  SUBMIT_ASSOCIATION_KANBAN,
+  associationKanbanError,
+  associationKanbanSuccess,
+} from '../action/AdminKanban';
 
 import {
   GET_CLASSES_ADMIN_PANEL,
@@ -71,12 +87,18 @@ import {
 } from '../action/AdminClass';
 
 const ajaxMiddleware = (store) => (next) => (action) => {
-  const local = 'http://localhost:3000/';
   const utils = {
+    local: 'http://localhost:3000/',
+    distant: '',
     kanbanId: '',
+    listId: '',
+    ClassId: '',
+    list: '',
+    articleId: '',
+    editedArticleId: '',
+    editedClassId: '',
+    classUsername: '',
   };
-
-  const kanbanId = store.getState().kanbans.kanban_id;
 
   next(action);
 
@@ -85,7 +107,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${local}api/article/all`,
+        url: `${utils.local}api/article/all`,
         withCredentials: true,
 
       })
@@ -103,7 +125,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${local}api/admin/article/all`,
+        url: `${utils.local}api/admin/article/all`,
         withCredentials: true,
 
       })
@@ -122,7 +144,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${local}api/article/write`,
+        url: `${utils.local}api/article/write`,
         withCredentials: true,
         data: {
           title: store.getState().editor.title,
@@ -134,7 +156,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${local}api/admin/article/all`,
+          url: `${utils.local}api/admin/article/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -150,12 +172,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case SUBMIT_EDITED_ARTICLE:
 
-      const editedArticleId = store.getState().editor.id_edited_article;
+      utils.editedArticleId = store.getState().editor.id_edited_article;
 
       axios({
 
         method: 'put',
-        url: `${local}api/article/${editedArticleId}/edit`,
+        url: `${utils.local}api/article/${utils.editedArticleId}/edit`,
         withCredentials: true,
         data: {
           title: store.getState().editor.title,
@@ -172,12 +194,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case DELETE_ARTICLE:
 
-      const articleId = store.getState().articles.article_id;
+      utils.articleId = store.getState().articles.article_id;
 
       axios({
 
         method: 'delete',
-        url: `${local}api/article/${articleId}/delete`,
+        url: `${utils.local}api/article/${utils.articleId}/delete`,
         withCredentials: true,
 
       }).then((res) => {
@@ -186,7 +208,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${local}api/admin/article/all`,
+          url: `${utils.local}api/admin/article/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -205,7 +227,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${local}api/admin/class/all`,
+        url: `${utils.local}api/admin/class/all`,
         withCredentials: true,
 
       }).then((res) => {
@@ -221,7 +243,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${local}api/admin/class/create`,
+        url: `${utils.local}api/admin/class/create`,
         withCredentials: true,
         data: {
           username: store.getState().editorClass.username,
@@ -235,7 +257,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${local}api/admin/class/all`,
+          url: `${utils.local}api/admin/class/all`,
           withCredentials: true,
 
         })
@@ -254,12 +276,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case SUBMIT_EDITED_CLASS:
 
-      const editedClassId = store.getState().editorClass.id_edited_class;
+      utils.editedClassId = store.getState().editorClass.id_edited_class;
 
       axios({
 
         method: 'put',
-        url: `${local}api/admin/class/${editedClassId}/edit`,
+        url: `${utils.local}api/admin/class/${utils.editedClassId}/edit`,
         withCredentials: true,
         data: {
           username: store.getState().editorClass.username,
@@ -268,9 +290,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         },
       }).then((res) => {
-        console.log('axios username :', store.getState().editorClass.username, 'axios password :', store.getState().editorClass.password, 'axios description :', store.getState().editorClass.description);
         store.dispatch(editClassSuccess());
-        console.log('taddaaaaaaaaaa');
       }).catch((err) => {
         store.dispatch(editClassError('Impossible d\'éditer'));
       });
@@ -279,12 +299,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case DELETE_CLASS:
 
-      const ClassId = store.getState().classes.class_id;
+      utils.ClassId = store.getState().classes.class_id;
 
       axios({
 
         method: 'delete',
-        url: `${local}api/admin/class/${ClassId}/delete`,
+        url: `${utils.local}api/admin/class/${utils.ClassId}/delete`,
         withCredentials: true,
 
       }).then((res) => {
@@ -292,18 +312,16 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${local}api/admin/class/all`,
+          url: `${utils.local}api/admin/class/all`,
           withCredentials: true,
 
         }).then((res) => {
           console.log('res data sa mere :', res.data);
           store.dispatch(getClassesSuccess(res.data.data));
-          console.log(('ce que tu veux'));
         }).catch((err) => {
           store.dispatch(getClassesError('Impossible de récupérer les classes...'));
         });
       }).catch((err) => {
-        console.log('ouos : ', err);
         store.dispatch(deleteClassError('Impossible de supprimer la classe'));
       });
 
@@ -314,7 +332,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${local}api/kanban/all`,
+        url: `${utils.local}api/kanban/all`,
         withCredentials: true,
 
       }).then((res) => {
@@ -327,9 +345,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case GET_KANBAN_DETAIL:
       utils.kanbanId = store.getState().kanbans.kanban_id;
+
       axios({
         method: 'get',
-        url: `${local}api/kanban/${utils.kanbanId}`,
+        url: `${utils.local}api/kanban/${utils.kanbanId}`,
         withCredentials: true,
       })
         .then((res) => {
@@ -346,7 +365,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${local}api/kanban/create`,
+        url: `${utils.local}api/kanban/create`,
         withCredentials: true,
         data: {
           title: store.getState().editorKanban.title,
@@ -359,7 +378,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         store.dispatch(createKanbanSuccess());
         axios({
           method: 'get',
-          url: `${local}api/kanban/all`,
+          url: `${utils.local}api/kanban/all`,
           withCredentials: true,
         }).then((response) => {
           store.dispatch(getKanbanSuccess(response.data.data));
@@ -378,17 +397,18 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case DELETE_KANBAN:
 
-      const kanbanId = store.getState().kanbans.kanban_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
+
       axios({
         method: 'delete',
-        url: `${local}api/kanban/${kanbanId}/delete`,
+        url: `${utils.local}api/kanban/${utils.kanbanId}/delete`,
         withCredentials: true,
       }).then((res) => {
         store.dispatch(deleteKanbanSuccess());
         axios({
 
           method: 'get',
-          url: `${local}api/kanban/all`,
+          url: `${utils.local}api/kanban/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -406,12 +426,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       break;
 
     case CREATE_CARD_SUBMIT:
-      const listId = store.getState().kanbans.list_id;
+      utils.listId = store.getState().kanbans.list_id;
 
       axios({
 
         method: 'post',
-        url: `${local}api/kanban/list/${listId}/card/create`,
+        url: `${utils.local}api/kanban/list/${utils.listId}/card/create`,
         withCredentials: true,
         data: {
           order: Number(store.getState().kanbans.newCardOrder),
@@ -421,11 +441,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(createCardSuccess());
+        utils.kanbanId = store.getState().kanbans.kanban_id;
 
         axios({
 
           method: 'get',
-          url: `${local}api/kanban/${kanbanId}`,
+          url: `${utils.local}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
@@ -440,21 +461,21 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       break;
 
     case DELETE_CARD:
-      const cardId = store.getState().kanbans.card_id;
-      const list = store.getState().kanbans.list_id;
-      const kanban = store.getState().kanbans.kanban_id;
+      utils.cardId = store.getState().kanbans.card_id;
+      utils.list = store.getState().kanbans.list_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
 
       axios({
 
         method: 'delete',
-        url: `${local}api/kanban/list/${list}/card/${cardId}/delete`,
+        url: `${utils.local}api/kanban/list/${utils.list}/card/${utils.cardId}/delete`,
         withCredentials: true,
       }).then((res) => {
         store.dispatch(deleteCardSuccess());
 
         axios({
           method: 'get',
-          url: `${local}api/kanban/${kanban}`,
+          url: `${utils.local}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
@@ -469,12 +490,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       break;
     case CREATE_LIST_SUBMIT:
-      const kanbanID = store.getState().kanbans.kanban_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
 
       axios({
 
         method: 'post',
-        url: `${local}api/kanban/${kanbanID}/list/create`,
+        url: `${utils.local}api/kanban/${utils.kanbanId}/list/create`,
         withCredentials: true,
         data: {
           order: Number(store.getState().kanbans.newListOrder),
@@ -486,7 +507,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${local}api/kanban/${kanbanId}`,
+          url: `${utils.local}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
@@ -496,6 +517,104 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         });
       }).catch((err) => {
         store.dispatch(createCardError('Impossible de créer'));
+      });
+
+      break;
+
+    case DELETE_LIST:
+      utils.listId = store.getState().kanbans.list_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
+
+      axios({
+
+        method: 'delete',
+        url: `${utils.local}api/kanban/${utils.kanbanId}/list/${utils.listId}/delete`,
+        withCredentials: true,
+      }).then((res) => {
+        store.dispatch(deleteListSuccess());
+
+        axios({
+          method: 'get',
+          url: `${utils.local}api/kanban/${utils.kanbanId}`,
+          withCredentials: true,
+
+        }).then((res) => {
+          store.dispatch(getKanbanDetailSuccess(res.data.data));
+        }).catch((err) => {
+          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+        });
+      }).catch((err) => {
+        console.log(err);
+      // store.dispatch(createCardError('Impossible de créer'));
+      });
+
+      break;
+
+    case SUBMIT_ASSOCIATION_ARTICLE:
+      utils.articleId = store.getState().admin.item_id;
+      utils.classUsername = store.getState().admin.classAdded;
+
+      axios({
+
+        method: 'post',
+        url: `${utils.local}api/article/${utils.articleId}/associate`,
+        withCredentials: true,
+        data: {
+          className: utils.classUsername,
+        }
+      }).then((res) => {
+        store.dispatch(associationArticleSuccess());
+
+        axios({
+
+          method: 'get',
+          url: `${utils.local}api/admin/article/all`,
+          withCredentials: true,
+  
+        })
+          .then((res) => {
+            store.dispatch(getArticlesSuccess(res.data.data));
+          })
+  
+          .catch((err) => {
+            store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+          });
+      }).catch((err) => {
+        console.log(err);
+        store.dispatch(associationArticleError('Il y a eu une erreur lors de l\'association de classe'));
+      });
+
+      break;
+
+    case SUBMIT_ASSOCIATION_KANBAN:
+      utils.kanbanId = store.getState().admin.item_id;
+      utils.classUsername = store.getState().admin.classAdded;
+
+      axios({
+
+        method: 'post',
+        url: `${utils.local}api/kanban/${utils.kanbanId}/associate`,
+        withCredentials: true,
+        data: {
+          className: utils.classUsername,
+        }
+      }).then((res) => {
+        store.dispatch(associationKanbanSuccess());
+        axios({
+
+          method: 'get',
+          url: `${utils.local}api/kanban/all`,
+          withCredentials: true,
+  
+        }).then((res) => {
+          console.log(res.data.data);
+          store.dispatch(getKanbansSuccess(res.data.data));
+        }).catch((err) => {
+          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+        });
+      }).catch((err) => {
+        console.log(err);
+        store.dispatch(associationKanbanError('Il y a eu une erreur lors de l\'association de kanban'));
       });
 
       break;

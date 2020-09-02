@@ -17,7 +17,7 @@ const AdminClass = ({
   useEffect(() => {
     getClasses();
   }, []);
-  console.log(list);
+
   return (
     <div className="admin_panel_class" onClick={closeMenu}>
       <h1 className="admin_panel_class-title"> Espace administrateur - gestion des classes </h1>
@@ -59,5 +59,7 @@ const AdminClass = ({
     </div>
   );
 };
+
+
 
 export default AdminClass;

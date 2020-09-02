@@ -16,6 +16,7 @@ import {
   deleteCard,
   toggleModalList,
   createListSubmit,
+  deleteList,
 } from '../store/action/create-actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -40,7 +41,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onOpenClick: (id) => {
-    console.log(id);
     dispatch(toggleModalCard(id));
   },
 
@@ -48,12 +48,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createCardSubmit());
   },
 
-  // controlled input for card form in kanban
+  // Controlled input for card form in kanban
   changeField: (changedData) => {
     dispatch(changeFieldCard(changedData));
   },
 
-  // change edit mode to edit kanban details
+  // Change edit mode to edit kanban details
   handleEditMode: (changedData) => {
     dispatch(handleEditMode(changedData));
   },
@@ -80,6 +80,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   closeMenu: () => {
     dispatch(closeMenu());
+  },
+
+  deleteList: () => {
+    dispatch(deleteList());
   },
 });
 

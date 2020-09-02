@@ -6,11 +6,17 @@
   flex-direction: column;
   justify-content: space-evenly;
   height: 100vh;
+  background-image: url('src/assets/images/classes.png');
+  background-position: bottom right;
+  background-size:70%;
+  background-repeat: no-repeat;
+
 
   &-title{
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.5rem;
+    font-weight: vars.$title-font-weight;
     font-family: vars.$font-title;
+    margin-bottom: 3rem;
   }
 }
 
@@ -18,13 +24,17 @@
   margin: 2rem;
   background-color: vars.$alt-dark-color;
   padding: 0.8em;
+  position: relative;
 
   &-head{
     margin-bottom: 1em;
 
     &-title{
-    font-weight: 700;
-    font-size: 1.4em;
+      font-weight: vars.$title-font-weight;
+      font-family: vars.$font-title;
+      font-size:1.3rem;
+      position: absolute;
+      top:-13px;
     }
   }
 

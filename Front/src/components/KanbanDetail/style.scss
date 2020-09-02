@@ -148,9 +148,9 @@
 /*scrollbar*/
 
 ::-webkit-scrollbar {
-  background-color: vars.$light-color;
+  background-color: #000;
 
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg,vars.$color,vars.$dark-color);
+  background: linear-gradient(vars.$alt-color,vars.$dark-color);
 }

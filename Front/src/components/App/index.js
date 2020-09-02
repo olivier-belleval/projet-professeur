@@ -27,7 +27,7 @@ const App = ({ isLogged, teacher }) => (
     <Route exact path="/" component={HomePage} />
 
     { isLogged ? (
-      <div>
+      <div style={{minHeight:100+'vh'}}>
         <TogglerMenu />
         <MenuDesktop />
         <Switch>

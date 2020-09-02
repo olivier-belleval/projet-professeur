@@ -11,12 +11,10 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   editClass: (id) => {
-    console.log("l'user veut modifier la classe", id);
     dispatch(editClass(id));
   },
 
   deleteClass: (id) => {
-    console.log("l'user veut supprimer la classe", id);
     dispatch(deleteClass(id));
   },
 

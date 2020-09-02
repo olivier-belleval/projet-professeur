@@ -17,9 +17,7 @@ const ArticlesView = ({ list, getArticles, closeMenu }) => {
             <h2 className="article-head-title" key={post.article_title}>
               {post.article_title}
             </h2>
-            <p>
-              rédigé par Une dev
-            </p>
+
           </div>
           <p className="article-excerpt" key={post.article_excerpt}>
             {post.article_excerpt}

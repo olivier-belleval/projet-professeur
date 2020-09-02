@@ -57,6 +57,7 @@
   "dependencies": {
     "@artsy/fresnel": "^1.2.1",
     "axios": "^0.19.2",
+    "dompurify": "^2.0.14",
     "draft-js": "^0.11.7",
     "lodash": "^4.17.20",
     "prop-types": "*",

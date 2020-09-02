@@ -61,7 +61,7 @@ const TextEditorClass = ({
           <Link to="/admin/comptes">Annuler</Link>
         </button>
         <button type="submit" className="text-editor-class-button">
-          Let's go baby !
+          Ajouter
         </button>
         {send && <Redirect to="/admin/comptes" />}
       </form>

@@ -27,6 +27,9 @@ import {
   CREATE_LIST_ERROR,
   CREATE_LIST_SUCCESS,
   CREATE_LIST_SUBMIT,
+  DELETE_LIST,
+  DELETE_LIST_ERROR,
+  DELETE_LIST_SUCCESS,
 } from '../action/create-actions';
 
 export const initialState = {
@@ -108,12 +111,14 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
+        datas: false,
         kanban_id: action.payload,
       };
     case GET_KANBAN_DETAIL:
       return {
         ...state,
         loading: true,
+        datas: false,
       };
     case GET_KANBAN_DETAIL_SUCCESS:
       return {
@@ -134,7 +139,6 @@ export default (state = initialState, action = {}) => {
         loading: false,
         error: action.payload,
         kanban_detail: [],
-        kanban_id: '',
       };
     case DELETE_KANBAN:
       return {
@@ -195,6 +199,23 @@ export default (state = initialState, action = {}) => {
         newListOrder: '',
         newListTitle: '',
         listModalOpen: !state.listModalOpen,
+      };
+    case DELETE_LIST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        list_id: '',
+      };
+    case DELETE_LIST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        list_id: '',
       };
     default:
       return state;
