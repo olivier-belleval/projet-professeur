@@ -31,7 +31,7 @@
       position: relative;
        width: 90%;
        padding: 1em;
-       background-color: vars.$lightest-color;
+       background-color: vars.$neutral-color;
       // border-radius: 5px;
       // color: vars.$lightest-color;
        //font-weight: bold;
@@ -79,7 +79,7 @@
 }
 .association-modale{
   position: absolute;
-  background-color: vars.$lightest-color;
+  background-color: vars.$neutral-color;
   box-shadow: 5px 7px vars.$alt-dark-color;
   border-radius: 5px;
   top:20%;

@@ -9,10 +9,13 @@
   justify-content: space-between;
   padding: 1em;
   border-bottom: 1px solid vars.$primary-color;
-  background-color: vars.$light-color;
+  background-color: vars.$neutral-color;
+  position:fixed;
+  top:0;
+  width: 100%;
+  z-index:100;
 
   &-title {
-    color: vars.$dark-color;
     font-size: 1.5em;
   }
 
@@ -24,11 +27,10 @@
   &-link {
     margin: 0 1rem;
     cursor: pointer;
-    color: vars.$dark-color;
 
     &:hover,
     &.active {
-      color: vars.$color;
+      color: vars.$alt-dark-color;
     }
   }
 }

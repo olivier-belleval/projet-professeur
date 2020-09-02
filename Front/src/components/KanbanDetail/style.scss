@@ -2,7 +2,7 @@
 
 .kanban-detail{
   margin:1.3em;
-  background-color: vars.$lightest-color;
+  background-color: vars.$neutral-color;
   padding: 1em;
   position: relative;
   overflow-y: hidden;
@@ -53,7 +53,7 @@
   flex-wrap: wrap;
   box-shadow: 5px 10px vars.$color;
   border-radius: 0 0 0.7em 0.7em;
-  background-color:vars.$lightest-color ;
+  background-color:vars.$neutral-color ;
   margin-top: 1em;
 
   &-content{
@@ -65,7 +65,7 @@
     font-size: 1.3em;
     font-weight: 700;
     width: 100%;
-    background-color: vars.$light-color;
+    background-color: vars.$neutral-color;
     padding: 1em 0.5em;
       }
     }
