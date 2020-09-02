@@ -21,9 +21,14 @@ import {
 
 const mapStateToProps = (state, ownProps) => {
   const { slug } = ownProps.match.params;
+  console.log("Nos props ", ownProps);
+
+  console.log('container kanban: ',
+    state.kanbans.kanban
+  )
 
   return {
-    kanban: getKanbanBySlug(state, slug),
+    kanban: state.kanbans.kanban,
     modalOpen: state.kanbans.modalOpen,
     listModalOpen: state.kanbans.listModalOpen,
     newCardOrder: state.kanbans.newCardOrder,

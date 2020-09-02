@@ -4,6 +4,7 @@ import {
   GET_KANBANS_ERROR,
   GET_KANBANS_SUCCESS,
   GET_KANBAN,
+  GET_KANBAN_ID,
   GET_KANBAN_ERROR,
   GET_KANBAN_SUCCESS,
   GET_KANBAN_DETAIL,
@@ -37,7 +38,7 @@ export const initialState = {
   error: '',
   list: [],
   kanban_id: '',
-  kanban_detail: [],
+  kanban: [],
   modalOpen: false,
   listModalOpen: false,
   newCardOrder: '',
@@ -107,6 +108,11 @@ export default (state = initialState, action = {}) => {
         error: action.payload,
         list: [],
       };
+    case GET_KANBAN_ID:
+      return{
+        ...state,
+        kanban_id: action.payload,
+      }
     case GET_KANBAN:
       return {
         ...state,
@@ -131,7 +137,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
-        kanban_detail: [...action.payload],
+        kanban: [...action.payload],
       };
     case GET_KANBAN_ERROR:
       return {

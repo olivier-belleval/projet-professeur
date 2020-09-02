@@ -183,7 +183,10 @@ module.exports = {
 
         try {
 
-            const result = await kanbanDataMapper.associateClassToKanban(request.params.kanbanId, request.body.classId);
+            const kanbanId = request.params.kanbanId;
+            const className = request.body.className;
+
+            const result = await kanbanDataMapper.associateClassToKanban(kanbanId, className);
 
             // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un kanban inexistant
             if (!result) {
@@ -212,9 +215,9 @@ module.exports = {
         try {
 
             const kanbanId = request.params.id;
-            const classId = request.body.classId;
+            const className = request.body.className;
 
-            const result = await kanbanDataMapper.removeAssociationClassToKanban(kanbanId, classId);
+            const result = await kanbanDataMapper.removeAssociationClassToKanban(kanbanId, className);
 
             // fin d'éxécution si le professeur tente d'associer une classe inexistante ou un article inexistant
             if (!result) {
