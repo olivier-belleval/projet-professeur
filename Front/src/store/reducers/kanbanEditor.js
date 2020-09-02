@@ -7,6 +7,12 @@ import {
   SUBMIT_EDITED_KANBAN,
   EDIT_KANBAN_ERROR,
   EDIT_KANBAN_SUCCESS,
+  TOGGLE_MODAL_LIST_EDITION,
+  GET_CARD_DETAILS,
+  GET_LIST_DETAILS,
+  SUBMIT_LIST_EDITION,
+  LIST_EDITION_ERROR,
+  LIST_EDITION_SUCCESS,
 
 } from '../action/kanban-editor-action';
 import {
@@ -23,6 +29,16 @@ const initialState = {
   id: '',
   id_edited_kanban: '',
   editing: false,
+  editionModalList: false,
+  listDetails: {
+    title: '',
+    order: '',
+  },
+  cardDetails: {
+    description: '',
+    order: '',
+    color: '',
+  },
 };
 
 export default (state = initialState, action = {}) => {
@@ -88,16 +104,49 @@ export default (state = initialState, action = {}) => {
         id_edited_kanban: action.payload,
         editing: !state.editing,
       };
+    case TOGGLE_MODAL_LIST_EDITION:
+      return {
+        ...state,
+        editionModalList: !state.editionModalList,
+      };
+    case GET_LIST_DETAILS:
+      return {
+        ...state,
+        listDetails: {
+          ...action.payload,
+        },
+      };
+    case GET_CARD_DETAILS:
+      return {
+        ...state,
+        cardDetails: {
+          ...action.payload,
+        },
+      };
+    case SUBMIT_LIST_EDITION:
+      return {
+        ...state,
+        loading: true,
+      };
+    case LIST_EDITION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        listDetails: '',
+        editionModalList: false,
+      };
+    case LIST_EDITION_ERROR:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
     default:
       return state;
   }
 };
 
 export const getItemById = (state, id) => {
-  console.log(state.kanbans.list);
-  console.log(typeof id);
-  console.log(id);
   const kanbanEdited = state.kanbans.list.find((elem) => elem.id === id);
-
   return kanbanEdited;
 };

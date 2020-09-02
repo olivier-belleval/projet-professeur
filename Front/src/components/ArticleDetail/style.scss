@@ -5,7 +5,7 @@
   margin: auto;
 
   &-head{
-
+    margin-top: 4rem;
     padding: 1.2em;
     background-color: vars.$dark-color;
 
@@ -35,4 +35,18 @@
       background-color: vars.$alt-dark-color;
 
   }
+}
+
+
+@media screen and (min-width:600px){
+  .article-detail{
+    margin-top: 2rem;
+    width: 50%;
+    margin: auto;
+
+    &-content{
+      padding: 3rem;
+    }
+  }
+
 }

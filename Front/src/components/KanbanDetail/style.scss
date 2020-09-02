@@ -1,11 +1,10 @@
 @use 'src/styles/vars';
 
 .kanban-detail{
-  margin:1.3em;
-  background-color: vars.$neutral-color;
-  padding: 1em;
+  margin-top:2.2em;
   position: relative;
   overflow-y: hidden;
+  min-height: 100vh;
 
   &-adding-button{
     color:white;
@@ -46,6 +45,9 @@
       justify-content: space-around;
       width: 100%;
     }  
+    &-content{
+      padding: 1rem;
+    }
   }
 
 .kanban-card {

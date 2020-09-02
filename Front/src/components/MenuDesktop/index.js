@@ -1,11 +1,13 @@
 import React from 'react';
 import './style.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const MenuDesktop = ({ handleLogout }) => (
   <header className="menu">
 
-    <a className="menu-title">O'MyProf</a>
+    <Link exact to="/">
+      <div className="menu-title">O'MyProf</div>
+    </Link>
     <nav className="menu-nav">
       <NavLink key="1" exact to="/articles">
         <div className="menu-link">articles</div>

@@ -26,7 +26,7 @@ margin:0.7em;
   padding: 1em;
   margin-bottom: 1em;
   &:hover{
-    box-shadow: 5px 10px vars.$secondary-color;
+    box-shadow: 5px 10px vars.$color;
   }
 
   &-title{
@@ -37,5 +37,15 @@ margin:0.7em;
 
   &-subtitle{
     font-style: italic;
+  }
+}
+
+
+@media screen and (min-width:600px){
+  .kanbans-view{
+    padding: 3rem;
+    padding-top:7rem;
+    width: 70%;
+    margin: auto;
   }
 }

@@ -52,6 +52,9 @@ import {
   SUBMIT_EDITED_KANBAN,
   editKanbanError,
   editKanbanSuccess,
+  SUBMIT_LIST_EDITION,
+  listEditionSuccess,
+  listEditionError,
 } from '../action/kanban-editor-action';
 
 import {
@@ -626,7 +629,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'put',
-        url: `${local}api/kanban/${editedKanbanId}/edit`,
+        url: `${utils.local}api/kanban/${editedKanbanId}/edit`,
         withCredentials: true,
         data: {
           title: store.getState().editorKanban.title,
@@ -641,6 +644,40 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       }).catch((err) => {
         console.log(err);
         store.dispatch(editKanbanError('Impossible d\'éditer'));
+      });
+
+      break;
+
+    case SUBMIT_LIST_EDITION:
+
+      utils.listId = store.getState().kanbans.list_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
+console.log(store.getState().editorKanban.listDetails)
+      axios({
+
+        method: 'put',
+        url: `${utils.local}api/kanban/${utils.kanbanId}/list/${utils.listId}/edit`,
+        withCredentials: true,
+        data: {
+          name: store.getState().kanbans.newListTitle,
+          order: store.getState().editorKanban.newListOrder,
+        },
+      }).then((res) => {
+        
+        store.dispatch(listEditionSuccess());
+        axios({
+          method: 'get',
+          url: `${utils.local}api/kanban/${utils.kanbanId}`,
+          withCredentials: true,
+
+        }).then((res) => {
+          store.dispatch(getKanbanDetailSuccess(res.data.data));
+        }).catch((err) => {
+          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+        });
+      }).catch((err) => {
+        console.log(err);
+        store.dispatch(listEditionSuccess('Impossible d\'éditer'));
       });
 
       break;

@@ -9,6 +9,13 @@ import {
 } from '../store/action/data-actions';
 
 import {
+  toggleModalListEdition,
+  getListDetails,
+  getCardDetails,
+  submitListEdition,
+} from '../store/action/kanban-editor-action';
+
+import {
   toggleModalCard,
   changeFieldCard,
   createCardSubmit,
@@ -36,6 +43,9 @@ const mapStateToProps = (state, ownProps) => {
     newListOrder: state.kanbans.newListOrder,
     newListTitle: state.kanbans.newListTitle,
     newCardColor: state.kanbans.newCardColor,
+    editionModalList: state.editorKanban.editionModalList,
+    listDetails: state.editorKanban.listDetails,
+    cardDetails: state.editorKanban.cardDetails,
   };
 };
 
@@ -84,6 +94,22 @@ const mapDispatchToProps = (dispatch) => ({
 
   deleteList: () => {
     dispatch(deleteList());
+  },
+
+  toggleListEdit: (id) => {
+    dispatch(toggleModalListEdition(id));
+  },
+
+  getListDetails: (data) => {
+    dispatch(getListDetails(data));
+  },
+
+  getCardDetails: (data) => {
+    dispatch(getCardDetails(data));
+  },
+
+  submitListEdition: () => {
+    dispatch(submitListEdition());
   },
 });
 

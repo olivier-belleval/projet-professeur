@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // React-Icons
 import { AiFillPlusSquare } from 'react-icons/ai';
-import { MdClose } from 'react-icons/md';
+import { MdClose, MdMoreVert } from 'react-icons/md';
 
 // Import Component
 import KanbanCard from './KanbanCard';
@@ -16,23 +16,36 @@ const KanbanList = ({
   deleteCard,
   getListId,
   deleteList,
+  toggleListEdit,
+  getListDetails,
+  getCardDetails,
 }) => (
-  <div style={{ width: '100%' }}>
+  <div>
     <div
       className="kanban-list"
       key={list.id}
       onClick={() => {
-        console.log("Kanban Detail List Component. L'id de ma liste est : ", list.id)
+        console.log("Kanban Detail List Component. L'id de ma liste est : ", list.id);
         getListId(list.id);
       }}
     >
       <div className="kanban-list-title">
         <span>{list.name}</span>
 
-        <span><AiFillPlusSquare onClick={() => {
-          onOpenClick(list.id);
-        }}
-        />
+        <span>
+          <MdMoreVert onClick={() => {
+            getListDetails({
+              title: list.name,
+              order: list.order
+            });
+            toggleListEdit(list.id);
+          }}
+          />
+
+          <AiFillPlusSquare onClick={() => {
+            onOpenClick(list.id);
+          }}
+          />
         </span>
 
         <span>
@@ -46,6 +59,7 @@ const KanbanList = ({
             key={card.id}
             card={card}
             deleteCard={deleteCard}
+            getCardDetails={getCardDetails}
           />
         ))}
 

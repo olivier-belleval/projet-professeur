@@ -32,7 +32,7 @@
     &-title{
       font-weight: vars.$title-font-weight;
       font-family: vars.$font-title;
-      font-size:1.3rem;
+      font-size: 2rem;
       position: absolute;
       top:-13px;
     }
@@ -51,6 +51,7 @@
 @media screen and (min-width:600px){
   .articles-view{
     padding: 3rem;
+    padding-top:7rem;
     width: 70%;
     margin: auto;
   }

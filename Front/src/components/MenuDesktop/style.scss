@@ -8,7 +8,6 @@
   text-align: center;
   justify-content: space-between;
   padding: 1em;
-  border-bottom: 1px solid vars.$primary-color;
   background-color: vars.$neutral-color;
   position:fixed;
   top:0;
@@ -16,7 +15,15 @@
   z-index:100;
 
   &-title {
-    font-size: 1.5em;
+    font-size: 1.8em;
+    font-family: vars.$font-title;
+    background-image: linear-gradient(90deg, rgba(2, 0, 7, 0.8), rgba(57, 28, 126,0) 70.71%),
+    linear-gradient(127deg, rgba(50, 3, 88, 0.8), rgba(77, 2, 92, 0) 70.71%),
+    linear-gradient(336deg, rgba(185, 50, 117, 0.8), rgba(54, 15, 77, 0) 70.71%) !important;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent !important;
+    text-shadow: 5px 0px vars.$light-color;
   }
 
   &-nav {
@@ -28,9 +35,9 @@
     margin: 0 1rem;
     cursor: pointer;
 
-    &:hover,
-    &.active {
-      color: vars.$alt-dark-color;
+    &:hover {
+      color: vars.$lightest-color;
+      font-weight: 700;
     }
   }
 }
