@@ -21,6 +21,7 @@ const mapStateToProps = (state) => ({
   loading: state.user.loading,
   classes: state.user.classes,
   teacher: state.user.teacher,
+  message: state.user.message,
 });
 
 
@@ -49,7 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
   //get all classes from an axios request and deliver it into select input
   getClasses: () => {
     dispatch(getClasses());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,0 +1,39 @@
+@use 'src/styles/vars.scss';
+
+.text-editor-class {
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: 5px;
+  height: 100vh;
+  margin: auto;
+  width: fit-content;
+  background-color: white;
+  margin-top: 3rem;
+  padding: 1em;
+
+  &-button-cancel{
+    background-color: #6e6e6e;
+    margin-right: 1em;
+  }
+
+}
+
+input,textarea{
+  margin: 1em;
+  border-radius: 5px;
+  padding: 5px;
+}
+.input{
+
+  &-title, &-content{
+    width: 90%;
+    border:lightgray 1px solid;
+    &:focus{
+      box-shadow: 5px 10px vars.$light-color;
+      outline:none
+    }
+  }
+  &-content{
+    min-height: 25em;
+  }
+
+}

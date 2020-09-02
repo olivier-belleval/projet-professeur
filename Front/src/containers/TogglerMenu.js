@@ -10,9 +10,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onOpenClick: () => {;
+  onOpenClick: () => {
     dispatch(toggleMenu());
   },
+
   handleLogout: () => {
     console.log('handle logout');
     dispatch(logout());

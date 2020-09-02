@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
 
@@ -11,6 +11,7 @@ const Login = ({
   loading,
   classes,
   teacher,
+  message,
   // func which dispatch
   handleLogin,
   handleClassesLogin,
@@ -24,6 +25,12 @@ const Login = ({
     evt.preventDefault();
     handleLogin();
   };
+
+  const handleSubmitStudent = (evt) => {
+    evt.preventDefault();
+    handleClassesLogin();
+  };
+
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
     changeField({ [name]: value });
@@ -40,8 +47,13 @@ const Login = ({
       )}
       {!isLogged && loginOpened && !loading && (
         <div className="login-form">
-          <form className="form" onSubmit={ teacher ? handleSubmit : handleClassesLogin }>
+          <form className="form" onSubmit={teacher ? handleSubmit : handleSubmitStudent}>
             <div className="login-form-inputs">
+              {message && (
+              <div className="login-form-error-message">
+                {message}
+              </div>
+              )}
               {teacher && (
               <input
                 name="username"
@@ -60,7 +72,7 @@ const Login = ({
               >
                 <option>je choisis ma classe</option>
                 {classes.map((item) => (
-                  <option value={item} key={item}>{item}</option>
+                  <option value={item.class_usernames} key={item.class_id}>{item.class_usernames}</option>
                 ))}
               </select>
               )}
