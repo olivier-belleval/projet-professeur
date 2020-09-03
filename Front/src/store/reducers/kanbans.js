@@ -58,6 +58,9 @@ export default (state = initialState, action = {}) => {
         ...state,
         modalOpen: !state.modalOpen,
         list_id: action.payload,
+        newCardColor: '#4c3e53',
+        newCardOrder: '',
+        newCardContent: '',
       };
     case TOGGLE_MODAL_LIST:
       return {
@@ -81,6 +84,7 @@ export default (state = initialState, action = {}) => {
         list_id: '',
         newCardOrder: '',
         newCardContent: '',
+        newCardColor: '',
         modalOpen: !state.modalOpen,
       };
     case CHANGE_FIELD_CARD:

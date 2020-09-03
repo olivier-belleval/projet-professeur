@@ -1,4 +1,4 @@
-@use '../../styles/vars';
+@import '../../styles/vars';
 
 .settings {
   display: flex;
@@ -31,7 +31,7 @@
       &-bar{
     width: 2rem;
     height: 0.25rem;
-    background-color: vars.$lightest-color;
+    background-color: $lightest-color;
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;
@@ -67,7 +67,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: vars.$alt-dark-color;
+    color: $alt-dark-color;
     margin-right: 10px;
     cursor: pointer;
   }
@@ -76,7 +76,7 @@
   }
 
 .menu-open {
-  background-color:vars.$alt-dark-color;
+  background-color:$alt-dark-color;
   // transform: rotate(45deg);
     &:nth-child(1) {
       transform: rotate(45deg);

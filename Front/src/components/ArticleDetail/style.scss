@@ -1,4 +1,4 @@
-@use 'src/styles/vars.scss';
+@import 'src/styles/vars.scss';
 
 .article-detail{
   width: 90%;
@@ -7,13 +7,13 @@
   &-head{
     margin-top: 4rem;
     padding: 1.2em;
-    background-color: vars.$dark-color;
+    background-color: $dark-color;
 
     &-title{
       font-weight: 700;
       font-size: 2em;
       margin-bottom: 0.5em;
-      font-family: vars.$font-title;
+      font-family: $font-title;
     }
 
     &-subtitle {
@@ -25,14 +25,14 @@
   &-content {
       text-align: justify;
       padding: 1em;
-      background-color: vars.$neutral-color;
+      background-color: $neutral-color;
   }
   &-back {
       margin-top: 1em;
       padding: 0.5em;
       border-radius: 5px;
       width: fit-content;
-      background-color: vars.$alt-dark-color;
+      background-color: $alt-dark-color;
 
   }
 }

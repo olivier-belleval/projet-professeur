@@ -1,4 +1,4 @@
-@use 'src/styles/vars.scss';
+@import 'src/styles/vars.scss';
 
 .text-editor-class {
   border: 1px solid rgb(199, 199, 199);
@@ -28,7 +28,7 @@ input,textarea{
     width: 90%;
     border:lightgray 1px solid;
     &:focus{
-      box-shadow: 5px 10px vars.$light-color;
+      box-shadow: 5px 10px $light-color;
       outline:none
     }
   }

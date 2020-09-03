@@ -396,7 +396,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           });
       }).catch((err, res) => {
         console.log(err);
-        console.log(res.data);
         store.dispatch(createKanbanError(res.data));
       });
 
@@ -434,6 +433,19 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
     case CREATE_CARD_SUBMIT:
       utils.listId = store.getState().kanbans.list_id;
+      let cardOrder;
+
+      store.getState().kanbans.kanban_detail['0'].lists.map((elem) => {
+        if (elem.id === utils.listId) {
+          if (!elem.cards) {
+            cardOrder = 1;
+          }
+          else {
+            cardOrder = elem.cards.length + 1;
+          }
+          return cardOrder;
+        }
+      });
 
       axios({
 
@@ -441,9 +453,9 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         url: `${utils.local}api/kanban/list/${utils.listId}/card/create`,
         withCredentials: true,
         data: {
-          order: Number(store.getState().kanbans.newCardOrder),
+          order: cardOrder,
           description: store.getState().kanbans.newCardContent,
-          color: '#fff',
+          color: store.getState().kanbans.newCardColor,
 
         },
       }).then((res) => {
@@ -492,12 +504,22 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         });
       }).catch((err) => {
         console.log(err);
-      // store.dispatch(createCardError('Impossible de créer'));
+        store.dispatch(deleteCardError('Impossible de supprimer la carte'));
       });
 
       break;
     case CREATE_LIST_SUBMIT:
       utils.kanbanId = store.getState().kanbans.kanban_id;
+      let listOrder;
+
+      (() => {
+        if (!store.getState().kanbans.kanban_detail['0'].lists) {
+          listOrder = 1;
+        }
+        else {
+          listOrder = store.getState().kanbans.kanban_detail['0'].lists.length +1;
+        }
+      })();
 
       axios({
 
@@ -505,7 +527,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         url: `${utils.local}api/kanban/${utils.kanbanId}/list/create`,
         withCredentials: true,
         data: {
-          order: Number(store.getState().kanbans.newListOrder),
+          order: listOrder,
           name: store.getState().kanbans.newListTitle,
         },
       }).then((res) => {
@@ -523,7 +545,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
         });
       }).catch((err) => {
-        store.dispatch(createCardError('Impossible de créer'));
+        store.dispatch(createListError('Impossible de créer'));
       });
 
       break;
@@ -654,7 +676,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       utils.listId = store.getState().kanbans.list_id;
       utils.kanbanId = store.getState().kanbans.kanban_id;
-      console.log(store.getState().editorKanban.listDetails);
+
       axios({
 
         method: 'put',
@@ -662,7 +684,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
         data: {
           name: store.getState().kanbans.newListTitle,
-          order: store.getState().editorKanban.newListOrder,
+          order: store.getState().editorKanban.listDetails.order,
         },
       }).then((res) => {
         store.dispatch(listEditionSuccess());
@@ -696,8 +718,8 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
         data: {
           description: store.getState().kanbans.newCardContent,
-          order: store.getState().editorKanban.newCardOrder,
-          color: store.getState().editorKanban.newCardColor,
+          order: store.getState().editorKanban.cardDetails.order,
+          color: store.getState().kanbans.newCardColor,
         },
       }).then((res) => {
         store.dispatch(cardEditionSuccess());

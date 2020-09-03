@@ -162,6 +162,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         cardDetails: '',
+        newCardColor: '',
         editionModalCard: false,
       };
     case CARD_EDITION_ERROR:

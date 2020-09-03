@@ -70,7 +70,7 @@ const KanbanDetail = ({
   if (kanban_detail['0'].lists) {
     kanban_detail['0'].lists.sort((a, b) => {
       if (a.cards) {
-        a.cards.sort((c, d) => ( c.order - d.order));
+        a.cards.sort((c, d) => (c.order - d.order));
       }
       return a.order - b.order;
     });
@@ -80,10 +80,11 @@ const KanbanDetail = ({
     <div className="kanban-detail" onClick={closeMenu}>
       <header className="kanban-detail-header">
         <div className="kanban-detail-head">
-          <div><h1 className="kanban-detail-head--title">
-            {kanban.title}
+          <div className="kanban-detail-head-text-content">
+            <h1 className="kanban-detail-head--title">
+              {kanban.title}
 
-          </h1>
+            </h1>
             <span className="kanban-detail-head--subtitle">
               {kanban.description}
             </span>
@@ -193,14 +194,6 @@ const CardModal = ({
     </div>
     <form onSubmit={handleSubmit}>
       <h3>{editionModalCard ? 'Editer ma carte' : 'Ajouter une carte'}</h3>
-      <input
-        type="number"
-        name="newCardOrder"
-        defaultValue={editionModalCard ? cardDetails.order : newCardOrder}
-        placeholder="Position de la carte"
-        className="modal-input"
-        onChange={changeField}
-      />
       <textarea
         type="text"
         name="newCardContent"
@@ -215,7 +208,7 @@ const CardModal = ({
       <input
         type="color"
         name="newCardColor"
-        defaultValue={editionModalCard ? cardDetails.color : newCardColor}
+        defaultValue={editionModalCard ? cardDetails.color : "#4c3e53"}
         onChange={changeField}
       />
       <button type="submit"> Ajouter</button>
@@ -227,7 +220,6 @@ const CardModal = ({
 const ListModal = ({
   openListModal,
   handleSubmit,
-  newListOrder,
   newListTitle,
   changeField,
   editionModalList,
@@ -241,14 +233,6 @@ const ListModal = ({
     </div>
     <form onSubmit={handleSubmit}>
       <h3>{editionModalList ? 'Modifier une liste' : 'Ajouter une liste'}</h3>
-      <input
-        type="number"
-        name="newListOrder"
-        defaultValue={editionModalList ? listDetails.order : newListOrder}
-        placeholder="Position de la liste"
-        className="modal-input"
-        onChange={changeField}
-      />
       <input
         type="text"
         name="newListTitle"

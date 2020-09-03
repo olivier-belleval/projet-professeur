@@ -7,7 +7,7 @@ const KanbanCard = ({
   getCardDetails,
   toggleCardEdit
 }) => (
-  <div className="kanban-card">
+  <div className="kanban-card" style={{backgroundColor:card.color}}>
 
     <div className="kanban-card-title">
       {card.name}

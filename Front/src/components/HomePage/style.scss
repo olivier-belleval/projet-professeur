@@ -1,4 +1,4 @@
-@use 'src/styles/vars.scss';
+@import 'src/styles/vars.scss';
 
 .homepage{
   height: 100vh;
@@ -19,7 +19,7 @@
   &-title{
     margin-top: 2rem;
     font-size: 3rem;
-    font-family: vars.$font-title;
+    font-family: $font-title;
   }
 }
 
