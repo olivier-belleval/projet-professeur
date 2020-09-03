@@ -68,6 +68,9 @@ import {
   SUBMIT_ASSOCIATION_ARTICLE,
   associationArticleError,
   associationArticleSuccess,
+  REMOVE_CLASS_FROM_ARTICLE,
+  removeClassSuccessFromArticle,
+  removeClassErrorFromArticle,
 } from '../action/AdminArticle';
 
 import {
@@ -680,6 +683,42 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       }).catch((err) => {
         console.log('erreur :', err);
         store.dispatch(removeClassError('Impossible de supprimer la classe'));
+      });
+
+      break;
+
+    case REMOVE_CLASS_FROM_ARTICLE:
+
+      utils.articleId = store.getState().admin.item_id;
+      utils.classUsername = store.getState().admin.removedClass;
+      console.log(utils.articleId);
+      console.log(utils.classUsername);
+
+      axios({
+        method: 'delete',
+        url: `${utils.local}api/article/${utils.articleId}/associate/remove`,
+        withCredentials: true,
+        data: {
+          className: utils.classUsername,
+        },
+      }).then((res) => {
+        store.dispatch(removeClassSuccess());
+        axios({
+
+          method: 'get',
+          url: `${utils.local}api/admin/article/all`,
+          withCredentials: true,
+
+        }).then((res) => {
+          console.log('res data :', res.data);
+          store.dispatch(getArticlesSuccess(res.data.data));
+          console.log('ok c\'est passé');
+        }).catch((err) => {
+          store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+        });
+      }).catch((err) => {
+        console.log('erreur :', err);
+        store.dispatch(removeClassError('Impossible de désassocier la classe'));
       });
 
       break;

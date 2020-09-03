@@ -4,6 +4,10 @@ import {
   SUBMIT_ASSOCIATION_ARTICLE,
   ASSOCIATION_ARTICLE_SUCCESS,
   ASSOCIATION_ARTICLE_ERROR,
+  REMOVE_CLASS_FROM_ARTICLE,
+  REMOVE_CLASS_SUCCESS_FROM_ARTICLE,
+  REMOVE_CLASS_ERROR_FROM_ARTICLE,
+  REMOVED_CLASS_FROM_ARTICLE,
 } from '../action/AdminArticle';
 
 import {
@@ -96,6 +100,33 @@ export default (state = initialState, action = {}) => {
         loadind: false,
         removedClass: action.payload,
       };
+
+    case REMOVE_CLASS_FROM_ARTICLE:
+      return {
+        ...state,
+        loadind: true,
+        item_id: action.payload,
+      };
+    case REMOVE_CLASS_SUCCESS_FROM_ARTICLE:
+      return {
+        ...state,
+        loading: false,
+        item_id: '',
+      };
+    case REMOVE_CLASS_ERROR_FROM_ARTICLE:
+      return {
+        ...state,
+        loadind: false,
+        message: action.payload,
+        item_id: '',
+      };
+    case REMOVED_CLASS_FROM_ARTICLE:
+      return {
+        ...state,
+        loadind: false,
+        removedClass: action.payload,
+      };
+
     default:
       return state;
   }

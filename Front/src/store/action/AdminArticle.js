@@ -13,6 +13,11 @@ export const GET_ARTICLES_ADMIN_PANEL = 'GET_ARTICLES_ADMIN_PANEL';
 export const EDIT_ARTICLE = 'EDIT_ARTICLE';
 export const TOGGLE_ADD_CLASS_MODAL = 'TOGGLE_ADD_CLASS_MODAL';
 
+export const REMOVE_CLASS_FROM_ARTICLE = 'REMOVE_CLASS_FROM_ARTICLE';
+export const REMOVE_CLASS_SUCCESS_FROM_ARTICLE = 'REMOVE_CLASS_SUCCESS_FROM_ARTICLE';
+export const REMOVE_CLASS_ERROR_FROM_ARTICLE = 'REMOVE_CLASS_ERROR_FROM_ARTICLE';
+export const REMOVED_CLASS_FROM_ARTICLE = 'REMOVED_CLASS_FROM_ARTICLE';
+
 export const modifyArticle = () => ({
   type: MODIFY_ARTICLE,
 });
@@ -65,5 +70,24 @@ export const associationArticleSuccess = (payload) => ({
 
 export const associationArticleError = (payload) => ({
   type: ASSOCIATION_ARTICLE_ERROR,
+  payload,
+});
+
+export const removeClassFromArticle = (payload) => ({
+  type: REMOVE_CLASS_FROM_ARTICLE,
+  payload,
+});
+
+export const removeClassSuccessFromArticle = () => ({
+  type: REMOVE_CLASS_SUCCESS_FROM_ARTICLE,
+});
+
+export const removeClassErrorFromArticle = (payload) => ({
+  type: REMOVE_CLASS_ERROR_FROM_ARTICLE,
+  payload,
+});
+
+export const removedClassFromArticle = (payload) => ({
+  type: REMOVED_CLASS_FROM_ARTICLE,
   payload,
 });
