@@ -53,9 +53,11 @@ const KanbanDetail = ({
     }
     else if (modalOpen) {
       handleCardSubmit();
-    } else if (editionModalList) {
+    }
+    else if (editionModalList) {
       submitListEdition();
-    } else if (editionModalCard) {
+    }
+    else if (editionModalCard) {
       submitCardEdition();
     }
   };
@@ -64,6 +66,15 @@ const KanbanDetail = ({
     const { name, value } = evt.target;
     changeField({ [name]: value });
   };
+
+  if (kanban_detail['0'].lists) {
+    kanban_detail['0'].lists.sort((a, b) => {
+      if (a.cards) {
+        a.cards.sort((c, d) => ( c.order - d.order));
+      }
+      return a.order - b.order;
+    });
+  }
 
   return (
     <div className="kanban-detail" onClick={closeMenu}>
@@ -115,6 +126,7 @@ const KanbanDetail = ({
       { datas && kanban_detail['0'].lists && (
         <main>
           <div className="kanban-detail-grid">
+
             {kanban_detail['0'].lists.map((list) => (
               <KanbanList
                 key={list.id}
@@ -173,14 +185,14 @@ const CardModal = ({
   handleSubmit,
   editionModalCard,
   toggleCardEdit,
-  cardDetails
+  cardDetails,
 }) => (
   <div className="modal">
     <div className="modal-close-button">
       <MdClose onClick={editionModalCard ? toggleCardEdit : onClick} />
     </div>
     <form onSubmit={handleSubmit}>
-      <h3>{editionModalCard ? "Editer ma carte" : "Ajouter une carte"}</h3>
+      <h3>{editionModalCard ? 'Editer ma carte' : 'Ajouter une carte'}</h3>
       <input
         type="number"
         name="newCardOrder"
@@ -203,7 +215,7 @@ const CardModal = ({
       <input
         type="color"
         name="newCardColor"
-        defaultValue= {editionModalCard ? cardDetails.color : newCardColor}
+        defaultValue={editionModalCard ? cardDetails.color : newCardColor}
         onChange={changeField}
       />
       <button type="submit"> Ajouter</button>

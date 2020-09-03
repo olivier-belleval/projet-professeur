@@ -20,13 +20,18 @@ const KanbanList = ({
   getListDetails,
   getCardDetails,
   toggleCardEdit,
-}) => (
+}) => {
+
+  // if(list.cards) {
+  //   list.cards.sort((a, b) => (a.order - b.order));
+  // }
+
+  return(
   <div>
     <div
       className="kanban-list"
       key={list.id}
       onClick={() => {
-        console.log("Kanban Detail List Component. L'id de ma liste est : ", list.id);
         getListId(list.id);
       }}
     >
@@ -68,7 +73,7 @@ const KanbanList = ({
       </div>
     </div>
   </div>
-);
+)};
 
 KanbanList.propTypes = {
   list: PropTypes.shape({
@@ -80,6 +85,9 @@ KanbanList.propTypes = {
   deleteCard: PropTypes.func,
   deleteList: PropTypes.func,
   getListId: PropTypes.func,
-
+  toggleCardEdit: PropTypes.func,
+  getCardDetails: PropTypes.func,
+  getListDetails: PropTypes.func,
+  toggleListEdit: PropTypes.func,
 };
 export default KanbanList;
