@@ -419,7 +419,7 @@ module.exports = {
             };
 
             if (!newCardObject['color']) {
-                newCardObject['color'] = '#4c3e53;
+                newCardObject['color'] = '#4c3e53';
             };
 
             newCardObject['list_id'] = request.params.id;
