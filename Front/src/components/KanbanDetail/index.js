@@ -21,6 +21,7 @@ const KanbanDetail = ({
   newListTitle,
   editionModalList,
   listDetails,
+  cardDetails,
 
   // Funtions
   deleteCard,
@@ -37,10 +38,12 @@ const KanbanDetail = ({
   getListDetails,
   getCardDetails,
   submitListEdition,
+  submitCardEdition,
+  toggleCardEdit,
+  editionModalCard,
 }) => {
   useEffect(() => {
     getKanbanDetail();
-    console.log('Console log du chargement de Kanban Detail');
   }, []);
 
   const handleSubmit = (evt) => {
@@ -52,6 +55,8 @@ const KanbanDetail = ({
       handleCardSubmit();
     } else if (editionModalList) {
       submitListEdition();
+    } else if (editionModalCard) {
+      submitCardEdition();
     }
   };
 
@@ -107,7 +112,7 @@ const KanbanDetail = ({
 
       </header>
 
-      { datas && kanban_detail && (
+      { datas && kanban_detail['0'].lists && (
         <main>
           <div className="kanban-detail-grid">
             {kanban_detail['0'].lists.map((list) => (
@@ -123,6 +128,7 @@ const KanbanDetail = ({
                 toggleListEdit={toggleListEdit}
                 getListDetails={getListDetails}
                 getCardDetails={getCardDetails}
+                toggleCardEdit={toggleCardEdit}
               />
             ))}
           </div>
@@ -138,6 +144,20 @@ const KanbanDetail = ({
             />
           )}
 
+          {editionModalCard && (
+            <CardModal
+              onClick={onOpenClick}
+              changeField={handleInputChange}
+              newCardOrder={newCardOrder}
+              newCardContent={newCardContent}
+              newCardColor={newCardColor}
+              handleSubmit={handleSubmit}
+              editionModalCard={editionModalCard}
+              toggleCardEdit={toggleCardEdit}
+              cardDetails={cardDetails}
+            />
+          )}
+
         </main>
       )}
     </div>
@@ -149,18 +169,22 @@ const CardModal = ({
   changeField,
   newCardOrder,
   newCardContent,
+  newCardColor,
   handleSubmit,
+  editionModalCard,
+  toggleCardEdit,
+  cardDetails
 }) => (
   <div className="modal">
     <div className="modal-close-button">
-      <MdClose onClick={onClick} />
+      <MdClose onClick={editionModalCard ? toggleCardEdit : onClick} />
     </div>
     <form onSubmit={handleSubmit}>
-      <h3>Ajouter une liste</h3>
+      <h3>{editionModalCard ? "Editer ma carte" : "Ajouter une carte"}</h3>
       <input
         type="number"
         name="newCardOrder"
-        value={newCardOrder}
+        defaultValue={editionModalCard ? cardDetails.order : newCardOrder}
         placeholder="Position de la carte"
         className="modal-input"
         onChange={changeField}
@@ -168,7 +192,7 @@ const CardModal = ({
       <textarea
         type="text"
         name="newCardContent"
-        value={newCardContent}
+        defaultValue={editionModalCard ? cardDetails.description : newCardContent}
         placeholder="Description"
         className="modal-textarea"
         onChange={changeField}
@@ -179,7 +203,7 @@ const CardModal = ({
       <input
         type="color"
         name="newCardColor"
-        defaultValue="#fff"
+        defaultValue= {editionModalCard ? cardDetails.color : newCardColor}
         onChange={changeField}
       />
       <button type="submit"> Ajouter</button>

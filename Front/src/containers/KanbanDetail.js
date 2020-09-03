@@ -13,6 +13,8 @@ import {
   getListDetails,
   getCardDetails,
   submitListEdition,
+  toggleModalCardEdition,
+  submitCardEdition,
 } from '../store/action/kanban-editor-action';
 
 import {
@@ -44,6 +46,7 @@ const mapStateToProps = (state, ownProps) => {
     newListTitle: state.kanbans.newListTitle,
     newCardColor: state.kanbans.newCardColor,
     editionModalList: state.editorKanban.editionModalList,
+    editionModalCard: state.editorKanban.editionModalCard,
     listDetails: state.editorKanban.listDetails,
     cardDetails: state.editorKanban.cardDetails,
   };
@@ -110,6 +113,14 @@ const mapDispatchToProps = (dispatch) => ({
 
   submitListEdition: () => {
     dispatch(submitListEdition());
+  },
+
+  toggleCardEdit: (id) => {
+    dispatch(toggleModalCardEdition(id));
+  },
+
+  submitCardEdition: () => {
+    dispatch(submitCardEdition());
   },
 });
 

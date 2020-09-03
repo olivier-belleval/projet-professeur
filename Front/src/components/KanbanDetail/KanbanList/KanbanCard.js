@@ -5,6 +5,7 @@ const KanbanCard = ({
   card,
   deleteCard,
   getCardDetails,
+  toggleCardEdit
 }) => (
   <div className="kanban-card">
 
@@ -16,7 +17,8 @@ const KanbanCard = ({
           description: card.description,
           order: card.order,
           color: card.color,
-        })
+        }),
+        toggleCardEdit(card.id)
       )}
       />
       <MdClose onClick={() => {

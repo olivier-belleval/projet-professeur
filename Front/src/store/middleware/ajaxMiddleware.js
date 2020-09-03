@@ -55,6 +55,9 @@ import {
   SUBMIT_LIST_EDITION,
   listEditionSuccess,
   listEditionError,
+  SUBMIT_CARD_EDITION,
+  cardEditionError,
+  cardEditionSuccess,
 } from '../action/kanban-editor-action';
 
 import {
@@ -95,6 +98,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
     distant: '',
     kanbanId: '',
     listId: '',
+    cardId: '',
     ClassId: '',
     list: '',
     articleId: '',
@@ -564,7 +568,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
         data: {
           className: utils.classUsername,
-        }
+        },
       }).then((res) => {
         store.dispatch(associationArticleSuccess());
 
@@ -573,12 +577,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           method: 'get',
           url: `${utils.local}api/admin/article/all`,
           withCredentials: true,
-  
+
         })
           .then((res) => {
             store.dispatch(getArticlesSuccess(res.data.data));
           })
-  
+
           .catch((err) => {
             store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
           });
@@ -600,7 +604,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
         data: {
           className: utils.classUsername,
-        }
+        },
       }).then((res) => {
         store.dispatch(associationKanbanSuccess());
         axios({
@@ -608,7 +612,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           method: 'get',
           url: `${utils.local}api/kanban/all`,
           withCredentials: true,
-  
+
         }).then((res) => {
           console.log(res.data.data);
           store.dispatch(getKanbansSuccess(res.data.data));
@@ -638,9 +642,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         },
       }).then((res) => {
-        console.log('axios title :', store.getState().editorKanban.title, 'axios background :', store.getState().editorKanban.background, 'axios description :', store.getState().editorKanban.description);
         store.dispatch(editKanbanSuccess());
-        console.log('taddaaaaaaaaaa');
       }).catch((err) => {
         console.log(err);
         store.dispatch(editKanbanError('Impossible d\'éditer'));
@@ -652,7 +654,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       utils.listId = store.getState().kanbans.list_id;
       utils.kanbanId = store.getState().kanbans.kanban_id;
-console.log(store.getState().editorKanban.listDetails)
+      console.log(store.getState().editorKanban.listDetails);
       axios({
 
         method: 'put',
@@ -663,7 +665,6 @@ console.log(store.getState().editorKanban.listDetails)
           order: store.getState().editorKanban.newListOrder,
         },
       }).then((res) => {
-        
         store.dispatch(listEditionSuccess());
         axios({
           method: 'get',
@@ -677,7 +678,42 @@ console.log(store.getState().editorKanban.listDetails)
         });
       }).catch((err) => {
         console.log(err);
-        store.dispatch(listEditionSuccess('Impossible d\'éditer'));
+        store.dispatch(listEditionError('Impossible d\'éditer'));
+      });
+
+      break;
+
+    case SUBMIT_CARD_EDITION:
+
+      utils.cardId = store.getState().editorKanban.card_id;
+      utils.kanbanId = store.getState().kanbans.kanban_id;
+      utils.listId = store.getState().kanbans.list_id;
+
+      axios({
+
+        method: 'put',
+        url: `${utils.local}api/kanban/list/${utils.listId}/card/${utils.cardId}/edit`,
+        withCredentials: true,
+        data: {
+          description: store.getState().kanbans.newCardContent,
+          order: store.getState().editorKanban.newCardOrder,
+          color: store.getState().editorKanban.newCardColor,
+        },
+      }).then((res) => {
+        store.dispatch(cardEditionSuccess());
+        axios({
+          method: 'get',
+          url: `${utils.local}api/kanban/${utils.kanbanId}`,
+          withCredentials: true,
+
+        }).then((res) => {
+          store.dispatch(getKanbanDetailSuccess(res.data.data));
+        }).catch((err) => {
+          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+        });
+      }).catch((err) => {
+        console.log(err);
+        store.dispatch(cardEditionError('Impossible d\'éditer'));
       });
 
       break;

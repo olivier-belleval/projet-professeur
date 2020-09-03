@@ -2,10 +2,11 @@ import axios from 'axios';
 import {
   LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError,
 } from '../action/index';
-import { LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT } from '../action/user';
+import {
+  LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT,
+} from '../action/user';
 
 const logMiddleware = (store) => (next) => (action) => {
-  
   const utils = {
     local: 'http://localhost:3000/',
     distant: 'http://54.90.32.97:3000/',
@@ -36,9 +37,9 @@ const logMiddleware = (store) => (next) => (action) => {
           );
         });
       break;
-      
-      case LOGIN_CLASSES_SUBMIT:
-        console.log(utils.user);
+
+    case LOGIN_CLASSES_SUBMIT:
+      console.log(utils.user);
       axios({
         method: 'post',
         url: `${utils.local}login/`,
@@ -50,9 +51,9 @@ const logMiddleware = (store) => (next) => (action) => {
         })
         .catch((err, res) => {
           console.error(err);
-            console.log(res);
-            store.dispatch(
-            loginSubmitError('Mot de passe incorrect')
+          console.log(res);
+          store.dispatch(
+            loginSubmitError('Mot de passe incorrect'),
           );
         });
       break;
@@ -88,7 +89,7 @@ const logMiddleware = (store) => (next) => (action) => {
         .catch((err) => {
           console.log(err);
           store.dispatch(getClassesError('Impossible de récupérer les classes...'));
-        })
+        });
 
       break;
 

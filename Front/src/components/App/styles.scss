@@ -29,8 +29,8 @@ a{
   text-transform: uppercase;
   letter-spacing: 3px;
 
-  a:hover{
-
+  &:hover{
+    box-shadow: inset 0 -6px 0 vars.$alt-dark-color;
   }
 }
 
@@ -48,4 +48,12 @@ button {
     background-color: vars.$primary-color;
     color:white;
   }
+}
+
+button {
+  cursor:pointer;
+}
+
+p{
+  white-space: pre-line;
 }

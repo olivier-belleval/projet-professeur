@@ -19,6 +19,7 @@ const KanbanList = ({
   toggleListEdit,
   getListDetails,
   getCardDetails,
+  toggleCardEdit,
 }) => (
   <div>
     <div
@@ -60,6 +61,7 @@ const KanbanList = ({
             card={card}
             deleteCard={deleteCard}
             getCardDetails={getCardDetails}
+            toggleCardEdit={toggleCardEdit}
           />
         ))}
 
