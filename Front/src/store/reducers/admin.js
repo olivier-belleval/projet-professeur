@@ -4,13 +4,17 @@ import {
   SUBMIT_ASSOCIATION_ARTICLE,
   ASSOCIATION_ARTICLE_SUCCESS,
   ASSOCIATION_ARTICLE_ERROR,
- } from '../action/AdminArticle';
+} from '../action/AdminArticle';
 
- import {
+import {
   SUBMIT_ASSOCIATION_KANBAN,
   ASSOCIATION_KANBAN_SUCCESS,
   ASSOCIATION_KANBAN_ERROR,
- } from '../action/AdminKanban';
+  REMOVE_CLASS,
+  REMOVE_CLASS_ERROR,
+  REMOVE_CLASS_SUCCESS,
+  REMOVED_CLASS,
+} from '../action/AdminKanban';
 
 export const initialState = {
   loading: false,
@@ -19,6 +23,7 @@ export const initialState = {
   classAdded: '',
   modalOpen: false,
   message: '',
+  removedClass: '',
 };
 
 export default (state = initialState, action = {}) => {
@@ -65,6 +70,33 @@ export default (state = initialState, action = {}) => {
         classAdded: '',
         item_id: '',
       };
+
+    case REMOVE_CLASS:
+      return {
+        ...state,
+        loadind: true,
+        item_id: action.payload,
+      };
+    case REMOVE_CLASS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        item_id: '',
+      };
+    case REMOVE_CLASS_ERROR:
+      return {
+        ...state,
+        loadind: false,
+        message: action.payload,
+        item_id: '',
+      };
+    case REMOVED_CLASS:
+      return {
+        ...state,
+        loadind: false,
+        removedClass: action.payload,
+      };
     default:
       return state;
-  }};
+  }
+};

@@ -4,7 +4,9 @@ import AdminKanban from '../components/AdminKanban';
 import {
   editKanban,
   deleteKanban,
-  submitAssociationKanban
+  submitAssociationKanban,
+  removeClass,
+  removedClass,
 } from '../store/action/AdminKanban';
 
 import {
@@ -60,6 +62,16 @@ const mapDispatch = (dispatch) => ({
 
   closeMenu: () => {
     dispatch(closeMenu());
+  },
+
+  removeClass: (id) => {
+    console.log("l'user veut supprimer la classe dans le kanban", id);
+    dispatch(removeClass(id));
+  },
+
+  removedClass: (id) => {
+    console.log("l'user veut supprimer la classe avec le nom suivant", id);
+    dispatch(removedClass(id));
   },
 });
 

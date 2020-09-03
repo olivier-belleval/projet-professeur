@@ -77,6 +77,9 @@ import {
   SUBMIT_ASSOCIATION_KANBAN,
   associationKanbanError,
   associationKanbanSuccess,
+  REMOVE_CLASS,
+  removeClassSuccess,
+  removeClassError,
 } from '../action/AdminKanban';
 
 import {
@@ -561,7 +564,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
         data: {
           className: utils.classUsername,
-        }
+        },
       }).then((res) => {
         store.dispatch(associationArticleSuccess());
 
@@ -570,12 +573,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           method: 'get',
           url: `${utils.local}api/admin/article/all`,
           withCredentials: true,
-  
+
         })
           .then((res) => {
             store.dispatch(getArticlesSuccess(res.data.data));
           })
-  
+
           .catch((err) => {
             store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
           });
@@ -597,7 +600,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
         data: {
           className: utils.classUsername,
-        }
+        },
       }).then((res) => {
         store.dispatch(associationKanbanSuccess());
         axios({
@@ -605,7 +608,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           method: 'get',
           url: `${utils.local}api/kanban/all`,
           withCredentials: true,
-  
+
         }).then((res) => {
           console.log(res.data.data);
           store.dispatch(getKanbansSuccess(res.data.data));
@@ -641,6 +644,42 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       }).catch((err) => {
         console.log(err);
         store.dispatch(editKanbanError('Impossible d\'éditer'));
+      });
+
+      break;
+
+    case REMOVE_CLASS:
+
+      utils.kanbanId = store.getState().admin.item_id;
+      utils.classUsername = store.getState().admin.removedClass;
+      console.log(utils.kanbanId);
+      console.log(utils.classUsername);
+
+      axios({
+        method: 'post',
+        url: `${utils.local}api/kanban/${utils.kanbanId}/associate/remove`,
+        withCredentials: true,
+        data: {
+          className: utils.classUsername,
+        },
+      }).then((res) => {
+        store.dispatch(removeClassSuccess());
+        axios({
+
+          method: 'get',
+          url: `${utils.local}api/kanban/all`,
+          withCredentials: true,
+
+        }).then((res) => {
+          console.log('res data :', res.data);
+          store.dispatch(getKanbansSuccess(res.data.data));
+          console.log('ok c\'est passé');
+        }).catch((err) => {
+          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+        });
+      }).catch((err) => {
+        console.log('erreur :', err);
+        store.dispatch(removeClassError('Impossible de supprimer la classe'));
       });
 
       break;
