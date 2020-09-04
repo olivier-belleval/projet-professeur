@@ -1,4 +1,4 @@
-@use 'src/styles/vars.scss';
+@import 'src/styles/vars.scss';
 
 .login{
   align-self: center;
@@ -14,7 +14,7 @@
   }
 
   &-form{
-  background-color:vars.$color;
+  background-color:$color;
   width: 80%;
   border-radius: 5px;
   padding: 1rem;
@@ -31,14 +31,14 @@
       }
   }
   &-admin{
-    color:vars.$dark-color;
+    color:$dark-color;
     text-transform: uppercase;
     font-weight: 700;
     position: relative;
     margin-top: 1.2rem;
 
     &:hover{
-      color:vars.$lightest-color;
+      color:$lightest-color;
     }
   }
 }

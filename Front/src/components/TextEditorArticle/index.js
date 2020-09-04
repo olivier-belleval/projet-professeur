@@ -41,7 +41,7 @@ const TextEditorArticle = ({
         />
         <textarea
           name="content"
-          defaultValue={editing ? articleEdited.article_excerpt : content}
+          defaultValue={editing ? articleEdited.article_content : content}
           onChange={handleInputChange}
           className="input-content"
         />

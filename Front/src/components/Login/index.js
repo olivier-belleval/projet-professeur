@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
+
+import {RiEyeCloseLine, RiEyeLine} from 'react-icons/ri';
 
 const Login = ({
   // data from state
@@ -39,6 +41,8 @@ const Login = ({
     getClasses();
   }, []);
 
+const [showedPassword, setShowedPassword] = useState(false);
+
   return (
     <div className="login">
       { loginOpened && loading && <span>Connexion en cours...</span>}
@@ -72,7 +76,9 @@ const Login = ({
               >
                 <option>je choisis ma classe</option>
                 {classes.map((item) => (
-                  <option value={item.class_usernames} key={item.class_id}>{item.class_usernames}</option>
+                  <option
+                  value={item.class_usernames}
+                  key={item.class_id}>{item.class_usernames}</option>
                 ))}
               </select>
               )}
@@ -80,9 +86,13 @@ const Login = ({
                 name="password"
                 value={password}
                 onChange={handleInputChange}
-                type="password"
+                type={showedPassword ? "text" : "password"}
                 placeholder="mot de passe"
-              />
+              /> <span onClick={()=>{
+                setShowedPassword(!showedPassword);
+              }}>
+              {showedPassword ? <RiEyeLine/> : <RiEyeCloseLine/>}
+              </span>
             </div>
             <button type="submit" className="login-form-button">Se connecter</button>
           </form>

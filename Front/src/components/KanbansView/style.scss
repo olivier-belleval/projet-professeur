@@ -1,11 +1,11 @@
-@use 'src/styles/vars';
+@import 'src/styles/vars';
 
 .kanbans-view{
 margin:0.7em;
   &-head{
     padding: 2em;
     margin-bottom: 2em;
-    background-color: vars.$alt-dark-color;
+    background-color: $alt-dark-color;
 
     &-title{
       font-weight: 700;
@@ -18,7 +18,7 @@ margin:0.7em;
   }
 
   &-list{
-    background-color:vars.$neutral-color;
+    background-color:$neutral-color;
   }
 }
 
@@ -26,7 +26,7 @@ margin:0.7em;
   padding: 1em;
   margin-bottom: 1em;
   &:hover{
-    box-shadow: 5px 10px vars.$secondary-color;
+    box-shadow: 5px 10px $alt-dark-color;
   }
 
   &-title{
@@ -37,5 +37,15 @@ margin:0.7em;
 
   &-subtitle{
     font-style: italic;
+  }
+}
+
+
+@media screen and (min-width:600px){
+  .kanbans-view{
+    padding: 3rem;
+    padding-top:7rem;
+    width: 70%;
+    margin: auto;
   }
 }

@@ -7,6 +7,7 @@ import { logout } from '../store/action/user';
 const mapStateToProps = (state) => ({
   opened: state.user.opened,
   path: state.user.path,
+  teacher: state.user.teacher,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -15,7 +16,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleLogout: () => {
-    console.log('handle logout');
     dispatch(logout());
   },
 });

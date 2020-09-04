@@ -41,6 +41,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         ...action.payload,
+        message: '',
       };
     case TOGGLE_LOGIN_FORM:
       return {
@@ -57,11 +58,18 @@ export default (state = initialState, action = {}) => {
         ...state,
         opened: false,
       };
-    case LOGIN_SUBMIT || LOGIN_CLASSES_SUBMIT:
+    case LOGIN_SUBMIT:
       return {
         ...state,
         loading: true,
+        message: '',
       };
+    case LOGIN_CLASSES_SUBMIT:
+      return {
+        ...state,
+        loading: true,
+        message: '',
+      }
     case LOGIN_SUBMIT_SUCCESS:
       return {
         ...state,

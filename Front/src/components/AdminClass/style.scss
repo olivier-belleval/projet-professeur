@@ -1,4 +1,4 @@
-@use '../../styles/vars';
+@import '../../styles/vars';
 
 .admin_panel_class {
   height: 100vh;
@@ -11,8 +11,8 @@
      font-weight: bold;
     padding: 2em;
     margin-bottom: 2em;
-    background-color: vars.$alt-dark-color;
-    font-family: vars.$font-title;
+    background-color: $alt-dark-color;
+    font-family: $font-title;
     font-size:1.3rem;
   }
 
@@ -26,9 +26,9 @@
       
        width: 90%;
        padding: 1em;
-       background-color: vars.$lightest-color;
+       background-color: $neutral-color;
       // border-radius: 5px;
-      // color: vars.$lightest-color;
+      // color: $lightest-color;
        //font-weight: bold;
        margin-bottom: 1em;
        display: flex;

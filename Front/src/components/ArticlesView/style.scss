@@ -1,4 +1,4 @@
-@use 'src/styles/vars.scss';
+@import 'src/styles/vars.scss';
 .articles-view{
   margin: 1rem;
   // display: flex;
@@ -14,15 +14,15 @@
 
   &-title{
     font-size: 2.5rem;
-    font-weight: vars.$title-font-weight;
-    font-family: vars.$font-title;
+    font-weight: $title-font-weight;
+    font-family: $font-title;
     margin-bottom: 3rem;
   }
 }
 
 .article {
   margin: 2rem;
-  background-color: vars.$alt-dark-color;
+  background-color: $alt-dark-color;
   padding: 0.8em;
   position: relative;
 
@@ -30,9 +30,9 @@
     margin-bottom: 1em;
 
     &-title{
-      font-weight: vars.$title-font-weight;
-      font-family: vars.$font-title;
-      font-size:1.3rem;
+      font-weight: $title-font-weight;
+      font-family: $font-title;
+      font-size: 2rem;
       position: absolute;
       top:-13px;
     }
@@ -51,6 +51,7 @@
 @media screen and (min-width:600px){
   .articles-view{
     padding: 3rem;
+    padding-top:7rem;
     width: 70%;
     margin: auto;
   }
