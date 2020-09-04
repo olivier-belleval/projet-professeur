@@ -36,7 +36,15 @@ const TogglerMenu = ({
           <div className="settings-nav" onClick={onOpenClick}>espace admin</div>
         </NavLink>
 
-        <NavLink key="4" exact to="/" onClick={handleLogout}>
+        <NavLink
+          key="4"
+          exact="true"
+          to="/"
+          onClick={() => {
+            handleLogout();
+            onOpenClick();
+          }}
+        >
           <div className="settings-nav">se déconnecter</div>
         </NavLink>
 

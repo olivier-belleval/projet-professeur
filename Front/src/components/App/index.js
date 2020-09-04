@@ -19,6 +19,7 @@ import TextEditorArticle from '../../containers/TextEditorArticle';
 import TextEditorClass from '../../containers/TextEditorClass';
 import TextEditorKanban from '../../containers/TextEditorKanban';
 import Admin from '../../containers/Admin';
+import NotFound from '../NotFound';
 
 // == Composant
 const App = ({ isLogged, teacher }) => (
@@ -49,6 +50,7 @@ const App = ({ isLogged, teacher }) => (
               <Route exact path="/admin/edit/class/:id" component={TextEditorClass} />
               <Route exact path="/admin/nouveau-kanban" component={TextEditorKanban} />
               <Route exact path="/admin/edit/kanban/:id" component={TextEditorKanban} />
+              <Route component={NotFound} />
             </Switch>
           )}
         </Switch>

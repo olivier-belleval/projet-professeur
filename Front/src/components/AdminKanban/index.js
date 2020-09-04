@@ -23,7 +23,9 @@ const AdminKanban = ({
   classAdded,
   classes,
   changeField,
-  handleSubmitAssociation
+  handleSubmitAssociation,
+  removeClass,
+  removedClass,
 }) => {
   useEffect(() => {
     getKanbans();
@@ -49,24 +51,37 @@ const AdminKanban = ({
             <div className="admin_panel_kanban-content-part" key={tableau.id}>
               <div className="admin_panel_kanban-content-part-tableau">{tableau.title}</div>
               <div className="admin_panel_kanban_content-part-class">
-                <p>{tableau.description}</p>
+                {tableau.classes && tableau.classes.map((classes) => (
+                  <span className="classusername-tag" key={classes.id}> {classes.username}
+                    <span
+                      className="class-remove"
+                      onClick={() => {
+                        console.log('remove class from', tableau.id);
+                        removeClass(tableau.id);
+                        removedClass(classes.username);
+                      }}
+                    >
+                      X
+                    </span>
+                  </span>
+                ))}
               </div>
               <div className="admin_panel_kanban_content-part-icons">
                 <div className="admin_panel_kanban_content-part-modify">
-                <Link to={`/admin/edit/kanban/${tableau.id}`} key={tableau.id}>
-                  <FaPencilAlt onClick={() => {
-                    editKanban(tableau.id);
+                  <Link to={`/admin/edit/kanban/${tableau.id}`} key={tableau.id}>
+                    <FaPencilAlt onClick={() => {
+                      editKanban(tableau.id);
+                    }}
+                    />
+                  </Link>
+                </div>
+                <div className="admin_panel_kanban_content-part-delete">
+                  <FaTrash onClick={() => {
+                    console.log('delete', tableau.id);
+                    deleteKanban(tableau.id);
                   }}
                   />
-                </Link>
-              </div>
-              <div className="admin_panel_kanban_content-part-delete">
-              <FaTrash onClick={() => {
-                console.log('delete', tableau.id);
-                deleteKanban(tableau.id);
-              }}
-              />
-                
+
                 </div>
                 <div className="admin_panel_kanban_content-part-join"><HiOutlineUserGroup onClick={() => (
                   onOpenClick(tableau.id)
