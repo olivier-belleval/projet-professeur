@@ -82,8 +82,6 @@ const KanbanDetail = ({
   }
   
 
-  console.log("détail de mon kanban : ",kanban_detail)
-
   return (
     <div className="kanban-detail" onClick={closeMenu}>
       <header className="kanban-detail-header">
@@ -135,7 +133,7 @@ const KanbanDetail = ({
 
       </header>
 
-      { datas && kanban_detail['0'] && (
+      { datas && kanban_detail['0'] && kanban_detail['0'].lists && (
         <main>
           <div className="kanban-detail-grid" style={{backgroundColor: kanban_detail['0'].background}}>
 

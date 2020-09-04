@@ -476,7 +476,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           withCredentials: true,
 
         }).then((res) => {
-          store.dispatch(getKanbanSuccess(res.data.data));
+          store.dispatch(getKanbanDetailSuccess(res.data.data));
         }).catch((err) => {
           store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
         });
