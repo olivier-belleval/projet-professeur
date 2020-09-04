@@ -25,36 +25,38 @@ const TogglerMenu = ({
         </div>
       </div>
       {opened && (
-      <div className="settings-menu">
+        <div className="settings-menu">
 
-        <NavLink key="1" exact to="/articles">
-          <div className="settings-nav" onClick={onOpenClick}>articles</div>
-        </NavLink>
+          <NavLink key="1" exact to="/articles">
+            <div className="settings-nav" onClick={onOpenClick}>articles</div>
+          </NavLink>
 
-        <NavLink key="2" exact to="/kanbans">
-          <div className="settings-nav" onClick={onOpenClick}>tableaux</div>
-        </NavLink>
-        {teacher && (
-        <NavLink key="3" exact to="/espace-admin">
-          <div className="settings-nav" onClick={onOpenClick}>espace admin</div>
-        </NavLink>
+          <NavLink key="2" exact to="/kanbans">
+            <div className="settings-nav" onClick={onOpenClick}>tableaux</div>
+          </NavLink>
+          {teacher && (
+            <div>
+              <NavLink key="3" exact to="/espace-admin">
+                <div className="settings-nav" onClick={onOpenClick}>espace admin</div>
+              </NavLink>
 
-        <NavLink
-          key="4"
-          exact="true"
-          to="/"
-          onClick={() => {
-            handleLogout();
-            onOpenClick();
-          }}
-        >
-          <div className="settings-nav">se déconnecter</div>
-        </NavLink>
-
-      </div>
-      )}
-    </div>
-  );
-};
+              <NavLink
+                key="4"
+                exact="true"
+                to="/"
+                onClick={() => {
+                  handleLogout();
+                  onOpenClick();
+                }}
+              >
+                <div className="settings-nav">se déconnecter</div>
+              </NavLink>
+          
+          </div>
+          )}
+        </div> 
+      )};
+ </div>
+)}
 
 export default TogglerMenu;

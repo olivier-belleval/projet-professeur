@@ -43,8 +43,10 @@ const KanbanDetail = ({
   toggleCardEdit,
   editionModalCard,
 }) => {
+
   useEffect(() => {
     getKanbanDetail();
+    console.log("Ma première action à l'ouverture du composant")
   }, []);
 
   const handleSubmit = (evt) => {
@@ -68,7 +70,8 @@ const KanbanDetail = ({
     changeField({ [name]: value });
   };
 
-  if (kanban_detail['0'].lists) {
+  if(kanban_detail['0']){
+    if (kanban_detail['0'].lists) {
     kanban_detail['0'].lists.sort((a, b) => {
       if (a.cards) {
         a.cards.sort((c, d) => (c.order - d.order));
@@ -76,8 +79,10 @@ const KanbanDetail = ({
       return a.order - b.order;
     });
   }
+  }
+  
 
-  console.log(kanban_detail['0'].background)
+  console.log("détail de mon kanban : ",kanban_detail)
 
   return (
     <div className="kanban-detail" onClick={closeMenu}>
@@ -130,7 +135,7 @@ const KanbanDetail = ({
 
       </header>
 
-      { datas && kanban_detail['0'].lists && (
+      { datas && kanban_detail['0'] && (
         <main>
           <div className="kanban-detail-grid" style={{backgroundColor: kanban_detail['0'].background}}>
 
