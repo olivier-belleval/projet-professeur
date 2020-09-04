@@ -113,7 +113,7 @@ export default (state = initialState, action = {}) => {
         list: [],
       };
     case GET_KANBAN_ID:
-      return{
+      return {
         ...state,
         kanban_id: action.payload,
       }
