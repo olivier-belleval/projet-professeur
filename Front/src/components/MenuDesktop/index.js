@@ -2,7 +2,7 @@ import React from 'react';
 import './style.scss';
 import { NavLink } from 'react-router-dom';
 
-const MenuDesktop = ({ handleLogout }) => (
+const MenuDesktop = ({ handleLogout, teacher }) => (
   <header className="menu">
 
     <NavLink exact to="/">
@@ -15,9 +15,11 @@ const MenuDesktop = ({ handleLogout }) => (
       <NavLink key="2" exact to="/kanbans">
         <div className="menu-link">tableaux</div>
       </NavLink>
+      {teacher && (
       <NavLink key="3" exact to="/espace-admin">
         <div className="menu-link">espace administrateur</div>
       </NavLink>
+      )}
       <NavLink key="4" exact to="/" onClick={handleLogout}>
         <div className="menu-link">se déconnecter</div>
       </NavLink>

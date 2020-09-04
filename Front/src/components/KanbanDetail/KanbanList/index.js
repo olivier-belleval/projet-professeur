@@ -20,13 +20,8 @@ const KanbanList = ({
   getListDetails,
   getCardDetails,
   toggleCardEdit,
-}) => {
-
-  // if(list.cards) {
-  //   list.cards.sort((a, b) => (a.order - b.order));
-  // }
-
-  return(
+  teacher,
+}) => (
   <div>
     <div
       className="kanban-list"
@@ -37,26 +32,29 @@ const KanbanList = ({
     >
       <div className="kanban-list-title">
         <span>{list.name}</span>
+        {teacher && (
+          <span>
+            <span>
+              <MdMoreVert onClick={() => {
+                getListDetails({
+                  title: list.name,
+                  order: list.order,
+                });
+                toggleListEdit(list.id);
+              }}
+              />
 
-        <span>
-          <MdMoreVert onClick={() => {
-            getListDetails({
-              title: list.name,
-              order: list.order
-            });
-            toggleListEdit(list.id);
-          }}
-          />
+              <AiFillPlusSquare onClick={() => {
+                onOpenClick(list.id);
+              }}
+              />
+            </span>
 
-          <AiFillPlusSquare onClick={() => {
-            onOpenClick(list.id);
-          }}
-          />
-        </span>
-
-        <span>
-          <MdClose onClick={deleteList} />
-        </span>
+            <span>
+              <MdClose onClick={deleteList} />
+            </span>
+          </span>
+        )}
 
       </div>
       <div className="kanban-list-content">
@@ -67,13 +65,14 @@ const KanbanList = ({
             deleteCard={deleteCard}
             getCardDetails={getCardDetails}
             toggleCardEdit={toggleCardEdit}
+            teacher={teacher}
           />
         ))}
 
       </div>
     </div>
   </div>
-)};
+);
 
 KanbanList.propTypes = {
   list: PropTypes.shape({

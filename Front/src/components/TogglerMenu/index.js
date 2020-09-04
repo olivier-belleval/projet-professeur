@@ -5,7 +5,10 @@ import { NavLink } from 'react-router-dom';
 import './style.scss';
 
 const TogglerMenu = ({
-  opened, onOpenClick, handleLogout,
+  opened,
+  onOpenClick,
+  handleLogout,
+  teacher,
 }) => {
   const cssClassNames = opened ? 'settings-icon-burger-bar menu-open' : 'settings-icon-burger-bar';
   return (
@@ -31,11 +34,11 @@ const TogglerMenu = ({
         <NavLink key="2" exact to="/kanbans">
           <div className="settings-nav" onClick={onOpenClick}>tableaux</div>
         </NavLink>
-
+        {teacher && (
         <NavLink key="3" exact to="/espace-admin">
           <div className="settings-nav" onClick={onOpenClick}>espace admin</div>
         </NavLink>
-
+        )}
         <NavLink key="4" exact to="/" onClick={handleLogout}>
           <div className="settings-nav">se déconnecter</div>
         </NavLink>

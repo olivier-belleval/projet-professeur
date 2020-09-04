@@ -5,26 +5,31 @@ const KanbanCard = ({
   card,
   deleteCard,
   getCardDetails,
-  toggleCardEdit
+  toggleCardEdit,
+  teacher,
 }) => (
-  <div className="kanban-card" style={{backgroundColor:card.color}}>
+  <div className="kanban-card" style={{ backgroundColor: card.color }}>
 
     <div className="kanban-card-title">
       {card.name}
-
-      <MdMoreVert onClick={() => (
-        getCardDetails({
-          description: card.description,
-          order: card.order,
-          color: card.color,
-        }),
-        toggleCardEdit(card.id)
+      {teacher && (
+        <span>
+          <MdMoreVert onClick={() => (
+            getCardDetails({
+              description: card.description,
+              order: card.order,
+              color: card.color,
+            }),
+            toggleCardEdit(card.id)
+          )}
+          />
+          <MdClose onClick={() => {
+            deleteCard(card.id);
+          }}
+          />
+        </span>
       )}
-      />
-      <MdClose onClick={() => {
-        deleteCard(card.id);
-      }}
-      />
+
     </div>
     {card.tags && card.tags.map((tag) => <Tag key={tag.id} tag={tag} />)}
     <div className="kanban-card-content">

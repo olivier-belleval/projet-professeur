@@ -49,6 +49,7 @@ const mapStateToProps = (state, ownProps) => {
     editionModalCard: state.editorKanban.editionModalCard,
     listDetails: state.editorKanban.listDetails,
     cardDetails: state.editorKanban.cardDetails,
+    teacher: state.user.teacher,
   };
 };
 

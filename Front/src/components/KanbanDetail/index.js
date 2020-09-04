@@ -22,6 +22,7 @@ const KanbanDetail = ({
   editionModalList,
   listDetails,
   cardDetails,
+  teacher,
 
   // Funtions
   deleteCard,
@@ -90,9 +91,10 @@ const KanbanDetail = ({
             </span>
           </div>
 
-          <div className="kanban-detail-adding-button">
-            <AiFillPlusSquare onClick={openListModal} />
-            { listModalOpen
+          {teacher && (
+            <div className="kanban-detail-adding-button">
+              <AiFillPlusSquare onClick={openListModal} />
+              { listModalOpen
             && (
             <ListModal
               openListModal={openListModal}
@@ -105,7 +107,7 @@ const KanbanDetail = ({
             />
             )}
 
-            { editionModalList
+              { editionModalList
             && (
             <ListModal
               openListModal={openListModal}
@@ -119,7 +121,9 @@ const KanbanDetail = ({
             />
             )}
 
-          </div>
+            </div>
+          )}
+
         </div>
 
       </header>
@@ -142,6 +146,7 @@ const KanbanDetail = ({
                 getListDetails={getListDetails}
                 getCardDetails={getCardDetails}
                 toggleCardEdit={toggleCardEdit}
+                teacher={teacher}
               />
             ))}
           </div>
@@ -208,7 +213,7 @@ const CardModal = ({
       <input
         type="color"
         name="newCardColor"
-        defaultValue={editionModalCard ? cardDetails.color : "#4c3e53"}
+        defaultValue={editionModalCard ? cardDetails.color : '#4c3e53'}
         onChange={changeField}
       />
       <button type="submit"> Ajouter</button>
