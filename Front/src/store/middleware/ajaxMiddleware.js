@@ -364,11 +364,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           console.log(err);
-          // store.dispatch(getKanbanError('Impossible de récupérer le kanban...'));
+          store.dispatch(getKanbanError('Impossible de récupérer le kanban...'));
         });
       break;
 
     case CREATE_KANBAN_SUBMIT:
+
       axios({
 
         method: 'post',

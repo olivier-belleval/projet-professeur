@@ -77,6 +77,8 @@ const KanbanDetail = ({
     });
   }
 
+  console.log(kanban_detail['0'].background)
+
   return (
     <div className="kanban-detail" onClick={closeMenu}>
       <header className="kanban-detail-header">
@@ -130,7 +132,7 @@ const KanbanDetail = ({
 
       { datas && kanban_detail['0'].lists && (
         <main>
-          <div className="kanban-detail-grid">
+          <div className="kanban-detail-grid" style={{backgroundColor: kanban_detail['0'].background}}>
 
             {kanban_detail['0'].lists.map((list) => (
               <KanbanList
