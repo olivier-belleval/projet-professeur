@@ -1,7 +1,16 @@
-import { GET_ARTICLES_ERROR, GET_ARTICLES_SUCCESS, GET_ARTICLES } from '../action/data-actions';
 import {
-  DELETE_ARTICLE, DELETE_ARTICLE_ERROR, DELETE_ARTICLE_SUCCESS, GET_ARTICLES_ADMIN_PANEL,
+  GET_ARTICLES_ERROR,
+  GET_ARTICLES_SUCCESS,
+  GET_ARTICLES,
+} from '../action/data-actions';
+
+import {
+  DELETE_ARTICLE,
+  DELETE_ARTICLE_ERROR,
+  DELETE_ARTICLE_SUCCESS,
+  GET_ARTICLES_ADMIN_PANEL,
 } from '../action/AdminArticle';
+
 import { slugifyTitle } from '../../utils';
 
 export const initialState = {

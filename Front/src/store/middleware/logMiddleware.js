@@ -32,14 +32,13 @@ const logMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           store.dispatch(
-            console.error(err),
             loginSubmitError('Mot de passe incorrect'),
           );
         });
       break;
 
     case LOGIN_CLASSES_SUBMIT:
-      console.log(utils.user);
+
       axios({
         method: 'post',
         url: `${utils.local}login/`,
@@ -49,9 +48,7 @@ const logMiddleware = (store) => (next) => (action) => {
         .then((res) => {
           store.dispatch(loginSubmitSuccess(res.data));
         })
-        .catch((err, res) => {
-          console.error(err);
-          console.log(res);
+        .catch((err) => {
           store.dispatch(
             loginSubmitError('Mot de passe incorrect'),
           );

@@ -5,11 +5,12 @@
   flex-wrap: nowrap;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 100vh;
+  height: 100%;
   background-image: url('src/assets/images/classes.png');
   background-position: bottom right;
-  background-size:70%;
   background-repeat: no-repeat;
+  background-size:70%;
+  background-color: $dark-color;
 
 
   &-title{

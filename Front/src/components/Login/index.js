@@ -62,6 +62,7 @@ const [showedPassword, setShowedPassword] = useState(false);
               <input
                 name="username"
                 value={username}
+                className="login-form-inputs-username"
                 onChange={handleInputChange}
                 type="text"
                 placeholder="nom d'utilisateur"
@@ -70,6 +71,7 @@ const [showedPassword, setShowedPassword] = useState(false);
               {!teacher && (
               <select
                 name="username"
+                className="login-form-inputs-username"
                 onChange={handleInputChange}
                 value={username}
                 className="login-form-select"
@@ -84,6 +86,7 @@ const [showedPassword, setShowedPassword] = useState(false);
               )}
               <input
                 name="password"
+                className="inputs-password"
                 value={password}
                 onChange={handleInputChange}
                 type={showedPassword ? "text" : "password"}

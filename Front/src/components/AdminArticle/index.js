@@ -27,6 +27,7 @@ const AdminArticle = ({
   handleSubmitAssociation,
   removeClassFromArticle,
   removedClassFromArticle,
+  message,
 }) => {
   useEffect(() => {
     getArticles();
@@ -48,6 +49,11 @@ const AdminArticle = ({
     <div className="container">
       <div className={modalOpen ? 'admin_panel_article blur' : 'admin_panel_article'} onClick={closeMenu}>
         <h1 className="admin_panel_article-title"> Espace administrateur - gestion des articles </h1>
+        {message && (
+        <div className="text-editor-class-message">
+          {message}
+        </div>
+      )}
         <div className="admin_panel_article-content">
           {list.map((article) => (
             <div className="admin_panel_article-content-part" key={article.article_id}>
@@ -56,18 +62,20 @@ const AdminArticle = ({
               <div className="admin_panel_article_content-part-class">
 
                 {article.class_username && article.class_username.map((classes) => (
-                  <span className="classusername-tag" key={classes}> {classes}
-                    <span
+                  <div className="classusername-container">
+                    <div className="classusername-tag" key={classes}> {classes}
+
+                    </div>
+                    <div
                       className="class-remove"
                       onClick={() => {
-                        console.log('remove class from', article.article_id);
                         removeClassFromArticle(article.article_id);
                         removedClassFromArticle(classes);
                       }}
                     >
-                      X
-                    </span>
-                  </span>
+                      x
+                    </div>
+                  </div>
                 ))}
 
               </div>

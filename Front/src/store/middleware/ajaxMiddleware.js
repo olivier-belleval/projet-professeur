@@ -274,7 +274,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           withCredentials: true,
 
         })
-
           .then((res) => {
             store.dispatch(getClassesSuccess(res.data.data));
           })
@@ -282,7 +281,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
             store.dispatch(getClassesError('Impossible de récupérer les classes...'));
           });
       }).catch((err, res) => {
-        store.dispatch(createClassError(res.data));
+        store.dispatch(createClassError());
       });
 
       break;
@@ -305,7 +304,8 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       }).then((res) => {
         store.dispatch(editClassSuccess());
       }).catch((err) => {
-        store.dispatch(editClassError('Impossible d\'éditer'));
+        console.log(err.response)
+        store.dispatch(editClassError());
       });
 
       break;
@@ -388,19 +388,20 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
         },
       }).then((res) => {
-        console.log(res.data);
         store.dispatch(createKanbanSuccess());
         axios({
+
           method: 'get',
           url: `${utils.local}api/kanban/all`,
           withCredentials: true,
-        }).then((response) => {
-          store.dispatch(getKanbanSuccess(response.data.data));
-        })
-          .catch((err) => {
-            console.log(err);
-            store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
-          });
+
+        }).then((res) => {
+          console.log('res data sa mere :', res.data);
+          store.dispatch(getKanbansSuccess(res.data.data));
+          console.log('ce que tu veux');
+        }).catch((err) => {
+          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+        });
       }).catch((err, res) => {
         console.log(err);
         store.dispatch(createKanbanError(res.data));

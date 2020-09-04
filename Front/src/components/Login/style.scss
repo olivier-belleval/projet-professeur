@@ -14,22 +14,31 @@
   }
 
   &-form{
-  background-color:$color;
+  background-color:$alt-dark-color;
   width: 80%;
   border-radius: 5px;
   padding: 1rem;
 
+  &-error-message{
+    box-shadow: inset 0 -12px 0 $primary-color;
+    font-weight: 700;
+
+  }
+
     &-inputs{
       margin: 5px;
       
-      &>input,select{
+      &-username,select{
         margin: 10px;
         border:none;
         padding:10px;
-        width: 80%;
+        width: 82%;
+        border-radius: 5px;
         }
       }
+
   }
+
   &-admin{
     color:$dark-color;
     text-transform: uppercase;
@@ -41,5 +50,12 @@
       color:$lightest-color;
     }
   }
+}
+
+.inputs-password {
+  width: 74%;
+  padding:10px;
+  border:none;
+
 }
 

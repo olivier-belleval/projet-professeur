@@ -1,12 +1,11 @@
 @import 'src/styles/vars.scss';
 
 .text-editor-article {
-  border: 1px solid rgb(199, 199, 199);
   border-radius: 5px;
   height: 100vh;
   margin: auto;
   width: fit-content;
-  background-color: white;
+  background-color: $neutral-color;
   margin-top: 3rem;
   padding: 1em;
 

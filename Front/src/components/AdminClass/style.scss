@@ -1,19 +1,22 @@
 @import '../../styles/vars';
 
 .admin_panel_class {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  // background-color: $dark-color;
+  padding-top: 5rem;
   
   &-title{
-     width: 90%;
-     font-weight: bold;
+    width: 90%;
+    font-weight: bold;
     padding: 2em;
     margin-bottom: 2em;
     background-color: $alt-dark-color;
     font-family: $font-title;
     font-size:1.3rem;
+
   }
 
   &-content{
@@ -23,46 +26,30 @@
     align-items: center;
 
     &-part{
-      
        width: 90%;
        padding: 1em;
        background-color: $neutral-color;
-      // border-radius: 5px;
-      // color: $lightest-color;
-       //font-weight: bold;
        margin-bottom: 1em;
-       display: flex;
        justify-content: space-between;
-       flex-wrap: wrap;
-
-      // &-icons{
-      //   width: 30%;
-      //   display: flex;
-      //   flex-direction: row;
-      //   align-items: flex-end;
-      //   justify-content: space-between;
-      // }
-
     }
 
   }
 
 }
 
-//TODO intégrer dans le scss
-
 .admin_panel_class_content-part-icons {
-
-  width: 30%;
+  text-align: center;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: space-around;
+
 
 }
 
-.admin_panel_class_content-part-class {
-  display: flex;
+.admin_panel_class-content-part-class{
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 
 .admin_panel_kanban-content-part-description {
@@ -71,4 +58,31 @@
 
 .admin_panel_article_content-part-description {
   display: flex;
+}
+
+
+@media screen and (min-width:600px){
+  .admin_panel_class{
+    width: 70%;
+    margin: auto;
+    height: 100vh;
+    background-color: $dark-color;
+
+    &-content{
+      &-part{
+        display: flex;
+
+      }
+    }
+  }
+  .admin_panel_class-content-part-class{
+    width: 40%;
+  }
+
+  .admin_panel_article_content-part-description{
+    width: 30%;
+  }
+  .admin_panel_class_content-part-icons {
+    width: 30%;
+  }
 }

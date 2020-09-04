@@ -26,6 +26,7 @@ const mapState = (state) => ({
   modalOpen: state.admin.modalOpen,
   item_id: state.admin.item_id,
   classAdded: state.admin.classAdded,
+  message: state.editor.message,
 });
 
 const mapDispatch = (dispatch) => ({

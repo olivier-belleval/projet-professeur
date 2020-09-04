@@ -52,18 +52,19 @@ const AdminKanban = ({
               <div className="admin_panel_kanban-content-part-tableau">{tableau.title}</div>
               <div className="admin_panel_kanban_content-part-class">
                 {tableau.classes && tableau.classes.map((classes) => (
-                  <span className="classusername-tag" key={classes.id}> {classes.username}
-                    <span
+                  <div className="classusername-container">
+                    <div className="classusername-tag" key={classes.id}> {classes.username}
+
+                    </div><div
                       className="class-remove"
                       onClick={() => {
-                        console.log('remove class from', tableau.id);
                         removeClass(tableau.id);
                         removedClass(classes.username);
                       }}
                     >
-                      X
-                    </span>
-                  </span>
+                      x
+                          </div>
+                  </div>
                 ))}
               </div>
               <div className="admin_panel_kanban_content-part-icons">

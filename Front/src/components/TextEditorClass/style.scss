@@ -5,15 +5,20 @@
   height: 100vh;
   margin: auto;
   width: fit-content;
-
   margin-top: 3rem;
   padding: 1em;
+
+  &-message{
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1rem;
+  }
 
   &-button-cancel{
     background-color: #6e6e6e;
     margin-right: 1em;
   }
-
 }
 
 input,textarea{

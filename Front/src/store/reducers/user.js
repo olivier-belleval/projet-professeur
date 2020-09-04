@@ -47,6 +47,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loginOpened: !state.loginOpened,
+        message: '',
       };
     case TOGGLE_MENU:
       return {
@@ -90,6 +91,8 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         teacher: !state.teacher,
+        message: '',
+        username: '',
       };
     case LOGOUT_SUCCESS:
       return {

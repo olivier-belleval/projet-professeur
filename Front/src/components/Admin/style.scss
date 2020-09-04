@@ -1,7 +1,7 @@
 @import '../../styles/vars';
 
 .admin_menu {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +10,7 @@
   background-size:70%;
   background-repeat: no-repeat;
   margin-top: 1em;
+  background-color: $dark-color;
   
   &-title {
     width: 80%;

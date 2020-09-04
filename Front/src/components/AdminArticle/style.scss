@@ -7,8 +7,10 @@
 .admin_panel_article {
   height: 100vh;
   display: flex;
+  padding-top: 5rem;
   flex-direction: column;
   align-items: center;
+  background-color: $dark-color;
   
   &-title{
      width: 90%;
@@ -111,11 +113,15 @@
 .classusername-tag{
   font-size: 0.7em;
   color: $lightest-color;
-  background-color: #a5a5a5;
   padding: 5px;
+}
+
+.classusername-container{
+  display: flex;
+  background: linear-gradient(90deg, $alt-color, $alt-dark-color);
   margin-right: 7px;
   border-radius: 5px;
-  box-shadow: 4px 7px $alt-dark-color;
+  box-shadow: 4px 7px $dark-color;
 }
 
 
@@ -127,6 +133,13 @@
 }
 
 .class-remove {
+  padding: 4px;
+  transition: background-color 0.5s ease;
+  &:hover{
   margin-left: 10px;
+  background-color: $dark-color;
+  height: 100%;
   cursor: pointer;
+  display: inline-block;
+  }
 }
