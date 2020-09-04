@@ -13,9 +13,9 @@ module.exports = {
 
     editClassSchema: Joi.object({
     
-        username: Joi.string().min(3),
-        password: Joi.string().pattern(/^[a-zA-Z0-9@$!%*?&-]*$/).min(3),
-        description: Joi.string().min(1)
+        username: Joi.string().min(3).allow('', null),,
+        password: Joi.string().pattern(/^[a-zA-Z0-9@$!%*?&-]*$/).min(3).allow('', null),,
+        description: Joi.string().min(1).allow('', null),
     
     }).required()
 
