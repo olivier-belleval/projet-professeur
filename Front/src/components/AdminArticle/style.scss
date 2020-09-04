@@ -13,13 +13,15 @@
   background-color: $dark-color;
   
   &-title{
-     width: 90%;
+    width:100%;
      font-weight: bold;
     padding: 2em;
     margin-bottom: 2em;
-    background-color: $alt-dark-color;
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);
     font-family: $font-title;
     font-size:1.3rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     
   }
 
@@ -127,7 +129,7 @@
 
 @media screen and (min-width:600px){
   .admin_panel_article{
-    width: 70%;
+    width: 60%;
     margin: auto;
   }
 }

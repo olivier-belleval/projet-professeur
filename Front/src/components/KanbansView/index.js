@@ -3,7 +3,7 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 import { slugifyTitle } from '../../utils';
 
-const KanbansView = ({ list, getKanbans, getKanban, closeMenu }) => {
+const KanbansView = ({ list, getKanbans, getKanban, closeMenu, username }) => {
   useEffect(() => {
     getKanbans();
   }, []);
@@ -14,8 +14,9 @@ const KanbansView = ({ list, getKanbans, getKanban, closeMenu }) => {
         <h2 className="kanbans-view-head-title">
           Mes Tableaux
         </h2>
+        <hr></hr>
         <span className="kanbans-view-head-subtitle">
-          Nom de la classe
+          {username}
         </span>
       </div>
       {list.map((kanban) => (

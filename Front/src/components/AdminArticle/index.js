@@ -48,7 +48,7 @@ const AdminArticle = ({
 
     <div className="container">
       <div className={modalOpen ? 'admin_panel_article blur' : 'admin_panel_article'} onClick={closeMenu}>
-        <h1 className="admin_panel_article-title"> Espace administrateur - gestion des articles </h1>
+        <h1 className="admin_panel_article-title"> Gestion des articles </h1>
         {message && (
         <div className="text-editor-class-message">
           {message}

@@ -45,7 +45,7 @@ const AdminKanban = ({
   return (
     <div className="container">
       <div className={modalOpen ? 'admin_panel_kanban blur' : 'admin_panel_kanban'} onClick={closeMenu}>
-        <h1 className="admin_panel_kanban-title"> Espace administrateur - gestion des kanbans </h1>
+        <h1 className="admin_panel_kanban-title"> Gestion des kanbans </h1>
         <div className="admin_panel_kanban-content">
           {list.map((tableau) => (
             <div className="admin_panel_kanban-content-part" key={tableau.id}>

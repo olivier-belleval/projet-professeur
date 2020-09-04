@@ -10,7 +10,7 @@ const ArticlesView = ({ list, getArticles, closeMenu }) => {
 
   return (
     <div className="articles-view" onClick={closeMenu}>
-      <h1 className="articles-view-title"> Mes articles</h1>
+      <div className="articles-view-title"> Mes articles</div>
       { list.map((post) => (
         <article className="article" key={post.article_title}>
           <div className="article-head">
