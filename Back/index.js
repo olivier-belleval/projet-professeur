@@ -13,7 +13,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
 
 const port = process.env.PORT || 3000;
-//const swaggerDefinition = require('./swagger/SwaggerDefinition.json');
 
 // gestion du request.body
 app.use(express.urlencoded({extended: true}));
@@ -64,8 +63,6 @@ const options = {
 const specs = swaggerJSDoc(options);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
-
-//app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
 
 app.use(router);
 

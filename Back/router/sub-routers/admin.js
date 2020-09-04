@@ -37,6 +37,10 @@ router.use(teacherMW.isATeacher);
  *         description: Array of all classes
  *         schema:
  *          $ref: '#/definitions/Classes'
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */ 
 router.get('/class/all', adminController.getAllClasses);
 
@@ -58,6 +62,10 @@ router.get('/class/all', adminController.getAllClasses);
  *                  type: array
  *                  items:
  *                      $ref: '#/definitions/ArticleWithClasses'
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  *                      
  */
 router.get('/article/all', adminController.getAllArticlesWithoutClasses);
@@ -80,6 +88,12 @@ router.get('/article/all', adminController.getAllArticlesWithoutClasses);
  *          properties:
  *              data:
  *                  $ref: '#/definitions/getOneClass'
+ *       400:
+ *          description: Cannot find class with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.get('/class/:id(\\d+)', adminController.getOneClass);
 
@@ -107,13 +121,17 @@ router.get('/class/:id(\\d+)', adminController.getOneClass);
  *                  example: Class has been created successfully.
  *              data:
  *                  $ref: '#/definitions/createClass'
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  *              
  */
 router.post('/class/create', validateBody(createClassSchema), adminController.createClass);
 
 /**
  * @swagger
- * /api/admin/class/{id}/edit':
+ * /api/admin/class/{id}/edit:
  *   put:
  *     description: Edit a Class
  *     tags: [Admin]
@@ -135,12 +153,18 @@ router.post('/class/create', validateBody(createClassSchema), adminController.cr
  *                  example: Class has been edited successfully.
  *              data:
  *                  $ref: '#/definitions/createClass'
+ *       400:
+ *          description: Fields are all empty
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.put('/class/:id(\\d+)/edit', validateBody(editClassSchema), adminController.editClass);
 
 /**
  * @swagger
- * /api/admin/class/{id}/delete':
+ * /api/admin/class/{id}/delete:
  *   delete:
  *     description: delete a Class
  *     operationId: deleteClass
@@ -160,6 +184,12 @@ router.put('/class/:id(\\d+)/edit', validateBody(editClassSchema), adminControll
  *                  example: Class has been deleted successfully.
  *              data:
  *                  $ref: '#/definitions/createClass'
+ *       400:
+ *          description: Failed to delete class with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.delete('/class/:id(\\d+)/delete', adminController.deleteClass);
 

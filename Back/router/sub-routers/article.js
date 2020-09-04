@@ -35,6 +35,8 @@ const articleController = require('../../controllers/articleController');
  *                  type: array
  *                  items:
  *                      $ref: '#/definitions/ArticleWithClasses'
+ *       500:
+ *          description: Internal Server Error
  */
 router.get('/all', articleController.getAllArticlesWithClass);
 
@@ -56,6 +58,12 @@ router.get('/all', articleController.getAllArticlesWithClass);
  *          properties:
  *              data:
  *                  $ref: '#/definitions/ArticleView'
+ *       400:
+ *          description: Cannot find article with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.get('/:id(\\d+)', articleController.getOneArticle);
 
@@ -79,6 +87,10 @@ router.get('/:id(\\d+)', articleController.getOneArticle);
  *          properties:
  *              data:
  *                  $ref: '#/definitions/Article'
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.post('/write', teacherMW.isATeacher, validateBody(createArticleSchema), articleController.createOneArticle);
 
@@ -104,12 +116,18 @@ router.post('/write', teacherMW.isATeacher, validateBody(createArticleSchema), a
  *                  type:  string
  *              data:
  *                  $ref: '#/definitions/Article'
+ *       400:
+ *          description: Fields are all empty
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.put('/:id(\\d+)/edit', teacherMW.isATeacher, validateBody(editArticleSchema), articleController.editArticle);
 
 /**
  * @swagger
- * /api/article/{id}/delete':
+ * /api/article/{id}/delete:
  *   delete:
  *     description: delete a article
  *     operationId: deleteArticle
@@ -128,6 +146,12 @@ router.put('/:id(\\d+)/edit', teacherMW.isATeacher, validateBody(editArticleSche
  *                  type:  string
  *              data:
  *                  $ref: '#/definitions/Article'
+ *       400:
+ *          description: Cannot delete article with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.delete('/:id(\\d+)/delete', teacherMW.isATeacher, articleController.deleteArticle);
 
@@ -163,6 +187,12 @@ router.delete('/:id(\\d+)/delete', teacherMW.isATeacher, articleController.delet
  *                  example: Association has been successfully added.
  *              data:
  *                  $ref: '#/definitions/m2m_class_to_article'
+ *       400:
+ *          description: Association failed
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.post('/:id(\\d+)/associate', teacherMW.isATeacher, validateBody(associationArticleClassSchema), articleController.associateClassToArticle);
 
@@ -198,6 +228,12 @@ router.post('/:id(\\d+)/associate', teacherMW.isATeacher, validateBody(associati
  *                  example: Association has been successfully removed.
  *              data:
  *                  $ref: '#/definitions/m2m_class_to_article'
+ *       400:
+ *          description: Failed to remove association
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.delete('/:id(\\d+)/associate/remove', teacherMW.isATeacher,  validateBody(associationArticleClassSchema), articleController.removeAssociationClassToArticle);
 
