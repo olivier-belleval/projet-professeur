@@ -7,13 +7,13 @@
   &-head{
 
     padding: 1.2em;
-    background-color: vars.$color;
+    background-color: vars.$dark-color;
 
     &-title{
       font-weight: 700;
       font-size: 2em;
       margin-bottom: 0.5em;
-      color: vars.$lightest-color;
+      font-family: vars.$font-title;
     }
 
     &-subtitle {
@@ -25,15 +25,14 @@
   &-content {
       text-align: justify;
       padding: 1em;
-      background-color: vars.$lightest-color;
+      background-color: vars.$neutral-color;
   }
   &-back {
       margin-top: 1em;
-      color: vars.$lightest-color;
       padding: 0.5em;
       border-radius: 5px;
       width: fit-content;
-      background-color: vars.$color;
+      background-color: vars.$alt-dark-color;
 
   }
 }

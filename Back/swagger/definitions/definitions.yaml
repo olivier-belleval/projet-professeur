@@ -78,16 +78,16 @@ definitions:
         example: 1
       title:
         type: string
-        example: comment s'integrer dans un groupe quand on a de l'acné
+        example: Article demonstration
       slug:
         type: string
-        example: comment-s-integrer-dans-un-groupe-quand-on-a-de-l-acne
+        example: article-demonstration
       excerpt:
         type: string
-        example: comment s'integrer dans un groupe quand ...
+        example: Content demonstration
       content:
         type: string
-        example: la vie d'adolenscent est compliquée ...
+        example: Content demonstration ...
       teacher_id:
         type: integer
         example: 1
@@ -111,7 +111,7 @@ definitions:
         example: Osti qui fa frette. Calvenusse de tabarnouche de mausus de cârosse de patente à gosse. J'ai finalement pogné la twist pour faire la poutine. Toryeu que c'est cheap cette esti de cochonnerie-là. T'es de bonne heure sul piton toé à matin, quessé qui t'arrive ? Ferme-toé un peu le mâche-patate là, va prendre une marche ou quelque chose.
       author:
         type: string
-        example: chuck norris
+        example: teacher
       class_username:
         type: array
         items: 
@@ -140,7 +140,7 @@ definitions:
       article_id: 1
       article_title: ceci est un titre
       article_content: ceci est le contenu de mon article
-      article_author: jean-claude dusse
+      article_author: teacher
       class_username: 
         - 6em A 
 

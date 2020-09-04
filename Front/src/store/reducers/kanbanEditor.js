@@ -1,91 +1,91 @@
 import {
-  UPDATE_CLASS_EDITOR_STATE,
-  CREATE_CLASS_SUBMIT,
-  CREATE_CLASS_ERROR,
-  CREATE_CLASS_SUCCESS,
-  CANCEL_EDITING_CLASS,
-  SUBMIT_EDITED_CLASS,
-  EDIT_CLASS_ERROR,
-  EDIT_CLASS_SUCCESS,
+  UPDATE_KANBAN_EDITOR_STATE,
+  CREATE_KANBAN_SUBMIT,
+  CREATE_KANBAN_ERROR,
+  CREATE_KANBAN_SUCCESS,
+  CANCEL_EDITING_KANBAN,
+  SUBMIT_EDITED_KANBAN,
+  EDIT_KANBAN_ERROR,
+  EDIT_KANBAN_SUCCESS,
 
-} from '../action/class-editor-action';
+} from '../action/kanban-editor-action';
 import {
-  EDIT_CLASS,
-} from '../action/AdminClass';
+  EDIT_KANBAN,
+} from '../action/AdminKanban';
 
 const initialState = {
-  username: '',
-  password: '',
+  title: '',
+  background: '',
   description: '',
   loading: false,
   message: '',
   send: false,
   id: '',
-  id_edited_class: '',
+  id_edited_kanban: '',
   editing: false,
 };
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case CANCEL_EDITING_CLASS:
+    case CANCEL_EDITING_KANBAN:
       return {
         ...state,
-        username: '',
-        password: '',
+        title: '',
+        background: '',
         description: '',
         editing: false,
-        id_edited_class: '',
+        id_edited_kanban: '',
       };
-    case UPDATE_CLASS_EDITOR_STATE:
+    case UPDATE_KANBAN_EDITOR_STATE:
       return {
         ...state,
         ...action.payload,
       };
-    case SUBMIT_EDITED_CLASS:
+    case SUBMIT_EDITED_KANBAN:
       return {
         ...state,
         loading: true,
         send: true,
         editing: false,
       };
-    case EDIT_CLASS_SUCCESS || EDIT_CLASS_ERROR:
+    case EDIT_KANBAN_SUCCESS || EDIT_KANBAN_ERROR:
       return {
         ...state,
-        username: '',
-        password: '',
+        title: '',
+        background: '',
         description: '',
         loading: false,
         send: false,
-        id_edited_class: '',
+        id_edited_kanban: '',
       };
-    case CREATE_CLASS_SUBMIT:
+    case CREATE_KANBAN_SUBMIT:
       return {
         ...state,
         loading: true,
         message: '',
         send: true,
       };
-    case CREATE_CLASS_SUCCESS:
+    case CREATE_KANBAN_SUCCESS:
       return {
         ...state,
         loading: false,
-        username: '',
-        password: '',
+        title: '',
+        background: '',
         description: '',
-        message: 'La classe a été ajouté !',
+        message: 'Le kanban a été ajouté !',
         send: false,
       };
-    case CREATE_CLASS_ERROR:
+    case CREATE_KANBAN_ERROR:
       return {
         ...state,
         loading: false,
-        message: 'Il y a eu une erreur à l\'envoi de votre classe',
+        message: 'Il y a eu une erreur à l\'envoi de votre tableau',
         send: false,
       };
-    case EDIT_CLASS:
+    case EDIT_KANBAN:
       return {
         ...state,
-        id_edited_class: action.payload,
+        id_edited_kanban: action.payload,
         editing: !state.editing,
       };
     default:
@@ -94,11 +94,10 @@ export default (state = initialState, action = {}) => {
 };
 
 export const getItemById = (state, id) => {
-  console.log(state.classes.classes);
+  console.log(state.kanbans.list);
   console.log(typeof id);
   console.log(id);
-  const classEdited = state.classes.classes.find((elem) => elem.class_id === id);
+  const kanbanEdited = state.kanbans.list.find((elem) => elem.id === id);
 
-  return classEdited;
+  return kanbanEdited;
 };
-

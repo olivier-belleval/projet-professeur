@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import ArticleDetail from '../components/ArticleDetail';
 import { getArticleBySlug } from '../store/reducers/articles';
+import { closeMenu } from '../store/action';
 
 const mapStateToProps = (state, ownProps) => {
   console.log(ownProps);
@@ -10,6 +11,12 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = (dispatch) => ({
+
+  closeMenu: () => {
+    dispatch(closeMenu());
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleDetail);
+

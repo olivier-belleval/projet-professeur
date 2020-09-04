@@ -12,7 +12,8 @@
     padding: 2em;
     margin-bottom: 2em;
     background-color: vars.$alt-dark-color;
-
+    font-family: vars.$font-title;
+    font-size:1.3rem;
   }
 
   &-content{
@@ -25,7 +26,7 @@
 
        width: 90%;
        padding: 1em;
-       background-color: vars.$lightest-color;
+       background-color: vars.$neutral-color;
       // border-radius: 5px;
       // color: vars.$lightest-color;
        //font-weight: bold;
@@ -66,4 +67,12 @@
 
 .admin_panel_kanban-content-part-tableau {
   font-weight: bold;
+}
+
+
+@media screen and (min-width:600px){
+  .admin_panel_kanban{
+    width: 70%;
+    margin: auto;
+  }
 }

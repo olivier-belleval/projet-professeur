@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import KanbanDetail from '../components/KanbanDetail';
 import { getKanbanBySlug } from '../store/reducers/kanbans';
+import { closeMenu } from '../store/action';
 
 import {
   getKanbanDetail,
@@ -15,6 +16,7 @@ import {
   deleteCard,
   toggleModalList,
   createListSubmit,
+  deleteList,
 } from '../store/action/create-actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -38,13 +40,12 @@ const mapStateToProps = (state, ownProps) => {
     list_id: state.kanbans.list_id,
     newListOrder: state.kanbans.newListOrder,
     newListTitle: state.kanbans.newListTitle,
-
+    newCardColor: state.kanbans.newCardColor,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onOpenClick: (id) => {
-    console.log('id dans kanbanDetail:', id);
     dispatch(toggleModalCard(id));
   },
 
@@ -52,12 +53,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createCardSubmit());
   },
 
-  //controlled input for card form in kanban
+  // Controlled input for card form in kanban
   changeField: (changedData) => {
     dispatch(changeFieldCard(changedData));
   },
 
-  //change edit mode to edit kanban details
+  // Change edit mode to edit kanban details
   handleEditMode: (changedData) => {
     dispatch(handleEditMode(changedData));
   },
@@ -79,8 +80,16 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleListSubmit: () => {
-    dispatch(createListSubmit())
-  }
+    dispatch(createListSubmit());
+  },
+
+  closeMenu: () => {
+    dispatch(closeMenu());
+  },
+
+  deleteList: () => {
+    dispatch(deleteList());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(KanbanDetail);

@@ -13,6 +13,7 @@ const TextEditorArticle = ({
   articleEdited,
   cancelEditingArticle,
   handleArticleEdit,
+  closeMenu,
 }) => {
 
   const handleInputChange = (evt) => {
@@ -29,7 +30,7 @@ const TextEditorArticle = ({
   }
 
   return (
-    <div className="text-editor-article">
+    <div className="text-editor-article" onClick={closeMenu}>
       <form onSubmit={editing ? handleEdition : handleSubmit}>
         <input
           name="title"

@@ -37,15 +37,12 @@ export const loginChangeTeacher = () => ({
 export const TOGGLE_MENU = 'TOGGLE_MENU';
 export const MODIFY_ARTICLE = 'MODIFY_ARTICLE';
 export const JOIN_CLASS = 'JOIN_CLASS';
+export const CLOSE_MENU = 'CLOSE_MENU';
+
+export const closeMenu = () => ({
+  type: CLOSE_MENU,
+});
 
 export const toggleMenu = () => ({
   type: TOGGLE_MENU,
-});
-
-export const modifyArticle = () => ({
-  type: MODIFY_ARTICLE,
-});
-
-export const joinClass = () => ({
-  type: JOIN_CLASS,
 });

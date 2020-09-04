@@ -5,40 +5,46 @@ import { AiFillPlusSquare } from 'react-icons/ai';
 import KanbanList from './KanbanList';
 
 const KanbanDetail = ({
+  // Datas
   kanban,
-  onOpenClick,
   modalOpen,
   listModalOpen,
-  changeField,
   newCardOrder,
   newCardContent,
-  handleCardSubmit,
-  handleEditMode,
   editMode,
   getKanbanDetail,
   kanban_detail,
   datas,
+  newCardColor,
+  newListOrder,
+  newListTitle,
+
+  // Funtions
   deleteCard,
   getListId,
   openListModal,
-  newListOrder,
-  newListTitle,
   handleListSubmit,
+  closeMenu,
+  deleteList,
+  handleCardSubmit,
+  handleEditMode,
+  changeField,
+  onOpenClick,
 }) => {
-
   useEffect(() => {
     getKanbanDetail();
+    console.log("Console log du chargement de Kanban Detail")
   }, []);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if(listModalOpen){
-      handleListSubmit()
-    } 
-    else if (modalOpen){
-    handleCardSubmit();}
+    if (listModalOpen) {
+      handleListSubmit();
+    }
+    else if (modalOpen) {
+      handleCardSubmit();
+    }
   };
-
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -46,7 +52,7 @@ const KanbanDetail = ({
   };
 
   return (
-    <div className="kanban-detail">
+    <div className="kanban-detail" onClick={closeMenu}>
       <header className="kanban-detail-header">
         <div className="kanban-detail-head">
           <div><h1 className="kanban-detail-head--title" onClick={handleEditMode}>
@@ -64,7 +70,7 @@ const KanbanDetail = ({
           </div>
 
           <div className="kanban-detail-adding-button">
-            <AiFillPlusSquare onClick={openListModal}/>
+            <AiFillPlusSquare onClick={openListModal} />
             {listModalOpen && (
               <ListModal
                 openListModal={openListModal}
@@ -79,11 +85,10 @@ const KanbanDetail = ({
 
       </header>
 
-      { datas && (
+      { datas && kanban_detail && (
         <main>
-
-          <div className="kanban-detail-grid">
-            {kanban_detail['0'].lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} deleteCard={deleteCard} getListId={getListId} />)}
+            <div className="kanban-detail-grid">
+            {kanban_detail['0'].lists.map((list) => <KanbanList key={list.id} list={list} onOpenClick={onOpenClick} deleteCard={deleteCard} getListId={getListId} deleteList={deleteList} />)}
           </div>
 
           {modalOpen && (
@@ -92,9 +97,12 @@ const KanbanDetail = ({
               changeField={handleInputChange}
               newCardOrder={newCardOrder}
               newCardContent={newCardContent}
+              newCardColor={newCardColor}
               handleSubmit={handleSubmit}
             />
           )}
+
+          
 
         </main>
       )}
@@ -104,74 +112,77 @@ const KanbanDetail = ({
 
 const CardModal = ({
   onClick, changeField, newCardOrder, newCardContent, handleSubmit,
-}) => {
-console.log("modal de card");
-
-  return (
-    <div className="modal">
-      <div className="modal-close-button">
-        <MdClose onClick={onClick} />
-      </div>
-      <form onSubmit={handleSubmit}>
-        <h3> Ajouter une carte</h3>
-        <input
-          type="number"
-          name="newCardOrder"
-          value={newCardOrder}
-          placeholder="Position de la carte"
-          className="modal-input"
-          onChange={changeField}
-        />
-        <textarea
-          type="text"
-          name="newCardContent"
-          value={newCardContent}
-          placeholder="Description"
-          className="modal-textarea"
-          onChange={changeField}
-        />
-        <button type="submit"> Ajouter</button>
-      </form>
-
+}) => (
+  <div className="modal">
+    <div className="modal-close-button">
+      <MdClose onClick={onClick} />
     </div>
-  );
-};
+    <form onSubmit={handleSubmit}>
+      <h3> Ajouter une carte</h3>
+      <input
+        type="number"
+        name="newCardOrder"
+        value={newCardOrder}
+        placeholder="Position de la carte"
+        className="modal-input"
+        onChange={changeField}
+      />
+      <textarea
+        type="text"
+        name="newCardContent"
+        value={newCardContent}
+        placeholder="Description"
+        className="modal-textarea"
+        onChange={changeField}
+      />
+      <label htmlFor="newCardColor"> 
+        Couleur de ma carte
+      </label>
+      <input
+        type="color"
+        name="newCardColor"
+        defaultValue="#fff"
+        onChange={changeField}
+      />
+      <button type="submit"> Ajouter</button>
+    </form>
+
+  </div>
+);
 
 const ListModal = ({
   openListModal,
   handleSubmit,
   newListOrder,
   newListTitle,
-  changeField
-}) => {
-  return (
-    <div className="modal">
-      <div className="modal-close-button">
-        <MdClose onClick={openListModal} />
-      </div>
-      <form onSubmit={handleSubmit}>
-        <h3> Ajouter une liste</h3>
-        <input
-          type="number"
-          name="newListOrder"
-          value={newListOrder}
-          placeholder="Position de la liste"
-          className="modal-input"
-          onChange={changeField}
-        />
-        <input
-          type="text"
-          name="newListTitle"
-          value={newListTitle}
-          placeholder="Nom de la liste"
-          className="modal-input"
-          onChange={changeField}
-        />
-        <button type="submit"> Ajouter</button>
-      </form>
-
+  changeField,
+}) => (
+  <div className="modal">
+    <div className="modal-close-button">
+      <MdClose onClick={openListModal} />
     </div>
-  );
-};
+    <form onSubmit={handleSubmit}>
+      <h3> Ajouter une liste</h3>
+      <input
+        type="number"
+        name="newListOrder"
+        value={newListOrder}
+        placeholder="Position de la liste"
+        className="modal-input"
+        onChange={changeField}
+      />
+      <input
+        type="text"
+        name="newListTitle"
+        value={newListTitle}
+        placeholder="Nom de la liste"
+        className="modal-input"
+        onChange={changeField}
+      />
+      <button type="submit"> Ajouter</button>
+    </form>
+
+  </div>
+);
 
 export default KanbanDetail;

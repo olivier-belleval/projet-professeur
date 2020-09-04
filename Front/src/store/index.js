@@ -11,7 +11,7 @@ import ajaxMiddleware from './middleware/ajaxMiddleware';
 
 const persistConfig = {
   key: 'root',
-  whitelist: ['user', 'kanbans'],
+  whitelist: ['user', 'kanbans', 'articles'],
   storage,
 };
 

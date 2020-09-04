@@ -1,8 +1,7 @@
 // == Import npm
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react'
-
+import { PersistGate } from 'redux-persist/integration/react';
 
 // == Import
 import './styles.scss';
@@ -12,24 +11,25 @@ import ArticlesView from '../../containers/ArticlesView';
 import KanbansView from '../../containers/KanbansView';
 import KanbanDetail from '../../containers/KanbanDetail';
 import TogglerMenu from '../../containers/TogglerMenu';
+import MenuDesktop from '../../containers/MenuDesktop';
 import AdminArticle from '../../containers/AdminArticle';
 import AdminKanban from '../../containers/AdminKanban';
 import AdminClass from '../../containers/AdminClass';
 import TextEditorArticle from '../../containers/TextEditorArticle';
 import TextEditorClass from '../../containers/TextEditorClass';
-import Admin from '../Admin';
-
+import TextEditorKanban from '../../containers/TextEditorKanban';
+import Admin from '../../containers/Admin';
 
 // == Composant
 const App = ({ isLogged, teacher }) => (
-
 
   <div className="app">
     <Route exact path="/" component={HomePage} />
 
     { isLogged ? (
-      <div>
+      <div style={{minHeight:100+'vh'}}>
         <TogglerMenu />
+        <MenuDesktop />
         <Switch>
 
           <Route exact path="/articles" component={ArticlesView} />
@@ -46,6 +46,9 @@ const App = ({ isLogged, teacher }) => (
               <Route exact path="/admin/kanban" component={AdminKanban} />
               <Route exact path="/admin/comptes" component={AdminClass} />
               <Route exact path="/admin/nouvelle-classe" component={TextEditorClass} />
+              <Route exact path="/admin/edit/class/:id" component={TextEditorClass} />
+              <Route exact path="/admin/nouveau-kanban" component={TextEditorKanban} />
+              <Route exact path="/admin/edit/kanban/:id" component={TextEditorKanban} />
             </Switch>
           )}
         </Switch>

@@ -6,6 +6,7 @@ import {
   LOGIN_SUBMIT_ERROR,
   LOGIN_CHANGE_TEACHER,
   TOGGLE_MENU,
+  CLOSE_MENU,
 } from '../action';
 
 import {
@@ -15,11 +16,10 @@ import {
   LOGIN_CLASSES_SUBMIT,
 } from '../action/user';
 
-
 const initialState = {
   username: '',
   password: '',
-  loginErrorMessage: '',
+  message: '',
   loading: false,
   isLogged: false,
   loginOpened: false,
@@ -52,6 +52,11 @@ export default (state = initialState, action = {}) => {
         ...state,
         opened: !state.opened,
       };
+    case CLOSE_MENU:
+      return {
+        ...state,
+        opened: false,
+      };
     case LOGIN_SUBMIT || LOGIN_CLASSES_SUBMIT:
       return {
         ...state,
@@ -63,14 +68,15 @@ export default (state = initialState, action = {}) => {
         isLogged: true,
         loading: false,
         password: '',
-        loginErrorMessage: '',
+        message: '',
       };
     case LOGIN_SUBMIT_ERROR:
       return {
         ...state,
         loading: false,
-        username: action.payload,
-        loginErrorMessage: action.payload,
+        username: '',
+        password: '',
+        message: action.payload,
       };
     case LOGIN_CHANGE_TEACHER:
       return {
