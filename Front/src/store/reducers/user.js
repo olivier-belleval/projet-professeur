@@ -100,6 +100,7 @@ export default (state = initialState, action = {}) => {
         isLogged: false,
         username: '',
         password: '',
+        loginOpened: false,
       };
     case GET_CLASSES:
       return {

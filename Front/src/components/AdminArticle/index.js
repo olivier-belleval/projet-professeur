@@ -27,7 +27,6 @@ const AdminArticle = ({
   handleSubmitAssociation,
   removeClassFromArticle,
   removedClassFromArticle,
-  message,
 }) => {
   useEffect(() => {
     getArticles();
@@ -49,11 +48,7 @@ const AdminArticle = ({
     <div className="container">
       <div className={modalOpen ? 'admin_panel_article blur' : 'admin_panel_article'} onClick={closeMenu}>
         <h1 className="admin_panel_article-title"> Gestion des articles </h1>
-        {message && (
-        <div className="text-editor-class-message">
-          {message}
-        </div>
-      )}
+
         <div className="admin_panel_article-content">
           {list.map((article) => (
             <div className="admin_panel_article-content-part" key={article.article_id}>
@@ -134,7 +129,7 @@ export const AssociationModale = ({
   onOpenClick,
   handleSubmit,
 }) => {
-  console.log(classes);
+
   return (
     <div className="association-modale">
       <div className="association-modale-close">

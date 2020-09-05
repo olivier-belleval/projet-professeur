@@ -1,7 +1,8 @@
 // == Import npm
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // == Import
 import './styles.scss';
@@ -26,7 +27,17 @@ const App = ({ isLogged, teacher }) => (
 
   <div className="app">
     <Route exact path="/" component={HomePage} />
-
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
     { isLogged ? (
       <div>
         <TogglerMenu />

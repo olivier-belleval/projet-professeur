@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 import {
   GET_ARTICLES,
   getArticlesSuccess,
@@ -166,6 +168,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(createArticleSuccess());
+        toast.dark("L'article a bien été ajouté.");
         axios({
 
           method: 'get',
@@ -175,10 +178,11 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         }).then((res) => {
           store.dispatch(getArticlesSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+          store.dispatch(getArticlesError());
         });
       }).catch((err) => {
-        store.dispatch(createArticleError('Impossible de créer'));
+        toast.dark('Oops. Tous les champs doivent être remplis avec au minimum 5 caractères');
+        store.dispatch(createArticleError());
       });
 
       break;
@@ -199,8 +203,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(editArticleSuccess());
+        toast.dark("L'article a été édité.");
       }).catch((err) => {
-        store.dispatch(editArticleError('Impossible d\'éditer'));
+        store.dispatch(editArticleError());
+        toast.dark('Le mot de passe ou l\'identifiant sont incorrects');
       });
 
       break;
@@ -217,7 +223,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       }).then((res) => {
         store.dispatch(deleteArticleSuccess());
-
+        toast.dark("L'article a bien été supprimé.");
         axios({
 
           method: 'get',
@@ -227,10 +233,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         }).then((res) => {
           store.dispatch(getArticlesSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+          store.dispatch(getArticlesError());
         });
       }).catch((err) => {
-        store.dispatch(deleteArticleError('Impossible de supprimer'));
+        store.dispatch(deleteArticleError());
       });
 
       break;
@@ -266,7 +272,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(createClassSuccess());
-
+        toast.dark('La classe a bien été créé.');
         axios({
 
           method: 'get',
@@ -278,10 +284,11 @@ const ajaxMiddleware = (store) => (next) => (action) => {
             store.dispatch(getClassesSuccess(res.data.data));
           })
           .catch((err) => {
-            store.dispatch(getClassesError('Impossible de récupérer les classes...'));
+            store.dispatch(getClassesError());
           });
       }).catch((err, res) => {
         store.dispatch(createClassError());
+        toast.dark('Tous les champs doivent être remplis. Le mot de passe doit avoir au moins 4 caractères');
       });
 
       break;
@@ -303,8 +310,8 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(editClassSuccess());
+        toast.dark('La classe a bien été édité.');
       }).catch((err) => {
-        console.log(err.response)
         store.dispatch(editClassError());
       });
 
@@ -322,6 +329,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       }).then((res) => {
         store.dispatch(deleteClassSuccess());
+        toast.dark('La classe a bien été supprimé.');
         axios({
 
           method: 'get',
@@ -329,13 +337,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           withCredentials: true,
 
         }).then((res) => {
-          console.log('res data sa mere :', res.data);
           store.dispatch(getClassesSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
+          store.dispatch(getClassesError());
         });
       }).catch((err) => {
-        store.dispatch(deleteClassError('Impossible de supprimer la classe'));
+        store.dispatch(deleteClassError());
       });
 
       break;
@@ -389,6 +396,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(createKanbanSuccess());
+        toast.dark('Le kanban a bien été créé.');
         axios({
 
           method: 'get',
@@ -396,14 +404,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           withCredentials: true,
 
         }).then((res) => {
-          console.log('res data sa mere :', res.data);
           store.dispatch(getKanbansSuccess(res.data.data));
-          console.log('ce que tu veux');
         }).catch((err) => {
-          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbansError());
         });
       }).catch((err, res) => {
-        console.log(err);
+        toast.dark('Le titre et la description sont obligatoires.');
         store.dispatch(createKanbanError(res.data));
       });
 
@@ -419,6 +425,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       }).then((res) => {
         store.dispatch(deleteKanbanSuccess());
+        toast.dark('Le kanban a bien été supprimé.');
         axios({
 
           method: 'get',
@@ -426,15 +433,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           withCredentials: true,
 
         }).then((res) => {
-          console.log('res data sa mere :', res.data);
           store.dispatch(getKanbansSuccess(res.data.data));
-          console.log('ce que tu veux');
         }).catch((err) => {
-          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbansError());
         });
       }).catch((err) => {
-        console.log('erreur :', err);
-        store.dispatch(deleteKanbanError('Impossible de supprimer les kanbans'));
+        store.dispatch(deleteKanbanError());
       });
 
       break;
@@ -468,6 +472,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(createCardSuccess());
+        toast.dark('La carte a bien été créé.');
         utils.kanbanId = store.getState().kanbans.kanban_id;
 
         axios({
@@ -479,10 +484,11 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         }).then((res) => {
           store.dispatch(getKanbanDetailSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbanError());
         });
       }).catch((err) => {
-        store.dispatch(createCardError('Impossible de créer'));
+        toast.dark('Oops. Il faut un contenu à la carte pour être créé.');
+        store.dispatch(createCardError());
       });
 
       break;
@@ -498,6 +504,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         url: `${utils.local}api/kanban/list/${utils.list}/card/${utils.cardId}/delete`,
         withCredentials: true,
       }).then((res) => {
+        toast.dark('Oust la carte.');
         store.dispatch(deleteCardSuccess());
 
         axios({
@@ -508,11 +515,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         }).then((res) => {
           store.dispatch(getKanbanDetailSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbanError());
         });
       }).catch((err) => {
-        console.log(err);
-        store.dispatch(deleteCardError('Impossible de supprimer la carte'));
+        store.dispatch(deleteCardError());
       });
 
       break;
@@ -541,6 +547,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(createListSuccess());
+        toast.dark('La liste a bien été créé.');
 
         axios({
 
@@ -551,10 +558,11 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         }).then((res) => {
           store.dispatch(getKanbanDetailSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbanError());
         });
       }).catch((err) => {
-        store.dispatch(createListError('Impossible de créer'));
+        toast.dark('Un petit titre à la liste peut-être ?');
+        store.dispatch(createListError());
       });
 
       break;
@@ -570,7 +578,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       }).then((res) => {
         store.dispatch(deleteListSuccess());
-
+        toast.dark('Oust la liste !');
         axios({
           method: 'get',
           url: `${utils.local}api/kanban/${utils.kanbanId}`,
@@ -579,11 +587,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         }).then((res) => {
           store.dispatch(getKanbanDetailSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbanError());
         });
       }).catch((err) => {
-        console.log(err);
-      // store.dispatch(createCardError('Impossible de créer'));
+      store.dispatch(deleteListError());
       });
 
       break;
@@ -602,7 +609,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(associationArticleSuccess());
-
+        toast.dark('Hop ! Classe associée.');
         axios({
 
           method: 'get',
@@ -615,11 +622,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           })
 
           .catch((err) => {
-            store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+            store.dispatch(getArticlesError());
           });
       }).catch((err) => {
-        console.log(err);
-        store.dispatch(associationArticleError('Il y a eu une erreur lors de l\'association de classe'));
+        store.dispatch(associationArticleError());
       });
 
       break;
@@ -638,6 +644,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(associationKanbanSuccess());
+        toast.dark('Hop ! Classe associée au kanban');
         axios({
 
           method: 'get',
@@ -648,11 +655,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           console.log(res.data.data);
           store.dispatch(getKanbansSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbansError());
         });
-      }).catch((err) => {
-        console.log(err);
-        store.dispatch(associationKanbanError('Il y a eu une erreur lors de l\'association de kanban'));
+      }).catch((err) => {   
+        store.dispatch(associationKanbanError());
       });
 
       break;
@@ -674,9 +680,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(editKanbanSuccess());
+        toast.dark('Le kanban a bien été édité.');
       }).catch((err) => {
-        console.log(err);
-        store.dispatch(editKanbanError('Impossible d\'éditer'));
+
+        store.dispatch(editKanbanError());
       });
 
       break;
@@ -685,8 +692,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       utils.kanbanId = store.getState().admin.item_id;
       utils.classUsername = store.getState().admin.removedClass;
-      console.log(utils.kanbanId);
-      console.log(utils.classUsername);
 
       axios({
         method: 'post',
@@ -697,6 +702,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(removeClassSuccess());
+        toast.dark('La classe est désassociéée.');
         axios({
 
           method: 'get',
@@ -704,15 +710,12 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           withCredentials: true,
 
         }).then((res) => {
-          console.log('res data :', res.data);
           store.dispatch(getKanbansSuccess(res.data.data));
-          console.log('ok c\'est passé');
         }).catch((err) => {
-          store.dispatch(getKanbansError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbansError());
         });
       }).catch((err) => {
-        console.log('erreur :', err);
-        store.dispatch(removeClassError('Impossible de supprimer la classe'));
+        store.dispatch(removeClassError());
       });
 
       break;
@@ -733,6 +736,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(listEditionSuccess());
+        toast.dark('La liste a bien été édité.');
         axios({
           method: 'get',
           url: `${utils.local}api/kanban/${utils.kanbanId}`,
@@ -741,11 +745,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         }).then((res) => {
           store.dispatch(getKanbanDetailSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbanError());
         });
       }).catch((err) => {
-        console.log(err);
-        store.dispatch(listEditionError('Impossible d\'éditer'));
+        store.dispatch(listEditionError());
       });
 
       break;
@@ -754,8 +757,6 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       utils.articleId = store.getState().admin.item_id;
       utils.classUsername = store.getState().admin.removedClass;
-      console.log(utils.articleId);
-      console.log(utils.classUsername);
 
       axios({
         method: 'delete',
@@ -766,6 +767,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(removeClassSuccess());
+        toast.dark('La classe a bien été désassociéé.');
         axios({
 
           method: 'get',
@@ -773,15 +775,14 @@ const ajaxMiddleware = (store) => (next) => (action) => {
           withCredentials: true,
 
         }).then((res) => {
-          console.log('res data :', res.data);
+
           store.dispatch(getArticlesSuccess(res.data.data));
-          console.log('ok c\'est passé');
         }).catch((err) => {
-          store.dispatch(getArticlesError('Impossible de récupérer les articles...'));
+          store.dispatch(getArticlesError());
         });
       }).catch((err) => {
         console.log('erreur :', err);
-        store.dispatch(removeClassError('Impossible de désassocier la classe'));
+        store.dispatch(removeClassError());
       });
 
       break;
@@ -804,6 +805,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         },
       }).then((res) => {
         store.dispatch(cardEditionSuccess());
+        toast.dark('La carte a bien été édité.');
         axios({
           method: 'get',
           url: `${utils.local}api/kanban/${utils.kanbanId}`,
@@ -812,11 +814,10 @@ const ajaxMiddleware = (store) => (next) => (action) => {
         }).then((res) => {
           store.dispatch(getKanbanDetailSuccess(res.data.data));
         }).catch((err) => {
-          store.dispatch(getKanbanError('Impossible de récupérer les kanbans...'));
+          store.dispatch(getKanbanError());
         });
       }).catch((err) => {
-        console.log(err);
-        store.dispatch(cardEditionError('Impossible d\'éditer'));
+        store.dispatch(cardEditionError());
       });
 
       break;

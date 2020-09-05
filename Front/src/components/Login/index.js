@@ -13,7 +13,6 @@ const Login = ({
   loading,
   classes,
   teacher,
-  message,
   // func which dispatch
   handleLogin,
   handleClassesLogin,
@@ -53,11 +52,6 @@ const [showedPassword, setShowedPassword] = useState(false);
         <div className="login-form">
           <form className="form" onSubmit={teacher ? handleSubmit : handleSubmitStudent}>
             <div className="login-form-inputs">
-              {message && (
-              <div className="login-form-error-message">
-                {message}
-              </div>
-              )}
               {teacher && (
               <input
                 name="username"

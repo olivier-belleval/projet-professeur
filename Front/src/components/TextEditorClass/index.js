@@ -15,9 +15,8 @@ const TextEditorClass = ({
   cancelEditingClass,
   handleClassEdit,
   closeMenu,
-  message,
 }) => {
-  console.log('text edit');
+
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
     changeField({ [name]: value });
@@ -37,11 +36,6 @@ const TextEditorClass = ({
   return (
     <div className="text-editor-class" onClick={closeMenu}>
       <form onSubmit={editing ? handleEdition : handleSubmit}>
-        {message && (
-        <div className="text-editor-class-message">
-          {message}
-        </div>
-        )}
         <input
           name="username"
           placeholder="Nom de la classe"

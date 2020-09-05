@@ -31,12 +31,10 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   editKanban: (id) => {
-    console.log("l'user veut modifier le tableau", id);
     dispatch(editKanban(id));
   },
 
   deleteKanban: (id) => {
-    console.log("l'user veut supprimer le tableau", id);
     dispatch(deleteKanban(id));
   },
 
@@ -65,12 +63,10 @@ const mapDispatch = (dispatch) => ({
   },
 
   removeClass: (id) => {
-    console.log("l'user veut supprimer la classe dans le kanban", id);
     dispatch(removeClass(id));
   },
 
   removedClass: (id) => {
-    console.log("l'user veut supprimer la classe avec le nom suivant", id);
     dispatch(removedClass(id));
   },
 });

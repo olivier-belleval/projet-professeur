@@ -62,12 +62,10 @@ const mapDispatch = (dispatch) => ({
   },
 
   removeClassFromArticle: (id) => {
-    console.log("l'user veut supprimer la classe dans l'article", id);
     dispatch(removeClassFromArticle(id));
   },
 
   removedClassFromArticle: (id) => {
-    console.log("l'user veut supprimer la classe avec le nom suivant", id);
     dispatch(removedClassFromArticle(id));
   },
 });

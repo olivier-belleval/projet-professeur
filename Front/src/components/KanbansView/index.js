@@ -13,9 +13,8 @@ const KanbansView = ({ list, getKanbans, getKanban, closeMenu, username }) => {
       <div className="kanbans-view-head">
         <h2 className="kanbans-view-head-title">
           Mes Tableaux
-        
         <hr></hr>
-        
+
           {username}
         </h2>
       </div>

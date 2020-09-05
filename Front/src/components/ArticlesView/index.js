@@ -3,10 +3,11 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 import { slugifyTitle } from '../../utils';
 
-const ArticlesView = ({ list, getArticles, closeMenu, username }) => {
+const ArticlesView = ({ list, getArticles, closeMenu, username, teacher  }) => {
   useEffect(() => {
     getArticles();
   }, []);
+  console.log(list)
 
   return (
     <div className="articles-view" onClick={closeMenu}>
@@ -22,6 +23,15 @@ const ArticlesView = ({ list, getArticles, closeMenu, username }) => {
             <h2 className="article-head-title" key={post.article_title}>
               {post.article_title}
             </h2>
+            
+              { teacher && 
+              post.class_username.map((classes,index) => (
+                
+                    <span className="classusername-teacher" key={index}> {classes}
+                    </span>
+              ))
+              }
+            
 
           </div>
           <p className="article-excerpt" key={post.article_excerpt}>

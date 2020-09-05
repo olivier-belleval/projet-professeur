@@ -8,13 +8,13 @@
   padding-top: 5rem;
   
   &-title{
-    width: 90%;
+    width: 100%;
     font-weight: bold;
     padding: 2em;
     margin-bottom: 2em;
-    background-color: $alt-dark-color;
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);
     font-family: $font-title;
-    font-size:1.3rem;
+    font-size:2rem;
     letter-spacing: 3px;
     text-transform: uppercase;
 

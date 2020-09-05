@@ -14,7 +14,7 @@ const TextEditorArticle = ({
   cancelEditingArticle,
   handleArticleEdit,
   closeMenu,
-  message,
+
 }) => {
 
   const handleInputChange = (evt) => {
@@ -25,7 +25,7 @@ const TextEditorArticle = ({
     evt.preventDefault();
     handleArticleSubmit();
   };
-  const handleEdition = (evt) =>{
+  const handleEdition = (evt) => {
     evt.preventDefault();
     handleArticleEdit();
   }
@@ -33,11 +33,6 @@ const TextEditorArticle = ({
   return (
     <div className="text-editor-article" onClick={closeMenu}>
       <form onSubmit={editing ? handleEdition : handleSubmit}>
-      {message && (
-        <div className="text-editor-class-message">
-          {message}
-        </div>
-      )}
         <input
           name="title"
           placeholder="Titre"
