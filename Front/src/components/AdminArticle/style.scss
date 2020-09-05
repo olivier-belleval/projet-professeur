@@ -62,7 +62,7 @@
 
 .admin_panel_article_content-part-icons {
 
-  width: 30%;
+  width: 20%;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -72,10 +72,14 @@
 
 .admin_panel_article_content-part-class {
   display: flex;
+  flex-wrap: wrap;
+  width: 30%;
 }
 
 .admin_panel_article-content-part-article {
   font-weight: bold;
+  width: 40%;
+  text-align: left;
 }
 
 .admin_panel_article-content-part-join {
@@ -121,7 +125,7 @@
 .classusername-container{
   display: flex;
   background: linear-gradient(90deg, $alt-color, $alt-dark-color);
-  margin-right: 7px;
+  margin-right: 10px;
   border-radius: 5px;
   box-shadow: 4px 7px $dark-color;
 }
@@ -133,12 +137,14 @@
     margin: auto;
   }
 }
-
+.association-modale{
+  left:36%
+}
 .class-remove {
   padding: 4px;
   transition: background-color 0.5s ease;
   &:hover{
-  margin-left: 10px;
+
   background-color: $dark-color;
   height: 100%;
   cursor: pointer;

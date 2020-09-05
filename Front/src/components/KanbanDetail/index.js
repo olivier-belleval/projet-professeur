@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import './style.scss';
-import { MdClose, MdMoreVert } from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
 import { AiFillPlusSquare } from 'react-icons/ai';
 import KanbanList from './KanbanList';
-import { toggleModalListEdition } from '../../store/action/kanban-editor-action';
 
 const KanbanDetail = ({
   // Datas
@@ -43,10 +42,8 @@ const KanbanDetail = ({
   toggleCardEdit,
   editionModalCard,
 }) => {
-
   useEffect(() => {
     getKanbanDetail();
-    console.log("Ma première action à l'ouverture du composant")
   }, []);
 
   const handleSubmit = (evt) => {
@@ -70,72 +67,45 @@ const KanbanDetail = ({
     changeField({ [name]: value });
   };
 
-  if(kanban_detail['0']){
+  if (kanban_detail['0']) {
     if (kanban_detail['0'].lists) {
-    kanban_detail['0'].lists.sort((a, b) => {
-      if (a.cards) {
-        a.cards.sort((c, d) => (c.order - d.order));
-      }
-      return a.order - b.order;
-    });
+      kanban_detail['0'].lists.sort((a, b) => {
+        if (a.cards) {
+          a.cards.sort((c, d) => (c.order - d.order));
+        }
+        return a.order - b.order;
+      });
+    }
   }
-  }
-  
 
   return (
-    <div className="kanban-detail" onClick={closeMenu}>
-      <header className="kanban-detail-header">
-        <div className="kanban-detail-head">
-          <div className="kanban-detail-head-text-content">
-            <h1 className="kanban-detail-head--title">
-              {kanban.title}
+    <div className="container">
+      <div className={modalOpen ? 'kanban-detail blur' : editionModalCard ? 'kanban-detail blur' : listModalOpen ? 'kanban-detail blur' : editionModalList ? 'kanban-detail blur' : 'kanban-detail'} onClick={closeMenu}>
+        <header className="kanban-detail-header">
+          <div className="kanban-detail-head">
+            <div className="kanban-detail-head-text-content">
+              <h1 className="kanban-detail-head--title">
+                {kanban.title}
 
-            </h1>
-            <span className="kanban-detail-head--subtitle">
-              {kanban.description}
-            </span>
-          </div>
+              </h1>
+              <span className="kanban-detail-head--subtitle">
+                {kanban.description}
+              </span>
+            </div>
 
-          {teacher && (
+            {teacher && (
             <div className="kanban-detail-adding-button">
               <AiFillPlusSquare onClick={openListModal} />
-              { listModalOpen
-            && (
-            <ListModal
-              openListModal={openListModal}
-              changeField={handleInputChange}
-              handleSubmit={handleSubmit}
-              newListdOrder={newListOrder}
-              newListTitle={newListTitle}
-              editionModalList={editionModalList}
-              toggleListEdit={toggleListEdit}
-            />
-            )}
-
-              { editionModalList
-            && (
-            <ListModal
-              openListModal={openListModal}
-              changeField={handleInputChange}
-              handleSubmit={handleSubmit}
-              newListdOrder={newListOrder}
-              newListTitle={newListTitle}
-              editionModalList={editionModalList}
-              toggleListEdit={toggleListEdit}
-              listDetails={listDetails}
-            />
-            )}
-
             </div>
-          )}
+            )}
 
-        </div>
+          </div>
 
-      </header>
+        </header>
 
-      { datas && kanban_detail['0'] && kanban_detail['0'].lists && (
+        { datas && kanban_detail['0'] && kanban_detail['0'].lists && (
         <main>
-          <div className="kanban-detail-grid" style={{backgroundColor: kanban_detail['0'].background}}>
+          <div className="kanban-detail-grid" style={{ backgroundColor: kanban_detail['0'].background }}>
 
             {kanban_detail['0'].lists.map((list) => (
               <KanbanList
@@ -156,33 +126,59 @@ const KanbanDetail = ({
             ))}
           </div>
 
-          {modalOpen && (
-            <CardModal
-              onClick={onOpenClick}
-              changeField={handleInputChange}
-              newCardOrder={newCardOrder}
-              newCardContent={newCardContent}
-              newCardColor={newCardColor}
-              handleSubmit={handleSubmit}
-            />
-          )}
-
-          {editionModalCard && (
-            <CardModal
-              onClick={onOpenClick}
-              changeField={handleInputChange}
-              newCardOrder={newCardOrder}
-              newCardContent={newCardContent}
-              newCardColor={newCardColor}
-              handleSubmit={handleSubmit}
-              editionModalCard={editionModalCard}
-              toggleCardEdit={toggleCardEdit}
-              cardDetails={cardDetails}
-            />
-          )}
-
         </main>
+        )}
+      </div>
+      {modalOpen && (
+      <CardModal
+        onClick={onOpenClick}
+        changeField={handleInputChange}
+        newCardOrder={newCardOrder}
+        newCardContent={newCardContent}
+        newCardColor={newCardColor}
+        handleSubmit={handleSubmit}
+      />
       )}
+
+      {editionModalCard && (
+      <CardModal
+        onClick={onOpenClick}
+        changeField={handleInputChange}
+        newCardOrder={newCardOrder}
+        newCardContent={newCardContent}
+        newCardColor={newCardColor}
+        handleSubmit={handleSubmit}
+        editionModalCard={editionModalCard}
+        toggleCardEdit={toggleCardEdit}
+        cardDetails={cardDetails}
+      />
+      )}
+      { listModalOpen
+            && (
+            <ListModal
+              openListModal={openListModal}
+              changeField={handleInputChange}
+              handleSubmit={handleSubmit}
+              newListdOrder={newListOrder}
+              newListTitle={newListTitle}
+              editionModalList={editionModalList}
+              toggleListEdit={toggleListEdit}
+            />
+            )}
+
+      { editionModalList
+            && (
+            <ListModal
+              openListModal={openListModal}
+              changeField={handleInputChange}
+              handleSubmit={handleSubmit}
+              newListdOrder={newListOrder}
+              newListTitle={newListTitle}
+              editionModalList={editionModalList}
+              toggleListEdit={toggleListEdit}
+              listDetails={listDetails}
+            />
+            )}
     </div>
   );
 };

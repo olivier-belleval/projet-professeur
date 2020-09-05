@@ -45,21 +45,21 @@
 //TODO intégrer dans le scss
 
 .admin_panel_kanban_content-part-icons {
-
-  width: 30%;
+  width: 20%;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
-
 }
 
 .admin_panel_kanban_content-part-class {
   display: flex;
+  width: 30%;
 }
 
 .admin_panel_kanban-content-part-tableau {
   font-weight: bold;
+  width: 30%;
 }
 
 

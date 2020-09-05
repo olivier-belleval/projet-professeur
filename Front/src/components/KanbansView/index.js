@@ -13,11 +13,11 @@ const KanbansView = ({ list, getKanbans, getKanban, closeMenu, username }) => {
       <div className="kanbans-view-head">
         <h2 className="kanbans-view-head-title">
           Mes Tableaux
-        </h2>
+        
         <hr></hr>
-        <span className="kanbans-view-head-subtitle">
+        
           {username}
-        </span>
+        </h2>
       </div>
       {list.map((kanban) => (
         <Link to={`kanban/${slugifyTitle(kanban.title)}`} key={kanban.title}>

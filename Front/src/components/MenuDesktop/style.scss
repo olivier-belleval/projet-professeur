@@ -1,5 +1,7 @@
 @import 'src/styles/vars';
-
+.active{
+  color: $lightest-color;
+}
 .menu {
   @media (max-width: 767px) {
     display: none;
@@ -33,9 +35,11 @@
     margin: 0 1rem;
     cursor: pointer;
 
+
     &:hover {
       color: $lightest-color;
       font-weight: 700;
     }
   }
 }
+

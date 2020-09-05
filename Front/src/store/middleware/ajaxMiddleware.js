@@ -516,6 +516,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       });
 
       break;
+
     case CREATE_LIST_SUBMIT:
       utils.kanbanId = store.getState().kanbans.kanban_id;
       let listOrder;

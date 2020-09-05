@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // React-Icons
-import { AiFillPlusSquare } from 'react-icons/ai';
+import { AiFillPlusSquare, AiOutlinePlus } from 'react-icons/ai';
 import { MdClose, MdMoreVert } from 'react-icons/md';
 
 // Import Component
@@ -22,7 +22,7 @@ const KanbanList = ({
   toggleCardEdit,
   teacher,
 }) => (
-  <div>
+  <div className="kanban-list-container">
     <div
       className="kanban-list"
       key={list.id}
@@ -44,10 +44,6 @@ const KanbanList = ({
               }}
               />
 
-              <AiFillPlusSquare onClick={() => {
-                onOpenClick(list.id);
-              }}
-              />
             </span>
 
             <span>
@@ -57,6 +53,7 @@ const KanbanList = ({
         )}
 
       </div>
+
       <div className="kanban-list-content">
         {list.cards && list.cards.map((card) => (
           <KanbanCard
@@ -70,6 +67,15 @@ const KanbanList = ({
         ))}
 
       </div>
+      {teacher
+      && (
+        <div className="adding-card">
+          <AiOutlinePlus onClick={() => {
+            onOpenClick(list.id);
+          }}
+          />
+        </div>
+      )}
     </div>
   </div>
 );
