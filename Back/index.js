@@ -9,6 +9,12 @@ require('dotenv').config();
 const router = require('./router');
 const session = require('express-session');
 
+const fileUpload = require('express-fileupload');
+
+app.use(fileUpload({
+    createParentPath: true
+}));
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
 

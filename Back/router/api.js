@@ -17,6 +17,7 @@ router.use(connexionMW.isUserConnected);
 
 router.use('/article', articleRouter)
     .use('/kanban', kanbanRouter)
-    .use('/admin', adminRouter);
+    .use('/admin', adminRouter)
+    .get('/download/:filename',filesController.downloadFile);
 
 module.exports = router;
