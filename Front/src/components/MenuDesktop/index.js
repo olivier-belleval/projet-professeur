@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const MenuDesktop = ({ handleLogout, teacher }) => (
   <header className="menu">

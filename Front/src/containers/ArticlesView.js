@@ -6,7 +6,8 @@ import { closeMenu } from '../store/action';
 const mapStateToProps = (state) => ({
   list: state.articles.list,
   username: state.user.username,
-  teacher: state.user.teacher
+  teacher: state.user.teacher,
+  isLogged: state.user.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
