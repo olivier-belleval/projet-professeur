@@ -44,17 +44,11 @@ const TogglerMenu = ({
           
           </div>
           )}
-          <NavLink
-                key="4"
-                exact="true"
-                to="/"
-                onClick={() => {
+                <div className="settings-nav" onClick={() => {
                   handleLogout();
                   onOpenClick();
-                }}
-              >
-                <div className="settings-nav">se déconnecter</div>
-              </NavLink>
+                }}><a>se déconnecter</a></div>
+              
         </div> 
       )};
  </div>

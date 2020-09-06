@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import { slugifyTitle } from '../../utils';
 
 const ArticlesView = ({
-  list, getArticles, closeMenu, username, teacher,
+  list, getArticles, closeMenu, username, teacher, isLogged
 }) => {
+
+if(isLogged)  {
   useEffect(() => {
     getArticles();
-  }, []);
+  }, []);}
 
   return (
     <div className="articles-view" onClick={closeMenu}>
