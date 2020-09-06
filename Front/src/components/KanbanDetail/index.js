@@ -67,7 +67,8 @@ const KanbanDetail = ({
     changeField({ [name]: value });
   };
 
-  if (kanban_detail['0']) {
+
+  if (kanban_detail && kanban_detail['0']) {
     if (kanban_detail['0'].lists) {
       kanban_detail['0'].lists.sort((a, b) => {
         if (a.cards) {

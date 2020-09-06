@@ -29,8 +29,9 @@ const logMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          store.dispatch(loginSubmitSuccess(res.data));
+          store.dispatch(loginSubmitSuccess());
           toast.dark(`Bienvenue ${utils.user.username}`);
+          console.log('hello ?')
         })
         .catch((err) => {
           toast.dark("Le mot de passe ou l'identifiant sont incorrects");

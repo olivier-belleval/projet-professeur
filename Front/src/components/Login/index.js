@@ -85,7 +85,7 @@ const [showedPassword, setShowedPassword] = useState(false);
                 onChange={handleInputChange}
                 type={showedPassword ? "text" : "password"}
                 placeholder="mot de passe"
-              /> <span onClick={()=>{
+              /> <span className="show-password-eye" onClick={()=>{
                 setShowedPassword(!showedPassword);
               }}>
               {showedPassword ? <RiEyeLine/> : <RiEyeCloseLine/>}
