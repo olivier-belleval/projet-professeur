@@ -40,7 +40,11 @@ const TogglerMenu = ({
                 <div className="settings-nav" onClick={onOpenClick}>espace admin</div>
               </NavLink>
 
-              <NavLink
+              
+          
+          </div>
+          )}
+          <NavLink
                 key="4"
                 exact="true"
                 to="/"
@@ -51,9 +55,6 @@ const TogglerMenu = ({
               >
                 <div className="settings-nav">se déconnecter</div>
               </NavLink>
-          
-          </div>
-          )}
         </div> 
       )};
  </div>

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
 
-import {RiEyeCloseLine, RiEyeLine} from 'react-icons/ri';
+import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
+
 
 const Login = ({
   // data from state
@@ -44,7 +45,7 @@ const [showedPassword, setShowedPassword] = useState(false);
 
   return (
     <div className="login">
-      { loginOpened && loading && <span>Connexion en cours...</span>}
+      { loginOpened && loading && ("Connexion en cours...")}
       {!isLogged && !loginOpened && (
         <button type="button" className="login-button" onClick={onOpenClick}> Connexion</button>
       )}

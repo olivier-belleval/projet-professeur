@@ -23,7 +23,7 @@ import Admin from '../../containers/Admin';
 import NotFound from '../NotFound';
 
 // == Composant
-const App = ({ isLogged, teacher }) => (
+const App = ({ isLogged, teacher, loading }) => (
 
   <div className="app">
     <Route exact path="/" component={HomePage} />
@@ -37,6 +37,7 @@ const App = ({ isLogged, teacher }) => (
       pauseOnFocusLoss
       draggable
       pauseOnHover
+      toastClassName="toast"
     />
     { isLogged ? (
       <div>
