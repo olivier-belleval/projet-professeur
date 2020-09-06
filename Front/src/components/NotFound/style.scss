@@ -1,17 +1,23 @@
+@import 'src/styles/vars';
+
 .not-found {
-  text-align: center;
+  margin: auto;
+  position: relative;
   h2 {
-    padding-top: 100px;
-    padding-bottom: 20px;
+  
+    top:7rem;
+    left:35%;
     font-size: 2.5em;
+    font-family: $font-title;
+    position: absolute;
   }
   p {
     font-size: 1.5em;
     padding-bottom: 20px;
   }
-  img {
-    @media (max-width: 768px) {
-      width: 100%;
-    }
-  }
+  // img {
+  //   @media (max-width: 768px) {
+  //     width: 100%;
+  //   }
+  // }
 }
