@@ -1,24 +1,50 @@
 [
     {
-        "description": "La première carte de la liste 1 du kanban 1",
+        "description": "Lire p17-27 - Le médecin malgré lui",
         "order": "1",
         "list_id": "1"
     },
     {
-        "description": "La seconde carte de la liste 2 du kanban 1",
-        "order": "2",
-        "list_id": "1"
+        "description": "Remplir QCM - Roméo et Juliette",
+        "order": "1",
+        "list_id": "2"
     },
     {
-        "description": "La première carte de la liste 1 du kanban 2",
+        "description": "Identifier les compléments d'objet direct dans le texte fourni lors du cours.",
         "order": "1",
         "list_id": "4"
     },
     {
-        "description": "La deuxieme carte de la liste 1 du kanban 2",
+        "description": "Identifier les compléments d'objet indirect dans le texte fourni lors du cours.",
+        "order": "1",
+        "list_id": "5"
+    },
+    {
+        "description": "Harceler Baptiste et Charles",
+        "order": "1",
+        "list_id": "8"
+    },
+    {
+        "description": "Faires des issues à la pelle",
         "order": "2",
-        "list_id": "4"
+        "list_id": "8"
+    },
+    {
+        "description": "S'approprier le chan vocal Licorne",
+        "order": "3",
+        "list_id": "8"
+    },
+    {
+        "description": "Apéro pour fêter la fin de formation",
+        "order": "1",
+        "list_id": "9"
+    },
+    {
+        "description": "Présentation - Apothéose",
+        "order": "1",
+        "list_id": "10"
     }
+    
     
 
 ]

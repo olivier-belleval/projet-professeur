@@ -50,7 +50,7 @@ CREATE TABLE "kanban"."kanban" (
     "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "background" TEXT DEFAULT '#FFFFFF',
+    "background" TEXT,
     "teacher_id" INT NOT NULL REFERENCES "omyprof"."teacher"("id")
 );
 
@@ -65,14 +65,14 @@ CREATE TABLE "kanban"."card" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "description" TEXT,
     "order" INT NOT NULL,
-    "color" TEXT DEFAULT '#FFFFFF',
+    "color" TEXT,
     "list_id" INT NOT NULL REFERENCES "kanban"."list"("id") ON DELETE CASCADE
 );
 
 CREATE TABLE "kanban"."tag" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL,
-    "color" TEXT DEFAULT '#FFFFFF'
+    "color" TEXT
 );
 
 CREATE TABLE "kanban"."m2m_tag_card" (
