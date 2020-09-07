@@ -1,0 +1,91 @@
+@import '../../styles/vars';
+
+.settings {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 20px;
+  padding: 10px;
+  align-items: center;
+  z-index:100;
+  
+  &-icon {
+    // color: black;
+    position:fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    @media (min-width: 768px) {
+      display: none;
+    }
+    &-burger {
+      width: 2rem;
+      height: 2rem;
+      position: fixed;
+      z-index: 20;
+      display: none;
+      display: flex;
+      justify-content: space-around;
+      flex-flow: column nowrap;
+
+      &-bar{
+    width: 2rem;
+    height: 0.25rem;
+    background-color: $lightest-color;
+    border-radius: 10px;
+    transform-origin: 1px;
+    transition: all 0.3s linear;
+
+      }
+      
+    }
+  }
+
+    &-menu {
+    background-color: rgba(12, 36, 38, 0.9);
+    width: 70%;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    animation-name: slide;
+    animation-duration: 1s;
+    @keyframes slide{
+      from{margin-left: -200px;}
+      to{margin-right : 0px;}
+  }
+ 
+  }
+  &-nav {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  &-button {
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $alt-dark-color;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+
+  }
+
+.menu-open {
+  background-color:$alt-dark-color;
+  // transform: rotate(45deg);
+    &:nth-child(1) {
+      transform: rotate(45deg);
+  }
+  &:nth-child(2) {
+    transform: translateX(-10px);
+    opacity: 0;
+}
+&:nth-child(3) {
+  transform: rotate(-45deg);
+}
+    }

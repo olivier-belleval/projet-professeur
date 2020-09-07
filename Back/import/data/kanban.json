@@ -1,0 +1,21 @@
+[
+    {
+        "title": "Kanban UN",
+        "description": "Le premier kanban",
+        "background": "#FFFFF",
+        "teacher_id": "1"
+    },
+    {
+        "title": "Kanban DEUX",
+        "description": "Le deuxième kanban",
+        "background": "#FFFFF",
+        "teacher_id": "1"
+    },
+    {
+        "title": "Kanban TROIS",
+        "description": "Le troisième kanban",
+        "background": "#FFFFF",
+        "teacher_id": "1"
+    }
+
+]

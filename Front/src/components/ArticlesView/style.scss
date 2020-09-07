@@ -1,0 +1,68 @@
+@import 'src/styles/vars.scss';
+.articles-view{
+  margin-top: 1rem;
+  min-height: 100vh;
+  background-color: $dark-color;
+
+
+  &-title{
+  width:100%;
+  font-weight: bold;
+  padding: 2em;
+  margin-bottom: 2em;
+  background: linear-gradient(90deg, $alt-color, $alt-dark-color);
+  font-family: $font-title;
+  font-size:2rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  }
+}
+
+.article {
+  margin: 2rem;
+  background-color: $neutral-color;
+  padding: 0.8em;
+  position: relative;
+
+  &-head{
+    margin-bottom: 1em;
+    text-align: right;
+
+    &-title{
+      font-weight: $title-font-weight;
+      font-family: $font-title;
+      font-size:1.4rem;
+      position: absolute;
+      top:-13px;
+    }
+  }
+
+  &-excerpt{
+    text-align: justify;
+  }
+
+  &-route{
+    text-align: right;
+  }
+  
+}
+
+.classusername-teacher{
+  padding: .7rem;
+  text-align: right;
+  font-weight: 700;
+  background-color: $dark-color;
+}
+
+@media screen and (min-width:600px){
+  .articles-view{
+    padding-top:7rem;
+    padding-bottom: 3rem;
+    width: 60%;
+    margin: auto;
+  }
+
+  .article{
+      padding: 3rem;
+  }
+}

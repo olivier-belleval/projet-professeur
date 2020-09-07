@@ -1,0 +1,186 @@
+@import 'src/styles/vars';
+
+.adding-card{
+  background-color: $dark-color;
+  width: 100%;
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+.kanban-detail{
+  margin-top:2.2em;
+  // position: relative;
+  overflow-y: hidden;
+  min-height: 100vh;
+  background-color: $neutral-color;
+
+  &-adding-button{
+    color:white;
+    font-size: 1.4rem;
+  }
+  &-head{
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);    padding: 2em 1em;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+    &-text-content{
+      margin:1rem 2rem 0 2rem;
+    }
+  
+    &--title{
+      font-weight: 700;
+      font-size: 1.9em;
+      color: $lightest-color;
+      font-family: $font-title;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+
+    }
+    &--subtitle{
+      font-size: 1.2em;
+    }
+  }
+  &-grid{
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+  }
+}
+
+.kanban-list{
+  margin-top: 1em;
+  background-color: $alt-dark-color;
+
+    &-title{
+      background-color: $alt-dark-color;
+      padding: 1.5em;
+      font-size: 1.2em;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }  
+    &-content{
+
+    }
+  }
+
+.kanban-card {
+  display: flex;
+  flex-wrap: wrap;
+  // box-shadow: 5px 10px $color;
+  // border-radius: 0 0 0.7em 0.7em;
+  background-color:$neutral-color ;
+  margin-top: 0.3em;
+
+  &-content{
+    text-align: justify;
+    padding: 1em;
+  }
+  &-title{
+    text-align: right;
+    font-size: 1.3em;
+    font-weight: 700;
+    width: 100%;
+    padding: 0.5em;
+      }
+    }
+
+.tag {
+  border-radius: 5px;
+  background-color: $color;
+  color: $lightest-color;
+  font-weight: 700;
+  padding: 5px 10px;
+  margin: 0.5em;
+}
+
+.modal{
+  position: absolute;
+  background-color:white;
+  left:0;
+  color: black;
+  top:30%;
+  border-radius:1em;
+  padding: 1em;
+  box-shadow: 5px 10px $alt-dark-color;
+
+  &-input,&-textarea{
+    margin: 1em;
+    border-radius: 5px;
+    padding: 5px;
+    width: 90%;
+    border:lightgray 1px solid;
+    &:focus{
+      box-shadow: 5px 10px $light-color;
+      outline:none
+    }
+  }
+
+  &-textarea{
+    height: 10rem;
+  }
+
+  &-close-button{
+    width: 100%;
+    text-align: right;
+    color: black;
+  }
+}
+
+.kanban-list-container{
+  width: 100%;
+  margin: 1rem;
+}
+
+  @media screen and (min-width:600px){
+    .kanban-list{
+    &-content{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+
+    }
+  &-container{
+    width: unset;
+  }}
+    .kanban-card{
+      width: 100%;
+    }
+  }
+  @media screen and (min-width:1000px){
+    .kanban-detail{
+
+    }
+    .kanban-detail-grid{
+      display: flex;
+      flex-wrap: nowrap;      
+      width:100%;
+      overflow-x: auto;
+    }
+    .kanban-list{
+      width: 25rem;
+    &-title{
+      height: 7rem;
+    }
+    
+  &-content{
+    
+  }}
+
+  .modal{
+    left: 40%;
+  }
+  }
+
+/*scrollbar*/
+
+::-webkit-scrollbar {
+  background-color: #000;
+
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient($alt-color,$dark-color);
+}

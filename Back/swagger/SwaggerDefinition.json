@@ -1,0 +1,20 @@
+
+
+
+{
+    "swagger":"2.0",
+    "info": {
+        "title":"API omyprof",
+        "version":"1.0",
+        "description":"This is a teacher - student help server."
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": ["http"]
+    "definitions": {
+        "classId":{
+            "name": "classId",
+            
+        }
+    }
+}

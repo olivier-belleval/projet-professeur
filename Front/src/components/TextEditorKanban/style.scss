@@ -1,0 +1,44 @@
+@import 'src/styles/vars.scss';
+
+.text-editor-kanban {
+  border-radius: 5px;
+  margin: auto;
+  width: fit-content;
+  background-color: $neutral-color;
+  margin-top: 3rem;
+  padding: 1em;
+
+  &-button-cancel{
+    background-color: #6e6e6e;
+    margin-right: 1em;
+  }
+
+}
+
+input,textarea{
+  margin: 1em;
+  border-radius: 5px;
+  padding: 5px;
+}
+.input{
+
+  &-title, &-content{
+    width: 90%;
+    border:lightgray 1px solid;
+    &:focus{
+      box-shadow: 5px 10px $alt-dark-color;
+      outline:none
+    }
+  }
+  &-content{
+    min-height: 25em;
+  }
+
+}
+
+.input-color{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-around;
+}

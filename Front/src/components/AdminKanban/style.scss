@@ -1,0 +1,71 @@
+@import  '../../styles/vars';
+
+.admin_panel_kanban {
+  padding-top: 5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $dark-color;
+
+  &-title{
+    width:100%;
+    font-weight: bold;
+    padding: 2em;
+    margin-bottom: 2em;
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);
+    font-family: $font-title;
+    font-size:1.3rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  &-content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-part{
+
+       width: 90%;
+       padding: 1em;
+       background-color: $neutral-color;
+       margin-bottom: 1em;
+       display: flex;
+       justify-content: space-between;
+       flex-wrap: wrap;
+
+    }
+
+  }
+
+}
+
+//TODO intégrer dans le scss
+
+.admin_panel_kanban_content-part-icons {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.admin_panel_kanban_content-part-class {
+  display: flex;
+  width: 30%;
+}
+
+.admin_panel_kanban-content-part-tableau {
+  font-weight: bold;
+  width: 30%;
+}
+
+
+@media screen and (min-width:600px){
+  .admin_panel_kanban{
+    width: 60%;
+    margin: auto;
+  }
+}

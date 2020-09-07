@@ -1,0 +1,25 @@
+@import 'src/styles/vars.scss';
+
+.homepage{
+  height: 100vh;
+  text-align: center;
+  background-image: url('src/assets/images/1566.jpg');
+  // // background-position: bottom right;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  &-image{
+    width: 40%;
+    position: absolute bottom;
+  }
+
+  &-title{
+    margin-top: 2rem;
+    font-size: 3rem;
+    font-family: $font-title;
+  }
+}
+

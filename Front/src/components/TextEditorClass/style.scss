@@ -1,0 +1,46 @@
+@import 'src/styles/vars.scss';
+
+.text-editor-class {
+  border-radius: 5px;
+  height: 100vh;
+  margin: auto;
+  width: fit-content;
+  margin-top: 3rem;
+  padding: 1em;
+
+  &-message{
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1rem;
+  }
+
+  &-button-cancel{
+    background-color: #6e6e6e;
+    margin-right: 1em;
+  }
+}
+
+input,textarea{
+  margin: 1em;
+  border-radius: 5px;
+  padding: 5px;
+}
+.input{
+
+  &-password{
+    width: 85%;
+  }
+  &-password, &-content{
+    border:none;
+    &:focus{
+      box-shadow: 5px 5px $color;
+      outline:none
+    }
+  }
+  &-content{
+    min-height: 25em;
+    width: 90%;
+  }
+
+}
