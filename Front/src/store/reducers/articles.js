@@ -11,6 +11,10 @@ import {
   GET_ARTICLES_ADMIN_PANEL,
 } from '../action/AdminArticle';
 
+import {
+  LOGOUT_SUCCESS,
+} from '../action/user';
+
 import { slugifyTitle } from '../../utils';
 
 export const initialState = {
@@ -22,6 +26,11 @@ export const initialState = {
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        list: [],
+      };
     case GET_ARTICLES:
       return {
         ...state,

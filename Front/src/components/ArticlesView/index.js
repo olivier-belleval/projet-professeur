@@ -12,6 +12,8 @@ if(isLogged)  {
     getArticles();
   }, []);}
 
+  console.log(list)
+
   return (
     <div className="articles-view" onClick={closeMenu}>
       <div className="articles-view-title"> Mes articles
@@ -27,7 +29,7 @@ if(isLogged)  {
               {post.article_title}
             </h2>
 
-            { teacher && post.class_username
+            { teacher && typeof post.class_username
               && post.class_username.map((classes, index) => (
                 <span className="classusername-teacher" key={index}> {classes}
                 </span>

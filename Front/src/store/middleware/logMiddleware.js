@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import {
-  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError,
+  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError, loginTeacherSubmitError
 } from '../action/index';
 import {
   LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT,
@@ -34,7 +34,8 @@ const logMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           toast.dark("Le mot de passe ou l'identifiant sont incorrects");
-          store.dispatch(loginSubmitError());
+          console.log(err.response)
+          store.dispatch(loginTeacherSubmitError());
         });
       break;
 
