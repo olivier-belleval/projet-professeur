@@ -6,6 +6,7 @@ import { closeMenu } from '../store/action';
 const mapStateToProps = (state) => ({
   list: state.kanbans.list,
   kanban_id: state.kanbans.kanban_id,
+  username: state.user.username,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,11 +1,13 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import {
-  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError,
+  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError, loginTeacherSubmitError
 } from '../action/index';
-import { LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT } from '../action/user';
+import {
+  LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT,
+} from '../action/user';
 
 const logMiddleware = (store) => (next) => (action) => {
-  
   const utils = {
     local: 'http://localhost:3000/',
     distant: 'http://54.90.32.97:3000/',
@@ -27,17 +29,18 @@ const logMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          store.dispatch(loginSubmitSuccess(res.data));
+          store.dispatch(loginSubmitSuccess());
+          toast.dark(`Bienvenue ${utils.user.username}`);
         })
         .catch((err) => {
-          store.dispatch(
-            console.error(err),
-            loginSubmitError('Mot de passe incorrect'),
-          );
+          toast.dark("Le mot de passe ou l'identifiant sont incorrects");
+          console.log(err.response)
+          store.dispatch(loginTeacherSubmitError());
         });
       break;
-      
-      case LOGIN_CLASSES_SUBMIT:
+
+    case LOGIN_CLASSES_SUBMIT:
+
       axios({
         method: 'post',
         url: `${utils.local}login/`,
@@ -46,11 +49,13 @@ const logMiddleware = (store) => (next) => (action) => {
       })
         .then((res) => {
           store.dispatch(loginSubmitSuccess(res.data));
+          toast.dark('Bienvenue dans ta classe !');
         })
         .catch((err) => {
+          toast.dark("Le mot de passe ou l'identifiant sont incorrects");
+          console.log(err.response);
           store.dispatch(
-            console.error(err),
-            loginSubmitError('Mot de passe incorrect'),
+            loginSubmitError(),
           );
         });
       break;
@@ -64,7 +69,7 @@ const logMiddleware = (store) => (next) => (action) => {
 
       })
         .then((res) => {
-          console.log('logout request', res);
+          toast.dark('A bientôt !');
           store.dispatch(logoutSuccess());
         })
         .catch((err) => {
@@ -80,13 +85,11 @@ const logMiddleware = (store) => (next) => (action) => {
         withCredentials: true,
       })
         .then((res) => {
-          console.log('res.data GET_CLASSES dans logMiddleware : ', res.data);
           store.dispatch(getClassesSuccess(res.data.data));
         })
         .catch((err) => {
-          console.log(err);
-          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
-        })
+          store.dispatch(getClassesError());
+        });
 
       break;
 

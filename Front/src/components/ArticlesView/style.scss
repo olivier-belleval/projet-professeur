@@ -1,38 +1,37 @@
-@use 'src/styles/vars.scss';
+@import 'src/styles/vars.scss';
 .articles-view{
-  margin: 1rem;
-  // display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 100vh;
-  background-image: url('src/assets/images/classes.png');
-  background-position: bottom right;
-  background-size:70%;
-  background-repeat: no-repeat;
+  margin-top: 1rem;
+  min-height: 100vh;
+  background-color: $dark-color;
 
 
   &-title{
-    font-size: 2.5rem;
-    font-weight: vars.$title-font-weight;
-    font-family: vars.$font-title;
-    margin-bottom: 3rem;
+  width:100%;
+  font-weight: bold;
+  padding: 2em;
+  margin-bottom: 2em;
+  background: linear-gradient(90deg, $alt-color, $alt-dark-color);
+  font-family: $font-title;
+  font-size:2rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
   }
 }
 
 .article {
   margin: 2rem;
-  background-color: vars.$alt-dark-color;
+  background-color: $neutral-color;
   padding: 0.8em;
   position: relative;
 
   &-head{
     margin-bottom: 1em;
+    text-align: right;
 
     &-title{
-      font-weight: vars.$title-font-weight;
-      font-family: vars.$font-title;
-      font-size:1.3rem;
+      font-weight: $title-font-weight;
+      font-family: $font-title;
+      font-size:1.4rem;
       position: absolute;
       top:-13px;
     }
@@ -48,10 +47,18 @@
   
 }
 
+.classusername-teacher{
+  padding: .7rem;
+  text-align: right;
+  font-weight: 700;
+  background-color: $dark-color;
+}
+
 @media screen and (min-width:600px){
   .articles-view{
-    padding: 3rem;
-    width: 70%;
+    padding-top:7rem;
+    padding-bottom: 3rem;
+    width: 60%;
     margin: auto;
   }
 

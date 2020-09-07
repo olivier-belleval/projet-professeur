@@ -13,6 +13,7 @@ const initialState = {
   classes: [],
   class_id: '',
   error: '',
+  message: '',
 
 };
 
@@ -50,6 +51,7 @@ export default (state = initialState, action = {}) => {
         loading: false,
         classe_id: '',
         error: '',
+        message: 'La classe a bien été supprimé',
       };
     case DELETE_CLASS_ERROR:
       return {

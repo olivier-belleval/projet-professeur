@@ -4,7 +4,9 @@ import AdminKanban from '../components/AdminKanban';
 import {
   editKanban,
   deleteKanban,
-  submitAssociationKanban
+  submitAssociationKanban,
+  removeClass,
+  removedClass,
 } from '../store/action/AdminKanban';
 
 import {
@@ -29,12 +31,10 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   editKanban: (id) => {
-    console.log("l'user veut modifier le tableau", id);
     dispatch(editKanban(id));
   },
 
   deleteKanban: (id) => {
-    console.log("l'user veut supprimer le tableau", id);
     dispatch(deleteKanban(id));
   },
 
@@ -60,6 +60,14 @@ const mapDispatch = (dispatch) => ({
 
   closeMenu: () => {
     dispatch(closeMenu());
+  },
+
+  removeClass: (id) => {
+    dispatch(removeClass(id));
+  },
+
+  removedClass: (id) => {
+    dispatch(removedClass(id));
   },
 });
 

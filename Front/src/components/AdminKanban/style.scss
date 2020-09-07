@@ -1,19 +1,23 @@
-@use '../../styles/vars';
+@import  '../../styles/vars';
 
 .admin_panel_kanban {
-  height: 100vh;
+  padding-top: 5rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: $dark-color;
 
   &-title{
-     width: 90%;
-     font-weight: bold;
+    width:100%;
+    font-weight: bold;
     padding: 2em;
     margin-bottom: 2em;
-    background-color: vars.$alt-dark-color;
-    font-family: vars.$font-title;
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);
+    font-family: $font-title;
     font-size:1.3rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
   }
 
   &-content{
@@ -26,22 +30,11 @@
 
        width: 90%;
        padding: 1em;
-       background-color: vars.$neutral-color;
-      // border-radius: 5px;
-      // color: vars.$lightest-color;
-       //font-weight: bold;
+       background-color: $neutral-color;
        margin-bottom: 1em;
        display: flex;
        justify-content: space-between;
        flex-wrap: wrap;
-
-      // &-icons{
-      //   width: 30%;
-      //   display: flex;
-      //   flex-direction: row;
-      //   align-items: flex-end;
-      //   justify-content: space-between;
-      // }
 
     }
 
@@ -52,27 +45,27 @@
 //TODO intégrer dans le scss
 
 .admin_panel_kanban_content-part-icons {
-
-  width: 30%;
+  width: 20%;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
-
 }
 
 .admin_panel_kanban_content-part-class {
   display: flex;
+  width: 30%;
 }
 
 .admin_panel_kanban-content-part-tableau {
   font-weight: bold;
+  width: 30%;
 }
 
 
 @media screen and (min-width:600px){
   .admin_panel_kanban{
-    width: 70%;
+    width: 60%;
     margin: auto;
   }
 }

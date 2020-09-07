@@ -1,20 +1,24 @@
-@use 'src/styles/vars.scss';
+@import 'src/styles/vars.scss';
 
 .text-editor-class {
-  border: 1px solid rgb(199, 199, 199);
   border-radius: 5px;
   height: 100vh;
   margin: auto;
   width: fit-content;
-  background-color: white;
   margin-top: 3rem;
   padding: 1em;
+
+  &-message{
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1rem;
+  }
 
   &-button-cancel{
     background-color: #6e6e6e;
     margin-right: 1em;
   }
-
 }
 
 input,textarea{
@@ -24,16 +28,19 @@ input,textarea{
 }
 .input{
 
-  &-title, &-content{
-    width: 90%;
-    border:lightgray 1px solid;
+  &-password{
+    width: 85%;
+  }
+  &-password, &-content{
+    border:none;
     &:focus{
-      box-shadow: 5px 10px vars.$light-color;
+      box-shadow: 5px 5px $color;
       outline:none
     }
   }
   &-content{
     min-height: 25em;
+    width: 90%;
   }
 
 }

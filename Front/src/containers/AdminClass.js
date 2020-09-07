@@ -7,6 +7,7 @@ const mapState = (state) => ({
   list: state.classes.classes,
   class_id: state.classes.class_id,
   id_edited_class: state.editorClass.id_edited_class,
+  message: state.classes.message,
 });
 
 const mapDispatch = (dispatch) => ({

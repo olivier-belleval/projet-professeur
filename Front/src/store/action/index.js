@@ -4,6 +4,7 @@ export const LOGIN_SUBMIT_SUCCESS = 'LOGIN_SUBMIT_SUCCESS';
 export const LOGIN_CHANGE_TEACHER = 'LOGIN_CHANGE_TEACHER';
 export const TOGGLE_LOGIN_FORM = 'TOGGLE_LOGIN_FORM';
 export const LOGIN_SUBMIT_ERROR = 'LOGIN_SUBMIT_ERROR';
+export const LOGIN_TEACHER_SUBMIT_ERROR = 'LOGIN_TEACHER_SUBMIT_ERROR';
 
 
 
@@ -46,3 +47,7 @@ export const closeMenu = () => ({
 export const toggleMenu = () => ({
   type: TOGGLE_MENU,
 });
+
+export const loginTeacherSubmitError = () => ({
+  type: LOGIN_TEACHER_SUBMIT_ERROR,
+})

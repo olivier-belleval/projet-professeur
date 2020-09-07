@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import DOMPurify from "dompurify";
 
 const ArticleDetail = ({ article, closeMenu }) => {
-  console.log(article);
-
 
   return (
     <div className="article-detail" onClick={closeMenu}>

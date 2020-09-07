@@ -1,7 +1,8 @@
 // == Import npm
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // == Import
 import './styles.scss';
@@ -19,15 +20,27 @@ import TextEditorArticle from '../../containers/TextEditorArticle';
 import TextEditorClass from '../../containers/TextEditorClass';
 import TextEditorKanban from '../../containers/TextEditorKanban';
 import Admin from '../../containers/Admin';
+import NotFound from '../NotFound';
 
 // == Composant
-const App = ({ isLogged, teacher }) => (
+const App = ({ isLogged, teacher, loading }) => (
 
   <div className="app">
     <Route exact path="/" component={HomePage} />
-
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      toastClassName="toast"
+    />
     { isLogged ? (
-      <div style={{minHeight:100+'vh'}}>
+      <div>
         <TogglerMenu />
         <MenuDesktop />
         <Switch>
@@ -49,6 +62,7 @@ const App = ({ isLogged, teacher }) => (
               <Route exact path="/admin/edit/class/:id" component={TextEditorClass} />
               <Route exact path="/admin/nouveau-kanban" component={TextEditorKanban} />
               <Route exact path="/admin/edit/kanban/:id" component={TextEditorKanban} />
+              <Route component={NotFound} />
             </Switch>
           )}
         </Switch>

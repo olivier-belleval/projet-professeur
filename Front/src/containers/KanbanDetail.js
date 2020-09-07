@@ -9,6 +9,15 @@ import {
 } from '../store/action/data-actions';
 
 import {
+  toggleModalListEdition,
+  getListDetails,
+  getCardDetails,
+  submitListEdition,
+  toggleModalCardEdition,
+  submitCardEdition,
+} from '../store/action/kanban-editor-action';
+
+import {
   toggleModalCard,
   changeFieldCard,
   createCardSubmit,
@@ -21,14 +30,9 @@ import {
 
 const mapStateToProps = (state, ownProps) => {
   const { slug } = ownProps.match.params;
-  console.log("Nos props ", ownProps);
-
-  console.log('container kanban: ',
-    state.kanbans.kanban
-  )
 
   return {
-    kanban: state.kanbans.kanban,
+    kanban: getKanbanBySlug(state, slug),
     modalOpen: state.kanbans.modalOpen,
     listModalOpen: state.kanbans.listModalOpen,
     newCardOrder: state.kanbans.newCardOrder,
@@ -41,6 +45,11 @@ const mapStateToProps = (state, ownProps) => {
     newListOrder: state.kanbans.newListOrder,
     newListTitle: state.kanbans.newListTitle,
     newCardColor: state.kanbans.newCardColor,
+    editionModalList: state.editorKanban.editionModalList,
+    editionModalCard: state.editorKanban.editionModalCard,
+    listDetails: state.editorKanban.listDetails,
+    cardDetails: state.editorKanban.cardDetails,
+    teacher: state.user.teacher,
   };
 };
 
@@ -89,6 +98,30 @@ const mapDispatchToProps = (dispatch) => ({
 
   deleteList: () => {
     dispatch(deleteList());
+  },
+
+  toggleListEdit: (id) => {
+    dispatch(toggleModalListEdition(id));
+  },
+
+  getListDetails: (data) => {
+    dispatch(getListDetails(data));
+  },
+
+  getCardDetails: (data) => {
+    dispatch(getCardDetails(data));
+  },
+
+  submitListEdition: () => {
+    dispatch(submitListEdition());
+  },
+
+  toggleCardEdit: (id) => {
+    dispatch(toggleModalCardEdition(id));
+  },
+
+  submitCardEdition: () => {
+    dispatch(submitCardEdition());
   },
 });
 

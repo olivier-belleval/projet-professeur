@@ -1,32 +1,40 @@
-@use 'src/styles/vars';
+@import 'src/styles/vars';
 
 .kanbans-view{
-margin:0.7em;
+min-height: 100vh;
+background-color: $dark-color;
+
   &-head{
     padding: 2em;
+    width: 100%;
     margin-bottom: 2em;
-    background-color: vars.$alt-dark-color;
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);
 
     &-title{
-      font-weight: 700;
+      // font-weight: 700;
       font-size: 2em;
+      font-family: $font-title;
+      letter-spacing: 3px;
+      text-transform: uppercase;
     }
 
     &-subtitle{
-        
+      font-weight: 700;
     }
   }
 
   &-list{
-    background-color:vars.$neutral-color;
+    background-color:$neutral-color;
+    margin: 1rem 2rem 1rem 2rem;
   }
 }
 
 .kanban {
   padding: 1em;
-  margin-bottom: 1em;
+
+
   &:hover{
-    box-shadow: 5px 10px vars.$secondary-color;
+    box-shadow: 5px 10px $alt-dark-color;
   }
 
   &-title{
@@ -37,5 +45,18 @@ margin:0.7em;
 
   &-subtitle{
     font-style: italic;
+    color: $lightest-color;
+    text-transform: none;
+    letter-spacing: none;
   }
+}
+
+
+@media screen and (min-width:600px){
+  .kanbans-view{
+    padding:5rem 0 5rem 0;
+    width: 60%;
+    margin: auto;
+    min-height: 100%;  
+}
 }

@@ -1,29 +1,40 @@
-@use 'src/styles/vars';
+@import 'src/styles/vars';
+
+.adding-card{
+  background-color: $dark-color;
+  width: 100%;
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
 
 .kanban-detail{
-  margin:1.3em;
-  background-color: vars.$neutral-color;
-  padding: 1em;
-  position: relative;
+  margin-top:2.2em;
+  // position: relative;
   overflow-y: hidden;
+  min-height: 100vh;
+  background-color: $neutral-color;
 
   &-adding-button{
     color:white;
     font-size: 1.4rem;
   }
   &-head{
-    background-color: vars.$color;
-    padding: 2em 1em;
+    background: linear-gradient(90deg, $alt-color, $alt-dark-color);    padding: 2em 1em;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: baseline;
-  
 
+    &-text-content{
+      margin:1rem 2rem 0 2rem;
+    }
+  
     &--title{
       font-weight: 700;
-      font-size: 1.7em;
-      color: vars.$lightest-color;
-      font-family: vars.$font-title;
+      font-size: 1.9em;
+      color: $lightest-color;
+      font-family: $font-title;
+      text-transform: uppercase;
+      letter-spacing: 3px;
 
     }
     &--subtitle{
@@ -33,28 +44,36 @@
   &-grid{
     display: flex;
     flex-wrap: wrap;
+    padding-bottom: 1rem;
   }
 }
 
 .kanban-list{
   margin-top: 1em;
+  background-color: $alt-dark-color;
+
     &-title{
-      background-color: vars.$alt-dark-color;
+      background-color: $alt-dark-color;
       padding: 1.5em;
       font-size: 1.2em;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       width: 100%;
+      margin-bottom: 1rem;
+      padding-left: 2rem;
     }  
+    &-content{
+
+    }
   }
 
 .kanban-card {
   display: flex;
   flex-wrap: wrap;
-  box-shadow: 5px 10px vars.$color;
-  border-radius: 0 0 0.7em 0.7em;
-  background-color:vars.$neutral-color ;
-  margin-top: 1em;
+  // box-shadow: 5px 10px $color;
+  // border-radius: 0 0 0.7em 0.7em;
+  background-color:$neutral-color ;
+  margin-top: 0.3em;
 
   &-content{
     text-align: justify;
@@ -65,15 +84,14 @@
     font-size: 1.3em;
     font-weight: 700;
     width: 100%;
-    background-color: vars.$neutral-color;
-    padding: 1em 0.5em;
+    padding: 0.5em;
       }
     }
 
 .tag {
   border-radius: 5px;
-  background-color: vars.$color;
-  color: vars.$lightest-color;
+  background-color: $color;
+  color: $lightest-color;
   font-weight: 700;
   padding: 5px 10px;
   margin: 0.5em;
@@ -87,7 +105,7 @@
   top:30%;
   border-radius:1em;
   padding: 1em;
-  box-shadow: 5px 10px vars.$alt-dark-color;
+  box-shadow: 5px 10px $alt-dark-color;
 
   &-input,&-textarea{
     margin: 1em;
@@ -96,7 +114,7 @@
     width: 90%;
     border:lightgray 1px solid;
     &:focus{
-      box-shadow: 5px 10px vars.$light-color;
+      box-shadow: 5px 10px $light-color;
       outline:none
     }
   }
@@ -112,6 +130,11 @@
   }
 }
 
+.kanban-list-container{
+  width: 100%;
+  margin: 1rem;
+}
+
   @media screen and (min-width:600px){
     .kanban-list{
     &-content{
@@ -119,7 +142,10 @@
       flex-wrap: wrap;
       justify-content: space-evenly;
 
-    }}
+    }
+  &-container{
+    width: unset;
+  }}
     .kanban-card{
       width: 100%;
     }
@@ -143,6 +169,10 @@
   &-content{
     
   }}
+
+  .modal{
+    left: 40%;
+  }
   }
 
 /*scrollbar*/
@@ -152,5 +182,5 @@
 
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(vars.$alt-color,vars.$dark-color);
+  background: linear-gradient($alt-color,$dark-color);
 }

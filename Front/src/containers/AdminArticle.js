@@ -11,7 +11,10 @@ import {
   toggleAddClassModal,
   changeField,
   submitAssociationArticle,
+  removeClassFromArticle,
+  removedClassFromArticle,
 } from '../store/action/AdminArticle';
+
 
 import { getClassesAdminPanel } from '../store/action/AdminClass';
 
@@ -23,6 +26,7 @@ const mapState = (state) => ({
   modalOpen: state.admin.modalOpen,
   item_id: state.admin.item_id,
   classAdded: state.admin.classAdded,
+  message: state.editor.message,
 });
 
 const mapDispatch = (dispatch) => ({
@@ -55,6 +59,14 @@ const mapDispatch = (dispatch) => ({
   },
   handleSubmitAssociation: () => {
     dispatch(submitAssociationArticle());
+  },
+
+  removeClassFromArticle: (id) => {
+    dispatch(removeClassFromArticle(id));
+  },
+
+  removedClassFromArticle: (id) => {
+    dispatch(removedClassFromArticle(id));
   },
 });
 
