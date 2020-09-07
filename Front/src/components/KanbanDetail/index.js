@@ -215,7 +215,7 @@ const CardModal = ({
       <input
         type="color"
         name="newCardColor"
-        defaultValue={editionModalCard ? cardDetails.color : '#4c3e53'}
+        defaultValue={editionModalCard ? cardDetails.color : '#2e2433'}
         onChange={changeField}
       />
       <button type="submit"> Ajouter</button>
