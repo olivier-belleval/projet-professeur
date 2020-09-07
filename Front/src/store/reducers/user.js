@@ -5,6 +5,7 @@ import {
   LOGIN_SUBMIT_SUCCESS,
   LOGIN_SUBMIT_ERROR,
   LOGIN_CHANGE_TEACHER,
+  LOGIN_TEACHER_SUBMIT_ERROR,
   TOGGLE_MENU,
   CLOSE_MENU,
 } from '../action';
@@ -70,7 +71,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: true,
         message: '',
-      }
+      };
     case LOGIN_SUBMIT_SUCCESS:
       return {
         ...state,
@@ -87,6 +88,13 @@ export default (state = initialState, action = {}) => {
         password: '',
         message: action.payload,
       };
+    case LOGIN_TEACHER_SUBMIT_ERROR:
+        return {
+          ...state,
+          loading: false,
+          username: '',
+          password: '',
+        };
     case LOGIN_CHANGE_TEACHER:
       return {
         ...state,
