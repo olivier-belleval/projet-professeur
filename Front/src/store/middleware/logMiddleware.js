@@ -53,6 +53,7 @@ const logMiddleware = (store) => (next) => (action) => {
         })
         .catch((err) => {
           toast.dark("Le mot de passe ou l'identifiant sont incorrects");
+          console.log(err.response);
           store.dispatch(
             loginSubmitError(),
           );
