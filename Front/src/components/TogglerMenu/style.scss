@@ -7,6 +7,7 @@
   left: 20px;
   padding: 10px;
   align-items: center;
+  z-index:100;
   &-icon {
     color: black;
     position:fixed;
@@ -15,7 +16,7 @@
     z-index: 2;
   }
   &-menu {
-    background-color: rgba(232, 232, 232, 0.8);
+    background-color: rgba(232, 232, 232, 0.9);
     width: 200px;
     height: 100vh;
     position: fixed;
@@ -25,7 +26,7 @@
   &-nav {
     margin-top: 50px;
     margin-bottom: 50px;
-    color: vars.$dark-color;
+    color: vars.$darkest-color;
     font-size: 1.2em;
     font-weight: bold;
   }

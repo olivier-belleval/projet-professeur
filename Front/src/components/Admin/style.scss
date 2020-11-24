@@ -14,8 +14,9 @@
     background-color: vars.$dark-color;
     border-radius: 5px;
     color: vars.$lightest-color;
-    font-weight: bold;
-    margin-bottom: 4em;
+    font-family: vars.$font-title;
+    font-size: 1.5rem;
+    margin-bottom: 2.5em;
   }
 
   &-button {
@@ -26,5 +27,13 @@
     border-radius: 5px;
     color: vars.$lightest-color;
     font-weight: bold;
+  }
+}
+
+
+@media screen and (min-width:600px){
+  .admin_menu{
+    width: 70%;
+    margin: auto;
   }
 }

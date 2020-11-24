@@ -1,0 +1,19 @@
+[
+    {
+        "kanban_id": "1",
+        "class_id": "1"
+    },
+    {
+        "kanban_id": "2",
+        "class_id": "2"
+    },
+    {
+        "kanban_id": "2",
+        "class_id": "1"
+    },
+    {
+        "kanban_id": "3",
+        "class_id": "3"
+    }
+    
+]

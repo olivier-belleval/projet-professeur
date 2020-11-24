@@ -1,0 +1,9 @@
+%syntax-version=1.0.0
+%project=omyprof
+%uri=https://omyprof.io
+
+00-create-tables 2020-08-21T11:22:44Z "Etudiant O'clock",,, <etudiant@teleporteur> # initial migration: tables creation
+10-user-queries 2020-08-22T15:15:32Z "Etudiant O'clock",,, <etudiant@teleporteur> # optimized queries for user methods
+20-article-queries 2020-08-22T15:32:23Z "Etudiant O'clock",,, <etudiant@teleporteur> # optimized queries for article methods
+30-admin-queries 2020-08-23T13:11:35Z "Etudiant O'clock",,, <etudiant@teleporteur> # optimized queries for admin methods
+40-kanban-queries.sql 2020-08-24T11:55:07Z "Etudiant O'clock",,, <etudiant@teleporteur> # optimized queries for kanban methods

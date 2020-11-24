@@ -1,38 +1,50 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   FaPencilAlt, FaTrash, FaPlusCircle, FaInfinity,
 } from 'react-icons/fa';
 import './style.scss';
 
-
-const AdminArticle = ({ list, onclickPen, onclickTrash, onclickJoin }) => {
-  console.log(list);
+const AdminArticle = ({
+  list,
+  deleteArticle,
+  onclickJoin,
+  getArticles,
+  editArticle,
+}) => {
+  useEffect(() => {
+    getArticles();
+  }, []);
   return (
     <div className="admin_panel_article">
       <h1 className="admin_panel_article-title"> Espace administrateur - gestion des articles </h1>
       <div className="admin_panel_article-content">
         {list.map((article) => (
-          <div className="admin_panel_article-content-part">
-            <div className="admin_panel_article-content-part-article">{article.title}</div>
+          <div className="admin_panel_article-content-part" key={article.article_id}>
+            <div className="admin_panel_article-content-part-article">{article.article_title}</div>
+
             <div className="admin_panel_article_content-part-class">
-              <p>{article.class}</p>
+
+              {article.class_username && article.class_username.map((classes) => <span className="classusername-tag" key={classes}> {classes}</span>)}
+
             </div>
+
             <div className="admin_panel_article_content-part-icons">
-              <div className="admin_panel_article_content-part-modify"><FaPencilAlt onClick={() => {
-                console.log('modify');
-                onclickPen();
-              }}
-              />
+              <div className="admin_panel_article_content-part-modify">
+                <Link to={`/admin/edit/article/${article.article_id}`} key={article.article_id}>
+                  <FaPencilAlt onClick={() => {
+                    editArticle(article.article_id);
+                  }}
+                  />
+                </Link>
               </div>
               <div className="admin_panel_article_content-part-delete"><FaTrash onClick={() => {
-                console.log('delete');
-                onclickTrash();
+                deleteArticle(article.article_id);
               }}
               />
               </div>
               <div className="admin_panel_article_content-part-join"><FaInfinity onClick={() => {
-                console.log('join');
                 onclickJoin();
               }}
               />
@@ -43,7 +55,9 @@ const AdminArticle = ({ list, onclickPen, onclickTrash, onclickJoin }) => {
 
         <div className="admin_panel_article-content-part">
           <p>Ajouter un article</p>
-          <FaPlusCircle />
+          <Link exact to="/admin/nouvel-article">
+            <FaPlusCircle />
+          </Link>
         </div>
       </div>
     </div>

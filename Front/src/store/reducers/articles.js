@@ -1,10 +1,14 @@
 import { GET_ARTICLES_ERROR, GET_ARTICLES_SUCCESS, GET_ARTICLES } from '../action/data-actions';
+import {
+  DELETE_ARTICLE, DELETE_ARTICLE_ERROR, DELETE_ARTICLE_SUCCESS, GET_ARTICLES_ADMIN_PANEL,
+} from '../action/AdminArticle';
 import { slugifyTitle } from '../../utils';
 
 export const initialState = {
   loading: false,
   error: '',
   list: [],
+  article_id: '',
 };
 
 export default (state = initialState, action = {}) => {
@@ -12,6 +16,13 @@ export default (state = initialState, action = {}) => {
     case GET_ARTICLES:
       return {
         ...state,
+        list: [],
+        loading: true,
+      };
+    case GET_ARTICLES_ADMIN_PANEL:
+      return {
+        ...state,
+        list: [],
         loading: true,
       };
     case GET_ARTICLES_SUCCESS:
@@ -26,6 +37,28 @@ export default (state = initialState, action = {}) => {
         ...state,
         loading: false,
         error: action.payload,
+        list: [],
+      };
+    case DELETE_ARTICLE:
+      return {
+        ...state,
+        loading: true,
+        article_id: action.payload,
+      };
+    case DELETE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        list: [],
+        article_id: '',
+        error: '',
+      };
+    case DELETE_ARTICLE_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        article_id: '',
         list: [],
       };
     default:

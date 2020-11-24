@@ -24,6 +24,14 @@ const Login = ({
     evt.preventDefault();
     handleLogin();
   };
+
+
+  const handleSubmitStudent = (evt) => {
+    evt.preventDefault();
+    handleClassesLogin();
+  };
+
+
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
     changeField({ [name]: value });
@@ -40,7 +48,7 @@ const Login = ({
       )}
       {!isLogged && loginOpened && !loading && (
         <div className="login-form">
-          <form className="form" onSubmit={ teacher ? handleSubmit : handleClassesLogin }>
+          <form className="form" onSubmit={ teacher ? handleSubmit : handleSubmitStudent }>
             <div className="login-form-inputs">
               {teacher && (
               <input
@@ -60,7 +68,7 @@ const Login = ({
               >
                 <option>je choisis ma classe</option>
                 {classes.map((item) => (
-                  <option value={item} key={item}>{item}</option>
+                  <option value={item.class_usernames} key={item.class_id}>{item.class_usernames}</option>
                 ))}
               </select>
               )}

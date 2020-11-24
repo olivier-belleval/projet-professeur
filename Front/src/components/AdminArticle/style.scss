@@ -12,6 +12,8 @@
     padding: 2em;
     margin-bottom: 2em;
     background-color: vars.$alt-dark-color;
+    font-family: vars.$font-title;
+    font-size:1.3rem;
     
   }
 
@@ -66,4 +68,22 @@
 
 .admin_panel_article-content-part-article {
   font-weight: bold;
+}
+
+.classusername-tag{
+  font-size: 0.7em;
+  color: vars.$lightest-color;
+  background-color: #a5a5a5;
+  padding: 5px;
+  margin-right: 7px;
+  border-radius: 5px;
+  box-shadow: 4px 7px vars.$alt-dark-color;
+}
+
+
+@media screen and (min-width:600px){
+  .admin_panel_article{
+    width: 70%;
+    margin: auto;
+  }
 }

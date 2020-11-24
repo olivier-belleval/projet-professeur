@@ -10,6 +10,7 @@
   &-title{
     font-size: 2rem;
     font-weight: 700;
+    font-family: vars.$font-title;
   }
 }
 
@@ -37,9 +38,14 @@
   
 }
 
-// @media screen and (min-width:600px){
-//   .articles-view{
-//     width: 80%;
-//     margin: auto;
-//   }
-// }
+@media screen and (min-width:600px){
+  .articles-view{
+    padding: 3rem;
+    width: 70%;
+    margin: auto;
+  }
+
+  .article{
+      padding: 3rem;
+  }
+}
