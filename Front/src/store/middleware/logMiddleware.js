@@ -1,17 +1,21 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import {
-  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError,
+  LOGIN_SUBMIT, loginSubmitSuccess, loginSubmitError, loginTeacherSubmitError
 } from '../action/index';
-import { LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT } from '../action/user';
+import {
+  LOGOUT, GET_CLASSES, getClassesSuccess, getClassesError, logoutSuccess, LOGIN_CLASSES_SUBMIT,
+} from '../action/user';
 
 const logMiddleware = (store) => (next) => (action) => {
-  const local = 'http://localhost:3000/';
-  const server = 'http://54.90.32.97:3000/';
-  
-  const user = {
-        username: store.getState().user.username,
-        password: store.getState().user.password,
-      };
+  const utils = {
+    local: 'http://localhost:3000/',
+    distant: 'http://54.90.32.97:3000/',
+    user: {
+      username: store.getState().user.username,
+      password: store.getState().user.password,
+    },
+  };
 
   next(action);
 
@@ -20,48 +24,52 @@ const logMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'post',
-        url: `${local}login/admin`,
-        data: user,
+        url: `${utils.local}login/admin`,
+        data: utils.user,
         withCredentials: true,
       })
         .then((res) => {
-          store.dispatch(loginSubmitSuccess(res.data));
+          store.dispatch(loginSubmitSuccess());
+          toast.dark(`Bienvenue ${utils.user.username}`);
         })
         .catch((err) => {
-          store.dispatch(
-            console.error(err),
-            loginSubmitError('Mot de passe incorrect'),
-          );
+          toast.dark("Le mot de passe ou l'identifiant sont incorrects");
+          console.log(err.response)
+          store.dispatch(loginTeacherSubmitError());
         });
       break;
-      
-      case LOGIN_CLASSES_SUBMIT:
+
+    case LOGIN_CLASSES_SUBMIT:
+
       axios({
         method: 'post',
-        url: `${local}login/`,
-        data: user,
+        url: `${utils.local}login/`,
+        data: utils.user,
         withCredentials: true,
       })
         .then((res) => {
           store.dispatch(loginSubmitSuccess(res.data));
+          toast.dark('Bienvenue dans ta classe !');
         })
         .catch((err) => {
+          toast.dark("Le mot de passe ou l'identifiant sont incorrects");
+          console.log(err.response);
           store.dispatch(
-            console.error(err),
-            loginSubmitError('Mot de passe incorrect'),
+            loginSubmitError(),
           );
         });
       break;
+
     case LOGOUT:
-      console.log('case logout');
+
       axios({
         method: 'get',
-        url: `${local}login/logout`,
+        url: `${utils.local}login/logout`,
         withCredentials: true,
 
       })
         .then((res) => {
-          console.log('logout request', res);
+          toast.dark('A bientôt !');
           store.dispatch(logoutSuccess());
         })
         .catch((err) => {
@@ -73,18 +81,15 @@ const logMiddleware = (store) => (next) => (action) => {
     case GET_CLASSES:
       axios({
         method: 'get',
-        url: `${local}login`,
+        url: `${utils.local}login`,
         withCredentials: true,
       })
         .then((res) => {
-          console.log(res.data);
           store.dispatch(getClassesSuccess(res.data.data));
-          console.log('je vais au bout de ma requête');
         })
         .catch((err) => {
-          console.log(err);
-          store.dispatch(getClassesError('Impossible de récupérer les classes...'));
-        })
+          store.dispatch(getClassesError());
+        });
 
       break;
 

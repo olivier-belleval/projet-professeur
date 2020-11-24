@@ -13,6 +13,8 @@ const TextEditorArticle = ({
   articleEdited,
   cancelEditingArticle,
   handleArticleEdit,
+  closeMenu,
+
 }) => {
 
   const handleInputChange = (evt) => {
@@ -23,13 +25,13 @@ const TextEditorArticle = ({
     evt.preventDefault();
     handleArticleSubmit();
   };
-  const handleEdition = (evt) =>{
+  const handleEdition = (evt) => {
     evt.preventDefault();
     handleArticleEdit();
   }
 
   return (
-    <div className="text-editor-article">
+    <div className="text-editor-article" onClick={closeMenu}>
       <form onSubmit={editing ? handleEdition : handleSubmit}>
         <input
           name="title"
@@ -40,7 +42,7 @@ const TextEditorArticle = ({
         />
         <textarea
           name="content"
-          defaultValue={editing ? articleEdited.article_excerpt : content}
+          defaultValue={editing ? articleEdited.article_content : content}
           onChange={handleInputChange}
           className="input-content"
         />

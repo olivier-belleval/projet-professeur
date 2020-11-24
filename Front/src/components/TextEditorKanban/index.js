@@ -14,6 +14,7 @@ const TextEditorKanban = ({
   kanbanEdited,
   cancelEditingKanban,
   handleKanbanEdit,
+  closeMenu,
 }) => {
   console.log('text edit');
   const handleInputChange = (evt) => {
@@ -30,7 +31,7 @@ const TextEditorKanban = ({
   };
 
   return (
-    <div className="text-editor-kanban">
+    <div className="text-editor-kanban" onClick={closeMenu}>
       <form onSubmit={editing ? handleEdition : handleSubmit}>
         <input
           name="title"
@@ -39,14 +40,16 @@ const TextEditorKanban = ({
           onChange={handleInputChange}
           className="input-title"
         />
+        <div className="input-color">
+        <span className="background"> Couleur de fond du background</span>
         <input
           name="background"
           defaultValue={editing ? kanbanEdited.background : background}
           type="color"
-          placeholder="Choisissez votre couleur"
           onChange={handleInputChange}
-          className="input-title"
+          className="input-color-picker"
         />
+        </div>
         <textarea
           name="description"
           defaultValue={editing ? kanbanEdited.description : description}
@@ -58,7 +61,7 @@ const TextEditorKanban = ({
           <Link to="/admin/Kanban">Annuler</Link>
         </button>
         <button type="submit" className="text-editor-kanban-button">
-          Let's go baby !
+          Envoyer
         </button>
         {send && <Redirect to="/admin/kanban" />}
       </form>

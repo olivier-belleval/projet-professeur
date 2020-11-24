@@ -1,12 +1,10 @@
-@use 'src/styles/vars.scss';
+@import 'src/styles/vars.scss';
 
-.text-editor-class {
-  border: 1px solid rgb(199, 199, 199);
+.text-editor-kanban {
   border-radius: 5px;
-  height: 100vh;
   margin: auto;
   width: fit-content;
-  background-color: white;
+  background-color: $neutral-color;
   margin-top: 3rem;
   padding: 1em;
 
@@ -28,7 +26,7 @@ input,textarea{
     width: 90%;
     border:lightgray 1px solid;
     &:focus{
-      box-shadow: 5px 10px vars.$light-color;
+      box-shadow: 5px 10px $alt-dark-color;
       outline:none
     }
   }
@@ -36,4 +34,11 @@ input,textarea{
     min-height: 25em;
   }
 
+}
+
+.input-color{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-around;
 }

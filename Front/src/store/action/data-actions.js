@@ -13,6 +13,7 @@ export const GET_KANBANS_ERROR = 'GET_KANBANS_ERROR';
 export const GET_KANBANS_SUCCESS = 'GET_KANBANS_SUCCESS';
 
 // For ONE kanban
+export const GET_KANBAN_ID = 'GET_KANBAN_ID';
 export const GET_KANBAN = 'GET_KANBAN';
 export const GET_KANBAN_ERROR = 'GET_KANBAN_ERROR';
 export const GET_KANBAN_SUCCESS = 'GET_KANBAN_SUCCESS';
@@ -50,6 +51,11 @@ export const getKanbansSuccess = (payload) => ({
 });
 
 // For ONE kanban
+export const getKanbanId = (payload) =>({
+  type: GET_KANBAN_ID,
+  payload,
+})
+
 export const getKanbanError = (payload) => ({
   type: GET_KANBAN_ERROR,
   payload,

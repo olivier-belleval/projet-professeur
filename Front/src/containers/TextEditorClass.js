@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import TextEditorClass from '../components/TextEditorClass';
+import { closeMenu } from '../store/action';
 
 import {
   updateClassEditorState, createClassSubmit, cancelEditingClass, submitEditedClass,
@@ -36,6 +37,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleClassEdit: () => {
     dispatch(submitEditedClass());
+  },
+
+  closeMenu: () => {
+    dispatch(closeMenu());
   },
 });
 

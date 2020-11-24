@@ -8,10 +8,14 @@ import rootReducer from './reducers/root';
 
 import logMiddleware from './middleware/logMiddleware';
 import ajaxMiddleware from './middleware/ajaxMiddleware';
+import editMiddleware from './middleware/editMiddleware';
+import deleteMiddleware from './middleware/deleteMiddleware';
+import associateMiddleware from './middleware/associateMiddleware';
+import createMiddleware from './middleware/createMiddleware';
 
 const persistConfig = {
   key: 'root',
-  whitelist: ['user', 'kanbans'],
+  whitelist: ['user', 'kanbans', 'articles'],
   storage,
 };
 
@@ -22,6 +26,10 @@ const enhancers = composeEnhancers(
   applyMiddleware(
     logMiddleware,
     ajaxMiddleware,
+    createMiddleware,
+    editMiddleware,
+    deleteMiddleware,
+    associateMiddleware,
   ),
 );
 

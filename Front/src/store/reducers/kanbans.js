@@ -4,6 +4,7 @@ import {
   GET_KANBANS_ERROR,
   GET_KANBANS_SUCCESS,
   GET_KANBAN,
+  GET_KANBAN_ID,
   GET_KANBAN_ERROR,
   GET_KANBAN_SUCCESS,
   GET_KANBAN_DETAIL,
@@ -27,6 +28,9 @@ import {
   CREATE_LIST_ERROR,
   CREATE_LIST_SUCCESS,
   CREATE_LIST_SUBMIT,
+  DELETE_LIST,
+  DELETE_LIST_ERROR,
+  DELETE_LIST_SUCCESS,
 } from '../action/create-actions';
 
 export const initialState = {
@@ -34,7 +38,7 @@ export const initialState = {
   error: '',
   list: [],
   kanban_id: '',
-  kanban_detail: [],
+  kanban: [],
   modalOpen: false,
   listModalOpen: false,
   newCardOrder: '',
@@ -55,6 +59,9 @@ export default (state = initialState, action = {}) => {
         ...state,
         modalOpen: !state.modalOpen,
         list_id: action.payload,
+        newCardColor: '#4c3e53',
+        newCardOrder: '',
+        newCardContent: '',
       };
     case TOGGLE_MODAL_LIST:
       return {
@@ -78,6 +85,7 @@ export default (state = initialState, action = {}) => {
         list_id: '',
         newCardOrder: '',
         newCardContent: '',
+        newCardColor: '',
         modalOpen: !state.modalOpen,
       };
     case CHANGE_FIELD_CARD:
@@ -104,16 +112,23 @@ export default (state = initialState, action = {}) => {
         error: action.payload,
         list: [],
       };
+    case GET_KANBAN_ID:
+      return {
+        ...state,
+        kanban_id: action.payload,
+      }
     case GET_KANBAN:
       return {
         ...state,
         loading: false,
+        datas: false,
         kanban_id: action.payload,
       };
     case GET_KANBAN_DETAIL:
       return {
         ...state,
         loading: true,
+        datas: false,
       };
     case GET_KANBAN_DETAIL_SUCCESS:
       return {
@@ -126,7 +141,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
-        kanban_detail: [...action.payload],
+        kanban: [...action.payload],
       };
     case GET_KANBAN_ERROR:
       return {
@@ -134,7 +149,6 @@ export default (state = initialState, action = {}) => {
         loading: false,
         error: action.payload,
         kanban_detail: [],
-        kanban_id: '',
       };
     case DELETE_KANBAN:
       return {
@@ -195,6 +209,23 @@ export default (state = initialState, action = {}) => {
         newListOrder: '',
         newListTitle: '',
         listModalOpen: !state.listModalOpen,
+      };
+    case DELETE_LIST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        list_id: '',
+      };
+    case DELETE_LIST_ERROR:
+      return {
+        ...state,
+        loading: false,
+        list_id: '',
       };
     default:
       return state;

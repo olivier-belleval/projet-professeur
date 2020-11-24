@@ -1,10 +1,19 @@
 module.exports = {
+
+   /**
+   * Format kanban array to array of object
+   * @function
+   * @params {array} result from database request
+   * @return {array} the formated request
+   */
   kanbansFormater: (res) => {
+
     // first step we create an object 'kanbans' that contains object
     let kanbans = {};
-    // we take a request result named res
 
+    // we take a request result named res
     for(r in res){
+      
       // we format the kanban object
       let kan = {};
       kan.id = res[r].kanban_id;
@@ -15,8 +24,10 @@ module.exports = {
 
       // if doesnt exist we create the kanban
       if (typeof kanbans[kan.id] === 'undefined') {
+
         kanbans[kan.id] = kan;
       };
+
 
       // we format the teacher object
       let teacher = {};
@@ -27,11 +38,15 @@ module.exports = {
 
       // if doesnt exist we create the kanban's value 'teacher'
       if (typeof kanbans[kan.id]['teacher'] === 'undefined') {
+
         kanbans[kan.id]['teacher'] = {};
+
       };
       // we insert it into the kanban object if it doesnt exist
       if (typeof kanbans[kan.id]['teacher'][teacher.id] === 'undefined') {
+
         kanbans[kan.id]['teacher'] = teacher;
+
       };
 
       // we format the class(renamed student to avoid the reserved name "class") object
@@ -42,11 +57,15 @@ module.exports = {
 
       // if doesnt exist we create the kanban's value 'classes'
       if (typeof kanbans[kan.id]['classes'] === 'undefined') {
+
         kanbans[kan.id]['classes'] = {};
+
       };
       // we insert it into the kanban object if it doesnt exist
       if (typeof kanbans[kan.id]['classes'][student.id] === 'undefined') {
+
         kanbans[kan.id]['classes'][student.id] = student;
+
       };
 
       // we format the list object
@@ -57,12 +76,16 @@ module.exports = {
 
         // if doesnt exist we create the kanban's value 'lists'
       if (typeof kanbans[kan.id]['lists'] === 'undefined') {
+
         kanbans[kan.id]['lists'] = {};
+
       };
 
         // we insert it into the kanban object if it doesnt exist
       if (typeof kanbans[kan.id]['lists'][list.id] === 'undefined') {
+
         kanbans[kan.id]['lists'][list.id] = list;
+
       };
 
       // we format the card object
@@ -74,12 +97,16 @@ module.exports = {
 
       // if doesnt exist we create the lists's value 'cards'
       if (typeof kanbans[kan.id]['lists'][list.id]['cards'] === 'undefined') {
+
         kanbans[kan.id]['lists'][list.id]['cards'] = {};
+
       };
 
       // we insert it into the lists object if it doesnt exist
       if (typeof kanbans[kan.id]['lists'][list.id]['cards'][card.id] === 'undefined') {
+
         kanbans[kan.id]['lists'][list.id]['cards'][card.id] = card;
+
       };
 
       // we format the tag object
@@ -90,12 +117,16 @@ module.exports = {
 
         // if doesnt exist we create the card's value 'cards'
         if (typeof kanbans[kan.id]['lists'][list.id]['cards'][card.id]['tags'] === 'undefined') {
+
           kanbans[kan.id]['lists'][list.id]['cards'][card.id]['tags'] = {};
+
         };
 
         // we insert it into the cards object if it doesnt exist
         if (typeof kanbans[kan.id]['lists'][list.id]['cards'][card.id]['tags'][tag.id] === 'undefined') {
+
           kanbans[kan.id]['lists'][list.id]['cards'][card.id]['tags'][tag.id] = tag;
+          
         };
 
     };

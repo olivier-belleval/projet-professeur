@@ -1,11 +1,21 @@
 import { connect } from 'react-redux';
 import KanbanDetail from '../components/KanbanDetail';
 import { getKanbanBySlug } from '../store/reducers/kanbans';
+import { closeMenu } from '../store/action';
 
 import {
   getKanbanDetail,
   getListId,
 } from '../store/action/data-actions';
+
+import {
+  toggleModalListEdition,
+  getListDetails,
+  getCardDetails,
+  submitListEdition,
+  toggleModalCardEdition,
+  submitCardEdition,
+} from '../store/action/kanban-editor-action';
 
 import {
   toggleModalCard,
@@ -15,6 +25,7 @@ import {
   deleteCard,
   toggleModalList,
   createListSubmit,
+  deleteList,
 } from '../store/action/create-actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -34,12 +45,16 @@ const mapStateToProps = (state, ownProps) => {
     newListOrder: state.kanbans.newListOrder,
     newListTitle: state.kanbans.newListTitle,
     newCardColor: state.kanbans.newCardColor,
+    editionModalList: state.editorKanban.editionModalList,
+    editionModalCard: state.editorKanban.editionModalCard,
+    listDetails: state.editorKanban.listDetails,
+    cardDetails: state.editorKanban.cardDetails,
+    teacher: state.user.teacher,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onOpenClick: (id) => {
-    console.log(id);
     dispatch(toggleModalCard(id));
   },
 
@@ -47,12 +62,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createCardSubmit());
   },
 
-  //controlled input for card form in kanban
+  // Controlled input for card form in kanban
   changeField: (changedData) => {
     dispatch(changeFieldCard(changedData));
   },
 
-  //change edit mode to edit kanban details
+  // Change edit mode to edit kanban details
   handleEditMode: (changedData) => {
     dispatch(handleEditMode(changedData));
   },
@@ -74,8 +89,40 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   handleListSubmit: () => {
-    dispatch(createListSubmit())
-  }
+    dispatch(createListSubmit());
+  },
+
+  closeMenu: () => {
+    dispatch(closeMenu());
+  },
+
+  deleteList: () => {
+    dispatch(deleteList());
+  },
+
+  toggleListEdit: (id) => {
+    dispatch(toggleModalListEdition(id));
+  },
+
+  getListDetails: (data) => {
+    dispatch(getListDetails(data));
+  },
+
+  getCardDetails: (data) => {
+    dispatch(getCardDetails(data));
+  },
+
+  submitListEdition: () => {
+    dispatch(submitListEdition());
+  },
+
+  toggleCardEdit: (id) => {
+    dispatch(toggleModalCardEdition(id));
+  },
+
+  submitCardEdition: () => {
+    dispatch(submitCardEdition());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(KanbanDetail);

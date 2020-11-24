@@ -1,6 +1,9 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
+
+import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
+
 
 const Login = ({
   // data from state
@@ -25,12 +28,10 @@ const Login = ({
     handleLogin();
   };
 
-
   const handleSubmitStudent = (evt) => {
     evt.preventDefault();
     handleClassesLogin();
   };
-
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -40,20 +41,23 @@ const Login = ({
     getClasses();
   }, []);
 
+const [showedPassword, setShowedPassword] = useState(false);
+
   return (
     <div className="login">
-      { loginOpened && loading && <span>Connexion en cours...</span>}
+      { loginOpened && loading && ("Connexion en cours...")}
       {!isLogged && !loginOpened && (
         <button type="button" className="login-button" onClick={onOpenClick}> Connexion</button>
       )}
       {!isLogged && loginOpened && !loading && (
         <div className="login-form">
-          <form className="form" onSubmit={ teacher ? handleSubmit : handleSubmitStudent }>
+          <form className="form" onSubmit={teacher ? handleSubmit : handleSubmitStudent}>
             <div className="login-form-inputs">
               {teacher && (
               <input
                 name="username"
                 value={username}
+                className="login-form-inputs-username"
                 onChange={handleInputChange}
                 type="text"
                 placeholder="nom d'utilisateur"
@@ -62,23 +66,31 @@ const Login = ({
               {!teacher && (
               <select
                 name="username"
+                className="login-form-inputs-username"
                 onChange={handleInputChange}
                 value={username}
                 className="login-form-select"
               >
                 <option>je choisis ma classe</option>
                 {classes.map((item) => (
-                  <option value={item.class_usernames} key={item.class_id}>{item.class_usernames}</option>
+                  <option
+                  value={item.class_usernames}
+                  key={item.class_id}>{item.class_usernames}</option>
                 ))}
               </select>
               )}
               <input
                 name="password"
+                className="inputs-password"
                 value={password}
                 onChange={handleInputChange}
-                type="password"
+                type={showedPassword ? "text" : "password"}
                 placeholder="mot de passe"
-              />
+              /> <span className="show-password-eye" onClick={()=>{
+                setShowedPassword(!showedPassword);
+              }}>
+              {showedPassword ? <RiEyeLine/> : <RiEyeCloseLine/>}
+              </span>
             </div>
             <button type="submit" className="login-form-button">Se connecter</button>
           </form>

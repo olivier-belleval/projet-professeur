@@ -1,0 +1,90 @@
+ 
+parameters:
+  username:
+    name: username
+    description: Username to use for login.
+    in: body
+    required: true
+    type: string
+    example: 6eme A
+  password:
+    name: password
+    description: password to use for login.
+    in: body
+    required: true
+    type: string
+    example: un_password@super!safe
+  description:
+    name: description
+    description: description of the item
+    in: body
+    required: true
+    type: string
+    example: item description
+  teacherId:
+    name: teacherId
+    description: ID of the teacher
+    in: session
+    required: true
+    type: integer
+    example: 1
+  classId:
+    name: classId
+    description: ID of the class
+    in: params
+    required: true
+    type: integer
+    example: 1
+  articleId:
+    name: articleId
+    description: ID of the article
+    in: params
+    required: true
+    type: integer
+    example: 1
+  title: 
+    name: title
+    description: title of the item
+    in: body
+    required: true
+    type: string
+    example: item title
+  content: 
+    name: content
+    description: content of the item
+    in: body
+    required: true
+    type: string
+    example: content of the item
+  kanbanId:
+    name: kanbanId
+    description: ID of the kanban
+    in: params
+    required: true
+    type: integer
+    example: 1
+  listId:
+    name: listId
+    description: ID of the list
+    in: params
+    required: true
+    type: integer
+    example: 1
+  cardId:
+    name: cardId
+    description: ID of the card
+    in: params
+    required: true
+    type: integer
+    example: 1
+  tagId:
+    name: tagId
+    description: ID of the tag
+    in: params
+    required: true
+    type: integer
+    example: 1
+
+tags:
+  - name: Login
+    description: Login management

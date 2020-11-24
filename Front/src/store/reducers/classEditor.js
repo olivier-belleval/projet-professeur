@@ -10,7 +10,7 @@ import {
 
 } from '../action/class-editor-action';
 import {
-  EDIT_CLASS,
+  EDIT_CLASS, GET_CLASSES_ADMIN_PANEL,
 } from '../action/AdminClass';
 
 const initialState = {
@@ -40,30 +40,36 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         ...action.payload,
+        send: false,
       };
     case SUBMIT_EDITED_CLASS:
       return {
         ...state,
         loading: true,
-        send: true,
         editing: false,
       };
-    case EDIT_CLASS_SUCCESS || EDIT_CLASS_ERROR:
+    case EDIT_CLASS_SUCCESS:
       return {
         ...state,
         username: '',
         password: '',
         description: '',
         loading: false,
-        send: false,
+        send: true,
         id_edited_class: '',
+        message: '',
+      };
+    case EDIT_CLASS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        message: ' Le mot passe doit faire minimum 5 caractères.',
       };
     case CREATE_CLASS_SUBMIT:
       return {
         ...state,
         loading: true,
         message: '',
-        send: true,
       };
     case CREATE_CLASS_SUCCESS:
       return {
@@ -73,13 +79,13 @@ export default (state = initialState, action = {}) => {
         password: '',
         description: '',
         message: 'La classe a été ajouté !',
-        send: false,
+        send: true,
       };
     case CREATE_CLASS_ERROR:
       return {
         ...state,
         loading: false,
-        message: 'Il y a eu une erreur à l\'envoi de votre classe',
+        message: 'Le mot de passe doit faire minimum 5 caractères, sans espaces.',
         send: false,
       };
     case EDIT_CLASS:
@@ -88,17 +94,17 @@ export default (state = initialState, action = {}) => {
         id_edited_class: action.payload,
         editing: !state.editing,
       };
+    case GET_CLASSES_ADMIN_PANEL:
+      return {
+        ...state,
+        send: false,
+      };
     default:
       return state;
   }
 };
 
 export const getItemById = (state, id) => {
-  console.log(state.classes.classes);
-  console.log(typeof id);
-  console.log(id);
   const classEdited = state.classes.classes.find((elem) => elem.class_id === id);
-
   return classEdited;
 };
-

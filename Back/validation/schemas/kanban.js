@@ -12,7 +12,7 @@ module.exports = {
     }).required(),
 
 
-    editkanbanSchema: Joi.object({
+    editKanbanSchema: Joi.object({
     
         title: Joi.string().min(3).allow('', null),
         description: Joi.string().allow('', null),
@@ -23,7 +23,7 @@ module.exports = {
 
     associationKanbanClassSchema: Joi.object({
     
-        classId: Joi.number().integer().min(1).required()
+        className: Joi.string().min(3).required()
     
     }).required(),
 

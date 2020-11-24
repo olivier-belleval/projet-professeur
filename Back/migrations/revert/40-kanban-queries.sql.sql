@@ -16,9 +16,13 @@ DROP FUNCTION "kanban".update_kanban(INT, TEXT, TEXT, TEXT, TEXT);
 
 DROP FUNCTION "kanban".delete_kanban(INT);
 
-DROP FUNCTION "kanban".associate_class_to_kanban(INT, INT);
+DROP FUNCTION IF EXISTS "kanban".associate_class_to_kanban(INT, INT);
 
-DROP FUNCTION "kanban".remove_association_class_to_kanban(INT, INT);
+DROP FUNCTION IF EXISTS "kanban".associate_class_to_kanban(INT, TEXT);
+
+DROP FUNCTION IF EXISTS "kanban".remove_association_class_to_kanban(INT, INT);
+
+DROP FUNCTION IF EXISTS "kanban".remove_association_class_to_kanban(INT, TEXT);
 
 DROP FUNCTION "kanban".get_one_list_by_id(INT);
 

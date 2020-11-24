@@ -1,11 +1,11 @@
-@use 'src/styles/vars.scss';
+@import 'src/styles/vars.scss';
 
 .homepage{
   height: 100vh;
   text-align: center;
-  background-image: url('src/assets/images/opened_book.png');
-  background-position: bottom right;
-  background-size:115%;
+  background-image: url('src/assets/images/1566.jpg');
+  // // background-position: bottom right;
+  background-size: cover;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
@@ -19,25 +19,7 @@
   &-title{
     margin-top: 2rem;
     font-size: 3rem;
-    font-family: vars.$font-title;
-  }
-}
-
-@media screen and (min-width:600px){
-  .homepage{
-    background-size:65%;
-  }
-}
-
-@media screen and (min-width:800px){
-  .homepage{
-    background-size:50%;
-  }
-}
-
-@media screen and (min-width:1000px){
-  .homepage{
-    background-size:40%;
+    font-family: $font-title;
   }
 }
 

@@ -5,7 +5,9 @@ import {
   LOGIN_SUBMIT_SUCCESS,
   LOGIN_SUBMIT_ERROR,
   LOGIN_CHANGE_TEACHER,
+  LOGIN_TEACHER_SUBMIT_ERROR,
   TOGGLE_MENU,
+  CLOSE_MENU,
 } from '../action';
 
 import {
@@ -15,11 +17,10 @@ import {
   LOGIN_CLASSES_SUBMIT,
 } from '../action/user';
 
-
 const initialState = {
   username: '',
   password: '',
-  loginErrorMessage: '',
+  message: '',
   loading: false,
   isLogged: false,
   loginOpened: false,
@@ -41,21 +42,35 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         ...action.payload,
+        message: '',
       };
     case TOGGLE_LOGIN_FORM:
       return {
         ...state,
         loginOpened: !state.loginOpened,
+        message: '',
       };
     case TOGGLE_MENU:
       return {
         ...state,
         opened: !state.opened,
       };
-    case LOGIN_SUBMIT || LOGIN_CLASSES_SUBMIT:
+    case CLOSE_MENU:
+      return {
+        ...state,
+        opened: false,
+      };
+    case LOGIN_SUBMIT:
       return {
         ...state,
         loading: true,
+        message: '',
+      };
+    case LOGIN_CLASSES_SUBMIT:
+      return {
+        ...state,
+        loading: true,
+        message: '',
       };
     case LOGIN_SUBMIT_SUCCESS:
       return {
@@ -63,19 +78,29 @@ export default (state = initialState, action = {}) => {
         isLogged: true,
         loading: false,
         password: '',
-        loginErrorMessage: '',
+        message: '',
       };
     case LOGIN_SUBMIT_ERROR:
       return {
         ...state,
         loading: false,
-        username: action.payload,
-        loginErrorMessage: action.payload,
+        username: '',
+        password: '',
+        message: action.payload,
       };
+    case LOGIN_TEACHER_SUBMIT_ERROR:
+        return {
+          ...state,
+          loading: false,
+          username: '',
+          password: '',
+        };
     case LOGIN_CHANGE_TEACHER:
       return {
         ...state,
         teacher: !state.teacher,
+        message: '',
+        username: '',
       };
     case LOGOUT_SUCCESS:
       return {
@@ -83,6 +108,7 @@ export default (state = initialState, action = {}) => {
         isLogged: false,
         username: '',
         password: '',
+        loginOpened: false,
       };
     case GET_CLASSES:
       return {

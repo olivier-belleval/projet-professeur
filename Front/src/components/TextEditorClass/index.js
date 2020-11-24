@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import './style.scss';
-import 'draft-js/dist/Draft.css';
+import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
 
 const TextEditorClass = ({
   changeField,
@@ -14,8 +14,9 @@ const TextEditorClass = ({
   classEdited,
   cancelEditingClass,
   handleClassEdit,
+  closeMenu,
 }) => {
-  console.log('text edit');
+
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
     changeField({ [name]: value });
@@ -30,8 +31,10 @@ const TextEditorClass = ({
     handleClassEdit();
   };
 
+  const [showedPassword, setShowedPassword] = useState(false);
+
   return (
-    <div className="text-editor-class">
+    <div className="text-editor-class" onClick={closeMenu}>
       <form onSubmit={editing ? handleEdition : handleSubmit}>
         <input
           name="username"
@@ -40,15 +43,22 @@ const TextEditorClass = ({
           className="input-title"
           defaultValue={editing ? classEdited.class_username : username}
         />
-        <input
-          name="password"
-          type="password"
-          value={password}
-          placeholder="Mot de passe"
-          onChange={handleInputChange}
-          className="input-title"
-
-        />
+        <span className="input-password">
+          <input
+            name="password"
+            type={showedPassword ? 'text' : 'password'}
+            value={password}
+            placeholder="Mot de passe"
+            onChange={handleInputChange}
+            className="input-password"
+          />
+          <span onClick={() => {
+            setShowedPassword(!showedPassword);
+          }}
+          >
+            {showedPassword ? <RiEyeLine /> : <RiEyeCloseLine />}
+          </span>
+        </span>
         <textarea
           name="description"
           placeholder="Description de la classe..."
@@ -60,7 +70,7 @@ const TextEditorClass = ({
           <Link to="/admin/comptes">Annuler</Link>
         </button>
         <button type="submit" className="text-editor-class-button">
-          Let's go baby !
+          Ajouter
         </button>
         {send && <Redirect to="/admin/comptes" />}
       </form>

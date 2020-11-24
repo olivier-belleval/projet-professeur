@@ -12,14 +12,15 @@ const AdminClass = ({
   editClass,
   deleteClass,
   getClasses,
+  closeMenu,
 }) => {
   useEffect(() => {
     getClasses();
   }, []);
-  console.log(list);
+
   return (
-    <div className="admin_panel_class">
-      <h1 className="admin_panel_class-title"> Espace administrateur - gestion des classes </h1>
+    <div className="admin_panel_class" onClick={closeMenu}>
+      <h1 className="admin_panel_class-title"> Gestion des classes </h1>
       <div className="admin_panel_class-content">
         {list.map((classe) => (
           <div className="admin_panel_class-content-part" key={classe.class_id}>
@@ -58,5 +59,7 @@ const AdminClass = ({
     </div>
   );
 };
+
+
 
 export default AdminClass;
