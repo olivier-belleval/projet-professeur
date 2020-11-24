@@ -122,6 +122,17 @@ const editMiddleware = (store) => (next) => (action) => {
       }).then((res) => {
         store.dispatch(editKanbanSuccess());
         toast.dark('Le kanban a bien été édité.');
+        axios({
+
+          method: 'get',
+          url: `${utils.local}api/kanban/all`,
+          withCredentials: true,
+
+        }).then((res) => {
+          store.dispatch(getKanbansSuccess(res.data.data));
+        }).catch((err) => {
+          store.dispatch(getKanbansError());
+        });
       }).catch((err) => {
         store.dispatch(editKanbanError());
       });

@@ -59,7 +59,7 @@ export default (state = initialState, action = {}) => {
         ...state,
         modalOpen: !state.modalOpen,
         list_id: action.payload,
-        newCardColor: '#4c3e53',
+        newCardColor: '#2e2433',
         newCardOrder: '',
         newCardContent: '',
       };

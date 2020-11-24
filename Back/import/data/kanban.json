@@ -1,20 +1,22 @@
 [
     {
-        "title": "Kanban UN",
-        "description": "Le premier kanban",
-        "background": "#FFFFF",
+        "title": "Séquence 1 - Théâtre",
+        "description": "Déroulé de la séquence",
         "teacher_id": "1"
     },
     {
-        "title": "Kanban DEUX",
-        "description": "Le deuxième kanban",
-        "background": "#FFFFF",
+        "title": "Soutien - Grammaire",
+        "description": "Classe de soutien 5eme B",
         "teacher_id": "1"
     },
     {
-        "title": "Kanban TROIS",
-        "description": "Le troisième kanban",
-        "background": "#FFFFF",
+        "title": "Oral blanc - Baccalauréat",
+        "description": "Heures de passage",
+        "teacher_id": "1"
+    },
+    {
+        "title": "O'clock - Apothéose",
+        "description": "Choses à faire",
         "teacher_id": "1"
     }
 

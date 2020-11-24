@@ -29,6 +29,8 @@ const kanbanController = require('../../controllers/kanbanController');
  *         description: Array of all kanbans
  *         schema:
  *          $ref: '#/definitions/AllKanbans'
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -49,6 +51,12 @@ router.get('/all', kanbanController.getAllKanbans);
  *         description: Displays one kanban
  *         schema:
  *          $ref: '#/definitions/AllKanbans'
+ *       400:
+ *          description: Cannot find kanban with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 
 router.get('/:id(\\d+)', kanbanController.getOneKanbansById);
@@ -71,6 +79,10 @@ router.get('/:id(\\d+)', kanbanController.getOneKanbansById);
  *         description: kanban has been created
  *         schema:
  *          $ref: '#/definitions/KanbanCreate'
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 
 router.post('/create', teacherMW.isATeacher, validateBody(createKanbanSchema), kanbanController.createKanban);
@@ -94,6 +106,12 @@ router.post('/create', teacherMW.isATeacher, validateBody(createKanbanSchema), k
  *         description: Kanban has been edited
  *         schema:
  *          $ref: '#/definitions/KanbanEdit'
+ *       400:
+ *          description: All fields are empty
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 
 router.put('/:id(\\d+)/edit', teacherMW.isATeacher, validateBody(editKanbanSchema), kanbanController.editKanban);
@@ -113,6 +131,12 @@ router.put('/:id(\\d+)/edit', teacherMW.isATeacher, validateBody(editKanbanSchem
  *         description: Kanban has been deleted
  *         schema:
  *          $ref: '#/definitions/KanbanDelete'
+ *       400:
+ *          description: Failed to delete kanban with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.delete('/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.deleteKanban);
 
@@ -147,6 +171,12 @@ router.delete('/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.delete
  *                  example: Association has been successfully added.
  *              data:
  *                  $ref: '#/definitions/association_class_to_kanban'
+ *       400:
+ *          description: Association failed
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 
 router.post('/:kanbanId(\\d+)/associate', teacherMW.isATeacher, validateBody(associationKanbanClassSchema), kanbanController.associateClassToKanban);
@@ -182,6 +212,12 @@ router.post('/:kanbanId(\\d+)/associate', teacherMW.isATeacher, validateBody(ass
  *                  example: Association has been successfully deleted.
  *              data:
  *                  $ref: '#/definitions/association_class_to_kanban'
+ *       400:
+ *          description: Failed to remove association
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 router.post('/:id(\\d+)/associate/remove', teacherMW.isATeacher, validateBody(associationKanbanClassSchema), kanbanController.removeAssociationClassToKanban);
 
@@ -202,6 +238,12 @@ router.post('/:id(\\d+)/associate/remove', teacherMW.isATeacher, validateBody(as
  *         description: Selected list is displayed
  *         schema:
  *          $ref: '#/definitions/listFromKanban'
+ *       400:
+ *          description: Cannot find list with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -242,6 +284,10 @@ router.get('/:kanbanId(\\d+)/list/:listId(\\d+)', teacherMW.isATeacher, kanbanCo
  *         description: Selected list is displayed
  *         schema:
  *          $ref: '#/definitions/createList'
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -282,6 +328,12 @@ router.post('/:id(\\d+)/list/create', teacherMW.isATeacher, validateBody(createL
  *         description: Edited list is displayed
  *         schema:
  *          $ref: '#/definitions/listFromKanban'
+ *       400:
+ *          description: All fields are empty
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -303,6 +355,12 @@ router.put('/:kanbanId(\\d+)/list/:listId(\\d+)/edit', teacherMW.isATeacher, val
  *         description: Deleted list is displayed
  *         schema:
  *          $ref: '#/definitions/listDelete'
+ *       400:
+ *          description: Failed to delete list with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -325,6 +383,12 @@ router.delete('/:kanbanId(\\d+)/list/:listId(\\d+)/delete', teacherMW.isATeacher
  *         description: Selected card is displayed
  *         schema:
  *          $ref: '#/definitions/cardFromList'
+ *       400:
+ *          description: Failed to find card with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -366,6 +430,10 @@ router.get('/list/:listId(\\d+)/card/:cardId(\\d+)', teacherMW.isATeacher, kanba
  *         description: Created card is displayed
  *         schema:
  *          $ref: '#/definitions/cardCreate'
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -407,6 +475,12 @@ router.post('/list/:id(\\d+)/card/create', teacherMW.isATeacher, validateBody(cr
  *         description: Edited card is displayed
  *         schema:
  *          $ref: '#/definitions/cardEdit'
+ *       400:
+ *          description: All fields are empty
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -428,6 +502,12 @@ router.put('/list/:listId(\\d+)/card/:cardId(\\d+)/edit',teacherMW.isATeacher, v
  *         description: Deleted card is displayed
  *         schema:
  *          $ref: '#/definitions/cardDelete'
+ *       400:
+ *          description: Failed to delete card with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -446,6 +526,10 @@ router.delete('/list/:listId(\\d+)/card/:cardId(\\d+)/delete', teacherMW.isATeac
  *         description: Array of all tags
  *         schema:
  *          $ref: '#/definitions/allTags'
+ *       401:
+ *          description: Unauthorized - You must be logged in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -466,6 +550,12 @@ router.get('/tag/all', teacherMW.isATeacher, kanbanController.getAllTags);
  *         description: Displays the selected tag
  *         schema:
  *          $ref: '#/definitions/allTags'
+ *       400:
+ *          description: Failed to delete kanban with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -505,6 +595,10 @@ router.get('/tag/:id(\\d+)', teacherMW.isATeacher, kanbanController.getOneTagByI
  *         description: Displays the selected tag
  *         schema:
  *          $ref: '#/definitions/allTags'
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -544,6 +638,12 @@ router.post('/tag/create', validateBody(createTagSchema), teacherMW.isATeacher, 
  *         description: Displays the edited tag
  *         schema:
  *          $ref: '#/definitions/allTags'
+ *       400:
+ *          description: All fields are empty
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -564,6 +664,12 @@ router.put('/tag/:id(\\d+)/edit', teacherMW.isATeacher, validateBody(editTagSche
  *         description: Displays the deleted tag
  *         schema:
  *          $ref: '#/definitions/allTags'
+ *       400:
+ *          description: Failed to delete tag with id {id}
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  * 
  */
 
@@ -601,6 +707,12 @@ router.delete('/tag/:id(\\d+)/delete', teacherMW.isATeacher, kanbanController.de
  *                  example: Association has been successfully added.
  *              data:
  *                  $ref: '#/definitions/association_tag_to_card'
+ *       400:
+ *          description: Association failed
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 
 router.post('/card/:cardId(\\d+)/tag/:tagId(\\d+)/add', teacherMW.isATeacher, kanbanController.createAssociationTagToCard);
@@ -627,6 +739,12 @@ router.post('/card/:cardId(\\d+)/tag/:tagId(\\d+)/add', teacherMW.isATeacher, ka
  *                  example: Association has been successfully removed.
  *              data:
  *                  $ref: '#/definitions/association_tag_to_card'
+ *       400:
+ *          description: Failed to remove association
+ *       401:
+ *          description: Unauthorized - You must be logged as a teacher in order to continue
+ *       500:
+ *          description: Internal Server Error
  */
 
 router.delete('/card/:cardId(\\d+)/tag/:tagId(\\d+)/remove', teacherMW.isATeacher, kanbanController.deleteAssociationTagToCard);

@@ -13,7 +13,7 @@ const articles = require('../data/article.json');
 const kanbans = require('../data/kanban.json');
 const lists = require('../data/list.json');
 const cards = require('../data/card.json');
-const tags = require('../data/tag.json');
+// const tags = require('../data/tag.json');
 const articleClassRelations = require('../data/article-class.json');
 const kanbanClassRelations = require('../data/kanban-class.json');
 const tagCardRelations = require('../data/tag-card.json');
@@ -85,13 +85,13 @@ const tagCardRelations = require('../data/tag-card.json');
 
     };
 
-    console.log('Processing: tag.json');
+    /*console.log('Processing: tag.json');
 
     for (let entry of tags) {
 
         const result = await client.query('INSERT INTO "kanban"."tag" ("name", "color") VALUES ($1, $2)', [entry.name, entry.color]);
 
-    };
+    };*/
 
     console.log('Processing: article-class.json');
 
@@ -109,6 +109,7 @@ const tagCardRelations = require('../data/tag-card.json');
 
     };
 
+    /*
     console.log('Processing: tag-card.json');
 
     for (let entry of tagCardRelations) {
@@ -116,6 +117,7 @@ const tagCardRelations = require('../data/tag-card.json');
         const result = await client.query('INSERT INTO "kanban"."m2m_tag_card" ("tag_id", "card_id") VALUES ($1, $2)', [entry.tag_id, entry.card_id]);
 
     };
+    */
     
     console.log('Data import OK');
     client.end();

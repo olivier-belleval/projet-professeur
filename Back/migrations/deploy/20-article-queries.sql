@@ -48,7 +48,7 @@ LANGUAGE SQL STRICT;
 
 -- fonction pour afficher les articles concernant une classe
 
-CREATE TYPE article_search_class AS ("article_id" INT, "article_title" TEXT, "article_slug" TEXT, "article_excerpt" TEXT, "class_username" TEXT,"article_author" TEXT);
+CREATE TYPE article_search_class AS ("article_id" INT, "article_title" TEXT, "article_slug" TEXT, "article_excerpt" TEXT, "article_content" TEXT, "class_username" TEXT,"article_author" TEXT);
 
 CREATE FUNCTION get_articles_by_class(classId INT) RETURNS SETOF article_search_class AS
 $$
@@ -57,6 +57,7 @@ $$
 		a.title AS article_title,
         a.slug AS article_slug,
 		a.excerpt AS article_excerpt,
+        a.content AS article_content,
 		c.username AS class_username,
 		t.first_name || ' ' || t.last_name AS article_author
 	    FROM "article"."article" a
