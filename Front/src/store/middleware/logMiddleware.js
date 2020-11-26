@@ -10,7 +10,7 @@ import {
 const logMiddleware = (store) => (next) => (action) => {
   const utils = {
     local: 'http://localhost:3000/',
-    distant: 'http://51.254.203.220/:3000/',
+    distant: 'http://51.254.203.220:3000/',
     user: {
       username: store.getState().user.username,
       password: store.getState().user.password,

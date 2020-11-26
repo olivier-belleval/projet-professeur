@@ -24,7 +24,7 @@ import {
 const associateMiddleware = (store) => (next) => (action) => {
   const utils = {
     local: 'http://localhost:3000/',
-    distant: 'http://51.254.203.220/:3000/',
+    distant: 'http://51.254.203.220:3000/',
     kanbanId: '',
     listId: '',
     cardId: '',
