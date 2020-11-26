@@ -41,7 +41,7 @@ import {
 const editMiddleware = (store) => (next) => (action) => {
   const utils = {
     local: 'http://localhost:3000/',
-    distant: '',
+    distant: 'http://51.254.203.220/:3000/',
     kanbanId: '',
     listId: '',
     cardId: '',
@@ -63,7 +63,7 @@ const editMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'put',
-        url: `${utils.local}api/article/${utils.editedArticleId}/edit`,
+        url: `${utils.distant}api/article/${utils.editedArticleId}/edit`,
         withCredentials: true,
         data: {
           title: store.getState().editor.title,
@@ -87,7 +87,7 @@ const editMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'put',
-        url: `${utils.local}api/admin/class/${utils.editedClassId}/edit`,
+        url: `${utils.distant}api/admin/class/${utils.editedClassId}/edit`,
         withCredentials: true,
         data: {
           username: store.getState().editorClass.username,
@@ -111,7 +111,7 @@ const editMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'put',
-        url: `${utils.local}api/kanban/${editedKanbanId}/edit`,
+        url: `${utils.distant}api/kanban/${editedKanbanId}/edit`,
         withCredentials: true,
         data: {
           title: store.getState().editorKanban.title,
@@ -125,7 +125,7 @@ const editMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/kanban/all`,
+          url: `${utils.distant}api/kanban/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -146,7 +146,7 @@ const editMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'post',
-        url: `${utils.local}api/kanban/${utils.kanbanId}/associate/remove`,
+        url: `${utils.distant}api/kanban/${utils.kanbanId}/associate/remove`,
         withCredentials: true,
         data: {
           className: utils.classUsername,
@@ -157,7 +157,7 @@ const editMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/kanban/all`,
+          url: `${utils.distant}api/kanban/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -179,7 +179,7 @@ const editMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'put',
-        url: `${utils.local}api/kanban/${utils.kanbanId}/list/${utils.listId}/edit`,
+        url: `${utils.distant}api/kanban/${utils.kanbanId}/list/${utils.listId}/edit`,
         withCredentials: true,
         data: {
           name: store.getState().kanbans.newListTitle,
@@ -190,7 +190,7 @@ const editMiddleware = (store) => (next) => (action) => {
         toast.dark('La liste a bien été édité.');
         axios({
           method: 'get',
-          url: `${utils.local}api/kanban/${utils.kanbanId}`,
+          url: `${utils.distant}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
@@ -213,7 +213,7 @@ const editMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'put',
-        url: `${utils.local}api/kanban/list/${utils.listId}/card/${utils.cardId}/edit`,
+        url: `${utils.distant}api/kanban/list/${utils.listId}/card/${utils.cardId}/edit`,
         withCredentials: true,
         data: {
           description: store.getState().kanbans.newCardContent,
@@ -225,7 +225,7 @@ const editMiddleware = (store) => (next) => (action) => {
         toast.dark('La carte a bien été édité.');
         axios({
           method: 'get',
-          url: `${utils.local}api/kanban/${utils.kanbanId}`,
+          url: `${utils.distant}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {

@@ -28,7 +28,7 @@ app.use(session({
 
 }));
 
-const whiteListOrigin = ['http://localhost:8080',]
+const whiteListOrigin = ['http://localhost:8080','http://10.89.165.247:8080']
 
 // gestion des cors
 var corsOptions = {

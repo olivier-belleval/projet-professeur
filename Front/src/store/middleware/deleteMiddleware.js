@@ -49,7 +49,7 @@ import {
 const deleteMiddleware = (store) => (next) => (action) => {
   const utils = {
     local: 'http://localhost:3000/',
-    distant: '',
+    distant: 'http://51.254.203.220/:3000/',
     kanbanId: '',
     listId: '',
     cardId: '',
@@ -71,7 +71,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'delete',
-        url: `${utils.local}api/article/${utils.articleId}/delete`,
+        url: `${utils.distant}api/article/${utils.articleId}/delete`,
         withCredentials: true,
 
       }).then((res) => {
@@ -80,7 +80,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/admin/article/all`,
+          url: `${utils.distant}api/admin/article/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -101,7 +101,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'delete',
-        url: `${utils.local}api/admin/class/${utils.ClassId}/delete`,
+        url: `${utils.distant}api/admin/class/${utils.ClassId}/delete`,
         withCredentials: true,
 
       }).then((res) => {
@@ -110,7 +110,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/admin/class/all`,
+          url: `${utils.distant}api/admin/class/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -130,7 +130,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'delete',
-        url: `${utils.local}api/kanban/${utils.kanbanId}/delete`,
+        url: `${utils.distant}api/kanban/${utils.kanbanId}/delete`,
         withCredentials: true,
       }).then((res) => {
         store.dispatch(deleteKanbanSuccess());
@@ -138,7 +138,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/kanban/all`,
+          url: `${utils.distant}api/kanban/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -160,7 +160,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'delete',
-        url: `${utils.local}api/kanban/list/${utils.list}/card/${utils.cardId}/delete`,
+        url: `${utils.distant}api/kanban/list/${utils.list}/card/${utils.cardId}/delete`,
         withCredentials: true,
       }).then((res) => {
         toast.dark('Oust la carte.');
@@ -168,7 +168,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
 
         axios({
           method: 'get',
-          url: `${utils.local}api/kanban/${utils.kanbanId}`,
+          url: `${utils.distant}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
@@ -189,14 +189,14 @@ const deleteMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'delete',
-        url: `${utils.local}api/kanban/${utils.kanbanId}/list/${utils.listId}/delete`,
+        url: `${utils.distant}api/kanban/${utils.kanbanId}/list/${utils.listId}/delete`,
         withCredentials: true,
       }).then((res) => {
         store.dispatch(deleteListSuccess());
         toast.dark('Oust la liste !');
         axios({
           method: 'get',
-          url: `${utils.local}api/kanban/${utils.kanbanId}`,
+          url: `${utils.distant}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
@@ -217,7 +217,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'post',
-        url: `${utils.local}api/kanban/${utils.kanbanId}/associate/remove`,
+        url: `${utils.distant}api/kanban/${utils.kanbanId}/associate/remove`,
         withCredentials: true,
         data: {
           className: utils.classUsername,
@@ -228,7 +228,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/kanban/all`,
+          url: `${utils.distant}api/kanban/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -249,7 +249,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'delete',
-        url: `${utils.local}api/article/${utils.articleId}/associate/remove`,
+        url: `${utils.distant}api/article/${utils.articleId}/associate/remove`,
         withCredentials: true,
         data: {
           className: utils.classUsername,
@@ -260,7 +260,7 @@ const deleteMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/admin/article/all`,
+          url: `${utils.distant}api/admin/article/all`,
           withCredentials: true,
 
         }).then((res) => {

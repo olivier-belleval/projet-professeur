@@ -24,7 +24,7 @@ import {
 const associateMiddleware = (store) => (next) => (action) => {
   const utils = {
     local: 'http://localhost:3000/',
-    distant: '',
+    distant: 'http://51.254.203.220/:3000/',
     kanbanId: '',
     listId: '',
     cardId: '',
@@ -46,7 +46,7 @@ const associateMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${utils.local}api/article/${utils.articleId}/associate`,
+        url: `${utils.distant}api/article/${utils.articleId}/associate`,
         withCredentials: true,
         data: {
           className: utils.classUsername,
@@ -57,7 +57,7 @@ const associateMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/admin/article/all`,
+          url: `${utils.distant}api/admin/article/all`,
           withCredentials: true,
 
         })
@@ -81,7 +81,7 @@ const associateMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${utils.local}api/kanban/${utils.kanbanId}/associate`,
+        url: `${utils.distant}api/kanban/${utils.kanbanId}/associate`,
         withCredentials: true,
         data: {
           className: utils.classUsername,
@@ -92,7 +92,7 @@ const associateMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/kanban/all`,
+          url: `${utils.distant}api/kanban/all`,
           withCredentials: true,
 
         }).then((res) => {
