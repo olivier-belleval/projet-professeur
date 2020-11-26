@@ -53,7 +53,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${utils.distant}api/article/all`,
+        url: `${utils.local}api/article/all`,
         withCredentials: true,
 
       })
@@ -71,7 +71,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${utils.distant}api/admin/article/all`,
+        url: `${utils.local}api/admin/article/all`,
         withCredentials: true,
 
       })
@@ -90,7 +90,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${utils.distant}api/admin/class/all`,
+        url: `${utils.local}api/admin/class/all`,
         withCredentials: true,
 
       }).then((res) => {
@@ -107,7 +107,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'get',
-        url: `${utils.distant}api/kanban/all`,
+        url: `${utils.local}api/kanban/all`,
         withCredentials: true,
 
       }).then((res) => {
@@ -123,7 +123,7 @@ const ajaxMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'get',
-        url: `${utils.distant}api/kanban/${utils.kanbanId}`,
+        url: `${utils.local}api/kanban/${utils.kanbanId}`,
         withCredentials: true,
       })
         .then((res) => {

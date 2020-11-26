@@ -24,7 +24,7 @@ const logMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'post',
-        url: `${utils.distant}login/admin`,
+        url: `${utils.local}login/admin`,
         data: utils.user,
         withCredentials: true,
       })
@@ -43,7 +43,7 @@ const logMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'post',
-        url: `${utils.distant}login/`,
+        url: `${utils.local}login/`,
         data: utils.user,
         withCredentials: true,
       })
@@ -64,7 +64,7 @@ const logMiddleware = (store) => (next) => (action) => {
 
       axios({
         method: 'get',
-        url: `${utils.distant}login/logout`,
+        url: `${utils.local}login/logout`,
         withCredentials: true,
 
       })
@@ -81,7 +81,7 @@ const logMiddleware = (store) => (next) => (action) => {
     case GET_CLASSES:
       axios({
         method: 'get',
-        url: `${utils.distant}login`,
+        url: `${utils.local}login`,
         withCredentials: true,
       })
         .then((res) => {
