@@ -12,7 +12,7 @@ if(isLogged)  {
     getArticles();
   }, []);}
 
-  console.log(list)
+  const filteredList = list.filter((post) => post.class_username);
 
   return (
     <div className="articles-view" onClick={closeMenu}>
@@ -22,7 +22,7 @@ if(isLogged)  {
           {username}
         </span>
       </div>
-      { list.map((post) => (
+      { filteredList.map((post) => (
         <article className="article" key={post.article_title}>
           <div className="article-head">
             <h2 className="article-head-title" key={post.article_title}>
