@@ -45,7 +45,7 @@ import {
 const createMiddleware = (store) => (next) => (action) => {
   const utils = {
     local: 'http://localhost:3000/',
-    distant: '',
+    distant: 'http://api.omyprof.belleval.com',
     kanbanId: '',
     listId: '',
     cardId: '',
@@ -65,7 +65,7 @@ const createMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${utils.local}api/article/write`,
+        url: `${utils.distant}api/article/write`,
         withCredentials: true,
         data: {
           title: store.getState().editor.title,
@@ -78,7 +78,7 @@ const createMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/admin/article/all`,
+          url: `${utils.distant}api/admin/article/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -100,7 +100,7 @@ const createMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${utils.local}api/admin/class/create`,
+        url: `${utils.distant}api/admin/class/create`,
         withCredentials: true,
         data: {
           username: store.getState().editorClass.username,
@@ -114,7 +114,7 @@ const createMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/admin/class/all`,
+          url: `${utils.distant}api/admin/class/all`,
           withCredentials: true,
 
         })
@@ -136,7 +136,7 @@ const createMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${utils.local}api/kanban/create`,
+        url: `${utils.distant}api/kanban/create`,
         withCredentials: true,
         data: {
           title: store.getState().editorKanban.title,
@@ -150,7 +150,7 @@ const createMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/kanban/all`,
+          url: `${utils.distant}api/kanban/all`,
           withCredentials: true,
 
         }).then((res) => {
@@ -184,7 +184,7 @@ const createMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${utils.local}api/kanban/list/${utils.listId}/card/create`,
+        url: `${utils.distant}api/kanban/list/${utils.listId}/card/create`,
         withCredentials: true,
         data: {
           order: cardOrder,
@@ -200,7 +200,7 @@ const createMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/kanban/${utils.kanbanId}`,
+          url: `${utils.distant}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
@@ -231,7 +231,7 @@ const createMiddleware = (store) => (next) => (action) => {
       axios({
 
         method: 'post',
-        url: `${utils.local}api/kanban/${utils.kanbanId}/list/create`,
+        url: `${utils.distant}api/kanban/${utils.kanbanId}/list/create`,
         withCredentials: true,
         data: {
           order: listOrder,
@@ -244,7 +244,7 @@ const createMiddleware = (store) => (next) => (action) => {
         axios({
 
           method: 'get',
-          url: `${utils.local}api/kanban/${utils.kanbanId}`,
+          url: `${utils.distant}api/kanban/${utils.kanbanId}`,
           withCredentials: true,
 
         }).then((res) => {
