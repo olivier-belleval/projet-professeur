@@ -62,9 +62,9 @@ const App = ({ isLogged, teacher, loading }) => (
               <Route exact path="/admin/edit/class/:id" component={TextEditorClass} />
               <Route exact path="/admin/nouveau-kanban" component={TextEditorKanban} />
               <Route exact path="/admin/edit/kanban/:id" component={TextEditorKanban} />
-              <Route component={NotFound} />
             </Switch>
           )}
+          <Route component={NotFound} />
         </Switch>
       </div>
     ) : <Redirect to="/" />}
