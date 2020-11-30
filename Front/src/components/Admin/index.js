@@ -26,7 +26,7 @@ const Admin = ({ closeMenu }) => (
 );
 
 Admin.propTypes = {
-  closeMenu: PropTypes.func,
+  closeMenu: PropTypes.func.isRequired,
 };
 
 export default Admin;

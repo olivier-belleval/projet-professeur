@@ -1,16 +1,23 @@
+/**
+ * import modules
+ */
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import {
   FaPencilAlt,
   FaTrash,
   FaPlusCircle,
-  FaInfinity,
 } from 'react-icons/fa';
 
 import { MdClose } from 'react-icons/md';
-import './style.scss';
 import { HiOutlineUserGroup } from 'react-icons/hi';
+
+/**
+ * import locals
+ */
+import './style.scss';
 
 const AdminArticle = ({
   list,
@@ -56,16 +63,16 @@ const AdminArticle = ({
 
               <div className="admin_panel_article_content-part-class">
 
-                {article.class_username && article.class_username.map((classes) => (
+                {article.class_username && article.class_username.map((classesObject) => (
                   <div className="classusername-container">
-                    <div className="classusername-tag" key={classes}> {classes}
+                    <div className="classusername-tag" key={classesObject}> {classesObject}
 
                     </div>
                     <div
                       className="class-remove"
                       onClick={() => {
                         removeClassFromArticle(article.article_id);
-                        removedClassFromArticle(classes);
+                        removedClassFromArticle(classesObject);
                       }}
                     >
                       x
@@ -122,39 +129,68 @@ const AdminArticle = ({
   );
 };
 
+AdminArticle.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.shape({
+    article_id: PropTypes.number.isRequired,
+    article_title: PropTypes.string.isRequired,
+    class_username: PropTypes.string.isRequired,
+  })).isRequired,
+  deleteArticle: PropTypes.func.isRequired,
+  getArticles: PropTypes.func.isRequired,
+  editArticle: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
+  classes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  classAdded: PropTypes.string.isRequired,
+  changeField: PropTypes.func.isRequired,
+  getClasses: PropTypes.func.isRequired,
+  onOpenClick: PropTypes.func.isRequired,
+  modalOpen: PropTypes.bool.isRequired,
+  handleSubmitAssociation: PropTypes.func.isRequired,
+  removeClassFromArticle: PropTypes.func.isRequired,
+  removedClassFromArticle: PropTypes.func.isRequired,
+};
+
 export const AssociationModale = ({
   classes,
   classAdded,
   handleInputChange,
   onOpenClick,
   handleSubmit,
-}) => {
-
-  return (
-    <div className="association-modale">
-      <div className="association-modale-close">
-        <MdClose onClick={onOpenClick} />
-      </div>
-      <form className="association-modale-form" onSubmit={handleSubmit}>
-        <h3> Associer une classe à l'article </h3>
-        <select
-          className="association-modale-select"
-          name="classAdded"
-          value={classAdded}
-          onChange={handleInputChange}
-        >
-          <option>Sélectionner une classe</option>
-          {classes.map((item) => (
-            <option value={item.class_username} key={item.class_id}>{item.class_username}</option>
-          ))}
-        </select>
-        <div>
-          <button type="button" onClick={onOpenClick}>Annuler</button> <button>Associer </button>
-        </div>
-      </form>
-
+}) => (
+  <div className="association-modale">
+    <div className="association-modale-close">
+      <MdClose onClick={onOpenClick} />
     </div>
-  );
+    <form className="association-modale-form" onSubmit={handleSubmit}>
+      <h3> Associer une classe à l'article </h3>
+      <select
+        className="association-modale-select"
+        name="classAdded"
+        value={classAdded}
+        onChange={handleInputChange}
+      >
+        <option>Sélectionner une classe</option>
+        {classes.map((item) => (
+          <option value={item.class_username} key={item.class_id}>{item.class_username}</option>
+        ))}
+      </select>
+      <div>
+        <button type="button" onClick={onOpenClick}>Annuler</button> <button type="button">Associer </button>
+      </div>
+    </form>
+
+  </div>
+);
+
+AssociationModale.propTypes = {
+  classes: PropTypes.arrayOf(PropTypes.shape({
+    class_username: PropTypes.string.isRequired,
+    class_id: PropTypes.number.isRequired,
+  })).isRequired,
+  classAdded: PropTypes.string.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  onOpenClick: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default AdminArticle;
