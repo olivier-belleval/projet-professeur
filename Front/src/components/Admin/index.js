@@ -1,6 +1,14 @@
+/**
+ * import modules
+ */
 import React from 'react';
-import './style.scss';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+/**
+ * import locals
+ */
+import './style.scss';
 
 const Admin = ({ closeMenu }) => (
   <div className="admin_menu" onClick={closeMenu}>
@@ -16,5 +24,9 @@ const Admin = ({ closeMenu }) => (
     </NavLink>
   </div>
 );
+
+Admin.propTypes = {
+  closeMenu: PropTypes.func,
+};
 
 export default Admin;
