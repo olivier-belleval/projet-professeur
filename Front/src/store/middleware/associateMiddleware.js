@@ -24,7 +24,7 @@ import {
 const associateMiddleware = (store) => (next) => (action) => {
   const utils = {
     local: 'http://localhost:3000/',
-    distant: 'http://api.omyprof.belleval.com',
+    distant: 'https://api.omyprof.belleval.com/',
     kanbanId: '',
     listId: '',
     cardId: '',

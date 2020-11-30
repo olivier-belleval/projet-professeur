@@ -65,6 +65,7 @@ const App = ({ isLogged, teacher, loading }) => (
               <Route component={NotFound} />
             </Switch>
           )}
+          <Route component={NotFound} />
         </Switch>
       </div>
     ) : <Redirect to="/" />}

@@ -10,7 +10,7 @@ import {
 const logMiddleware = (store) => (next) => (action) => {
   const utils = {
     local: 'http://localhost:3000/',
-    distant: 'http://54.90.32.97:3000/',
+    distant: 'https://api.omyprof.belleval.com/',
     user: {
       username: store.getState().user.username,
       password: store.getState().user.password,
