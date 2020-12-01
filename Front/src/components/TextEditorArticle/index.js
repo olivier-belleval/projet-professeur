@@ -1,7 +1,14 @@
+/**
+ * import modules
+ */
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import './style.scss';
+import PropTypes from 'prop-types';
 
+/**
+ * import locals
+ */
+import './style.scss';
 
 const TextEditorArticle = ({
   changeField,
@@ -16,7 +23,6 @@ const TextEditorArticle = ({
   closeMenu,
 
 }) => {
-
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
     changeField({ [name]: value });
@@ -28,7 +34,7 @@ const TextEditorArticle = ({
   const handleEdition = (evt) => {
     evt.preventDefault();
     handleArticleEdit();
-  }
+  };
 
   return (
     <div className="text-editor-article" onClick={closeMenu}>
@@ -56,6 +62,19 @@ const TextEditorArticle = ({
       </form>
     </div>
   );
+};
+
+TextEditorArticle.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  changeField: PropTypes.func.isRequired,
+  handleArticleSubmit: PropTypes.func.isRequired,
+  send: PropTypes.bool.isRequired,
+  editing: PropTypes.bool.isRequired,
+  articleEdited: PropTypes.object.isRequired,
+  cancelEditingArticle: PropTypes.func.isRequired,
+  handleArticleEdit: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
 };
 
 export default TextEditorArticle;

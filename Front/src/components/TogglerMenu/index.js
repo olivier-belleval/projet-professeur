@@ -1,7 +1,13 @@
+/**
+ * import modules
+ */
 import React from 'react';
-import { FaBars } from 'react-icons/fa';
-
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+/**
+ * import locals
+ */
 import './style.scss';
 
 const TogglerMenu = ({
@@ -15,7 +21,6 @@ const TogglerMenu = ({
     <div className="settings">
       <div className="settings-button" onClick={onOpenClick}>
         <div className="settings-icon">
-          {/* <FaBars /> */}
           <div className="settings-icon-burger">
             <div className={cssClassNames} />
             <div className={cssClassNames} />
@@ -40,18 +45,28 @@ const TogglerMenu = ({
                 <div className="settings-nav" onClick={onOpenClick}>espace admin</div>
               </NavLink>
 
-              
-          
-          </div>
+            </div>
           )}
-                <div className="settings-nav" onClick={() => {
-                  handleLogout();
-                  onOpenClick();
-                }}><a>se déconnecter</a></div>
-              
-        </div> 
+          <div
+            className="settings-nav"
+            onClick={() => {
+              handleLogout();
+              onOpenClick();
+            }}
+          >
+            <a>se déconnecter</a>
+          </div>
+        </div>
       )};
- </div>
-)}
+    </div>
+  );
+};
+
+TogglerMenu.propTypes = {
+  opened: PropTypes.bool.isRequired,
+  teacher: PropTypes.bool.isRequired,
+  onOpenClick: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired,
+};
 
 export default TogglerMenu;

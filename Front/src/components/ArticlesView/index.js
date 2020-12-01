@@ -1,16 +1,29 @@
+/**
+ * import modules
+ */
 import React, { useEffect } from 'react';
-import './style.scss';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+/**
+ * import locals
+ */
+import './style.scss';
 import { slugifyTitle } from '../../utils';
 
 const ArticlesView = ({
-  list, getArticles, closeMenu, username, teacher, isLogged
+  list,
+  getArticles,
+  closeMenu,
+  username,
+  teacher,
+  isLogged,
 }) => {
-
-if(isLogged)  {
-  useEffect(() => {
-    getArticles();
-  }, []);}
+  if (isLogged) {
+    useEffect(() => {
+      getArticles();
+    }, []);
+  }
 
   const filteredList = list.filter((post) => post.class_username);
 
@@ -49,6 +62,20 @@ if(isLogged)  {
 
     </div>
   );
+};
+
+ArticlesView.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.shape({
+    article_id: PropTypes.number.isRequired,
+    article_title: PropTypes.string.isRequired,
+    class_username: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    article_excerpt: PropTypes.string.isRequired,
+  })).isRequired,
+  getArticles: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  teacher: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 export default ArticlesView;

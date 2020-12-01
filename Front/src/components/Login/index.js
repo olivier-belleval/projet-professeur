@@ -1,9 +1,14 @@
+/**
+ * import modules
+ */
 import React, { useEffect, useState } from 'react';
-import './style.scss';
+import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 
-import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
-
+/**
+ * import locals
+ */
+import './style.scss';
 
 const Login = ({
   // data from state
@@ -41,11 +46,11 @@ const Login = ({
     getClasses();
   }, []);
 
-const [showedPassword, setShowedPassword] = useState(false);
+  const [showedPassword, setShowedPassword] = useState(false);
 
   return (
     <div className="login">
-      { loginOpened && loading && ("Connexion en cours...")}
+      { loginOpened && loading && ('Connexion en cours...')}
       {!isLogged && !loginOpened && (
         <button type="button" className="login-button" onClick={onOpenClick}> Connexion</button>
       )}
@@ -66,16 +71,17 @@ const [showedPassword, setShowedPassword] = useState(false);
               {!teacher && (
               <select
                 name="username"
-                className="login-form-inputs-username"
+                className="login-form-inputs-username login-form-select"
                 onChange={handleInputChange}
                 value={username}
-                className="login-form-select"
               >
                 <option>je choisis ma classe</option>
                 {classes.map((item) => (
                   <option
-                  value={item.class_usernames}
-                  key={item.class_id}>{item.class_usernames}</option>
+                    value={item.class_usernames}
+                    key={item.class_id}
+                  >{item.class_usernames}
+                  </option>
                 ))}
               </select>
               )}
@@ -84,12 +90,16 @@ const [showedPassword, setShowedPassword] = useState(false);
                 className="inputs-password"
                 value={password}
                 onChange={handleInputChange}
-                type={showedPassword ? "text" : "password"}
+                type={showedPassword ? 'text' : 'password'}
                 placeholder="mot de passe"
-              /> <span className="show-password-eye" onClick={()=>{
-                setShowedPassword(!showedPassword);
-              }}>
-              {showedPassword ? <RiEyeLine/> : <RiEyeCloseLine/>}
+              />
+              <span
+                className="show-password-eye"
+                onClick={() => {
+                  setShowedPassword(!showedPassword);
+                }}
+              >
+                {showedPassword ? <RiEyeLine /> : <RiEyeCloseLine />}
               </span>
             </div>
             <button type="submit" className="login-form-button">Se connecter</button>
@@ -102,12 +112,22 @@ const [showedPassword, setShowedPassword] = useState(false);
 };
 
 Login.propTypes = {
-  username: PropTypes.string,
-  password: PropTypes.string,
-  changeField: PropTypes.func,
-  isLogged: PropTypes.bool,
-  opened: PropTypes.bool,
-  handleLogin: PropTypes.func,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  loginOpened: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  classes: PropTypes.arrayOf(PropTypes.shape({
+    class_usernames: PropTypes.string.isRequired,
+    class_id: PropTypes.number.isRequired,
+  })).isRequired,
+  teacher: PropTypes.bool.isRequired,
+  changeField: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  handleClassesLogin: PropTypes.func.isRequired,
+  onOpenClick: PropTypes.func.isRequired,
+  onTeacherClick: PropTypes.func.isRequired,
+  getClasses: PropTypes.func.isRequired,
 };
 
 export default Login;

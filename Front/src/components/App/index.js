@@ -1,11 +1,15 @@
-// == Import npm
+/**
+ * import modules
+ */
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
-// == Import
-import './styles.scss';
+/**
+ * import components
+ */
 import HomePage from '../../containers/HomePage';
 import ArticleDetail from '../../containers/ArticleDetail';
 import ArticlesView from '../../containers/ArticlesView';
@@ -22,8 +26,13 @@ import TextEditorKanban from '../../containers/TextEditorKanban';
 import Admin from '../../containers/Admin';
 import NotFound from '../NotFound';
 
+/**
+ * import locals
+ */
+import './styles.scss';
+
 // == Composant
-const App = ({ isLogged, teacher, loading }) => (
+const App = ({ isLogged, teacher }) => (
 
   <div className="app">
     <Route exact path="/" component={HomePage} />
@@ -72,6 +81,11 @@ const App = ({ isLogged, teacher, loading }) => (
   </div>
 
 );
+
+App.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+  teacher: PropTypes.bool.isRequired,
+};
 
 // == Export
 export default App;

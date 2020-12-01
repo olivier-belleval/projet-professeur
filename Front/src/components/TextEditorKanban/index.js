@@ -1,7 +1,15 @@
+/**
+ * import modules
+ */
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import './style.scss';
 import 'draft-js/dist/Draft.css';
+import PropTypes from 'prop-types';
+
+/**
+ * import locals
+ */
+import './style.scss';
 
 const TextEditorKanban = ({
   changeField,
@@ -16,7 +24,6 @@ const TextEditorKanban = ({
   handleKanbanEdit,
   closeMenu,
 }) => {
-  console.log('text edit');
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
     changeField({ [name]: value });
@@ -41,14 +48,14 @@ const TextEditorKanban = ({
           className="input-title"
         />
         <div className="input-color">
-        <span className="background"> Couleur de fond du background</span>
-        <input
-          name="background"
-          defaultValue={editing ? kanbanEdited.background : background}
-          type="color"
-          onChange={handleInputChange}
-          className="input-color-picker"
-        />
+          <span className="background"> Couleur de fond du background</span>
+          <input
+            name="background"
+            defaultValue={editing ? kanbanEdited.background : background}
+            type="color"
+            onChange={handleInputChange}
+            className="input-color-picker"
+          />
         </div>
         <textarea
           name="description"
@@ -67,6 +74,20 @@ const TextEditorKanban = ({
       </form>
     </div>
   );
+};
+
+TextEditorKanban.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  background: PropTypes.string.isRequired,
+  kanbanEdited: PropTypes.object.isRequired,
+  send: PropTypes.bool.isRequired,
+  editing: PropTypes.bool.isRequired,
+  changeField: PropTypes.func.isRequired,
+  handleKanbanSubmit: PropTypes.func.isRequired,
+  cancelEditingKanban: PropTypes.func.isRequired,
+  handleKanbanEdit: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
 };
 
 export default TextEditorKanban;

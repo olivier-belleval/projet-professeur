@@ -1,5 +1,6 @@
 import React from 'react';
 import { MdClose, MdMoreVert } from 'react-icons/md';
+import PropTypes from 'prop-types';
 
 const KanbanCard = ({
   card,
@@ -11,7 +12,6 @@ const KanbanCard = ({
   <div className="kanban-card" style={{ backgroundColor: card.color }}>
 
     <div className="kanban-card-title">
-      {card.name}
       {teacher && (
         <span>
           <MdMoreVert onClick={() => (
@@ -39,10 +39,30 @@ const KanbanCard = ({
   </div>
 );
 
+KanbanCard.propTypes = {
+  card: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    color: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    order: PropTypes.number.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }).isRequired,
+  deleteCard: PropTypes.func.isRequired,
+  getCardDetails: PropTypes.func.isRequired,
+  toggleCardEdit: PropTypes.func.isRequired,
+  teacher: PropTypes.bool.isRequired,
+};
+
 const Tag = ({ tag }) => (
   <span className="tag">
     {tag.name}
   </span>
 );
+
+Tag.propTypes = {
+  tag: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default KanbanCard;

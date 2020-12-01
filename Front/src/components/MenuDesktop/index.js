@@ -1,6 +1,14 @@
+/**
+ * import modules
+ */
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+/**
+ * import locals
+ */
 import './style.scss';
-import { NavLink, Link } from 'react-router-dom';
 
 const MenuDesktop = ({ handleLogout, teacher }) => (
   <header className="menu">
@@ -20,12 +28,16 @@ const MenuDesktop = ({ handleLogout, teacher }) => (
         <div className="menu-link">espace administrateur</div>
       </NavLink>
       )}
-      
-        <div className="menu-link" onClick={handleLogout}> <a>se déconnecter</a></div>
 
+      <div className="menu-link" onClick={handleLogout}> <a>se déconnecter</a></div>
 
     </nav>
   </header>
 );
+
+MenuDesktop.propTypes = {
+  teacher: PropTypes.bool.isRequired,
+  handleLogout: PropTypes.func.isRequired,
+};
 
 export default MenuDesktop;

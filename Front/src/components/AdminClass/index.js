@@ -1,10 +1,17 @@
+/**
+ * import modules
+ */
 import React, { useEffect } from 'react';
-
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import {
   FaPencilAlt, FaTrash, FaPlusCircle,
 } from 'react-icons/fa';
+
+/**
+ * import locals
+ */
 import './style.scss';
 
 const AdminClass = ({
@@ -40,7 +47,6 @@ const AdminClass = ({
 
               </div>
               <div className="admin_panel_class_content-part-delete"><FaTrash onClick={() => {
-                console.log('delete', classe.class_id);
                 deleteClass(classe.class_id);
               }}
               />
@@ -60,6 +66,16 @@ const AdminClass = ({
   );
 };
 
-
+AdminClass.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.shape({
+    class_id: PropTypes.number.isRequired,
+    class_username: PropTypes.string.isRequired,
+    class_description: PropTypes.string.isRequired,
+  })).isRequired,
+  editClass: PropTypes.func.isRequired,
+  deleteClass: PropTypes.func.isRequired,
+  getClasses: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
+};
 
 export default AdminClass;

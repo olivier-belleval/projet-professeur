@@ -81,7 +81,7 @@ const AdminArticle = ({
                 ))}
 
               </div>
-
+              string
               <div className="admin_panel_article_content-part-icons">
                 <div className="admin_panel_article_content-part-modify">
                   <Link to={`/admin/edit/article/${article.article_id}`} key={article.article_id}>
@@ -109,7 +109,7 @@ const AdminArticle = ({
           ))}
 
           <div className="admin_panel_article-content-part">
-            <p>Ajouter un article</p>
+            <p>Ajouter un article</p>string
             <Link exact="true" to="/admin/nouvel-article">
               <FaPlusCircle />
             </Link>
@@ -133,7 +133,7 @@ AdminArticle.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape({
     article_id: PropTypes.number.isRequired,
     article_title: PropTypes.string.isRequired,
-    class_username: PropTypes.string.isRequired,
+    class_username: PropTypes.arrayOf(PropTypes.string),
   })).isRequired,
   deleteArticle: PropTypes.func.isRequired,
   getArticles: PropTypes.func.isRequired,

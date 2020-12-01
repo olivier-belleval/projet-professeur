@@ -1,3 +1,6 @@
+/**
+ * import modules
+ */
 import React from 'react';
 
 const Logout = () => (

@@ -1,7 +1,15 @@
+/**
+ * import modules
+ */
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import './style.scss';
 import { RiEyeCloseLine, RiEyeLine } from 'react-icons/ri';
+import PropTypes from 'prop-types';
+
+/**
+ * import locals
+ */
+import './style.scss';
 
 const TextEditorClass = ({
   changeField,
@@ -16,7 +24,6 @@ const TextEditorClass = ({
   handleClassEdit,
   closeMenu,
 }) => {
-
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
     changeField({ [name]: value });
@@ -76,6 +83,20 @@ const TextEditorClass = ({
       </form>
     </div>
   );
+};
+
+TextEditorClass.propTypes = {
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  classEdited: PropTypes.object.isRequired,
+  send: PropTypes.bool.isRequired,
+  editing: PropTypes.bool.isRequired,
+  changeField: PropTypes.func.isRequired,
+  handleClassSubmit: PropTypes.func.isRequired,
+  cancelEditingClass: PropTypes.func.isRequired,
+  handleClassEdit: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
 };
 
 export default TextEditorClass;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // React-Icons
-import { AiFillPlusSquare, AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlus } from 'react-icons/ai';
 import { MdClose, MdMoreVert } from 'react-icons/md';
 
 // Import Component
@@ -84,15 +84,18 @@ KanbanList.propTypes = {
   list: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
+    order: PropTypes.number,
     cards: PropTypes.array,
-  }),
-  onOpenClick: PropTypes.func,
-  deleteCard: PropTypes.func,
-  deleteList: PropTypes.func,
-  getListId: PropTypes.func,
-  toggleCardEdit: PropTypes.func,
-  getCardDetails: PropTypes.func,
-  getListDetails: PropTypes.func,
-  toggleListEdit: PropTypes.func,
+  }).isRequired,
+  onOpenClick: PropTypes.func.isRequired,
+  deleteCard: PropTypes.func.isRequired,
+  deleteList: PropTypes.func.isRequired,
+  getListId: PropTypes.func.isRequired,
+  toggleCardEdit: PropTypes.func.isRequired,
+  getCardDetails: PropTypes.func.isRequired,
+  getListDetails: PropTypes.func.isRequired,
+  toggleListEdit: PropTypes.func.isRequired,
+  teacher: PropTypes.bool.isRequired,
 };
+
 export default KanbanList;

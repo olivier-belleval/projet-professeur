@@ -1,29 +1,38 @@
+/**
+ * import modules
+ */
 import React, { useEffect } from 'react';
-import './style.scss';
 import { MdClose } from 'react-icons/md';
 import { AiFillPlusSquare } from 'react-icons/ai';
+import PropTypes from 'prop-types';
+
+/**
+ * import components
+ */
 import KanbanList from './KanbanList';
+
+/**
+ * import locals
+ */
+import './style.scss';
 
 const KanbanDetail = ({
   // Datas
   kanban,
   modalOpen,
   listModalOpen,
-  newCardOrder,
   newCardContent,
   editMode,
-  getKanbanDetail,
   kanban_detail,
   datas,
-  newCardColor,
-  newListOrder,
   newListTitle,
-  editionModalList,
   listDetails,
   cardDetails,
   teacher,
 
   // Funtions
+  editionModalList,
+  getKanbanDetail,
   deleteCard,
   getListId,
   openListModal,
@@ -66,7 +75,6 @@ const KanbanDetail = ({
     const { name, value } = evt.target;
     changeField({ [name]: value });
   };
-
 
   if (kanban_detail && kanban_detail['0']) {
     if (kanban_detail['0'].lists) {
@@ -134,9 +142,7 @@ const KanbanDetail = ({
       <CardModal
         onClick={onOpenClick}
         changeField={handleInputChange}
-        newCardOrder={newCardOrder}
         newCardContent={newCardContent}
-        newCardColor={newCardColor}
         handleSubmit={handleSubmit}
       />
       )}
@@ -145,9 +151,7 @@ const KanbanDetail = ({
       <CardModal
         onClick={onOpenClick}
         changeField={handleInputChange}
-        newCardOrder={newCardOrder}
         newCardContent={newCardContent}
-        newCardColor={newCardColor}
         handleSubmit={handleSubmit}
         editionModalCard={editionModalCard}
         toggleCardEdit={toggleCardEdit}
@@ -160,7 +164,6 @@ const KanbanDetail = ({
               openListModal={openListModal}
               changeField={handleInputChange}
               handleSubmit={handleSubmit}
-              newListdOrder={newListOrder}
               newListTitle={newListTitle}
               editionModalList={editionModalList}
               toggleListEdit={toggleListEdit}
@@ -173,7 +176,6 @@ const KanbanDetail = ({
               openListModal={openListModal}
               changeField={handleInputChange}
               handleSubmit={handleSubmit}
-              newListdOrder={newListOrder}
               newListTitle={newListTitle}
               editionModalList={editionModalList}
               toggleListEdit={toggleListEdit}
@@ -184,12 +186,56 @@ const KanbanDetail = ({
   );
 };
 
+KanbanDetail.propTypes = {
+  kanban: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+  modalOpen: PropTypes.bool.isRequired,
+  listModalOpen: PropTypes.bool.isRequired,
+  newCardContent: PropTypes.string.isRequired,
+  editMode: PropTypes.bool.isRequired,
+  kanban_detail: PropTypes.arrayOf(PropTypes.shape({
+    lists: PropTypes.array.isRequired,
+    background: PropTypes.string.isRequired,
+  })).isRequired,
+  datas: PropTypes.bool.isRequired,
+  newCardColor: PropTypes.string.isRequired,
+  newListTitle: PropTypes.string.isRequired,
+  listDetails: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+  cardDetails: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+  }).isRequired,
+  teacher: PropTypes.bool.isRequired,
+
+  editionModalList: PropTypes.bool.isRequired,
+  getKanbanDetail: PropTypes.func.isRequired,
+  deleteCard: PropTypes.func.isRequired,
+  getListId: PropTypes.func.isRequired,
+  openListModal: PropTypes.func.isRequired,
+  handleListSubmit: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
+  deleteList: PropTypes.func.isRequired,
+  handleCardSubmit: PropTypes.func.isRequired,
+  handleEditMode: PropTypes.func.isRequired,
+  changeField: PropTypes.func.isRequired,
+  onOpenClick: PropTypes.func.isRequired,
+  toggleListEdit: PropTypes.func.isRequired,
+  getListDetails: PropTypes.func.isRequired,
+  getCardDetails: PropTypes.func.isRequired,
+  submitListEdition: PropTypes.func.isRequired,
+  submitCardEdition: PropTypes.func.isRequired,
+  toggleCardEdit: PropTypes.func.isRequired,
+  editionModalCard: PropTypes.bool.isRequired,
+};
+
 const CardModal = ({
   onClick,
   changeField,
-  newCardOrder,
   newCardContent,
-  newCardColor,
   handleSubmit,
   editionModalCard,
   toggleCardEdit,
@@ -224,6 +270,19 @@ const CardModal = ({
   </div>
 );
 
+CardModal.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  changeField: PropTypes.func.isRequired,
+  newCardContent: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  editionModalCard: PropTypes.bool.isRequired,
+  toggleCardEdit: PropTypes.func.isRequired,
+  cardDetails: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 const ListModal = ({
   openListModal,
   handleSubmit,
@@ -253,5 +312,17 @@ const ListModal = ({
 
   </div>
 );
+
+ListModal.propTypes = {
+  openListModal: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  newListTitle: PropTypes.string.isRequired,
+  changeField: PropTypes.func.isRequired,
+  editionModalList: PropTypes.bool.isRequired,
+  toggleListEdit: PropTypes.func.isRequired,
+  listDetails: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default KanbanDetail;
